@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ember — FIRE & Retirement Calculator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root{
+    --paper:#F6F2EA;
+    --card:#FFFDF9;
+    --ink:#1B1A16;
+    --ink-soft:#5E594E;
+    --ink-faint:#928B7C;
+    --line:#E6E0D3;
+    --line-soft:#EFEAE0;
+    --pine:#1E4D3C;
+    --pine-bright:#2E8B5C;
+    --ember:#C0531C;
+    --ember-soft:#F4E3D6;
+    --shadow:0 1px 2px rgba(27,26,22,.04),0 8px 24px rgba(27,26,22,.05);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    font-family:'Hanken Grotesk',sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    padding:clamp(16px,4vw,48px);
+    background-image:radial-gradient(circle at 1px 1px, rgba(27,26,22,.025) 1px, transparent 0);
+    background-size:22px 22px;
+  }
+  .wrap{max-width:1120px;margin:0 auto}
+
+  header{margin-bottom:clamp(24px,4vw,40px)}
+  .brand{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+  .mark{
+    font-family:'Fraunces',serif;font-weight:600;
+    font-size:clamp(30px,5vw,46px);letter-spacing:-.02em;color:var(--ink);
+    line-height:1;
+  }
+  .mark .dot{color:var(--ember)}
+  .tag{color:var(--ink-soft);font-size:14px;font-weight:500;letter-spacing:.01em}
+  .sub{margin-top:10px;color:var(--ink-soft);font-size:15px;max-width:56ch}
+
+  .grid{display:grid;grid-template-columns:minmax(0,380px) minmax(0,1fr);gap:clamp(16px,2.5vw,28px);align-items:start}
+  @media(max-width:860px){.grid{grid-template-columns:1fr}}
+
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow)}
+  .panel-pad{padding:clamp(18px,2.2vw,26px)}
+
+  .panel-title{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:var(--ink-faint);font-weight:600;margin-bottom:14px}
+
+  /* mode toggle */
+  .mode{display:flex;background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:3px;margin-bottom:6px}
+  .mode button{flex:1;background:none;border:none;font-family:inherit;font-size:13px;font-weight:600;color:var(--ink-soft);padding:8px 6px;border-radius:8px;cursor:pointer;transition:background .18s,color .18s,box-shadow .18s}
+  .mode button.on{background:var(--card);color:var(--ink);box-shadow:0 1px 2px rgba(27,26,22,.08)}
+  .mode-desc{font-size:12px;color:var(--ink-faint);margin:8px 2px 22px;line-height:1.45}
+
+  /* coast reached badge */
+  .reached-badge{display:flex;width:fit-content;align-items:center;gap:5px;margin-top:8px;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--pine);background:rgba(46,139,92,.12);padding:3px 8px;border-radius:99px}
+
+  .field{margin-bottom:20px}
+  .field:last-child{margin-bottom:0}
+  .field-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:8px}
+  .field label{font-size:14px;font-weight:600;color:var(--ink)}
+  .hint{font-size:11.5px;color:var(--ink-faint);font-weight:500}
+  .val-wrap{position:relative;display:flex;align-items:center}
+  .prefix{position:absolute;left:13px;color:var(--ink-faint);font-weight:600;font-size:15px;pointer-events:none}
+  .suffix{position:absolute;right:13px;color:var(--ink-faint);font-weight:600;font-size:15px;pointer-events:none}
+  input[type=number]{
+    width:100%;font-family:'Hanken Grotesk',sans-serif;font-size:16px;font-weight:600;color:var(--ink);
+    background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:11px 14px;
+    transition:border-color .15s, box-shadow .15s;
+  }
+  input.has-prefix{padding-left:26px}
+  input.has-suffix{padding-right:30px}
+  input[type=number]:focus{outline:none;border-color:var(--pine);box-shadow:0 0 0 3px rgba(30,77,60,.12)}
+  input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none}
+  input[type=number]{-moz-appearance:textfield}
+
+  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:4px;background:var(--line);margin-top:13px;cursor:pointer}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--pine);border:3px solid var(--card);box-shadow:0 1px 4px rgba(27,26,22,.25);cursor:pointer}
+  input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--pine);border:3px solid var(--card);box-shadow:0 1px 4px rgba(27,26,22,.25);cursor:pointer}
+
+  .adv-toggle{
+    width:100%;margin-top:22px;background:none;border:1px dashed var(--line);border-radius:11px;
+    padding:11px;font-family:inherit;font-size:13px;font-weight:600;color:var(--ink-soft);cursor:pointer;
+    display:flex;align-items:center;justify-content:center;gap:8px;transition:background .15s,border-color .15s;
+  }
+  .adv-toggle:hover{background:var(--paper);border-color:var(--ink-faint)}
+  .adv-toggle .chev{transition:transform .25s}
+  .adv-toggle[aria-expanded=true] .chev{transform:rotate(180deg)}
+  .advanced{overflow:hidden;max-height:0;transition:max-height .35s ease;margin-top:0}
+  .advanced.open{max-height:760px;margin-top:20px}
+  .adv-inner{padding-top:20px;border-top:1px solid var(--line-soft)}
+
+  /* Results */
+  .results-head{display:flex;flex-direction:column;gap:4px;margin-bottom:6px}
+  .verdict-pill{display:inline-flex;align-items:center;gap:7px;align-self:flex-start;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:5px 11px;border-radius:99px;margin-bottom:16px}
+  .verdict-pill.good{background:rgba(46,139,92,.12);color:var(--pine)}
+  .verdict-pill.fire{background:var(--ember-soft);color:var(--ember)}
+  .verdict-pill .pulse{width:7px;height:7px;border-radius:50%;background:currentColor;box-shadow:0 0 0 0 currentColor;animation:pulse 2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(192,83,28,.5)}70%{box-shadow:0 0 0 6px rgba(192,83,28,0)}100%{box-shadow:0 0 0 0 rgba(192,83,28,0)}}
+
+  .headline{font-family:'Fraunces',serif;font-weight:500;letter-spacing:-.02em;line-height:1.08;font-size:clamp(26px,3.6vw,38px);color:var(--ink)}
+  .headline .em{color:var(--ember);font-weight:600}
+  .headline .pn{color:var(--pine);font-weight:600}
+  .headline-sub{color:var(--ink-soft);font-size:15px;margin-top:8px}
+
+  .stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);border-radius:14px;overflow:hidden;margin-top:24px}
+  @media(max-width:520px){.stat-grid{grid-template-columns:1fr 1fr}}
+  .stat{background:var(--card);padding:16px 16px 18px}
+  .stat .k{font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-faint);font-weight:600;margin-bottom:7px}
+  .stat .v{font-family:'Fraunces',serif;font-size:clamp(21px,2.4vw,26px);font-weight:500;letter-spacing:-.01em;color:var(--ink);line-height:1}
+  .stat .v small{font-size:14px;color:var(--ink-faint);font-family:'Hanken Grotesk';font-weight:600}
+
+  .chart-card{margin-top:var(--gap,28px)}
+  .chart-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+  .chart-title{font-family:'Fraunces',serif;font-size:19px;font-weight:600;letter-spacing:-.01em}
+  .legend{display:flex;gap:16px;flex-wrap:wrap}
+  .lg{display:flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;color:var(--ink-soft)}
+  .lg .swatch{width:16px;height:3px;border-radius:3px}
+  .lg .swatch.dash{background:repeating-linear-gradient(90deg,var(--ember) 0 4px,transparent 4px 7px)}
+  .chart-box{position:relative;height:300px;margin-top:14px}
+  @media(max-width:520px){.chart-box{height:250px}}
+
+  .chart-ctl{display:flex;align-items:center;gap:14px;margin-top:16px;padding-top:14px;border-top:1px solid var(--line-soft)}
+  .chart-ctl label{font-size:12.5px;font-weight:600;color:var(--ink-soft);white-space:nowrap;flex-shrink:0}
+  .chart-ctl input[type=range]{flex:1;margin-top:0}
+  .chart-ctl input[type=number]{width:62px;padding:7px 10px;font-size:13px;font-weight:600;text-align:center}
+  @media(max-width:520px){.chart-ctl{flex-wrap:wrap;gap:10px}.chart-ctl label{width:100%}}
+
+  .footnote{margin-top:18px;font-size:12.5px;color:var(--ink-faint);line-height:1.5;border-top:1px solid var(--line-soft);padding-top:14px}
+  .footnote b{color:var(--ink-soft);font-weight:600}
+
+  /* tabs */
+  .tabs{display:flex;gap:0;border-bottom:1px solid var(--line);margin-bottom:clamp(20px,3vw,32px);overflow-x:auto;-ms-overflow-style:none;scrollbar-width:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab-btn{background:none;border:none;font-family:inherit;font-size:15px;font-weight:600;color:var(--ink-faint);padding:14px 0 16px;margin-right:28px;cursor:pointer;position:relative;white-space:nowrap;transition:color .2s}
+  .tab-btn:hover{color:var(--ink-soft)}
+  .tab-btn.active{color:var(--ink)}
+  .tab-btn.active::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:2px;background:var(--pine);border-radius:2px 2px 0 0}
+  .tab-content{display:none}
+  .tab-content.active{display:block}
+
+  /* simulator */
+  .holding{display:grid;grid-template-columns:auto 1fr auto auto;gap:10px;align-items:center;padding:13px 0;border-bottom:1px solid var(--line-soft)}
+  .holding:last-child{border-bottom:none}
+  .ticker-tag{font-family:'Fraunces',serif;font-weight:600;font-size:17px;color:var(--ink);letter-spacing:-.01em;display:flex;align-items:center;gap:5px;min-width:50px}
+  .ticker-tag.lev::after{content:'3x';font-family:'Hanken Grotesk',sans-serif;font-size:9px;font-weight:700;color:var(--ember);background:var(--ember-soft);padding:2px 5px;border-radius:99px;letter-spacing:.04em}
+  .holding-name{font-size:12.5px;color:var(--ink-soft);font-weight:500;line-height:1.3;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .alloc-input{display:flex;align-items:center;gap:3px;background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:5px 9px 5px 10px;transition:border-color .15s,box-shadow .15s}
+  .alloc-input:focus-within{border-color:var(--pine);box-shadow:0 0 0 3px rgba(30,77,60,.12)}
+  .alloc-input input{width:42px;border:none;background:none;font-family:inherit;font-size:14px;font-weight:600;color:var(--ink);text-align:right;-moz-appearance:textfield}
+  .alloc-input input::-webkit-outer-spin-button,.alloc-input input::-webkit-inner-spin-button{-webkit-appearance:none}
+  .alloc-input input:focus{outline:none}
+  .alloc-input .pct{font-size:13px;color:var(--ink-faint);font-weight:600}
+  .holding-remove{background:none;border:none;width:26px;height:26px;border-radius:99px;color:var(--ink-faint);cursor:pointer;font-size:18px;line-height:1;display:flex;align-items:center;justify-content:center;transition:background .15s,color .15s;padding:0}
+  .holding-remove:hover{background:var(--ember-soft);color:var(--ember)}
+
+  .add-holding{margin-top:18px;display:flex;gap:9px}
+  .add-holding select{flex:1;font-family:inherit;font-size:14px;font-weight:600;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:11px 14px;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23928B7C' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:34px;min-width:0}
+  .add-holding select:focus{outline:none;border-color:var(--pine);box-shadow:0 0 0 3px rgba(30,77,60,.12)}
+  .add-holding button{font-family:inherit;font-size:14px;font-weight:600;color:var(--card);background:var(--pine);border:none;border-radius:11px;padding:11px 18px;cursor:pointer;transition:background .15s}
+  .add-holding button:hover{background:#163B2D}
+  .add-holding button:disabled{background:var(--ink-faint);cursor:not-allowed;opacity:.5}
+
+  .alloc-total{margin-top:18px;padding:11px 14px;border-radius:11px;display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:600;background:var(--paper);border:1px solid var(--line);color:var(--ink-soft)}
+  .alloc-total.ok{background:rgba(46,139,92,.08);border-color:rgba(46,139,92,.3);color:var(--pine)}
+  .alloc-total.off{background:var(--ember-soft);border-color:rgba(192,83,28,.3);color:var(--ember)}
+
+  .alloc-bar{display:flex;height:8px;border-radius:99px;overflow:hidden;background:var(--line-soft);margin-top:14px}
+  .alloc-bar span{height:100%;transition:width .35s ease}
+
+  .sim-headline{font-family:'Fraunces',serif;font-weight:500;letter-spacing:-.02em;line-height:1.1;font-size:clamp(28px,3.8vw,42px);color:var(--ink);margin-top:6px}
+  .sim-headline .em{color:var(--ember);font-weight:600}
+  .sim-headline .pn{color:var(--pine);font-weight:600}
+  .sim-sub{color:var(--ink-soft);font-size:14.5px;margin-top:10px;line-height:1.55}
+  .sim-sub b{color:var(--ink);font-weight:600}
+
+  .sim-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);border-radius:14px;overflow:hidden;margin-top:24px}
+  @media(max-width:520px){.sim-stats{grid-template-columns:1fr}}
+  .sim-stat{background:var(--card);padding:16px 16px 18px}
+  .sim-stat .k{font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-faint);font-weight:600;margin-bottom:7px}
+  .sim-stat .v{font-family:'Fraunces',serif;font-size:clamp(21px,2.4vw,26px);font-weight:500;letter-spacing:-.01em;color:var(--ink);line-height:1}
+  .sim-stat .v.neg{color:var(--ember)}
+  .sim-stat .ann{margin-top:6px;font-size:12px;color:var(--ink-faint);font-weight:500;line-height:1.35}
+
+  .warning{margin-top:22px;padding:14px 16px;background:var(--ember-soft);border:1px solid rgba(192,83,28,.25);border-radius:12px;font-size:12.5px;color:#7A3210;line-height:1.6}
+  .warning b{font-weight:700;color:var(--ember)}
+  .warning .icon{font-weight:700;margin-right:4px;color:var(--ember)}
+
+  /* sync toggle */
+  .tabs{justify-content:space-between;align-items:center;gap:12px}
+  .tab-list{display:flex;min-width:0}
+  .sync-toggle{display:flex;align-items:center;gap:7px;background:none;border:1px solid var(--line);border-radius:99px;padding:5px 12px 5px 10px;font-family:inherit;font-size:12px;font-weight:600;color:var(--ink-faint);cursor:pointer;flex-shrink:0;margin-bottom:8px;transition:border-color .15s,color .15s,background .15s;white-space:nowrap}
+  .sync-toggle:hover{border-color:var(--ink-faint);color:var(--ink-soft)}
+  .sync-toggle.on{color:var(--pine);border-color:rgba(46,139,92,.4);background:rgba(46,139,92,.06)}
+  .sync-dot{width:7px;height:7px;border-radius:50%;background:currentColor;opacity:.4;transition:opacity .2s}
+  .sync-toggle.on .sync-dot{opacity:1;animation:syncpulse 2.5s infinite}
+  @keyframes syncpulse{0%,100%{box-shadow:0 0 0 0 rgba(46,139,92,.4)}50%{box-shadow:0 0 0 5px rgba(46,139,92,0)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <span class="mark">Ember<span class="dot">.</span></span>
+      <span class="tag">FIRE &amp; Retirement Calculator</span>
+    </div>
+    <p class="sub">Built for early retirement, works for any retirement. Set your own return and see exactly when work becomes optional.</p>
+  </header>
+
+  <nav class="tabs">
+    <div class="tab-list">
+      <button class="tab-btn active" data-tab="calc-tab">Calculator</button>
+      <button class="tab-btn" data-tab="sim-tab">Portfolio simulator</button>
+    </div>
+    <button class="sync-toggle on" id="syncBtn" title="When linked: assets ↔ portfolio value, and the simulator's CAGR feeds the calculator's post-retirement return">
+      <span class="sync-dot"></span>
+      <span id="syncLabel">Linked</span>
+    </button>
+  </nav>
+
+  <div id="calc-tab" class="tab-content active">
+  <div class="grid">
+    <!-- INPUTS -->
+    <div class="panel panel-pad">
+      <div class="panel-title">Your numbers</div>
+
+      <div class="field">
+        <div class="field-head"><label for="age">Current age</label><span class="hint" id="age-h">years</span></div>
+        <div class="val-wrap"><input type="number" id="age" value="30" min="15" max="90"></div>
+        <input type="range" id="age-r" min="18" max="70" value="30">
+      </div>
+
+      <div class="field">
+        <div class="field-head"><label for="assets">Current invested assets</label></div>
+        <div class="val-wrap"><span class="prefix">$</span><input class="has-prefix" type="number" id="assets" value="50000" min="0" step="1000"></div>
+        <input type="range" id="assets-r" min="0" max="1000000" step="5000" value="50000">
+      </div>
+
+      <div class="field">
+        <div class="field-head"><label for="contrib">Annual contribution</label><span class="hint">what you invest per year</span></div>
+        <div class="val-wrap"><span class="prefix">$</span><input class="has-prefix" type="number" id="contrib" value="30000" min="0" step="1000"></div>
+        <input type="range" id="contrib-r" min="0" max="200000" step="1000" value="30000">
+      </div>
+
+      <div class="field">
+        <div class="field-head"><label for="ret">Pre-retirement return</label><span class="hint">while you're still accumulating</span></div>
+        <div class="val-wrap"><input class="has-suffix" type="number" id="ret" value="10" min="-20" step="0.5"><span class="suffix">%</span></div>
+        <input type="range" id="ret-r" min="0" max="40" step="0.5" value="10">
+      </div>
+
+      <div class="field">
+        <div class="field-head"><label for="spend">Annual spending in retirement</label><span class="hint">today's dollars</span></div>
+        <div class="val-wrap"><span class="prefix">$</span><input class="has-prefix" type="number" id="spend" value="60000" min="0" step="1000"></div>
+        <input type="range" id="spend-r" min="0" max="300000" step="1000" value="60000">
+      </div>
+
+      <div class="field">
+        <div class="field-head"><label for="swr">Post-retirement return</label><span class="hint">your conservative retirement portfolio</span></div>
+        <div class="val-wrap"><input class="has-suffix" type="number" id="swr" value="7" min="0.1" step="0.1"><span class="suffix">%</span></div>
+        <input type="range" id="swr-r" min="2" max="15" step="0.1" value="7">
+      </div>
+
+      <button class="adv-toggle" id="advBtn" aria-expanded="false">
+        <span>Advanced settings</span>
+        <span class="chev">▾</span>
+      </button>
+
+      <div class="advanced" id="advPanel">
+        <div class="adv-inner">
+          <div class="field">
+            <div class="field-head"><label for="infl">Inflation rate</label><span class="hint">long-run avg ≈ 3%</span></div>
+            <div class="val-wrap"><input class="has-suffix" type="number" id="infl" value="3" min="0" step="0.1"><span class="suffix">%</span></div>
+            <input type="range" id="infl-r" min="0" max="8" step="0.1" value="3">
+          </div>
+          <div class="field">
+            <div class="field-head"><label for="trad">Expected retirement age</label><span class="hint">typical is 65 · lower if retiring early</span></div>
+            <div class="val-wrap"><input type="number" id="trad" value="65" min="40" max="90"></div>
+            <input type="range" id="trad-r" min="50" max="75" value="65">
+          </div>
+          <div class="field" id="cushionField">
+            <div class="field-head"><label for="cushion">Cash cushion</label><span class="hint">years of spending in cash/bonds for down years</span></div>
+            <div class="val-wrap"><input class="has-suffix" type="number" id="cushion" value="0" min="0" step="0.5"><span class="suffix">yrs</span></div>
+            <input type="range" id="cushion-r" min="0" max="10" step="0.5" value="0">
+          </div>
+          <div class="field" style="margin-bottom:0">
+            <div class="field-head"><label for="cgrow">Contribution growth / year</label><span class="hint">raises &amp; savings increases</span></div>
+            <div class="val-wrap"><input class="has-suffix" type="number" id="cgrow" value="0" min="0" step="0.5"><span class="suffix">%</span></div>
+            <input type="range" id="cgrow-r" min="0" max="15" step="0.5" value="0">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULTS -->
+    <div>
+      <div class="panel panel-pad">
+        <div class="results-head">
+          <span class="verdict-pill" id="pill"><span class="pulse"></span><span id="pillTxt">—</span></span>
+        </div>
+        <div class="headline" id="headline">—</div>
+        <div class="headline-sub" id="headlineSub">—</div>
+
+          <div class="stat-grid">
+          <div class="stat"><div class="k" id="s-fire-label">FIRE number</div><div class="v" id="s-fire">—</div></div>
+          <div class="stat"><div class="k">Coast FIRE number</div><div class="v" id="s-coast">—</div></div>
+          <div class="stat"><div class="k">Portfolio at retirement</div><div class="v" id="s-atfi">—</div></div>
+        </div>
+
+        <p class="footnote">
+          All figures are in <b>today's dollars</b> (inflation-adjusted). Your <b>pre-retirement return</b> drives growth while you're accumulating; your <b>post-retirement return</b> drives growth after retirement, typically lower as you shift to a more conservative allocation. <b>FIRE number</b> = annual spending ÷ post-retirement real return, plus any cash cushion. <b>Coast FIRE</b> is the amount that, with zero further saving, grows to your FIRE number by your expected retirement age. The chart shows your full life cycle: contributions and pre-retirement growth until your expected retirement age, then spending withdrawals at the post-retirement return.
+        </p>
+      </div>
+
+      <div class="panel panel-pad chart-card">
+        <div class="chart-head">
+          <span class="chart-title">Path to independence</span>
+          <div class="legend">
+            <span class="lg"><span class="swatch" style="background:var(--pine)"></span>Portfolio</span>
+            <span class="lg"><span class="swatch dash"></span>FIRE number</span>
+          </div>
+        </div>
+        <div class="chart-box"><canvas id="chart"></canvas></div>
+        <div class="chart-ctl">
+          <label for="chartEnd">Show projection through age</label>
+          <input type="range" id="chartEnd-r" min="50" max="105" step="1" value="95">
+          <input type="number" id="chartEnd" min="50" max="105" step="1" value="95">
+        </div>
+      </div>
+    </div>
+  </div>
+  </div><!-- /calc-tab -->
+
+  <div id="sim-tab" class="tab-content">
+    <div class="grid">
+      <div class="panel panel-pad">
+        <div class="panel-title">Build your portfolio</div>
+
+        <div class="field">
+          <div class="field-head"><label for="pv">Portfolio value</label><span class="hint">total amount to allocate</span></div>
+          <div class="val-wrap"><span class="prefix">$</span><input class="has-prefix" type="number" id="pv" value="50000" min="0" step="10000"></div>
+          <input type="range" id="pv-r" min="0" max="5000000" step="10000" value="50000">
+        </div>
+
+        <div id="holdings" style="margin-top:8px"></div>
+
+        <div class="add-holding">
+          <select id="addSel"><option value="">+ Add a holding...</option></select>
+          <button id="addBtn">Add</button>
+        </div>
+
+        <div class="alloc-total ok" id="allocTotal"><span>Total allocation</span><span id="allocTotalVal">100%</span></div>
+        <div class="alloc-bar" id="allocBar"></div>
+      </div>
+
+      <div>
+        <div class="panel panel-pad">
+          <div class="panel-title">Projected performance</div>
+          <div class="sim-headline" id="simHeadline">—</div>
+          <p class="sim-sub" id="simSub">—</p>
+
+          <div class="sim-stats">
+            <div class="sim-stat"><div class="k">Expected return (CAGR)</div><div class="v" id="ss-cagr">—</div><div class="ann">based on 10-yr history</div></div>
+            <div class="sim-stat"><div class="k">Annual dividend income</div><div class="v" id="ss-inc">—</div><div class="ann" id="ss-inc-ann">at current yields</div></div>
+            <div class="sim-stat"><div class="k">2022 stress test</div><div class="v" id="ss-stress">—</div><div class="ann" id="ss-stress-ann">a known bad year</div></div>
+          </div>
+
+          <div class="warning"><span class="icon">⚠</span><b>Past performance does not predict future returns.</b> These figures use historical data and don't account for sequence-of-returns risk. <span id="levWarn"></span></div>
+        </div>
+      </div>
+    </div>
+  </div><!-- /sim-tab -->
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const pairs = ['age','assets','contrib','ret','spend','infl','swr','trad','cgrow','cushion','chartEnd'];
+let linked = true; // cross-tab linking: assets ↔ pv, sim CAGR → post-retirement return
+
+// keep number <-> slider in sync (slider clamps to its range; number is free)
+pairs.forEach(id=>{
+  const n=$(id), r=$(id+'-r');
+  if(!n) return;
+  n.addEventListener('input',()=>{ if(r){ r.value = Math.min(Math.max(n.value, r.min), r.max);} compute();});
+  if(r) r.addEventListener('input',()=>{ n.value=r.value; compute();});
+});
+
+// cross-tab sync helpers
+function pushAssetsToPv(){
+  if(!linked) return;
+  const v = +$('assets').value || 0;
+  if(+$('pv').value === v) return;
+  $('pv').value = v;
+  const r = $('pv-r'); r.value = Math.min(Math.max(v, +r.min), +r.max);
+  if(typeof recomputeSim === 'function') recomputeSim();
+}
+function pushPvToAssets(){
+  if(!linked) return;
+  const v = +$('pv').value || 0;
+  if(+$('assets').value === v) return;
+  $('assets').value = v;
+  const r = $('assets-r'); r.value = Math.min(Math.max(v, +r.min), +r.max);
+  compute();
+}
+function pushCagrToRet(cagr){
+  if(!linked || !isFinite(cagr)) return;
+  const target = +cagr.toFixed(1);
+  // Push simulator CAGR into the POST-retirement return field — that's the conservative
+  // historical-ETF rate, which belongs in the post-retirement slot. Pre-retirement stays manual.
+  if(+$('swr').value === target) return;
+  $('swr').value = target;
+  const r = $('swr-r'); r.value = Math.min(Math.max(target, +r.min), +r.max);
+  compute();
+}
+
+// when user edits assets (number or slider), propagate to pv if linked
+$('assets').addEventListener('input', pushAssetsToPv);
+$('assets-r').addEventListener('input', pushAssetsToPv);
+
+$('advBtn').addEventListener('click',()=>{
+  const open=$('advPanel').classList.toggle('open');
+  $('advBtn').setAttribute('aria-expanded',open);
+});
+
+const fmt = v => {
+  if(!isFinite(v)) return '—';
+  v=Math.round(v);
+  return '$'+v.toLocaleString('en-US');
+};
+const fmtC = v => { // compact for axis
+  if(Math.abs(v)>=1e6) return '$'+(v/1e6).toFixed(1).replace(/\.0$/,'')+'M';
+  if(Math.abs(v)>=1e3) return '$'+Math.round(v/1e3)+'k';
+  return '$'+Math.round(v);
+};
+
+let chart;
+
+function compute(){
+  const age=+$('age').value, assets=+$('assets').value, contrib=+$('contrib').value;
+  const nomPre=+$('ret').value/100, spend=+$('spend').value;
+  const nomPost=+$('swr').value/100;
+  const infl=+$('infl').value/100, trad=+$('trad').value, cgrow=+$('cgrow').value/100;
+  const cushionYrs = +$('cushion').value || 0;
+  const chartEnd = +$('chartEnd').value || 95;
+
+  // convert nominal returns to real (inflation-adjusted) so everything stays in today's dollars
+  const rrPre  = (1+nomPre )/(1+infl)-1;
+  const rrPost = (1+nomPost)/(1+infl)-1;
+
+  // FIRE number = principal whose real post-retirement return covers real spending, plus optional cushion
+  const baseFire = rrPost > 0 ? spend/rrPost : Infinity;
+  const fire = baseFire + cushionYrs*spend;
+
+  // Coast FIRE: amount needed today to grow to FIRE by expected retirement age (uses pre-retirement return)
+  const yrsToTrad=Math.max(trad-age,0);
+  const coast = fire/Math.pow(1+rrPre, yrsToTrad);
+
+  // year-by-year simulation in today's dollars
+  // Phase transition is at EXPECTED RETIREMENT AGE (trad), not at FIRE crossing.
+  // You keep working/contributing until your planned retirement age, then switch to drawdown.
+  // Accumulation: balance grows at pre-retirement real return + contributions
+  // Retirement:   balance grows at post-retirement real return - annual spending
+  let bal=assets, c=contrib, fiAge=null, ranOut=null;
+  const maxAge=Math.max(chartEnd, age+1);
+  const series=[{x:age,y:bal}];
+  if(bal>=fire) fiAge=age;
+  for(let a=age; a<maxAge; a++){
+    if(a<trad){
+      bal = bal*(1+rrPre) + c;
+      c   = c*(1+cgrow);
+    } else {
+      bal = bal*(1+rrPost) - spend;
+      if(bal<0){ bal=0; }
+    }
+    const cur=a+1;
+    series.push({x:cur,y:bal});
+    if(fiAge===null && bal>=fire){ fiAge=cur; }
+    if(a>=trad && bal<=0 && ranOut===null){ ranOut=cur; break; }
+  }
+
+  // verdict + headline
+  const pill=$('pill'), pillTxt=$('pillTxt'), hl=$('headline'), hs=$('headlineSub');
+  const atFi = fiAge!==null ? series.find(p=>p.x===fiAge).y : null;
+  const balRetireEntry = series.find(p=>p.x===trad);
+  const balAtRetire = balRetireEntry ? balRetireEntry.y : null;
+
+  if(fiAge!==null){
+    if(fiAge<=trad){
+      // FI by (or before) planned retirement age — on track
+      const yrsBefore = trad - fiAge;
+      const fast = yrsBefore >= 5 || fiAge<=age;
+      pill.className='verdict-pill '+(fast?'fire':'good');
+      pillTxt.textContent = fiAge<=age ? 'Already FI' : (yrsBefore>0 ? 'Ahead of plan' : 'On track');
+      if(fiAge<=age){
+        hl.innerHTML='You\'re already <span class="pn">financially independent</span>.';
+      } else {
+        hl.innerHTML = `Financial independence at <span class="em">age ${fiAge}</span>${yrsBefore>0?` — <span class="em">${yrsBefore} ${yrsBefore===1?'year':'years'}</span> before your planned retirement`:''}.`;
+      }
+      // sub: balance at retirement + income breakdown
+      if(balAtRetire !== null){
+        const incomeRetire = balAtRetire * rrPost;
+        const surplus = incomeRetire - spend;
+        hs.innerHTML = `By age ${trad} your portfolio will be about <b>${fmt(balAtRetire)}</b>, generating <b>${fmt(incomeRetire)}</b>/yr — ${surplus>=0 ? `<span class="pn">a ${fmt(surplus)} surplus</span> over` : `<span class="em">${fmt(-surplus)} short of</span>`} your ${fmt(spend)} spending.`;
+      } else {
+        hs.textContent = `Pre-retirement growth at ${(rrPre*100).toFixed(1)}% real takes you there; once retired, your portfolio's ${(rrPost*100).toFixed(1)}% real return generates income to cover spending.`;
+      }
+    } else {
+      // fiAge > trad: behind plan
+      const yrsLate = fiAge - trad;
+      pill.className='verdict-pill fire';
+      pillTxt.textContent='Behind plan';
+      hl.innerHTML = `You'd hit FI at <span class="em">age ${fiAge}</span> — <span class="em">${yrsLate} ${yrsLate===1?'year':'years'}</span> past your planned retirement.`;
+      if(balAtRetire !== null){
+        hs.innerHTML = `By age ${trad}, you'll have about <b>${fmt(balAtRetire)}</b> — short of your <b>${fmt(fire)}</b> FIRE target. Try higher contributions, a higher pre-retirement return, or a later retirement age.`;
+      }
+    }
+  } else {
+    pill.className='verdict-pill good';
+    pillTxt.textContent='Needs adjusting';
+    hl.innerHTML=`Not reaching independence by <span class="pn">age ${maxAge}</span> yet.`;
+    hs.textContent='Try a higher contribution, a higher pre-retirement return, or lower retirement spending.';
+  }
+  if(ranOut !== null){
+    pill.className='verdict-pill fire';
+    pillTxt.textContent='Money runs out';
+    hs.textContent = `Warning: at this spending rate vs your post-retirement return, the portfolio is depleted by age ${ranOut}. Try lower spending, a higher post-retirement return, or a bigger cushion.`;
+  }
+
+  $('s-fire').textContent=fmt(fire);
+  const reached = assets>=coast;
+  $('s-coast').innerHTML = fmt(coast) + (reached ? '<div class="reached-badge">reached ✓</div>' : '');
+  $('s-atfi').textContent = balAtRetire !== null ? fmt(balAtRetire) : (atFi!==null ? fmt(atFi) : '—');
+
+  drawChart(series, fire, fiAge);
+}
+
+function drawChart(series, fire, fiAge){
+  const ctx=$('chart').getContext('2d');
+  const labels=series.map(p=>p.x);
+  const data=series.map(p=>p.y);
+  const fireLine=series.map(()=>fire);
+
+  const grad=ctx.createLinearGradient(0,0,0,300);
+  grad.addColorStop(0,'rgba(46,139,92,.22)');
+  grad.addColorStop(1,'rgba(46,139,92,0)');
+
+  // dot marking the FI crossover point
+  const pointR = series.map(p=>p.x===fiAge?5:0);
+  const pointBg = series.map(p=>p.x===fiAge?'#C0531C':'transparent');
+
+  const cfg={
+    type:'line',
+    data:{labels,datasets:[
+      {label:'Portfolio',data,borderColor:'#1E4D3C',borderWidth:2.5,backgroundColor:grad,fill:true,
+       tension:.25,pointRadius:pointR,pointBackgroundColor:pointBg,pointBorderColor:pointBg,pointHoverRadius:5},
+      {label:'FIRE number',data:fireLine,borderColor:'#C0531C',borderWidth:1.5,borderDash:[5,4],
+       fill:false,pointRadius:0,tension:0}
+    ]},
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      interaction:{mode:'index',intersect:false},
+      plugins:{
+        legend:{display:false},
+        tooltip:{
+          backgroundColor:'#1B1A16',padding:11,cornerRadius:9,titleFont:{family:'Hanken Grotesk',weight:'600'},
+          bodyFont:{family:'Hanken Grotesk'},
+          callbacks:{
+            title:items=>'Age '+items[0].label,
+            label:c=>c.dataset.label+': '+fmtC(c.parsed.y)
+          }
+        }
+      },
+      scales:{
+        x:{title:{display:true,text:'Age',font:{family:'Hanken Grotesk',size:11,weight:'600'},color:'#928B7C'},
+           grid:{display:false},ticks:{color:'#928B7C',font:{family:'Hanken Grotesk',size:11},maxTicksLimit:9}},
+        y:{grid:{color:'#EFEAE0'},border:{display:false},
+           ticks:{color:'#928B7C',font:{family:'Hanken Grotesk',size:11},callback:v=>fmtC(v)}}
+      }
+    }
+  };
+
+  if(chart){chart.data=cfg.data;chart.options=cfg.options;chart.update('none');}
+  else chart=new Chart(ctx,cfg);
+}
+
+compute();
+
+// ============ PORTFOLIO SIMULATOR ============
+// Approximate trailing data as of June 2026 — to be replaced by GitHub Action pipeline.
+// cagr = 10-year annualized total return %, yield = TTM dividend yield %, ret22 = calendar-year 2022 total return %
+const TICKERS = {
+  VOO:  { name:'Vanguard S&P 500',              cagr:15.6, yield:1.3, ret22:-18.2, lev:false },
+  VTI:  { name:'Vanguard Total US Market',      cagr:15.1, yield:1.3, ret22:-19.5, lev:false },
+  SPY:  { name:'SPDR S&P 500',                  cagr:15.5, yield:1.3, ret22:-18.2, lev:false },
+  QQQ:  { name:'Invesco Nasdaq 100',            cagr:21.6, yield:0.5, ret22:-32.6, lev:false },
+  TQQQ: { name:'ProShares UltraPro QQQ',        cagr:43.0, yield:0.4, ret22:-79.1, lev:true  },
+  UPRO: { name:'ProShares UltraPro S&P 500',    cagr:28.5, yield:0.5, ret22:-56.8, lev:true  },
+  SCHD: { name:'Schwab US Dividend Equity',     cagr:13.1, yield:3.4, ret22:-3.2,  lev:false },
+  VXUS: { name:'Vanguard Total International',  cagr:9.7,  yield:3.2, ret22:-16.1, lev:false },
+  BND:  { name:'Vanguard Total Bond Market',    cagr:2.0,  yield:4.3, ret22:-13.1, lev:false },
+  CASH: { name:'Cash / HYSA',                   cagr:2.0,  yield:4.5, ret22:1.5,   lev:false },
+};
+
+const TICKER_COLORS = {
+  VOO:'#1E4D3C', VTI:'#2E6F4F', SPY:'#3A8060', QQQ:'#5C9988',
+  TQQQ:'#C0531C', UPRO:'#D67847',
+  SCHD:'#2E8B5C', VXUS:'#B8924C',
+  BND:'#7A8DA0', CASH:'#A8A095'
+};
+
+let holdings = [
+  {symbol:'VOO',  alloc:70},
+  {symbol:'SCHD', alloc:20},
+  {symbol:'BND',  alloc:10},
+];
+
+function renderHoldings(){
+  const wrap = $('holdings');
+  wrap.innerHTML = '';
+  holdings.forEach((h,i) => {
+    const t = TICKERS[h.symbol];
+    const row = document.createElement('div');
+    row.className = 'holding';
+    row.innerHTML =
+      '<div class="ticker-tag '+(t.lev?'lev':'')+'">'+h.symbol+'</div>'+
+      '<div class="holding-name" title="'+t.name+'">'+t.name+'</div>'+
+      '<div class="alloc-input"><input type="number" min="0" max="200" step="1" value="'+h.alloc+'" data-i="'+i+'"><span class="pct">%</span></div>'+
+      '<button class="holding-remove" data-i="'+i+'" aria-label="Remove">×</button>';
+    wrap.appendChild(row);
+  });
+  wrap.querySelectorAll('.alloc-input input').forEach(inp => {
+    inp.addEventListener('input', e => {
+      const i = +e.target.dataset.i;
+      holdings[i].alloc = +e.target.value || 0;
+      recomputeSim();
+    });
+  });
+  wrap.querySelectorAll('.holding-remove').forEach(btn => {
+    btn.addEventListener('click', e => {
+      const i = +e.currentTarget.dataset.i;
+      holdings.splice(i, 1);
+      renderHoldings();
+      renderAddSelect();
+      recomputeSim();
+    });
+  });
+}
+
+function renderAddSelect(){
+  const sel = $('addSel');
+  const used = new Set(holdings.map(h => h.symbol));
+  sel.innerHTML = '<option value="">+ Add a holding...</option>';
+  Object.entries(TICKERS).forEach(([sym, t]) => {
+    if(used.has(sym)) return;
+    const opt = document.createElement('option');
+    opt.value = sym;
+    opt.textContent = sym + ' — ' + t.name;
+    sel.appendChild(opt);
+  });
+  $('addBtn').disabled = sel.options.length <= 1;
+}
+
+$('addBtn').addEventListener('click', () => {
+  const sym = $('addSel').value;
+  if(!sym) return;
+  const total = holdings.reduce((s,h)=>s+h.alloc, 0);
+  const newAlloc = total < 100 ? (100 - total) : 10;
+  holdings.push({symbol: sym, alloc: newAlloc});
+  renderHoldings();
+  renderAddSelect();
+  $('addSel').value = '';
+  recomputeSim();
+});
+
+// portfolio value <-> slider
+$('pv').addEventListener('input', () => {
+  const r = $('pv-r');
+  r.value = Math.min(Math.max($('pv').value, +r.min), +r.max);
+  recomputeSim();
+  pushPvToAssets();
+});
+$('pv-r').addEventListener('input', () => {
+  $('pv').value = $('pv-r').value;
+  recomputeSim();
+  pushPvToAssets();
+});
+
+function recomputeSim(){
+  const pv = +$('pv').value || 0;
+  const total = holdings.reduce((s,h) => s + h.alloc, 0);
+
+  // weighted sums
+  let cagrW = 0, yieldW = 0, stressW = 0;
+  holdings.forEach(h => {
+    const t = TICKERS[h.symbol];
+    cagrW += h.alloc * t.cagr;
+    yieldW += h.alloc * t.yield;
+    stressW += h.alloc * t.ret22;
+  });
+  // per-dollar metrics (normalize to total allocation)
+  const norm = total > 0 ? total : 100;
+  const cagr   = cagrW   / norm;
+  const yld    = yieldW  / norm;
+  const stress = stressW / norm;
+
+  // dollar figures use the actually-allocated portion
+  const allocFrac  = total / 100;
+  const allocated  = pv * allocFrac;
+  const annualGain = allocated * cagr   / 100;
+  const annualInc  = allocated * yld    / 100;
+  const stressDol  = allocated * stress / 100;
+
+  // allocation indicator
+  const at = $('allocTotal'), atv = $('allocTotalVal');
+  if(total === 0){
+    at.className = 'alloc-total off';
+    atv.textContent = 'add a holding to start';
+  } else if(Math.abs(total - 100) < 0.5){
+    at.className = 'alloc-total ok';
+    atv.textContent = '100%';
+  } else {
+    at.className = 'alloc-total off';
+    const diff = total - 100;
+    atv.textContent = total.toFixed(0) + '% — ' + (diff > 0 ? 'over by ' + diff.toFixed(0) + '%' : 'add ' + Math.abs(diff).toFixed(0) + '% more');
+  }
+
+  // allocation bar
+  const bar = $('allocBar');
+  bar.innerHTML = '';
+  const denom = Math.max(total, 100);
+  holdings.forEach(h => {
+    const seg = document.createElement('span');
+    seg.style.background = TICKER_COLORS[h.symbol] || '#928B7C';
+    seg.style.width = (h.alloc / denom * 100) + '%';
+    bar.appendChild(seg);
+  });
+
+  // headline + sub
+  const hl = $('simHeadline'), sub = $('simSub');
+  if(holdings.length === 0 || total === 0){
+    hl.innerHTML = 'Add holdings to see projections.';
+    sub.textContent = 'Pick from the dropdown to start building your portfolio.';
+  } else {
+    hl.innerHTML = 'Expected return of <span class="em">' + cagr.toFixed(1) + '%</span> per year.';
+    sub.innerHTML = 'On <b>$' + Math.round(allocated).toLocaleString() + '</b> invested, that\'s about <b>$' +
+      Math.round(annualGain).toLocaleString() + '</b> in total annual gains — including <b>$' +
+      Math.round(annualInc).toLocaleString() + '</b> in dividends you could spend without touching principal.';
+  }
+
+  $('ss-cagr').textContent = isFinite(cagr) ? cagr.toFixed(1) + '%' : '—';
+  $('ss-inc').textContent  = isFinite(annualInc) ? '$' + Math.round(annualInc).toLocaleString() : '—';
+  $('ss-inc-ann').textContent = isFinite(yld) ? yld.toFixed(2) + '% yield · current rates' : 'at current yields';
+
+  const stEl = $('ss-stress');
+  stEl.textContent = isFinite(stress) ? (stress >= 0 ? '+' : '') + stress.toFixed(1) + '%' : '—';
+  stEl.className = 'v' + (stress < 0 ? ' neg' : '');
+  $('ss-stress-ann').textContent = isFinite(stressDol)
+    ? (stressDol >= 0 ? '+$' : '−$') + Math.abs(Math.round(stressDol)).toLocaleString() + ' on this portfolio'
+    : 'a known bad year';
+
+  // leveraged warning (only shows when relevant)
+  const hasLev = holdings.some(h => TICKERS[h.symbol] && TICKERS[h.symbol].lev);
+  $('levWarn').textContent = hasLev
+    ? 'Your portfolio includes leveraged ETFs (2x/3x funds). These have outsized trailing returns during bull markets but lose substantially more in down markets due to daily-reset compounding — treat projections involving them as best-case, not expected.'
+    : '';
+
+  // push CAGR to calculator's expected return when linked
+  pushCagrToRet(cagr);
+}
+
+// tabs
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const tab = btn.dataset.tab;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b === btn));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.toggle('active', c.id === tab));
+  });
+});
+
+// sync toggle
+$('syncBtn').addEventListener('click', () => {
+  linked = !linked;
+  $('syncBtn').classList.toggle('on', linked);
+  $('syncLabel').textContent = linked ? 'Linked' : 'Unlinked';
+  if(linked){
+    // re-sync values when toggling on (calculator is the source of truth)
+    pushAssetsToPv();
+    recomputeSim();
+  }
+});
+
+// init simulator
+renderHoldings();
+renderAddSelect();
+recomputeSim();
+
+// Try to refresh ticker stats from the data pipeline (data/tickers.json).
+// Falls back silently to the hardcoded TICKERS above if the fetch fails
+// (e.g., opened from the local filesystem, or before the pipeline has run).
+fetch('data/tickers.json', {cache: 'no-cache'})
+  .then(r => r.ok ? r.json() : null)
+  .then(data => {
+    if(!data || !data.tickers) return;
+    let updated = 0;
+    Object.entries(data.tickers).forEach(([sym, t]) => {
+      if(t.cagr === null || t.yield === null) return; // skip failed fetches
+      TICKERS[sym] = {
+        name:  t.name,
+        cagr:  t.cagr,
+        yield: t.yield,
+        ret22: t.ret22,
+        lev:   !!t.lev,
+      };
+      updated++;
+    });
+    if(updated > 0){
+      renderHoldings();
+      renderAddSelect();
+      recomputeSim();
+    }
+  })
+  .catch(() => { /* silent fallback to hardcoded data */ });
+</script>
+</body>
+</html>
