@@ -420,7 +420,7 @@
     <div class="panel panel-pad">
       <div class="panel-title">Simulation inputs</div>
       <p class="mc-lede">
-        Runs thousands of randomized future paths against your plan. Inherits assets, contributions, age, retirement age, and spending from the <b>Calculator</b>. When linked, <b>post-retirement volatility</b> auto-fills from your <b>Portfolio Simulator</b> mix (mirroring how CAGR feeds the post-retirement return).
+        Runs thousands of randomized retirement scenarios against your plan. Inherits assets, contributions, age, retirement age, and spending from the <b>Calculator</b>. Accumulation is treated as deterministic (if pre-ret returns disappoint, you'd work an extra year — that's not the question MC is built to answer). When linked, post-retirement volatility auto-fills from your <b>Portfolio Simulator</b> mix.
       </p>
 
       <div class="mc-inherited">
@@ -436,12 +436,6 @@
           <div class="mc-inh-row"><span class="k">Pre-ret return</span><span class="v" id="mc-inh-pre">—</span></div>
           <div class="mc-inh-row"><span class="k">Post-ret return</span><span class="v" id="mc-inh-post">—</span></div>
         </div>
-      </div>
-
-      <div class="field">
-        <div class="field-head"><label for="mcVolPre">Pre-retirement volatility</label><span class="hint">your active accumulation strategy — manual</span></div>
-        <div class="val-wrap"><input class="has-suffix" type="number" id="mcVolPre" value="18" min="0" max="100" step="0.5"><span class="suffix">%</span></div>
-        <input type="range" id="mcVolPre-r" min="0" max="80" step="0.5" value="18">
       </div>
 
       <div class="field">
@@ -496,7 +490,7 @@
 
 <script>
 const $ = id => document.getElementById(id);
-const pairs = ['age','assets','contrib','ret','spend','infl','swr','trad','cgrow','cushion','chartEnd','mcVolPre','mcVolPost','mcRuns'];
+const pairs = ['age','assets','contrib','ret','spend','infl','swr','trad','cgrow','cushion','chartEnd','mcVolPost','mcRuns'];
 let linked = true; // cross-tab linking: assets ↔ pv, sim CAGR → post-retirement return
 
 // keep number <-> slider in sync (slider clamps to its range; number is free)
@@ -1017,7 +1011,7 @@ function gatherMcParams(){
     spending:      +$('spend').value || 0,
     cushionYrs:    +$('cushion').value || 0,
     preRet:        +$('ret').value || 0,
-    preVol:        +$('mcVolPre').value || 0,
+    preVol:        0,  // accumulation is deterministic — MC focuses on retirement survival
     postRet:       +$('swr').value || 0,
     postVol:       +$('mcVolPost').value || 0,
   };
