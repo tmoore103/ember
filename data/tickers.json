@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-06T03:29:09.290241Z",
+  "updated": "2026-06-06T03:56:49.223053Z",
   "tickers": {
     "VOO": {
       "name": "Vanguard S&P 500",
@@ -29,19 +29,110 @@
       "yield": 0.4,
       "ret22": -33.22
     },
+    "QQQM": {
+      "name": "Invesco Nasdaq 100 (low-cost)",
+      "lev": false,
+      "cagr": 17.49,
+      "yield": 0.44,
+      "ret22": -33.21
+    },
+    "VFIAX": {
+      "name": "Vanguard 500 Index Admiral",
+      "lev": false,
+      "cagr": 15.23,
+      "yield": 1.04,
+      "ret22": -18.68
+    },
+    "SPYG": {
+      "name": "SPDR S&P 500 Growth",
+      "lev": false,
+      "cagr": 17.71,
+      "yield": 0.48,
+      "ret22": -29.95
+    },
+    "VGT": {
+      "name": "Vanguard Information Technology",
+      "lev": false,
+      "cagr": 24.84,
+      "yield": 0.33,
+      "ret22": -30.28
+    },
+    "SMH": {
+      "name": "VanEck Semiconductor",
+      "lev": false,
+      "cagr": 36.18,
+      "yield": 0.19,
+      "ret22": -34.97
+    },
+    "SOXX": {
+      "name": "iShares Semiconductor",
+      "lev": false,
+      "cagr": 34.06,
+      "yield": 0.31,
+      "ret22": -36.35
+    },
+    "XLP": {
+      "name": "Consumer Staples Select Sector SPDR",
+      "lev": false,
+      "cagr": 7.36,
+      "yield": 2.61,
+      "ret22": -0.8
+    },
     "TQQQ": {
-      "name": "ProShares UltraPro QQQ",
+      "name": "ProShares UltraPro QQQ (3x)",
       "lev": true,
       "cagr": 42.76,
       "yield": 0.43,
       "ret22": -79.68
     },
     "UPRO": {
-      "name": "ProShares UltraPro S&P 500",
+      "name": "ProShares UltraPro S&P 500 (3x)",
       "lev": true,
       "cagr": 28.99,
       "yield": 0.73,
       "ret22": -57.59
+    },
+    "USD": {
+      "name": "ProShares Ultra Semiconductors (2x)",
+      "lev": true,
+      "cagr": 58.32,
+      "yield": 0.27,
+      "ret22": -69.75
+    },
+    "SOXL": {
+      "name": "Direxion Daily Semiconductor Bull (3x)",
+      "lev": true,
+      "cagr": 58.58,
+      "yield": 0.04,
+      "ret22": -86.48
+    },
+    "RETL": {
+      "name": "Direxion Daily Retail Bull (3x)",
+      "lev": true,
+      "cagr": -5.76,
+      "yield": 0.66,
+      "ret22": -81.54
+    },
+    "NAIL": {
+      "name": "Direxion Daily Homebuilders Bull (3x)",
+      "lev": true,
+      "cagr": 3.95,
+      "yield": 1.02,
+      "ret22": -73.19
+    },
+    "DFEN": {
+      "name": "Direxion Daily Aerospace & Defense (3x)",
+      "lev": true,
+      "cagr": 15.78,
+      "yield": 8.26,
+      "ret22": 4.26
+    },
+    "FNGU": {
+      "name": "MicroSectors FANG+ (3x ETN)",
+      "lev": true,
+      "cagr": 8.75,
+      "yield": 0.0,
+      "ret22": null
     },
     "SCHD": {
       "name": "Schwab US Dividend Equity",
@@ -50,6 +141,76 @@
       "yield": 3.27,
       "ret22": -3.23
     },
+    "VYM": {
+      "name": "Vanguard High Dividend Yield",
+      "lev": false,
+      "cagr": 11.69,
+      "yield": 2.22,
+      "ret22": -0.9
+    },
+    "SPYD": {
+      "name": "SPDR S&P 500 High Dividend",
+      "lev": false,
+      "cagr": 8.55,
+      "yield": 4.15,
+      "ret22": -1.97
+    },
+    "JEPI": {
+      "name": "JPMorgan Equity Premium Income",
+      "lev": false,
+      "cagr": 10.88,
+      "yield": 8.26,
+      "ret22": -3.06
+    },
+    "JEPQ": {
+      "name": "JPMorgan Nasdaq Equity Premium Income",
+      "lev": false,
+      "cagr": 15.64,
+      "yield": 10.39,
+      "ret22": -12.89
+    },
+    "QYLD": {
+      "name": "Global X Nasdaq-100 Covered Call",
+      "lev": false,
+      "cagr": 9.54,
+      "yield": 11.68,
+      "ret22": -19.43
+    },
+    "QQQI": {
+      "name": "NEOS Nasdaq-100 High Income",
+      "lev": false,
+      "cagr": 20.33,
+      "yield": 13.79,
+      "ret22": null
+    },
+    "NVDY": {
+      "name": "YieldMax NVDA Option Income",
+      "lev": false,
+      "cagr": 59.78,
+      "yield": 65.45,
+      "ret22": null
+    },
+    "SVOL": {
+      "name": "Simplify Volatility Premium",
+      "lev": false,
+      "cagr": 7.24,
+      "yield": 22.31,
+      "ret22": -6.47
+    },
+    "VNQ": {
+      "name": "Vanguard Real Estate (REITs)",
+      "lev": false,
+      "cagr": 5.55,
+      "yield": 3.6,
+      "ret22": -25.67
+    },
+    "VWO": {
+      "name": "Vanguard Emerging Markets",
+      "lev": false,
+      "cagr": 8.35,
+      "yield": 2.5,
+      "ret22": -18.56
+    },
     "VXUS": {
       "name": "Vanguard Total International",
       "lev": false,
@@ -57,12 +218,82 @@
       "yield": 2.76,
       "ret22": -16.62
     },
+    "GLD": {
+      "name": "SPDR Gold Shares",
+      "lev": false,
+      "cagr": 12.8,
+      "yield": 0.0,
+      "ret22": 0.78
+    },
     "BND": {
       "name": "Vanguard Total Bond Market",
       "lev": false,
       "cagr": 1.63,
       "yield": 3.98,
       "ret22": -12.52
+    },
+    "AGG": {
+      "name": "iShares Core US Aggregate Bond",
+      "lev": false,
+      "cagr": 1.57,
+      "yield": 4.0,
+      "ret22": -12.42
+    },
+    "TLT": {
+      "name": "iShares 20+ Year Treasury Bond",
+      "lev": false,
+      "cagr": -1.61,
+      "yield": 4.6,
+      "ret22": -29.38
+    },
+    "SCHP": {
+      "name": "Schwab US TIPS",
+      "lev": false,
+      "cagr": 2.65,
+      "yield": 4.0,
+      "ret22": -11.55
+    },
+    "FLRT": {
+      "name": "Pacific Asset Floating Rate Income",
+      "lev": false,
+      "cagr": 4.98,
+      "yield": 6.82,
+      "ret22": -2.73
+    },
+    "MAIN": {
+      "name": "Main Street Capital (BDC)",
+      "lev": false,
+      "cagr": 12.91,
+      "yield": 8.26,
+      "ret22": -10.88
+    },
+    "HTGC": {
+      "name": "Hercules Capital (BDC)",
+      "lev": false,
+      "cagr": 13.49,
+      "yield": 12.3,
+      "ret22": -9.56
+    },
+    "PFLT": {
+      "name": "PennantPark Floating Rate (BDC)",
+      "lev": false,
+      "cagr": 6.31,
+      "yield": 15.28,
+      "ret22": -6.84
+    },
+    "QPUX": {
+      "name": "QPUX",
+      "lev": false,
+      "cagr": -50.76,
+      "yield": 0.0,
+      "ret22": null
+    },
+    "DRAM": {
+      "name": "DRAM",
+      "lev": false,
+      "cagr": 5270.46,
+      "yield": 0.0,
+      "ret22": null
     },
     "CASH": {
       "name": "Cash / HYSA",
