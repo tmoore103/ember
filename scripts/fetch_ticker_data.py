@@ -15,6 +15,7 @@ Run manually:
 from __future__ import annotations
 
 import json
+import math
 import os
 import sys
 from datetime import datetime, timedelta
@@ -68,7 +69,7 @@ TICKERS: dict[str, dict] = {
 }
 
 # Cash is a special "ticker" — not on the market, set manually.
-CASH = {"name": "Cash / HYSA", "lev": False, "cagr": 2.0, "yield": 4.5, "ret22": 1.5}
+CASH = {"name": "Cash / HYSA", "lev": False, "cagr": 2.0, "stddev": 0.5, "yield": 4.5, "ret22": 1.5}
 
 OUTPUT_PATH = "data/tickers.json"
 
@@ -86,6 +87,13 @@ def fetch_stats(symbol: str) -> dict:
     end_price = float(hist["Close"].iloc[-1])
     years = (hist.index[-1] - hist.index[0]).days / 365.25
     cagr = ((end_price / start_price) ** (1 / years) - 1) * 100
+
+    # Annualized volatility: stddev of daily returns × sqrt(252 trading days).
+    daily_returns = hist["Close"].pct_change().dropna()
+    if len(daily_returns) > 1:
+        stddev = float(daily_returns.std()) * math.sqrt(252) * 100
+    else:
+        stddev = 0.0
 
     # TTM dividend yield from actual distributions in the past year.
     yield_pct = 0.0
@@ -113,9 +121,10 @@ def fetch_stats(symbol: str) -> dict:
         pass
 
     return {
-        "cagr":  round(cagr, 2),
-        "yield": round(yield_pct, 2),
-        "ret22": round(ret22, 2) if ret22 is not None else None,
+        "cagr":   round(cagr, 2),
+        "stddev": round(stddev, 2),
+        "yield":  round(yield_pct, 2),
+        "ret22":  round(ret22, 2) if ret22 is not None else None,
     }
 
 
@@ -138,14 +147,14 @@ def main() -> int:
         try:
             stats = fetch_stats(symbol)
             result[symbol] = {**meta, **stats}
-            print(f"  {symbol:5s}  CAGR={stats['cagr']:6.2f}%  yield={stats['yield']:5.2f}%  2022={stats['ret22']}")
+            print(f"  {symbol:5s}  CAGR={stats['cagr']:6.2f}%  σ={stats['stddev']:5.2f}%  yield={stats['yield']:5.2f}%  2022={stats['ret22']}")
         except Exception as e:
             failures.append(symbol)
             if symbol in existing:
                 result[symbol] = existing[symbol]
                 print(f"  {symbol:5s}  fetch failed — kept previous data ({e})")
             else:
-                result[symbol] = {**meta, "cagr": None, "yield": None, "ret22": None}
+                result[symbol] = {**meta, "cagr": None, "stddev": None, "yield": None, "ret22": None}
                 print(f"  {symbol:5s}  fetch failed and no fallback ({e})")
 
     # Cash entry is set manually.

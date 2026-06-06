@@ -184,8 +184,9 @@
   .sim-sub{color:var(--ink-soft);font-size:14.5px;margin-top:10px;line-height:1.55}
   .sim-sub b{color:var(--ink);font-weight:600}
 
-  .sim-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);border-radius:14px;overflow:hidden;margin-top:24px}
-  @media(max-width:520px){.sim-stats{grid-template-columns:1fr}}
+  .sim-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);border-radius:14px;overflow:hidden;margin-top:24px}
+  @media(max-width:880px){.sim-stats{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:420px){.sim-stats{grid-template-columns:1fr}}
   .sim-stat{background:var(--card);padding:16px 16px 18px}
   .sim-stat .k{font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-faint);font-weight:600;margin-bottom:7px}
   .sim-stat .v{font-family:'Fraunces',serif;font-size:clamp(21px,2.4vw,26px);font-weight:500;letter-spacing:-.01em;color:var(--ink);line-height:1}
@@ -205,6 +206,23 @@
   .sync-dot{width:7px;height:7px;border-radius:50%;background:currentColor;opacity:.4;transition:opacity .2s}
   .sync-toggle.on .sync-dot{opacity:1;animation:syncpulse 2.5s infinite}
   @keyframes syncpulse{0%,100%{box-shadow:0 0 0 0 rgba(46,139,92,.4)}50%{box-shadow:0 0 0 5px rgba(46,139,92,0)}}
+
+  /* Monte Carlo */
+  .mc-headline{text-align:center;padding:28px 0 18px;border-bottom:1px solid var(--line-soft);margin-bottom:22px}
+  .mc-pct{font-family:'Fraunces',serif;font-size:clamp(54px,9vw,84px);font-weight:500;letter-spacing:-.02em;line-height:1;color:var(--ink)}
+  .mc-pct.good{color:var(--pine)}
+  .mc-pct.warn{color:#B07820}
+  .mc-pct.bad{color:var(--ember)}
+  .mc-pct-label{margin-top:12px;font-size:13.5px;color:var(--ink-faint);letter-spacing:.01em}
+  .run-btn{width:100%;margin-top:16px;padding:14px;background:var(--pine);color:#fff;border:none;border-radius:11px;font-family:inherit;font-size:14.5px;font-weight:600;letter-spacing:.02em;cursor:pointer;transition:background .15s}
+  .run-btn:hover{background:#173E30}
+  .run-btn:disabled{background:#9B8B7C;cursor:wait}
+  .mc-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);border-radius:14px;overflow:hidden}
+  .mc-stats .stat{background:var(--card);padding:14px 16px}
+  .mc-stats .stat .k{font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-faint);font-weight:600;margin-bottom:6px}
+  .mc-stats .stat .v{font-family:'Fraunces',serif;font-size:clamp(19px,2.2vw,24px);font-weight:500;letter-spacing:-.01em;color:var(--ink);line-height:1}
+  .mc-lede{font-size:13.5px;color:var(--ink-faint);line-height:1.55;margin-bottom:18px}
+  .mc-lede b{color:var(--ink-soft);font-weight:600}
 </style>
 </head>
 <body>
@@ -221,6 +239,7 @@
     <div class="tab-list">
       <button class="tab-btn active" data-tab="calc-tab">Calculator</button>
       <button class="tab-btn" data-tab="sim-tab">Portfolio simulator</button>
+      <button class="tab-btn" data-tab="mc-tab">Monte Carlo</button>
     </div>
     <button class="sync-toggle on" id="syncBtn" title="When linked: assets ↔ portfolio value, and the simulator's CAGR feeds the calculator's post-retirement return">
       <span class="sync-dot"></span>
@@ -373,6 +392,7 @@
 
           <div class="sim-stats">
             <div class="sim-stat"><div class="k">Expected return (CAGR)</div><div class="v" id="ss-cagr">—</div><div class="ann">based on 10-yr history</div></div>
+            <div class="sim-stat"><div class="k">Volatility (annualized)</div><div class="v" id="ss-vol">—</div><div class="ann">how much returns swing year-to-year</div></div>
             <div class="sim-stat"><div class="k">Annual dividend income</div><div class="v" id="ss-inc">—</div><div class="ann" id="ss-inc-ann">at current yields</div></div>
             <div class="sim-stat"><div class="k">2022 stress test</div><div class="v" id="ss-stress">—</div><div class="ann" id="ss-stress-ann">a known bad year</div></div>
           </div>
@@ -385,11 +405,73 @@
       </div>
     </div>
   </div><!-- /sim-tab -->
+
+  <div id="mc-tab" class="tab-content">
+  <div class="grid">
+    <!-- INPUTS -->
+    <div class="panel panel-pad">
+      <div class="panel-title">Simulation inputs</div>
+      <p class="mc-lede">
+        Runs thousands of randomized future paths against your plan. Inherits assets, contributions, age, retirement age, and spending from the <b>Calculator</b>. When linked, pre-retirement volatility auto-fills from your <b>Portfolio Simulator</b> mix.
+      </p>
+
+      <div class="field">
+        <div class="field-head"><label for="mcVolPre">Pre-retirement volatility</label><span class="hint">year-to-year swing during accumulation</span></div>
+        <div class="val-wrap"><input class="has-suffix" type="number" id="mcVolPre" value="18" min="0" max="100" step="0.5"><span class="suffix">%</span></div>
+        <input type="range" id="mcVolPre-r" min="0" max="80" step="0.5" value="18">
+      </div>
+
+      <div class="field">
+        <div class="field-head"><label for="mcVolPost">Post-retirement volatility</label><span class="hint">typically lower as allocation de-risks</span></div>
+        <div class="val-wrap"><input class="has-suffix" type="number" id="mcVolPost" value="10" min="0" max="60" step="0.5"><span class="suffix">%</span></div>
+        <input type="range" id="mcVolPost-r" min="0" max="40" step="0.5" value="10">
+      </div>
+
+      <div class="field">
+        <div class="field-head"><label for="mcRuns">Simulations</label><span class="hint">more runs = smoother bands, slightly slower</span></div>
+        <div class="val-wrap"><input type="number" id="mcRuns" value="10000" min="500" max="50000" step="500"></div>
+        <input type="range" id="mcRuns-r" min="1000" max="50000" step="1000" value="10000">
+      </div>
+
+      <button id="mcRun" class="run-btn">Run simulation</button>
+    </div>
+
+    <!-- RESULTS -->
+    <div class="panel panel-pad">
+      <div class="panel-title">Probability of success</div>
+      <div class="mc-headline">
+        <div class="mc-pct" id="mc-pct">—</div>
+        <div class="mc-pct-label" id="mc-pct-label">Hit Run to see results</div>
+      </div>
+      <div class="mc-stats">
+        <div class="stat"><div class="k">Median ending portfolio</div><div class="v" id="mc-med">—</div></div>
+        <div class="stat"><div class="k">10th percentile (bad luck)</div><div class="v" id="mc-p10">—</div></div>
+        <div class="stat"><div class="k">90th percentile (good luck)</div><div class="v" id="mc-p90">—</div></div>
+        <div class="stat"><div class="k">Earliest depletion</div><div class="v" id="mc-fail">—</div></div>
+      </div>
+      <p class="footnote" style="margin-top:18px;border-top:none;padding-top:0">
+        <b>How to read this.</b> Success probability is the share of simulated futures where your portfolio survives to your chart end age. The 10th/90th percentile bands show the spread of outcomes — eighty percent of futures land between them. Plan against the bad-luck scenarios, not the median.
+      </p>
+    </div>
+  </div>
+
+  <div class="panel panel-pad chart-card">
+    <div class="chart-head">
+      <span class="chart-title">Distribution of paths</span>
+      <div class="legend">
+        <span class="lg"><span class="swatch" style="background:var(--pine)"></span>Median</span>
+        <span class="lg"><span class="swatch" style="background:rgba(30,77,60,0.32);border-radius:3px"></span>25–75th</span>
+        <span class="lg"><span class="swatch" style="background:rgba(30,77,60,0.12);border-radius:3px"></span>10–90th</span>
+      </div>
+    </div>
+    <div class="chart-box"><canvas id="mc-chart"></canvas></div>
+  </div>
+  </div><!-- /mc-tab -->
 </div>
 
 <script>
 const $ = id => document.getElementById(id);
-const pairs = ['age','assets','contrib','ret','spend','infl','swr','trad','cgrow','cushion','chartEnd'];
+const pairs = ['age','assets','contrib','ret','spend','infl','swr','trad','cgrow','cushion','chartEnd','mcVolPre','mcVolPost','mcRuns'];
 let linked = true; // cross-tab linking: assets ↔ pv, sim CAGR → post-retirement return
 
 // keep number <-> slider in sync (slider clamps to its range; number is free)
@@ -602,61 +684,61 @@ compute();
 
 // ============ PORTFOLIO SIMULATOR ============
 // Approximate trailing data as of June 2026 — to be replaced by GitHub Action pipeline.
-// cagr = 10-year annualized total return %, yield = TTM dividend yield %, ret22 = calendar-year 2022 total return %
+// cagr = 10-year annualized total return %, stddev = annualized volatility %, yield = TTM dividend yield %, ret22 = calendar-year 2022 total return %
 const TICKERS = {
   // US broad / large cap
-  VOO:   { name:'Vanguard S&P 500',                       cagr:15.6, yield:1.3, ret22:-18.2, lev:false },
-  VTI:   { name:'Vanguard Total US Market',               cagr:15.1, yield:1.3, ret22:-19.5, lev:false },
-  SPY:   { name:'SPDR S&P 500',                           cagr:15.5, yield:1.3, ret22:-18.2, lev:false },
-  VFIAX: { name:'Vanguard 500 Index Admiral',             cagr:15.6, yield:1.3, ret22:-18.2, lev:false },
-  QQQ:   { name:'Invesco Nasdaq 100',                     cagr:21.6, yield:0.5, ret22:-32.6, lev:false },
-  QQQM:  { name:'Invesco Nasdaq 100 (low-cost)',          cagr:21.2, yield:0.7, ret22:-32.5, lev:false },
-  SPYG:  { name:'SPDR S&P 500 Growth',                    cagr:17.0, yield:0.7, ret22:-29.5, lev:false },
+  VOO:   { name:'Vanguard S&P 500',                       cagr:15.6, stddev:16.0, yield:1.3, ret22:-18.2, lev:false },
+  VTI:   { name:'Vanguard Total US Market',               cagr:15.1, stddev:16.5, yield:1.3, ret22:-19.5, lev:false },
+  SPY:   { name:'SPDR S&P 500',                           cagr:15.5, stddev:16.0, yield:1.3, ret22:-18.2, lev:false },
+  VFIAX: { name:'Vanguard 500 Index Admiral',             cagr:15.6, stddev:16.0, yield:1.3, ret22:-18.2, lev:false },
+  QQQ:   { name:'Invesco Nasdaq 100',                     cagr:21.6, stddev:22.0, yield:0.5, ret22:-32.6, lev:false },
+  QQQM:  { name:'Invesco Nasdaq 100 (low-cost)',          cagr:21.2, stddev:22.0, yield:0.7, ret22:-32.5, lev:false },
+  SPYG:  { name:'SPDR S&P 500 Growth',                    cagr:17.0, stddev:18.0, yield:0.7, ret22:-29.5, lev:false },
   // Sectors
-  VGT:   { name:'Vanguard Information Technology',        cagr:20.0, yield:0.5, ret22:-29.6, lev:false },
-  SMH:   { name:'VanEck Semiconductor',                   cagr:25.0, yield:0.6, ret22:-35.0, lev:false },
-  SOXX:  { name:'iShares Semiconductor',                  cagr:24.0, yield:0.7, ret22:-35.0, lev:false },
-  XLP:   { name:'Consumer Staples (XLP)',                 cagr:9.5,  yield:2.5, ret22:-0.7,  lev:false },
+  VGT:   { name:'Vanguard Information Technology',        cagr:20.0, stddev:22.0, yield:0.5, ret22:-29.6, lev:false },
+  SMH:   { name:'VanEck Semiconductor',                   cagr:25.0, stddev:30.0, yield:0.6, ret22:-35.0, lev:false },
+  SOXX:  { name:'iShares Semiconductor',                  cagr:24.0, stddev:30.0, yield:0.7, ret22:-35.0, lev:false },
+  XLP:   { name:'Consumer Staples (XLP)',                 cagr:9.5,  stddev:12.0, yield:2.5, ret22:-0.7,  lev:false },
   // Leveraged
-  TQQQ:  { name:'ProShares UltraPro QQQ (3x)',            cagr:43.0, yield:0.4, ret22:-79.1, lev:true  },
-  UPRO:  { name:'ProShares UltraPro S&P 500 (3x)',        cagr:28.5, yield:0.5, ret22:-56.8, lev:true  },
-  USD:   { name:'ProShares Ultra Semiconductors (2x)',    cagr:25.0, yield:0.5, ret22:-60.0, lev:true  },
-  SOXL:  { name:'Direxion Daily Semiconductor Bull (3x)', cagr:30.0, yield:0.5, ret22:-86.0, lev:true  },
-  RETL:  { name:'Direxion Daily Retail Bull (3x)',        cagr:5.0,  yield:1.0, ret22:-55.0, lev:true  },
-  NAIL:  { name:'Direxion Daily Homebuilders Bull (3x)',  cagr:25.0, yield:0.5, ret22:-55.0, lev:true  },
-  DFEN:  { name:'Direxion Daily Aerospace & Defense (3x)',cagr:15.0, yield:0.5, ret22:-25.0, lev:true  },
-  FNGU:  { name:'MicroSectors FANG+ (3x ETN)',            cagr:45.0, yield:0.0, ret22:-80.0, lev:true  },
+  TQQQ:  { name:'ProShares UltraPro QQQ (3x)',            cagr:43.0, stddev:70.0, yield:0.4, ret22:-79.1, lev:true  },
+  UPRO:  { name:'ProShares UltraPro S&P 500 (3x)',        cagr:28.5, stddev:50.0, yield:0.5, ret22:-56.8, lev:true  },
+  USD:   { name:'ProShares Ultra Semiconductors (2x)',    cagr:25.0, stddev:55.0, yield:0.5, ret22:-60.0, lev:true  },
+  SOXL:  { name:'Direxion Daily Semiconductor Bull (3x)', cagr:30.0, stddev:90.0, yield:0.5, ret22:-86.0, lev:true  },
+  RETL:  { name:'Direxion Daily Retail Bull (3x)',        cagr:5.0,  stddev:75.0, yield:1.0, ret22:-55.0, lev:true  },
+  NAIL:  { name:'Direxion Daily Homebuilders Bull (3x)',  cagr:25.0, stddev:70.0, yield:0.5, ret22:-55.0, lev:true  },
+  DFEN:  { name:'Direxion Daily Aerospace & Defense (3x)',cagr:15.0, stddev:55.0, yield:0.5, ret22:-25.0, lev:true  },
+  FNGU:  { name:'MicroSectors FANG+ (3x ETN)',            cagr:45.0, stddev:80.0, yield:0.0, ret22:-80.0, lev:true  },
   // Dividend
-  SCHD:  { name:'Schwab US Dividend Equity',              cagr:13.1, yield:3.4, ret22:-3.2,  lev:false },
-  VYM:   { name:'Vanguard High Dividend Yield',           cagr:10.0, yield:3.0, ret22:-0.5,  lev:false },
-  SPYD:  { name:'SPDR S&P 500 High Dividend',             cagr:9.0,  yield:4.5, ret22:0.7,   lev:false },
+  SCHD:  { name:'Schwab US Dividend Equity',              cagr:13.1, stddev:15.0, yield:3.4, ret22:-3.2,  lev:false },
+  VYM:   { name:'Vanguard High Dividend Yield',           cagr:10.0, stddev:15.0, yield:3.0, ret22:-0.5,  lev:false },
+  SPYD:  { name:'SPDR S&P 500 High Dividend',             cagr:9.0,  stddev:17.0, yield:4.5, ret22:0.7,   lev:false },
   // Covered-call / option income
-  JEPI:  { name:'JPMorgan Equity Premium Income',         cagr:9.0,  yield:7.2, ret22:-3.5,  lev:false },
-  JEPQ:  { name:'JPMorgan Nasdaq Equity Premium Income',  cagr:14.0, yield:9.0, ret22:-10.0, lev:false },
-  QYLD:  { name:'Global X Nasdaq-100 Covered Call',       cagr:5.0,  yield:12.0,ret22:-19.0, lev:false },
-  QQQI:  { name:'NEOS Nasdaq-100 High Income',            cagr:15.0, yield:14.0,ret22:null,  lev:false },
-  NVDY:  { name:'YieldMax NVDA Option Income',            cagr:60.0, yield:30.0,ret22:null,  lev:false },
-  SVOL:  { name:'Simplify Volatility Premium',            cagr:8.0,  yield:16.0,ret22:-5.0,  lev:false },
+  JEPI:  { name:'JPMorgan Equity Premium Income',         cagr:9.0,  stddev:10.0, yield:7.2, ret22:-3.5,  lev:false },
+  JEPQ:  { name:'JPMorgan Nasdaq Equity Premium Income',  cagr:14.0, stddev:15.0, yield:9.0, ret22:-10.0, lev:false },
+  QYLD:  { name:'Global X Nasdaq-100 Covered Call',       cagr:5.0,  stddev:13.0, yield:12.0,ret22:-19.0, lev:false },
+  QQQI:  { name:'NEOS Nasdaq-100 High Income',            cagr:15.0, stddev:13.0, yield:14.0,ret22:null,  lev:false },
+  NVDY:  { name:'YieldMax NVDA Option Income',            cagr:60.0, stddev:50.0, yield:30.0,ret22:null,  lev:false },
+  SVOL:  { name:'Simplify Volatility Premium',            cagr:8.0,  stddev:12.0, yield:16.0,ret22:-5.0,  lev:false },
   // Diversifiers
-  VNQ:   { name:'Vanguard Real Estate (REITs)',           cagr:7.0,  yield:4.0, ret22:-26.0, lev:false },
-  VWO:   { name:'Vanguard Emerging Markets',              cagr:5.0,  yield:3.0, ret22:-18.0, lev:false },
-  VXUS:  { name:'Vanguard Total International',           cagr:9.7,  yield:3.2, ret22:-16.1, lev:false },
-  GLD:   { name:'SPDR Gold Shares',                       cagr:6.5,  yield:0.0, ret22:-0.3,  lev:false },
+  VNQ:   { name:'Vanguard Real Estate (REITs)',           cagr:7.0,  stddev:20.0, yield:4.0, ret22:-26.0, lev:false },
+  VWO:   { name:'Vanguard Emerging Markets',              cagr:5.0,  stddev:17.0, yield:3.0, ret22:-18.0, lev:false },
+  VXUS:  { name:'Vanguard Total International',           cagr:9.7,  stddev:16.0, yield:3.2, ret22:-16.1, lev:false },
+  GLD:   { name:'SPDR Gold Shares',                       cagr:6.5,  stddev:15.0, yield:0.0, ret22:-0.3,  lev:false },
   // Bonds
-  BND:   { name:'Vanguard Total Bond Market',             cagr:2.0,  yield:4.3, ret22:-13.1, lev:false },
-  AGG:   { name:'iShares Core US Aggregate Bond',         cagr:1.8,  yield:4.0, ret22:-13.0, lev:false },
-  TLT:   { name:'iShares 20+ Year Treasury Bond',         cagr:-1.5, yield:4.5, ret22:-31.0, lev:false },
-  SCHP:  { name:'Schwab US TIPS',                         cagr:2.5,  yield:3.0, ret22:-12.5, lev:false },
+  BND:   { name:'Vanguard Total Bond Market',             cagr:2.0,  stddev:6.0,  yield:4.3, ret22:-13.1, lev:false },
+  AGG:   { name:'iShares Core US Aggregate Bond',         cagr:1.8,  stddev:6.0,  yield:4.0, ret22:-13.0, lev:false },
+  TLT:   { name:'iShares 20+ Year Treasury Bond',         cagr:-1.5, stddev:15.0, yield:4.5, ret22:-31.0, lev:false },
+  SCHP:  { name:'Schwab US TIPS',                         cagr:2.5,  stddev:7.0,  yield:3.0, ret22:-12.5, lev:false },
   // Floating rate / BDCs
-  FLRT:  { name:'Pacific Asset Floating Rate Income',     cagr:4.0,  yield:6.5, ret22:-2.0,  lev:false },
-  MAIN:  { name:'Main Street Capital (BDC)',              cagr:12.0, yield:5.5, ret22:-9.0,  lev:false },
-  HTGC:  { name:'Hercules Capital (BDC)',                 cagr:13.0, yield:9.5, ret22:-7.0,  lev:false },
-  PFLT:  { name:'PennantPark Floating Rate (BDC)',        cagr:6.0,  yield:10.5,ret22:-8.0,  lev:false },
+  FLRT:  { name:'Pacific Asset Floating Rate Income',     cagr:4.0,  stddev:5.0,  yield:6.5, ret22:-2.0,  lev:false },
+  MAIN:  { name:'Main Street Capital (BDC)',              cagr:12.0, stddev:25.0, yield:5.5, ret22:-9.0,  lev:false },
+  HTGC:  { name:'Hercules Capital (BDC)',                 cagr:13.0, stddev:30.0, yield:9.5, ret22:-7.0,  lev:false },
+  PFLT:  { name:'PennantPark Floating Rate (BDC)',        cagr:6.0,  stddev:20.0, yield:10.5,ret22:-8.0,  lev:false },
   // Unverified — pipeline will validate
-  QPUX:  { name:'QPUX',                                   cagr:10.0, yield:1.0, ret22:null,  lev:false },
-  DRAM:  { name:'DRAM',                                   cagr:10.0, yield:1.0, ret22:null,  lev:false },
+  QPUX:  { name:'QPUX',                                   cagr:10.0, stddev:30.0, yield:1.0, ret22:null,  lev:false },
+  DRAM:  { name:'DRAM',                                   cagr:10.0, stddev:30.0, yield:1.0, ret22:null,  lev:false },
   // Cash
-  CASH:  { name:'Cash / HYSA',                            cagr:2.0,  yield:4.5, ret22:1.5,   lev:false },
+  CASH:  { name:'Cash / HYSA',                            cagr:2.0,  stddev:0.5,  yield:4.5, ret22:1.5,   lev:false },
 };
 
 const TICKER_COLORS = {
@@ -768,18 +850,20 @@ function recomputeSim(){
   const total = holdings.reduce((s,h) => s + h.alloc, 0);
 
   // weighted sums
-  let cagrW = 0, yieldW = 0, stressW = 0;
+  let cagrW = 0, yieldW = 0, stressW = 0, volW = 0;
   holdings.forEach(h => {
     const t = TICKERS[h.symbol];
     cagrW += h.alloc * t.cagr;
     yieldW += h.alloc * t.yield;
     stressW += h.alloc * t.ret22;
+    volW += h.alloc * (t.stddev || 0);
   });
   // per-dollar metrics (normalize to total allocation)
   const norm = total > 0 ? total : 100;
   const cagr   = cagrW   / norm;
   const yld    = yieldW  / norm;
   const stress = stressW / norm;
+  const vol    = volW    / norm;
 
   // dollar figures use the actually-allocated portion
   const allocFrac  = total / 100;
@@ -826,6 +910,7 @@ function recomputeSim(){
   }
 
   $('ss-cagr').textContent = isFinite(cagr) ? cagr.toFixed(1) + '%' : '—';
+  $('ss-vol').textContent  = isFinite(vol) && vol > 0 ? vol.toFixed(1) + '%' : '—';
   $('ss-inc').textContent  = isFinite(annualInc) ? '$' + Math.round(annualInc).toLocaleString() : '—';
   $('ss-inc-ann').textContent = isFinite(yld) ? yld.toFixed(2) + '% yield · current rates' : 'at current yields';
 
@@ -844,7 +929,174 @@ function recomputeSim(){
 
   // push CAGR to calculator's expected return when linked
   pushCagrToRet(cagr);
+  // push volatility to Monte Carlo's pre-retirement volatility when linked
+  pushVolToMc(vol);
 }
+
+function pushVolToMc(vol){
+  if(!linked || !isFinite(vol) || vol <= 0) return;
+  const target = +vol.toFixed(1);
+  if(+$('mcVolPre').value === target) return;
+  $('mcVolPre').value = target;
+  const r = $('mcVolPre-r'); r.value = Math.min(Math.max(target, +r.min), +r.max);
+}
+
+// ============ MONTE CARLO ============
+function gaussianRandom(mean, stddev){
+  let u = 0, v = 0;
+  while(u === 0) u = Math.random();
+  while(v === 0) v = Math.random();
+  const z = Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+  return z * stddev + mean;
+}
+
+function gatherMcParams(){
+  return {
+    currentAge:    +$('age').value || 30,
+    retireAge:     +$('trad').value || 65,
+    endAge:        +$('chartEnd').value || 95,
+    startAssets:   +$('assets').value || 0,
+    contribution:  +$('contrib').value || 0,
+    contribGrowth: +$('cgrow').value || 0,
+    spending:      +$('spend').value || 0,
+    preRet:        +$('ret').value || 0,
+    preVol:        +$('mcVolPre').value || 0,
+    postRet:       +$('swr').value || 0,
+    postVol:       +$('mcVolPost').value || 0,
+  };
+}
+
+function runSinglePath(p){
+  const path = [];
+  let portfolio = p.startAssets;
+  let contrib = p.contribution;
+  let depletionAge = null;
+
+  for(let age = p.currentAge; age <= p.endAge; age++){
+    path.push(portfolio);
+    if(portfolio <= 0){
+      if(depletionAge === null) depletionAge = age;
+      portfolio = 0;
+      continue;
+    }
+    if(age < p.retireAge){
+      const r = gaussianRandom(p.preRet/100, p.preVol/100);
+      portfolio = portfolio * (1 + r) + contrib;
+      contrib *= (1 + p.contribGrowth/100);
+    } else {
+      const r = gaussianRandom(p.postRet/100, p.postVol/100);
+      portfolio = portfolio * (1 + r) - p.spending;
+    }
+  }
+  return { path, success: depletionAge === null, depletionAge };
+}
+
+let mcChart = null;
+
+function runMonteCarlo(){
+  const btn = $('mcRun');
+  btn.disabled = true;
+  btn.textContent = 'Running…';
+
+  // defer to next frame so the UI can update before the heavy computation
+  setTimeout(() => {
+    const params = gatherMcParams();
+    const n = Math.max(500, Math.min(50000, +$('mcRuns').value || 10000));
+    const ageCount = params.endAge - params.currentAge + 1;
+    const paths = new Array(n);
+    const depletionAges = [];
+    let successCount = 0;
+
+    for(let i = 0; i < n; i++){
+      const result = runSinglePath(params);
+      paths[i] = result.path;
+      if(result.success) successCount++;
+      if(result.depletionAge !== null) depletionAges.push(result.depletionAge);
+    }
+
+    // percentile bands at each age
+    const p10 = new Array(ageCount), p25 = new Array(ageCount),
+          p50 = new Array(ageCount), p75 = new Array(ageCount), p90 = new Array(ageCount);
+    const slice = new Array(n);
+    for(let a = 0; a < ageCount; a++){
+      for(let i = 0; i < n; i++) slice[i] = paths[i][a];
+      slice.sort((x,y) => x - y);
+      p10[a] = slice[Math.floor(n * 0.10)];
+      p25[a] = slice[Math.floor(n * 0.25)];
+      p50[a] = slice[Math.floor(n * 0.50)];
+      p75[a] = slice[Math.floor(n * 0.75)];
+      p90[a] = slice[Math.floor(n * 0.90)];
+    }
+
+    const successRate = (successCount / n) * 100;
+    const ages = Array.from({length: ageCount}, (_, i) => params.currentAge + i);
+
+    renderMcResults({
+      successRate,
+      endP10: p10[ageCount - 1],
+      endP50: p50[ageCount - 1],
+      endP90: p90[ageCount - 1],
+      earliestDepletion: depletionAges.length ? Math.min.apply(null, depletionAges) : null,
+      ages, p10, p25, p50, p75, p90
+    });
+
+    btn.disabled = false;
+    btn.textContent = 'Run simulation';
+  }, 30);
+}
+
+function renderMcResults(r){
+  const pct = $('mc-pct');
+  pct.textContent = r.successRate.toFixed(1) + '%';
+  pct.className = 'mc-pct ' + (r.successRate >= 90 ? 'good' : r.successRate >= 75 ? 'warn' : 'bad');
+  $('mc-pct-label').textContent =
+    r.successRate >= 90 ? 'of simulated futures survive to your end age'
+    : r.successRate >= 75 ? 'survive — meaningful tail risk worth planning for'
+    : r.successRate >= 50 ? 'survive — this plan is fragile against bad luck'
+    : 'survive — significant restructuring needed';
+
+  const fmt$ = v => v == null ? '—' : (v < 0 ? '−$' : '$') + Math.abs(Math.round(v)).toLocaleString();
+  $('mc-med').textContent  = fmt$(r.endP50);
+  $('mc-p10').textContent  = fmt$(r.endP10);
+  $('mc-p90').textContent  = fmt$(r.endP90);
+  $('mc-fail').textContent = r.earliestDepletion ? 'age ' + r.earliestDepletion : 'never (in any run)';
+
+  // chart
+  const ctx = $('mc-chart').getContext('2d');
+  if(mcChart) mcChart.destroy();
+  mcChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: r.ages,
+      datasets: [
+        { label:'10th', data:r.p10, borderColor:'transparent', backgroundColor:'rgba(30,77,60,0.12)', pointRadius:0, fill:false, tension:0.15 },
+        { label:'90th', data:r.p90, borderColor:'transparent', backgroundColor:'rgba(30,77,60,0.12)', pointRadius:0, fill:'-1', tension:0.15 },
+        { label:'25th', data:r.p25, borderColor:'transparent', backgroundColor:'rgba(30,77,60,0.32)', pointRadius:0, fill:false, tension:0.15 },
+        { label:'75th', data:r.p75, borderColor:'transparent', backgroundColor:'rgba(30,77,60,0.32)', pointRadius:0, fill:'-1', tension:0.15 },
+        { label:'Median', data:r.p50, borderColor:'#1E4D3C', borderWidth:2.5, backgroundColor:'transparent', pointRadius:0, fill:false, tension:0.15 }
+      ]
+    },
+    options: {
+      responsive:true, maintainAspectRatio:false, animation:false,
+      interaction:{ mode:'index', intersect:false },
+      plugins:{
+        legend:{ display:false },
+        tooltip:{
+          callbacks:{
+            label: ctx => ctx.dataset.label + ': $' + Math.round(ctx.parsed.y).toLocaleString()
+          }
+        }
+      },
+      scales:{
+        x:{ title:{ display:true, text:'Age', color:'#7A6F5F' }, grid:{ color:'rgba(0,0,0,0.04)' }, ticks:{ color:'#7A6F5F' } },
+        y:{ title:{ display:true, text:'Portfolio (today\'s $)', color:'#7A6F5F' }, grid:{ color:'rgba(0,0,0,0.04)' },
+            ticks:{ color:'#7A6F5F', callback: v => '$' + (Math.abs(v) >= 1e6 ? (v/1e6).toFixed(1)+'M' : (v/1e3).toFixed(0)+'K') } }
+      }
+    }
+  });
+}
+
+$('mcRun').addEventListener('click', runMonteCarlo);
 
 // tabs
 document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -883,11 +1135,12 @@ fetch('data/tickers.json', {cache: 'no-cache'})
     Object.entries(data.tickers).forEach(([sym, t]) => {
       if(t.cagr === null || t.yield === null) return; // skip failed fetches
       TICKERS[sym] = {
-        name:  t.name,
-        cagr:  t.cagr,
-        yield: t.yield,
-        ret22: t.ret22,
-        lev:   !!t.lev,
+        name:   t.name,
+        cagr:   t.cagr,
+        stddev: t.stddev != null ? t.stddev : (TICKERS[sym] && TICKERS[sym].stddev) || 0,
+        yield:  t.yield,
+        ret22:  t.ret22,
+        lev:    !!t.lev,
       };
       updated++;
     });
