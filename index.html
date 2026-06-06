@@ -84,7 +84,7 @@
   input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none}
   input[type=number]{-moz-appearance:textfield}
 
-  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:4px;background:var(--line);margin-top:13px;cursor:pointer}
+  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:4px;background:var(--line);margin-top:13px;cursor:pointer;touch-action:pan-y}
   input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--pine);border:3px solid var(--card);box-shadow:0 1px 4px rgba(27,26,22,.25);cursor:pointer}
   input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--pine);border:3px solid var(--card);box-shadow:0 1px 4px rgba(27,26,22,.25);cursor:pointer}
 
@@ -319,6 +319,9 @@
         <p class="footnote">
           All figures are in <b>today's dollars</b> (inflation-adjusted). Your <b>pre-retirement return</b> drives growth while you're accumulating; your <b>post-retirement return</b> drives growth after retirement, typically lower as you shift to a more conservative allocation. <b>FIRE number</b> = annual spending ÷ post-retirement real return, plus any cash cushion. <b>Coast FIRE</b> is the amount that, with zero further saving, grows to your FIRE number by your expected retirement age. The chart shows your full life cycle: contributions and pre-retirement growth until your expected retirement age, then spending withdrawals at the post-retirement return.
         </p>
+        <p class="footnote" style="border-top:none;padding-top:0;margin-top:10px">
+          <b>Methodology.</b> This calculator uses an income-generation framework rather than the traditional 4% Safe Withdrawal Rate model. Rather than assuming a fixed annual withdrawal that gradually depletes principal, it projects portfolio behavior against your specified post-retirement return — appropriate for investors maintaining actively managed, income-producing portfolios where dividends, options premium, and sustained growth fund spending. Most useful when paired with a portfolio you've stress-tested and have conviction in.
+        </p>
       </div>
 
       <div class="panel panel-pad chart-card">
@@ -375,6 +378,9 @@
           </div>
 
           <div class="warning"><span class="icon">⚠</span><b>Past performance does not predict future returns.</b> These figures use historical data and don't account for sequence-of-returns risk. <span id="levWarn"></span></div>
+          <p class="footnote" style="margin-top:14px">
+            <b>Data note.</b> Ticker statistics reflect each fund's available price history (up to ten years). Funds with less than approximately two years of trading history may display CAGR and yield values that are not representative of long-term behavior — interpret with additional caution and consider that newer funds, leveraged ETFs, and option-income strategies often behave differently across full market cycles than their recent history suggests.
+          </p>
         </div>
       </div>
     </div>
