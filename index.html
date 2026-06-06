@@ -419,7 +419,7 @@
     <div class="panel panel-pad">
       <div class="panel-title">Simulation inputs</div>
       <p class="mc-lede">
-        Runs thousands of randomized future paths against your plan. Inherits assets, contributions, age, retirement age, and spending from the <b>Calculator</b>. When linked, pre-retirement volatility auto-fills from your <b>Portfolio Simulator</b> mix.
+        Runs thousands of randomized future paths against your plan. Inherits assets, contributions, age, retirement age, and spending from the <b>Calculator</b>. When linked, <b>post-retirement volatility</b> auto-fills from your <b>Portfolio Simulator</b> mix (mirroring how CAGR feeds the post-retirement return).
       </p>
 
       <div class="mc-inherited">
@@ -437,13 +437,13 @@
       </div>
 
       <div class="field">
-        <div class="field-head"><label for="mcVolPre">Pre-retirement volatility</label><span class="hint">year-to-year swing during accumulation</span></div>
+        <div class="field-head"><label for="mcVolPre">Pre-retirement volatility</label><span class="hint">your active accumulation strategy — manual</span></div>
         <div class="val-wrap"><input class="has-suffix" type="number" id="mcVolPre" value="18" min="0" max="100" step="0.5"><span class="suffix">%</span></div>
         <input type="range" id="mcVolPre-r" min="0" max="80" step="0.5" value="18">
       </div>
 
       <div class="field">
-        <div class="field-head"><label for="mcVolPost">Post-retirement volatility</label><span class="hint">typically lower as allocation de-risks</span></div>
+        <div class="field-head"><label for="mcVolPost">Post-retirement volatility</label><span class="hint">auto-fills from Portfolio Simulator when linked</span></div>
         <div class="val-wrap"><input class="has-suffix" type="number" id="mcVolPost" value="10" min="0" max="60" step="0.5"><span class="suffix">%</span></div>
         <input type="range" id="mcVolPost-r" min="0" max="40" step="0.5" value="10">
       </div>
@@ -972,9 +972,12 @@ function recomputeSim(){
 function pushVolToMc(vol){
   if(!linked || !isFinite(vol) || vol <= 0) return;
   const target = +vol.toFixed(1);
-  if(+$('mcVolPre').value === target) return;
-  $('mcVolPre').value = target;
-  const r = $('mcVolPre-r'); r.value = Math.min(Math.max(target, +r.min), +r.max);
+  // Push simulator volatility into POST-retirement volatility — the simulator
+  // represents your retirement income portfolio, mirroring how CAGR flows to
+  // post-retirement return. Pre-retirement volatility stays manual.
+  if(+$('mcVolPost').value === target) return;
+  $('mcVolPost').value = target;
+  const r = $('mcVolPost-r'); r.value = Math.min(Math.max(target, +r.min), +r.max);
 }
 
 // ============ MONTE CARLO ============
