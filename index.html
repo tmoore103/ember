@@ -431,6 +431,7 @@
           <div class="mc-inh-row"><span class="k">Starting assets</span><span class="v" id="mc-inh-assets">—</span></div>
           <div class="mc-inh-row"><span class="k">Annual contribution</span><span class="v" id="mc-inh-contrib">—</span></div>
           <div class="mc-inh-row"><span class="k">Annual spending</span><span class="v" id="mc-inh-spend">—</span></div>
+          <div class="mc-inh-row"><span class="k">Cash cushion</span><span class="v" id="mc-inh-cushion">—</span></div>
           <div class="mc-inh-row"><span class="k">Pre-ret return</span><span class="v" id="mc-inh-pre">—</span></div>
           <div class="mc-inh-row"><span class="k">Post-ret return</span><span class="v" id="mc-inh-post">—</span></div>
         </div>
@@ -706,12 +707,14 @@ function drawChart(series, fire, fiAge){
 function updateMcInherited(){
   const fmt$ = v => '$' + Math.round(v).toLocaleString();
   const fmtPct = v => (+v).toFixed(1) + '%';
+  const cushionYrs = +$('cushion').value || 0;
   $('mc-inh-age').textContent     = (+$('age').value || 0) + ' yrs';
   $('mc-inh-retire').textContent  = 'age ' + (+$('trad').value || 0);
   $('mc-inh-end').textContent     = 'age ' + (+$('chartEnd').value || 0);
   $('mc-inh-assets').textContent  = fmt$(+$('assets').value || 0);
   $('mc-inh-contrib').textContent = fmt$(+$('contrib').value || 0) + '/yr';
   $('mc-inh-spend').textContent   = fmt$(+$('spend').value || 0) + '/yr';
+  $('mc-inh-cushion').textContent = cushionYrs > 0 ? cushionYrs + ' yrs' : 'none';
   $('mc-inh-pre').textContent     = fmtPct($('ret').value);
   $('mc-inh-post').textContent    = fmtPct($('swr').value);
 }
@@ -981,12 +984,23 @@ function pushVolToMc(vol){
 }
 
 // ============ MONTE CARLO ============
-function gaussianRandom(mean, stddev){
+function gaussianStandard(){
+  // Standard normal Z ~ N(0,1) via Box-Muller
   let u = 0, v = 0;
   while(u === 0) u = Math.random();
   while(v === 0) v = Math.random();
-  const z = Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
-  return z * stddev + mean;
+  return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+}
+
+function lognormalReturn(meanPct, stddevPct){
+  // Single-period log-normal return draw. Standard finance MC model:
+  // returns are bounded below by -100% (you can't lose more than you have)
+  // and have a fat-right-tail. drift = ln(1+mean) - sigma^2/2 keeps
+  // expected return centered on the user's input.
+  const sigma = stddevPct / 100;
+  if(sigma <= 0) return meanPct / 100;
+  const drift = Math.log(1 + meanPct/100) - (sigma * sigma) / 2;
+  return Math.exp(drift + sigma * gaussianStandard()) - 1;
 }
 
 function gatherMcParams(){
@@ -998,6 +1012,7 @@ function gatherMcParams(){
     contribution:  +$('contrib').value || 0,
     contribGrowth: +$('cgrow').value || 0,
     spending:      +$('spend').value || 0,
+    cushionYrs:    +$('cushion').value || 0,
     preRet:        +$('ret').value || 0,
     preVol:        +$('mcVolPre').value || 0,
     postRet:       +$('swr').value || 0,
@@ -1009,22 +1024,42 @@ function runSinglePath(p){
   const path = [];
   let portfolio = p.startAssets;
   let contrib = p.contribution;
+  let cushion = 0;  // cash buffer set aside at retirement, drawn down first
   let depletionAge = null;
 
   for(let age = p.currentAge; age <= p.endAge; age++){
-    path.push(portfolio);
-    if(portfolio <= 0){
+    // Carve out the cushion at the moment of retirement.
+    if(age === p.retireAge && p.cushionYrs > 0 && cushion === 0){
+      const target = p.cushionYrs * p.spending;
+      cushion = Math.min(target, portfolio);
+      portfolio -= cushion;
+    }
+
+    // Chart shows total wealth (portfolio + cushion).
+    path.push(portfolio + cushion);
+
+    if((portfolio + cushion) <= 0){
       if(depletionAge === null) depletionAge = age;
       portfolio = 0;
+      cushion = 0;
       continue;
     }
+
     if(age < p.retireAge){
-      const r = gaussianRandom(p.preRet/100, p.preVol/100);
-      portfolio = portfolio * (1 + r) + contrib;
+      // Accumulation: log-normal growth + contribution.
+      portfolio = portfolio * (1 + lognormalReturn(p.preRet, p.preVol)) + contrib;
       contrib *= (1 + p.contribGrowth/100);
     } else {
-      const r = gaussianRandom(p.postRet/100, p.postVol/100);
-      portfolio = portfolio * (1 + r) - p.spending;
+      // Retirement: portfolio grows at post-ret return/vol, cushion stays in cash (~0% real).
+      portfolio = portfolio * (1 + lognormalReturn(p.postRet, p.postVol));
+      // Withdraw spending: cushion first, then portfolio.
+      let need = p.spending;
+      if(cushion > 0){
+        const draw = Math.min(cushion, need);
+        cushion -= draw;
+        need  -= draw;
+      }
+      if(need > 0) portfolio -= need;
     }
   }
   return { path, success: depletionAge === null, depletionAge };
@@ -1072,6 +1107,7 @@ function runMonteCarlo(){
 
     renderMcResults({
       successRate,
+      failedCount: n - successCount,
       endP10: p10[ageCount - 1],
       endP50: p50[ageCount - 1],
       endP90: p90[ageCount - 1],
@@ -1086,10 +1122,17 @@ function runMonteCarlo(){
 
 function renderMcResults(r){
   const pct = $('mc-pct');
-  pct.textContent = r.successRate.toFixed(1) + '%';
+  // Never round up to 100% if there are any failures — "100%" should mean
+  // genuinely zero depleted paths, not just rounding luck.
+  let pctText;
+  if(r.failedCount === 0) pctText = '100%';
+  else if(r.successRate >= 99.95) pctText = '99.9%';
+  else pctText = r.successRate.toFixed(1) + '%';
+  pct.textContent = pctText;
   pct.className = 'mc-pct ' + (r.successRate >= 90 ? 'good' : r.successRate >= 75 ? 'warn' : 'bad');
   $('mc-pct-label').textContent =
-    r.successRate >= 90 ? 'of simulated futures survive to your end age'
+    r.failedCount === 0 ? 'of simulated futures survive to your end age (zero failures)'
+    : r.successRate >= 90 ? 'of simulated futures survive to your end age'
     : r.successRate >= 75 ? 'survive — meaningful tail risk worth planning for'
     : r.successRate >= 50 ? 'survive — this plan is fragile against bad luck'
     : 'survive — significant restructuring needed';
