@@ -127,6 +127,7 @@
   .lg{display:flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;color:var(--ink-soft)}
   .lg .swatch{width:16px;height:3px;border-radius:3px}
   .lg .swatch.dash{background:repeating-linear-gradient(90deg,var(--ember) 0 4px,transparent 4px 7px)}
+  .lg .swatch.dash-ember{background:repeating-linear-gradient(90deg,var(--ember) 0 4px,transparent 4px 7px)}
   .chart-box{position:relative;height:300px;margin-top:14px}
   @media(max-width:520px){.chart-box{height:250px}}
 
@@ -484,9 +485,11 @@
         <span class="lg"><span class="swatch" style="background:var(--pine)"></span>Median</span>
         <span class="lg"><span class="swatch" style="background:rgba(30,77,60,0.32);border-radius:3px"></span>25–75th</span>
         <span class="lg"><span class="swatch" style="background:rgba(30,77,60,0.12);border-radius:3px"></span>10–90th</span>
+        <span class="lg"><span class="swatch dash-ember"></span>Earliest failure</span>
       </div>
     </div>
     <div class="chart-box"><canvas id="mc-chart"></canvas></div>
+    <p class="mc-worst-note" id="mc-worst-note" style="margin-top:12px;font-size:12.5px;color:var(--ink-faint);line-height:1.5;display:none"></p>
   </div>
   </div><!-- /mc-tab -->
 </div>
@@ -1080,12 +1083,18 @@ function runMonteCarlo(){
     const paths = new Array(n);
     const depletionAges = [];
     let successCount = 0;
+    let worstResult = null;  // earliest-depleting path
 
     for(let i = 0; i < n; i++){
       const result = runSinglePath(params);
       paths[i] = result.path;
       if(result.success) successCount++;
-      if(result.depletionAge !== null) depletionAges.push(result.depletionAge);
+      if(result.depletionAge !== null){
+        depletionAges.push(result.depletionAge);
+        if(!worstResult || result.depletionAge < worstResult.depletionAge){
+          worstResult = result;
+        }
+      }
     }
 
     // percentile bands at each age
@@ -1112,6 +1121,8 @@ function runMonteCarlo(){
       endP50: p50[ageCount - 1],
       endP90: p90[ageCount - 1],
       earliestDepletion: depletionAges.length ? Math.min.apply(null, depletionAges) : null,
+      worstPath: worstResult ? worstResult.path : null,
+      worstDepletionAge: worstResult ? worstResult.depletionAge : null,
       ages, p10, p25, p50, p75, p90
     });
 
@@ -1144,19 +1155,35 @@ function renderMcResults(r){
   $('mc-fail').textContent = r.earliestDepletion ? 'age ' + r.earliestDepletion : 'never (in any run)';
 
   // chart
+  const datasets = [
+    { label:'10th', data:r.p10, borderColor:'transparent', backgroundColor:'rgba(30,77,60,0.12)', pointRadius:0, fill:false, tension:0.15 },
+    { label:'90th', data:r.p90, borderColor:'transparent', backgroundColor:'rgba(30,77,60,0.12)', pointRadius:0, fill:'-1', tension:0.15 },
+    { label:'25th', data:r.p25, borderColor:'transparent', backgroundColor:'rgba(30,77,60,0.32)', pointRadius:0, fill:false, tension:0.15 },
+    { label:'75th', data:r.p75, borderColor:'transparent', backgroundColor:'rgba(30,77,60,0.32)', pointRadius:0, fill:'-1', tension:0.15 },
+    { label:'Median', data:r.p50, borderColor:'#1E4D3C', borderWidth:2.5, backgroundColor:'transparent', pointRadius:0, fill:false, tension:0.15 }
+  ];
+  // Overlay earliest-failing path when it exists.
+  const note = $('mc-worst-note');
+  if(r.worstPath){
+    datasets.push({
+      label:'Earliest failure', data:r.worstPath,
+      borderColor:'#C0531C', borderWidth:1.5, borderDash:[4,4],
+      backgroundColor:'transparent', pointRadius:0, fill:false, tension:0
+    });
+    note.style.display = 'block';
+    note.innerHTML = `<b>The earliest failure</b> ran out at age <b>${r.worstDepletionAge}</b>. That path saw a sustained string of below-average annual returns through retirement — the kind of sequence-of-returns risk that compounds against you when you're withdrawing each year. With 10,000 simulations you'll typically see a small handful of these extreme tails; this is the worst one in this run.`;
+  } else {
+    note.style.display = 'none';
+    note.textContent = '';
+  }
+
   const ctx = $('mc-chart').getContext('2d');
   if(mcChart) mcChart.destroy();
   mcChart = new Chart(ctx, {
     type: 'line',
     data: {
       labels: r.ages,
-      datasets: [
-        { label:'10th', data:r.p10, borderColor:'transparent', backgroundColor:'rgba(30,77,60,0.12)', pointRadius:0, fill:false, tension:0.15 },
-        { label:'90th', data:r.p90, borderColor:'transparent', backgroundColor:'rgba(30,77,60,0.12)', pointRadius:0, fill:'-1', tension:0.15 },
-        { label:'25th', data:r.p25, borderColor:'transparent', backgroundColor:'rgba(30,77,60,0.32)', pointRadius:0, fill:false, tension:0.15 },
-        { label:'75th', data:r.p75, borderColor:'transparent', backgroundColor:'rgba(30,77,60,0.32)', pointRadius:0, fill:'-1', tension:0.15 },
-        { label:'Median', data:r.p50, borderColor:'#1E4D3C', borderWidth:2.5, backgroundColor:'transparent', pointRadius:0, fill:false, tension:0.15 }
-      ]
+      datasets: datasets
     },
     options: {
       responsive:true, maintainAspectRatio:false, animation:false,
