@@ -438,7 +438,7 @@
     <div class="panel panel-pad">
       <div class="panel-title">Simulation inputs</div>
       <p class="mc-lede">
-        Runs thousands of randomized retirement scenarios against your plan. Inherits assets, contributions, age, retirement age, and spending from the <b>Calculator</b>. Accumulation is treated as deterministic (if pre-ret returns disappoint, you'd work an extra year — that's not the question MC is built to answer). When linked, post-retirement volatility auto-fills from your <b>Portfolio Simulator</b> mix.
+        Runs thousands of randomized retirement scenarios against your plan. Each scenario samples a real consecutive sequence from <b>S&amp;P 500 history (1928-2024)</b>, scaled to your portfolio's volatility — so worst-case sequences match actual market history (including the Great Depression) rather than independent random draws. Inherits assets, contributions, age, retirement age, and spending from the <b>Calculator</b>. Accumulation is treated as deterministic. When linked, post-retirement volatility auto-fills from your <b>Portfolio Simulator</b> mix.
       </p>
 
       <div class="mc-inherited">
@@ -1000,23 +1000,50 @@ function pushVolToMc(vol){
 }
 
 // ============ MONTE CARLO ============
+// S&P 500 annual total returns (with dividends reinvested), 1928-2024.
+// Sources: Damodaran (NYU Stern) via Slickcharts / DQYDJ.
+// Used for historical-bootstrap retirement sampling — captures real
+// crash-then-recovery sequence dynamics that independent log-normal draws miss.
+const SP500_HISTORY = [
+  0.4381, -0.0830, -0.2512, -0.4384, -0.0864,  0.4998, // 1928-1933
+ -0.0119,  0.4674,  0.3194, -0.3534,  0.2928, -0.0110, // 1934-1939
+ -0.1067, -0.1277,  0.1917,  0.2506,  0.1903,  0.3582, // 1940-1945
+ -0.0843,  0.0520,  0.0570,  0.1830,  0.3081,  0.2368, // 1946-1951
+  0.1815, -0.0121,  0.5256,  0.3260,  0.0744, -0.1046, // 1952-1957
+  0.4372,  0.1206,  0.0034,  0.2664, -0.0881,  0.2261, // 1958-1963
+  0.1642,  0.1240, -0.0997,  0.2380,  0.1081, -0.0824, // 1964-1969
+  0.0356,  0.1422,  0.1876, -0.1431, -0.2590,  0.3700, // 1970-1975
+  0.2383, -0.0698,  0.0651,  0.1852,  0.3174, -0.0470, // 1976-1981
+  0.2042,  0.2234,  0.0615,  0.3124,  0.1849,  0.0581, // 1982-1987
+  0.1654,  0.3148, -0.0306,  0.3023,  0.0749,  0.0997, // 1988-1993
+  0.0133,  0.3720,  0.2268,  0.3310,  0.2834,  0.2089, // 1994-1999
+ -0.0903, -0.1185, -0.2197,  0.2836,  0.1074,  0.0483, // 2000-2005
+  0.1561,  0.0548, -0.3655,  0.2594,  0.1482,  0.0210, // 2006-2011
+  0.1589,  0.3215,  0.1352,  0.0136,  0.1196,  0.2183, // 2012-2017
+ -0.0438,  0.3149,  0.1840,  0.2871, -0.1811,  0.2629, // 2018-2023
+  0.2502                                               // 2024
+];
+const SP500_MEAN = SP500_HISTORY.reduce((s,r) => s + r, 0) / SP500_HISTORY.length;
+const SP500_STDDEV = Math.sqrt(SP500_HISTORY.reduce((s,r) => s + (r - SP500_MEAN)**2, 0) / SP500_HISTORY.length);
+
 function gaussianStandard(){
-  // Standard normal Z ~ N(0,1) via Box-Muller
+  // Retained for potential future use, no longer used by the simulation.
   let u = 0, v = 0;
   while(u === 0) u = Math.random();
   while(v === 0) v = Math.random();
   return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
 }
 
-function lognormalReturn(meanPct, stddevPct){
-  // Single-period log-normal return draw. Standard finance MC model:
-  // returns are bounded below by -100% (you can't lose more than you have)
-  // and have a fat-right-tail. drift = ln(1+mean) - sigma^2/2 keeps
-  // expected return centered on the user's input.
-  const sigma = stddevPct / 100;
-  if(sigma <= 0) return meanPct / 100;
-  const drift = Math.log(1 + meanPct/100) - (sigma * sigma) / 2;
-  return Math.exp(drift + sigma * gaussianStandard()) - 1;
+function historicalScaledReturn(yearOffset, blockStart, userMeanPct, userStddevPct){
+  // Look up the historical return at (blockStart + yearOffset), wrapping
+  // around the array if we exceed available history. Normalize to a z-score
+  // against the historical mean/stddev, then scale to the user's mean & stddev.
+  // This preserves the SHAPE of the historical sequence (crash, recovery, etc.)
+  // while respecting the user's portfolio parameters.
+  const idx = ((blockStart + yearOffset) % SP500_HISTORY.length + SP500_HISTORY.length) % SP500_HISTORY.length;
+  const histReturn = SP500_HISTORY[idx];
+  const z = (histReturn - SP500_MEAN) / SP500_STDDEV;
+  return userMeanPct / 100 + z * (userStddevPct / 100);
 }
 
 function gatherMcParams(){
@@ -1030,7 +1057,6 @@ function gatherMcParams(){
     spending:      +$('spend').value || 0,
     cushionYrs:    +$('cushion').value || 0,
     preRet:        +$('ret').value || 0,
-    preVol:        0,  // accumulation is deterministic — MC focuses on retirement survival
     postRet:       +$('swr').value || 0,
     postVol:       +$('mcVolPost').value || 0,
   };
@@ -1041,18 +1067,20 @@ function runSinglePath(p){
   const returns = [];  // yearly return applied (null in years after depletion)
   let portfolio = p.startAssets;
   let contrib = p.contribution;
-  let cushion = 0;  // cash buffer set aside at retirement, drawn down first
+  let cushion = 0;
   let depletionAge = null;
+  // Pick a random starting year from S&P 500 history for the retirement block.
+  // Each simulation experiences a real consecutive historical sequence —
+  // including its actual recovery dynamics — scaled to the user's volatility.
+  const blockStart = Math.floor(Math.random() * SP500_HISTORY.length);
 
   for(let age = p.currentAge; age <= p.endAge; age++){
-    // Carve out the cushion at the moment of retirement.
     if(age === p.retireAge && p.cushionYrs > 0 && cushion === 0){
       const target = p.cushionYrs * p.spending;
       cushion = Math.min(target, portfolio);
       portfolio -= cushion;
     }
 
-    // Chart shows total wealth (portfolio + cushion).
     path.push(portfolio + cushion);
 
     if((portfolio + cushion) <= 0){
@@ -1065,11 +1093,14 @@ function runSinglePath(p){
 
     let r;
     if(age < p.retireAge){
-      r = lognormalReturn(p.preRet, p.preVol);
+      // Accumulation is deterministic — MC focuses on retirement survival.
+      r = p.preRet / 100;
       portfolio = portfolio * (1 + r) + contrib;
       contrib *= (1 + p.contribGrowth/100);
     } else {
-      r = lognormalReturn(p.postRet, p.postVol);
+      // Retirement: sample a real historical sequence scaled to user's portfolio.
+      const retireYearOffset = age - p.retireAge;
+      r = historicalScaledReturn(retireYearOffset, blockStart, p.postRet, p.postVol);
       portfolio = portfolio * (1 + r);
       let need = p.spending;
       if(cushion > 0){
@@ -1191,7 +1222,7 @@ function renderMcResults(r){
       backgroundColor:'transparent', pointRadius:0, fill:false, tension:0
     });
     note.style.display = 'block';
-    note.innerHTML = `<b>The earliest failure</b> ran out at age <b>${r.worstDepletionAge}</b>. That path saw a sustained string of below-average annual returns through retirement — the kind of sequence-of-returns risk that compounds against you when you're withdrawing each year. With 10,000 simulations you'll typically see a small handful of these extreme tails; this is the worst one in this run.`;
+    note.innerHTML = `<b>The earliest failure</b> ran out at age <b>${r.worstDepletionAge}</b>. That path drew its retirement years from one of the worst real historical sequences (likely starting near a 1929, 1973, or 2000 peak), scaled to your portfolio's volatility. The recovery years in this sequence weren't enough to offset withdrawals during the early crash — sequence-of-returns risk at its most punishing. Worst cases are bounded by what's actually happened in market history rather than open-ended Gaussian tails.`;
 
     // Build a table of the retirement years of that path.
     const fmt$ = v => (v < 0 ? '−$' : '$') + Math.abs(Math.round(v)).toLocaleString();
