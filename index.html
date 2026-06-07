@@ -487,6 +487,9 @@
       <p class="footnote" style="margin-top:18px;border-top:none;padding-top:0">
         <b>How to read this.</b> Success probability is the share of simulated futures where your portfolio survives to your chart end age. The 10th/90th percentile bands show the spread of outcomes — eighty percent of futures land between them. Plan against the bad-luck scenarios, not the median.
       </p>
+      <p class="footnote" style="margin-top:10px;border-top:none;padding-top:0">
+        <b>Methodology.</b> Each scenario uses <b>historical bootstrap sampling</b> — a random starting year is picked from S&amp;P 500 history (1928–2024), and your retirement plays out against that consecutive real sequence of annual returns, scaled to your portfolio's volatility via log-space z-score normalization. Worst-case outcomes are bounded by what's actually happened in market history (the Great Depression being the most severe); the model captures real crash-and-recovery dynamics rather than open-ended Gaussian tails. Future scenarios worse than history aren't surfaced, which is a conservative limitation worth keeping in mind.
+      </p>
     </div>
   </div>
 
@@ -1025,6 +1028,11 @@ const SP500_HISTORY = [
 ];
 const SP500_MEAN = SP500_HISTORY.reduce((s,r) => s + r, 0) / SP500_HISTORY.length;
 const SP500_STDDEV = Math.sqrt(SP500_HISTORY.reduce((s,r) => s + (r - SP500_MEAN)**2, 0) / SP500_HISTORY.length);
+// Log-space statistics: stock returns are naturally log-normal, so z-score
+// scaling must happen on ln(1+r) to keep losses bounded above -100%.
+const SP500_LOG_RETURNS = SP500_HISTORY.map(r => Math.log(1 + r));
+const SP500_LOG_MEAN = SP500_LOG_RETURNS.reduce((s,r) => s + r, 0) / SP500_LOG_RETURNS.length;
+const SP500_LOG_STDDEV = Math.sqrt(SP500_LOG_RETURNS.reduce((s,r) => s + (r - SP500_LOG_MEAN)**2, 0) / SP500_LOG_RETURNS.length);
 
 function gaussianStandard(){
   // Retained for potential future use, no longer used by the simulation.
@@ -1035,15 +1043,24 @@ function gaussianStandard(){
 }
 
 function historicalScaledReturn(yearOffset, blockStart, userMeanPct, userStddevPct){
-  // Look up the historical return at (blockStart + yearOffset), wrapping
-  // around the array if we exceed available history. Normalize to a z-score
-  // against the historical mean/stddev, then scale to the user's mean & stddev.
-  // This preserves the SHAPE of the historical sequence (crash, recovery, etc.)
-  // while respecting the user's portfolio parameters.
+  // Look up the historical year (with wrap-around) and compute its log-return z-score.
+  // Then scale to the user's portfolio parameters in log space and convert back.
+  // Working in log space ensures returns are bounded above -100% no matter how
+  // volatile the user's portfolio is relative to the S&P.
   const idx = ((blockStart + yearOffset) % SP500_HISTORY.length + SP500_HISTORY.length) % SP500_HISTORY.length;
-  const histReturn = SP500_HISTORY[idx];
-  const z = (histReturn - SP500_MEAN) / SP500_STDDEV;
-  return userMeanPct / 100 + z * (userStddevPct / 100);
+  const histLogReturn = SP500_LOG_RETURNS[idx];
+  const z = SP500_LOG_STDDEV > 0 ? (histLogReturn - SP500_LOG_MEAN) / SP500_LOG_STDDEV : 0;
+
+  const arithMean   = userMeanPct / 100;
+  const arithStddev = userStddevPct / 100;
+  if(arithStddev === 0) return arithMean;
+
+  // Moment-match arithmetic (mean, stddev) -> log-normal (μ, σ) parameters.
+  const ratio    = arithStddev / (1 + arithMean);
+  const sigmaLog = Math.sqrt(Math.log(1 + ratio * ratio));
+  const muLog    = Math.log(1 + arithMean) - (sigmaLog * sigmaLog) / 2;
+
+  return Math.exp(muLog + z * sigmaLog) - 1;
 }
 
 function gatherMcParams(){
