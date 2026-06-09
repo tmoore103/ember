@@ -159,7 +159,7 @@
   .holding-name{font-size:12.5px;color:var(--ink-soft);font-weight:500;line-height:1.3;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .alloc-input{display:flex;align-items:center;gap:3px;background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:5px 9px 5px 10px;transition:border-color .15s,box-shadow .15s}
   .alloc-input:focus-within{border-color:var(--pine);box-shadow:0 0 0 3px rgba(30,77,60,.12)}
-  .alloc-input input{width:42px;border:none;background:none;font-family:inherit;font-size:14px;font-weight:600;color:var(--ink);text-align:right;-moz-appearance:textfield}
+  .alloc-input input{width:54px;border:none;background:none;font-family:inherit;font-size:14px;font-weight:600;color:var(--ink);text-align:right;-moz-appearance:textfield}
   .alloc-input input::-webkit-outer-spin-button,.alloc-input input::-webkit-inner-spin-button{-webkit-appearance:none}
   .alloc-input input:focus{outline:none}
   .alloc-input .pct{font-size:13px;color:var(--ink-faint);font-weight:600}
@@ -193,7 +193,7 @@
   .sim-stat .k{font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-faint);font-weight:600;margin-bottom:7px}
   .sim-stat .v{font-family:'Fraunces',serif;font-size:clamp(21px,2.4vw,26px);font-weight:500;letter-spacing:-.01em;color:var(--ink);line-height:1}
   .sim-stat .v.neg{color:var(--ember)}
-  .sim-stat .ann{margin-top:6px;font-size:12px;color:var(--ink-faint);font-weight:500;line-height:1.35}
+  .sim-stat .ann,.stat .ann{margin-top:6px;font-size:12px;color:var(--ink-faint);font-weight:500;line-height:1.35}
 
   .warning{margin-top:22px;padding:14px 16px;background:var(--ember-soft);border:1px solid rgba(192,83,28,.25);border-radius:12px;font-size:12.5px;color:#7A3210;line-height:1.6}
   .warning b{font-weight:700;color:var(--ember)}
@@ -237,6 +237,21 @@
   .mc-inh-row{display:flex;justify-content:space-between;gap:8px;font-size:12.5px;line-height:1.3}
   .mc-inh-row .k{color:var(--ink-faint)}
   .mc-inh-row .v{color:var(--ink);font-weight:600;text-align:right}
+  /* Three-mode severity selector */
+  .mc-mode-group{display:grid;grid-template-columns:repeat(3,1fr);gap:0;background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:3px;margin-bottom:8px}
+  .mc-mode{background:transparent;border:none;font-family:inherit;cursor:pointer;padding:9px 6px 8px;border-radius:8px;transition:background .15s,color .15s;color:var(--ink-faint);display:flex;flex-direction:column;align-items:center;gap:2px;line-height:1.2}
+  .mc-mode .primary{font-size:13px;font-weight:600;color:var(--ink-soft)}
+  .mc-mode .hint{font-size:10.5px;letter-spacing:.02em;color:var(--ink-faint);text-transform:lowercase}
+  .mc-mode:hover{background:rgba(30,77,60,.04)}
+  .mc-mode.active{background:var(--pine);color:#fff}
+  .mc-mode.active .primary{color:#fff}
+  .mc-mode.active .hint{color:rgba(255,255,255,.75)}
+  .mc-mode-desc{font-size:12.5px;color:var(--ink-faint);line-height:1.5;margin:0 0 22px;font-style:italic;padding:0 2px}
+  @media(max-width:520px){
+    .mc-mode .primary{font-size:11.5px}
+    .mc-mode .hint{font-size:9.5px}
+    .mc-mode{padding:8px 3px 7px}
+  }
   .mc-worst-table{margin-top:14px;width:100%;border-collapse:collapse;font-size:12.5px;font-variant-numeric:tabular-nums}
   .mc-worst-table caption{caption-side:top;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-faint);font-weight:600;padding-bottom:8px}
   .mc-worst-table th{text-align:left;color:var(--ink-faint);font-weight:600;font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;padding:7px 10px;border-bottom:1px solid var(--line-soft)}
@@ -356,7 +371,7 @@
         <div class="headline-sub" id="headlineSub">—</div>
 
           <div class="stat-grid">
-          <div class="stat"><div class="k" id="s-fire-label">FIRE number</div><div class="v" id="s-fire">—</div></div>
+          <div class="stat"><div class="k" id="s-fire-label">FIRE number</div><div class="v" id="s-fire">—</div><div class="ann" id="s-fire-swr" style="font-style:italic">&nbsp;</div></div>
           <div class="stat"><div class="k">Coast FIRE number</div><div class="v" id="s-coast">—</div></div>
           <div class="stat"><div class="k">Portfolio at retirement</div><div class="v" id="s-atfi">—</div></div>
         </div>
@@ -438,8 +453,21 @@
     <div class="panel panel-pad">
       <div class="panel-title">Simulation inputs</div>
       <p class="mc-lede">
-        Runs thousands of randomized retirement scenarios against your plan. Each scenario samples a real consecutive sequence from <b>S&amp;P 500 history (1928-2024)</b>, scaled to your portfolio's volatility — so worst-case sequences match actual market history (including the Great Depression) rather than independent random draws. Inherits assets, contributions, age, retirement age, and spending from the <b>Calculator</b>. Accumulation is treated as deterministic. When linked, post-retirement volatility auto-fills from your <b>Portfolio Simulator</b> mix.
+        Runs thousands of randomized retirement scenarios against your plan. Inherits assets, contributions, age, retirement age, and spending from the <b>Calculator</b>. Accumulation is treated as deterministic. When linked, post-retirement volatility auto-fills from your <b>Portfolio Simulator</b> mix.
       </p>
+
+      <div class="mc-mode-group" role="radiogroup" aria-label="Severity model">
+        <button class="mc-mode active" type="button" data-mode="modern" role="radio" aria-checked="true">
+          <span class="primary">Modern era</span><span class="hint">standard</span>
+        </button>
+        <button class="mc-mode" type="button" data-mode="full" role="radio" aria-checked="false">
+          <span class="primary">Full history</span><span class="hint">more extreme</span>
+        </button>
+        <button class="mc-mode" type="button" data-mode="theoretical" role="radio" aria-checked="false">
+          <span class="primary">Theoretical</span><span class="hint">most extreme</span>
+        </button>
+      </div>
+      <p class="mc-mode-desc" id="mc-mode-desc">S&amp;P 500 returns 1990–2024. Worst case bounded by the dot-com bust or 2008 GFC. Excludes Great Depression and stagflation eras.</p>
 
       <div class="mc-inherited">
         <div class="mc-inh-title"><span>Inherited from Calculator</span><span class="pill">live</span></div>
@@ -487,8 +515,8 @@
       <p class="footnote" style="margin-top:18px;border-top:none;padding-top:0">
         <b>How to read this.</b> Success probability is the share of simulated futures where your portfolio survives to your chart end age. The 10th/90th percentile bands show the spread of outcomes — eighty percent of futures land between them. Plan against the bad-luck scenarios, not the median.
       </p>
-      <p class="footnote" style="margin-top:10px;border-top:none;padding-top:0">
-        <b>Methodology.</b> Each scenario uses <b>historical bootstrap sampling</b> — a random starting year is picked from S&amp;P 500 history (1928–2024), and your retirement plays out against that consecutive real sequence of annual returns, scaled to your portfolio's volatility via log-space z-score normalization. Worst-case outcomes are bounded by what's actually happened in market history (the Great Depression being the most severe); the model captures real crash-and-recovery dynamics rather than open-ended Gaussian tails. Future scenarios worse than history aren't surfaced, which is a conservative limitation worth keeping in mind.
+      <p class="footnote" style="margin-top:10px;border-top:none;padding-top:0" id="mc-methodology">
+        <b>Methodology.</b> Each scenario uses <b>historical bootstrap sampling</b> on S&amp;P 500 returns from <b>1990–2024</b> — a random starting year is picked from that window, and your retirement plays out against that consecutive real sequence of annual returns, scaled to your portfolio's volatility via log-space z-score normalization. Worst-case outcomes are bounded by the dot-com bust and 2008 GFC; the model captures real crash-and-recovery dynamics rather than open-ended Gaussian tails. Pre-1990 events (Great Depression, 1970s stagflation) and any future scenarios worse than recent history aren't surfaced, which is a deliberate framing — switch modes above to widen the worst case.
       </p>
     </div>
   </div>
@@ -665,6 +693,21 @@ function compute(){
   }
 
   $('s-fire').textContent=fmt(fire);
+  // Traditional SWR comparison: 4% rule extended for retirement duration via the
+  // Bengen/Pfau/Big-ERN-style curve. Drops below 4% as horizon exceeds 30 years,
+  // floored at 3%. Multiplier = spending / SWR.
+  const retYears = Math.max(1, chartEnd - trad);
+  const swr = Math.max(0.030, 0.040 - Math.max(0, retYears - 30) * 0.00025);
+  const swrFire = spend / swr;
+  const fmtCompact = v => {
+    if(!isFinite(v) || v <= 0) return '—';
+    if(v >= 1e9) return '$' + (v/1e9).toFixed(2).replace(/\.?0+$/,'') + 'B';
+    if(v >= 1e6) return '$' + (v/1e6).toFixed(2).replace(/\.?0+$/,'') + 'M';
+    if(v >= 1e3) return '$' + (v/1e3).toFixed(0) + 'K';
+    return '$' + Math.round(v).toLocaleString();
+  };
+  $('s-fire-swr').textContent = 'Traditional SWR: ' + fmtCompact(swrFire) +
+    ' (' + (swr * 100).toFixed(1) + '% over ' + retYears + ' yrs)';
   const reached = assets>=coast;
   $('s-coast').innerHTML = fmt(coast) + (reached ? '<div class="reached-badge">reached ✓</div>' : '');
   $('s-atfi').textContent = balAtRetire !== null ? fmt(balAtRetire) : (atFi!==null ? fmt(atFi) : '—');
@@ -1028,28 +1071,56 @@ const SP500_HISTORY = [
 ];
 const SP500_MEAN = SP500_HISTORY.reduce((s,r) => s + r, 0) / SP500_HISTORY.length;
 const SP500_STDDEV = Math.sqrt(SP500_HISTORY.reduce((s,r) => s + (r - SP500_MEAN)**2, 0) / SP500_HISTORY.length);
-// Log-space statistics: stock returns are naturally log-normal, so z-score
-// scaling must happen on ln(1+r) to keep losses bounded above -100%.
-const SP500_LOG_RETURNS = SP500_HISTORY.map(r => Math.log(1 + r));
-const SP500_LOG_MEAN = SP500_LOG_RETURNS.reduce((s,r) => s + r, 0) / SP500_LOG_RETURNS.length;
-const SP500_LOG_STDDEV = Math.sqrt(SP500_LOG_RETURNS.reduce((s,r) => s + (r - SP500_LOG_MEAN)**2, 0) / SP500_LOG_RETURNS.length);
+
+// Active severity mode for the MC engine. User-selectable via the segmented
+// control above the simulation inputs. Default is 'modern' — uses recent
+// market data and excludes the Great Depression / WW2 stagflation eras.
+let mcMode = 'modern';
+
+// Index of 1990 in SP500_HISTORY (1990 - 1928 = 62). Modern mode uses the
+// slice from 1990 onward (35 years: 1990–2024).
+const MODERN_START_IDX = 1990 - 1928;
+
+// Precompute log-return statistics for each historical dataset so z-score
+// normalization happens against the dataset actually in use.
+function buildDatasetStats(returns){
+  const logReturns = returns.map(r => Math.log(1 + r));
+  const logMean = logReturns.reduce((s,r) => s + r, 0) / logReturns.length;
+  const logVar  = logReturns.reduce((s,r) => s + (r - logMean)**2, 0) / logReturns.length;
+  return { returns, logReturns, logMean, logStddev: Math.sqrt(logVar) };
+}
+const MC_DATASETS = {
+  full:   buildDatasetStats(SP500_HISTORY),
+  modern: buildDatasetStats(SP500_HISTORY.slice(MODERN_START_IDX)),
+};
 
 function gaussianStandard(){
-  // Retained for potential future use, no longer used by the simulation.
+  // Standard normal Z ~ N(0,1) via Box-Muller. Used by the Theoretical mode.
   let u = 0, v = 0;
   while(u === 0) u = Math.random();
   while(v === 0) v = Math.random();
   return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
 }
 
-function historicalScaledReturn(yearOffset, blockStart, userMeanPct, userStddevPct){
-  // Look up the historical year (with wrap-around) and compute its log-return z-score.
-  // Then scale to the user's portfolio parameters in log space and convert back.
-  // Working in log space ensures returns are bounded above -100% no matter how
-  // volatile the user's portfolio is relative to the S&P.
-  const idx = ((blockStart + yearOffset) % SP500_HISTORY.length + SP500_HISTORY.length) % SP500_HISTORY.length;
-  const histLogReturn = SP500_LOG_RETURNS[idx];
-  const z = SP500_LOG_STDDEV > 0 ? (histLogReturn - SP500_LOG_MEAN) / SP500_LOG_STDDEV : 0;
+function lognormalReturn(meanPct, stddevPct){
+  // Single-period log-normal return draw. Used by the Theoretical mode.
+  // Returns are bounded below by -100% (exp() is always positive) but tails
+  // are unbounded — scenarios can exceed any real historical event.
+  const sigma = stddevPct / 100;
+  if(sigma <= 0) return meanPct / 100;
+  const drift = Math.log(1 + meanPct/100) - (sigma * sigma) / 2;
+  return Math.exp(drift + sigma * gaussianStandard()) - 1;
+}
+
+function historicalScaledReturn(yearOffset, blockStart, userMeanPct, userStddevPct, dataset){
+  // Look up the historical year (with wrap-around) within the active dataset
+  // and compute its log-return z-score. Scale to the user's portfolio parameters
+  // in log space and convert back. Working in log space keeps losses bounded
+  // above -100% regardless of how volatile the user's portfolio is.
+  const len = dataset.returns.length;
+  const idx = ((blockStart + yearOffset) % len + len) % len;
+  const histLogReturn = dataset.logReturns[idx];
+  const z = dataset.logStddev > 0 ? (histLogReturn - dataset.logMean) / dataset.logStddev : 0;
 
   const arithMean   = userMeanPct / 100;
   const arithStddev = userStddevPct / 100;
@@ -1061,6 +1132,13 @@ function historicalScaledReturn(yearOffset, blockStart, userMeanPct, userStddevP
   const muLog    = Math.log(1 + arithMean) - (sigmaLog * sigmaLog) / 2;
 
   return Math.exp(muLog + z * sigmaLog) - 1;
+}
+
+// Dispatcher: picks the right sampling strategy based on the active mode.
+function drawRetirementReturn(yearOffset, blockStart, userMeanPct, userStddevPct){
+  if(mcMode === 'theoretical') return lognormalReturn(userMeanPct, userStddevPct);
+  const dataset = mcMode === 'full' ? MC_DATASETS.full : MC_DATASETS.modern;
+  return historicalScaledReturn(yearOffset, blockStart, userMeanPct, userStddevPct, dataset);
 }
 
 function gatherMcParams(){
@@ -1117,7 +1195,7 @@ function runSinglePath(p){
     } else {
       // Retirement: sample a real historical sequence scaled to user's portfolio.
       const retireYearOffset = age - p.retireAge;
-      r = historicalScaledReturn(retireYearOffset, blockStart, p.postRet, p.postVol);
+      r = drawRetirementReturn(retireYearOffset, blockStart, p.postRet, p.postVol);
       portfolio = portfolio * (1 + r);
       let need = p.spending;
       if(cushion > 0){
@@ -1239,7 +1317,14 @@ function renderMcResults(r){
       backgroundColor:'transparent', pointRadius:0, fill:false, tension:0
     });
     note.style.display = 'block';
-    note.innerHTML = `<b>The earliest failure</b> ran out at age <b>${r.worstDepletionAge}</b>. That path drew its retirement years from one of the worst real historical sequences (likely starting near a 1929, 1973, or 2000 peak), scaled to your portfolio's volatility. The recovery years in this sequence weren't enough to offset withdrawals during the early crash — sequence-of-returns risk at its most punishing. Worst cases are bounded by what's actually happened in market history rather than open-ended Gaussian tails.`;
+    const failureBlurb = (
+      mcMode === 'theoretical'
+        ? `That path was generated by the theoretical Gaussian model with unbounded tails — the worst case here isn't tied to any specific historical event and can exceed anything that's actually happened. Switch to a historical mode to anchor worst cases to real market sequences.`
+        : mcMode === 'full'
+          ? `That path drew its retirement years from one of the worst real historical sequences (likely starting near the 1929, 1937, or 1973 peak), scaled to your portfolio's volatility. The recovery years weren't enough to offset withdrawals during the early crash — sequence-of-returns risk at its most punishing. Worst cases are bounded by what's actually happened in market history.`
+          : `That path drew its retirement years from one of the worst sequences in the modern era (likely starting near a 2000 or 2007 peak), scaled to your portfolio's volatility. The recovery years weren't enough to offset withdrawals during the early crash — sequence-of-returns risk at its most punishing. Switch to "Full history" to include the Great Depression in worst-case sequences.`
+    );
+    note.innerHTML = `<b>The earliest failure</b> ran out at age <b>${r.worstDepletionAge}</b>. ${failureBlurb}`;
 
     // Build a table of the retirement years of that path.
     const fmt$ = v => (v < 0 ? '−$' : '$') + Math.abs(Math.round(v)).toLocaleString();
@@ -1302,6 +1387,40 @@ function renderMcResults(r){
 }
 
 $('mcRun').addEventListener('click', runMonteCarlo);
+
+// MC mode descriptions (segmented control selection text + methodology footnote).
+const MC_MODE_COPY = {
+  modern: {
+    desc: 'S&P 500 returns 1990–2024. Worst case bounded by the dot-com bust or 2008 GFC. Excludes Great Depression and stagflation eras.',
+    methodology: `<b>Methodology.</b> Each scenario uses <b>historical bootstrap sampling</b> on S&P 500 returns from <b>1990–2024</b> — a random starting year is picked from that window, and your retirement plays out against that consecutive real sequence of annual returns, scaled to your portfolio's volatility via log-space z-score normalization. Worst-case outcomes are bounded by the dot-com bust and 2008 GFC; the model captures real crash-and-recovery dynamics rather than open-ended Gaussian tails. Pre-1990 events (Great Depression, 1970s stagflation) and any future scenarios worse than recent history aren't surfaced, which is a deliberate framing — switch modes above to widen the worst case.`
+  },
+  full: {
+    desc: 'S&P 500 returns 1928–2024. Worst case bounded by the Great Depression (1929–1932) sequences. Captures the full sweep of US market history.',
+    methodology: `<b>Methodology.</b> Each scenario uses <b>historical bootstrap sampling</b> on S&P 500 returns from <b>1928–2024</b> — a random starting year is picked from that window, and your retirement plays out against that consecutive real sequence of annual returns, scaled to your portfolio's volatility via log-space z-score normalization. Worst-case outcomes are bounded by what's actually happened in market history, with the Great Depression being the most severe. The model captures real crash-and-recovery dynamics rather than open-ended Gaussian tails. Future scenarios worse than history aren't surfaced, which is a conservative limitation worth keeping in mind.`
+  },
+  theoretical: {
+    desc: 'Log-normal Gaussian model with unbounded tails. Worst-case scenarios can exceed any real historical event. Useful for stress-testing beyond the historical record.',
+    methodology: `<b>Methodology.</b> Each scenario uses <b>log-normal sampling</b> — annual returns are drawn from a Gaussian distribution in log space, parameterized by your portfolio's expected return and volatility. Losses are bounded above -100% (because exp() is always positive) but tails are unbounded — worst-case scenarios can exceed any real historical event. This mode is useful for stress-testing beyond the historical record, but it can produce sequences worse than the Great Depression in particularly volatile portfolios.`
+  }
+};
+
+function applyMcMode(mode){
+  mcMode = mode;
+  document.querySelectorAll('.mc-mode').forEach(btn => {
+    const active = btn.dataset.mode === mode;
+    btn.classList.toggle('active', active);
+    btn.setAttribute('aria-checked', active ? 'true' : 'false');
+  });
+  const copy = MC_MODE_COPY[mode];
+  const desc = $('mc-mode-desc');
+  if(desc) desc.textContent = copy.desc;
+  const meth = $('mc-methodology');
+  if(meth) meth.innerHTML = copy.methodology;
+}
+
+document.querySelectorAll('.mc-mode').forEach(btn => {
+  btn.addEventListener('click', () => applyMcMode(btn.dataset.mode));
+});
 
 // tabs
 document.querySelectorAll('.tab-btn').forEach(btn => {
