@@ -4,7 +4,29 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google-site-verification" content="ck1CGVBaizIQMir1h_P5tVuhZ-Cvu0S1-PNh4gquVHQ" />
-<title>Ember — FIRE & Retirement Calculator</title>
+
+<!-- Primary SEO -->
+<title>Ember — FIRE Calculator & Monte Carlo Retirement Simulator</title>
+<meta name="description" content="A FIRE and early-retirement calculator with Monte Carlo simulation, portfolio building, and real S&P 500 historical data from 1928 to 2024.">
+<link rel="canonical" href="https://ember-fire.netlify.app/" />
+
+<!-- Open Graph (Facebook, LinkedIn, iMessage, Slack) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Ember">
+<meta property="og:title" content="Ember — FIRE Calculator & Monte Carlo Retirement Simulator">
+<meta property="og:description" content="A FIRE and early-retirement calculator with Monte Carlo simulation, portfolio building, and real S&P 500 historical data from 1928 to 2024.">
+<meta property="og:url" content="https://ember-fire.netlify.app/">
+<meta property="og:image" content="https://ember-fire.netlify.app/og.png">
+
+<!-- Twitter / X card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ember — FIRE Calculator & Monte Carlo Retirement Simulator">
+<meta name="twitter:description" content="A FIRE and early-retirement calculator with Monte Carlo simulation, portfolio building, and real S&P 500 historical data from 1928 to 2024.">
+<meta name="twitter:image" content="https://ember-fire.netlify.app/og.png">
+
+<!-- Favicon (emoji SVG; replace with brand mark when ready) -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔥</text></svg>">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -476,7 +498,7 @@
           <div class="mc-inh-row"><span class="k">Retiring at</span><span class="v" id="mc-inh-retire">—</span></div>
           <div class="mc-inh-row"><span class="k">Chart end age</span><span class="v" id="mc-inh-end">—</span></div>
           <div class="mc-inh-row"><span class="k">Starting assets</span><span class="v" id="mc-inh-assets">—</span></div>
-          <div class="mc-inh-row"><span class="k">Annual contribution</span><span class="v" id="mc-inh-contrib">—</span></div>
+          <div class="mc-inh-row"><span class="k">Pre-ret contribution</span><span class="v" id="mc-inh-contrib">—</span></div>
           <div class="mc-inh-row"><span class="k">Annual spending</span><span class="v" id="mc-inh-spend">—</span></div>
           <div class="mc-inh-row"><span class="k">Cash cushion</span><span class="v" id="mc-inh-cushion">—</span></div>
           <div class="mc-inh-row"><span class="k">Pre-ret return</span><span class="v" id="mc-inh-pre">—</span></div>
@@ -1105,11 +1127,16 @@ function gaussianStandard(){
 function lognormalReturn(meanPct, stddevPct){
   // Single-period log-normal return draw. Used by the Theoretical mode.
   // Returns are bounded below by -100% (exp() is always positive) but tails
-  // are unbounded — scenarios can exceed any real historical event.
-  const sigma = stddevPct / 100;
-  if(sigma <= 0) return meanPct / 100;
-  const drift = Math.log(1 + meanPct/100) - (sigma * sigma) / 2;
-  return Math.exp(drift + sigma * gaussianStandard()) - 1;
+  // are unbounded — scenarios can exceed any real historical event. Uses the
+  // same arithmetic→log-space moment-matching as historicalScaledReturn so
+  // both samplers interpret the user's volatility input identically.
+  const arithMean   = meanPct / 100;
+  const arithStddev = stddevPct / 100;
+  if(arithStddev <= 0) return arithMean;
+  const ratio    = arithStddev / (1 + arithMean);
+  const sigmaLog = Math.sqrt(Math.log(1 + ratio * ratio));
+  const muLog    = Math.log(1 + arithMean) - (sigmaLog * sigmaLog) / 2;
+  return Math.exp(muLog + sigmaLog * gaussianStandard()) - 1;
 }
 
 function historicalScaledReturn(yearOffset, blockStart, userMeanPct, userStddevPct, dataset){
