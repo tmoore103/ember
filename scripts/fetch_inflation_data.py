@@ -9,20 +9,26 @@ Methodology
 - Weights are BLS Consumer Expenditure Survey (CEX) derived — same source
   Truflation uses. Weights represent the share of typical household spending
   going to each category.
-- Data sources are the freshest free options available via FRED. The key
-  methodological choice: we use S&P/Case-Shiller home prices for the shelter
-  component instead of BLS's Owners' Equivalent Rent (OER), which historically
-  lags real housing market movements by 12-18 months. This is what drives
-  Ember's number to diverge from BLS CPI in the direction of "what people
-  actually feel."
-- All other components are pulled from BLS CPI subindexes via FRED.
+- Data sources are the freshest free options available:
+    * Shelter:   S&P/Case-Shiller home prices (FRED) instead of BLS's lagging
+                 Owners' Equivalent Rent (OER) — captures real housing prices.
+    * Energy:    EIA weekly retail gasoline (when EIA_API_KEY is set) instead
+                 of BLS's monthly Energy CPI — captures pump-price moves in
+                 near-real-time. Falls back to BLS CPIENGSL if EIA key missing.
+    * All other: BLS CPI subindexes via FRED (slow-moving categories where
+                 BLS's monthly data is acceptable).
 
 Run locally
 -----------
-    $env:FRED_API_KEY="your_key_here"        # PowerShell
+    $env:FRED_API_KEY="your_fred_key_here"        # PowerShell
+    $env:EIA_API_KEY="your_eia_key_here"          # PowerShell (optional)
     python scripts/fetch_inflation_data.py
 
-In GitHub Actions, FRED_API_KEY is injected from repository secrets.
+In GitHub Actions, both keys are injected from repository secrets.
+
+API key signup:
+    FRED: https://fred.stlouisfed.org/docs/api/api_key.html
+    EIA:  https://www.eia.gov/opendata/register.php
 """
 
 import os
@@ -46,7 +52,14 @@ if not API_KEY:
         "https://fred.stlouisfed.org/docs/api/api_key.html"
     )
 
+# EIA key is optional — if missing, the Energy component falls back to BLS CPIENGSL.
+EIA_API_KEY = os.environ.get("EIA_API_KEY")
+
 FRED_BASE = "https://api.stlouisfed.org/fred/series/observations"
+EIA_BASE  = "https://api.eia.gov/v2/petroleum/pri/gnd/data/"
+
+# EIA series ID for "Weekly U.S. Regular All Formulations Retail Gasoline Prices" ($/gallon)
+EIA_GAS_SERIES = "EMM_EPMR_PTE_NUS_DPG"
 
 # Component definitions: series ID, BLS-CEX-derived weight, display name, source label.
 # Weights sum to 1.00 and approximate BLS's 2024 consumer expenditure shares.
@@ -67,10 +80,23 @@ COMPONENTS = [
     },
     {
         "name": "Energy",
-        "series": "CPIENGSL",
+        "series": EIA_GAS_SERIES if EIA_API_KEY else "CPIENGSL",
+        "source_type": "eia_petroleum" if EIA_API_KEY else "fred",
         "weight": 0.07,
-        "source": "BLS CPI: Energy (FRED: CPIENGSL)",
-        "note": "Gasoline, electricity, natural gas, heating oil.",
+        "source": (
+            "EIA Weekly U.S. Retail Gasoline Prices (regular, all formulations)"
+            if EIA_API_KEY else
+            "BLS CPI: Energy (FRED: CPIENGSL)"
+        ),
+        "note": (
+            "Real-time weekly retail gasoline prices replace BLS's monthly Energy CPI. "
+            "Gasoline is the dominant driver of energy price volatility, so it serves "
+            "as a leading proxy for the broader energy basket while electricity and "
+            "natural gas move slowly."
+            if EIA_API_KEY else
+            "Gasoline, electricity, natural gas, heating oil. Set EIA_API_KEY env var "
+            "to swap in real-time weekly gas prices for a more responsive read."
+        ),
     },
     {
         "name": "Transportation",
@@ -127,6 +153,48 @@ def fetch_series(series_id, start_date="2010-01-01"):
         for obs in data.get("observations", [])
         if obs["value"] != "."
     ]
+
+
+def fetch_eia_gas(start_date="2010-01-01"):
+    """Fetch EIA weekly U.S. retail gasoline prices ($/gallon, regular all formulations).
+
+    Uses the EIA v2 API petroleum/pri/gnd endpoint. The series ID
+    EMM_EPMR_PTE_NUS_DPG is the national weekly average regular gasoline retail
+    price published every Monday afternoon (Tuesday after holidays).
+    Returns the same {date, value} shape as fetch_series for drop-in use.
+    """
+    if not EIA_API_KEY:
+        raise RuntimeError("EIA_API_KEY not set — cannot fetch EIA series")
+
+    params = [
+        ("api_key", EIA_API_KEY),
+        ("frequency", "weekly"),
+        ("data[0]", "value"),
+        ("facets[series][]", EIA_GAS_SERIES),
+        ("start", start_date),
+        ("sort[0][column]", "period"),
+        ("sort[0][direction]", "asc"),
+        ("length", "5000"),
+    ]
+    url = EIA_BASE + "?" + urllib.parse.urlencode(params, safe="[]")
+
+    with urllib.request.urlopen(url, timeout=30) as resp:
+        data = json.loads(resp.read())
+
+    rows = data.get("response", {}).get("data", [])
+    return [
+        {"date": r["period"], "value": float(r["value"])}
+        for r in rows
+        if r.get("value") not in (None, "", ".")
+    ]
+
+
+def fetch_component(comp, start_date="2010-01-01"):
+    """Dispatch fetching based on component's source_type."""
+    source_type = comp.get("source_type", "fred")
+    if source_type == "eia_petroleum":
+        return fetch_eia_gas(start_date)
+    return fetch_series(comp["series"], start_date)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -208,10 +276,14 @@ def build_history(all_series, bls_series, months=60):
 # ─────────────────────────────────────────────────────────────────────────────
 
 def main():
-    print(f"Fetching {len(COMPONENTS) + 1} FRED series...")
+    print(f"Fetching {len(COMPONENTS) + 1} data series...")
+    if EIA_API_KEY:
+        print("  Energy component: using EIA real-time gas prices ✓")
+    else:
+        print("  Energy component: using BLS CPIENGSL (set EIA_API_KEY for real-time gas)")
 
     # BLS headline CPI (for comparison)
-    print(f"  {BLS_CPI_SERIES:12s}  BLS headline CPI")
+    print(f"  {BLS_CPI_SERIES:30s}  BLS headline CPI")
     bls_observations = fetch_series(BLS_CPI_SERIES)
     bls_date, bls_yoy, _ = yoy_at(bls_observations, datetime.date.today())
 
@@ -219,8 +291,8 @@ def main():
     component_results = []
     all_series = []
     for comp in COMPONENTS:
-        print(f"  {comp['series']:12s}  {comp['name']}")
-        observations = fetch_series(comp["series"])
+        print(f"  {comp['series']:30s}  {comp['name']}")
+        observations = fetch_component(comp)
         date, yoy, _ = yoy_at(observations, datetime.date.today())
         contribution = round(yoy * comp["weight"], 2) if yoy is not None else None
         component_results.append({
@@ -257,15 +329,29 @@ def main():
                 "Ember True Inflation is a weighted average of year-over-year price "
                 "changes across six consumer spending categories. Weights are BLS "
                 "Consumer Expenditure Survey derived (the same source Truflation uses). "
-                "The key methodological choice: we use S&P/Case-Shiller home prices "
-                "for the shelter component instead of BLS's Owners' Equivalent Rent (OER), "
-                "which historically lags real housing market movements by 12-18 months. "
-                "This is what makes Ember's number diverge from BLS CPI in the direction "
-                "of what people actually experience."
+                "Two methodological choices drive Ember's divergence from BLS CPI: "
+                "(1) we use S&P/Case-Shiller home prices for the shelter component "
+                "instead of BLS's Owners' Equivalent Rent (OER), which lags real "
+                "housing prices by 12-18 months; "
+                + (
+                    "(2) we use EIA's weekly retail gasoline prices for the energy "
+                    "component instead of BLS's monthly Energy CPI, which captures "
+                    "pump-price moves about 30 days late."
+                    if EIA_API_KEY else
+                    "(2) energy uses BLS Energy CPI for now — set EIA_API_KEY in the "
+                    "pipeline to swap in real-time weekly gas prices."
+                )
             ),
             "weights_source": "BLS Consumer Expenditure Survey (CEX), 2024 weights",
-            "data_sources": "Federal Reserve Economic Data (FRED), St. Louis Fed",
+            "data_sources": (
+                "Federal Reserve Economic Data (FRED) + EIA Petroleum Data API"
+                if EIA_API_KEY else
+                "Federal Reserve Economic Data (FRED), St. Louis Fed"
+            ),
             "update_frequency": (
+                "Daily. Component data updates monthly (FRED) and weekly (EIA gas); "
+                "we recompute daily to pick up any revisions."
+                if EIA_API_KEY else
                 "Daily. Component data updates monthly; we recompute daily to pick up "
                 "any FRED revisions."
             ),

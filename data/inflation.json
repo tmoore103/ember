@@ -1,10 +1,10 @@
 {
-  "as_of": "2026-06-13",
-  "data_through": "2026-05-01",
-  "true_inflation_yoy": 4.52,
+  "as_of": "2026-06-14",
+  "data_through": "2026-06-08",
+  "true_inflation_yoy": 5.25,
   "bls_cpi_yoy": 4.17,
   "bls_cpi_as_of": "2026-05-01",
-  "gap": 0.35,
+  "gap": 1.08,
   "components": [
     {
       "name": "Shelter",
@@ -27,11 +27,11 @@
     {
       "name": "Energy",
       "weight": 0.07,
-      "yoy": 22.97,
-      "contribution": 1.61,
-      "source": "BLS CPI: Energy (FRED: CPIENGSL)",
-      "note": "Gasoline, electricity, natural gas, heating oil.",
-      "as_of": "2026-05-01"
+      "yoy": 33.4,
+      "contribution": 2.34,
+      "source": "EIA Weekly U.S. Retail Gasoline Prices (regular, all formulations)",
+      "note": "Real-time weekly retail gasoline prices replace BLS's monthly Energy CPI. Gasoline is the dominant driver of energy price volatility, so it serves as a leading proxy for the broader energy basket while electricity and natural gas move slowly.",
+      "as_of": "2026-06-08"
     },
     {
       "name": "Transportation",
@@ -64,309 +64,309 @@
   "history": [
     {
       "date": "2021-05",
-      "ember": 11.82,
+      "ember": 14.22,
       "bls": 4.92
     },
     {
       "date": "2021-06",
-      "ember": 12.55,
+      "ember": 14.62,
       "bls": 5.3
     },
     {
       "date": "2021-07",
-      "ember": 12.59,
+      "ember": 13.92,
       "bls": 5.25
     },
     {
       "date": "2021-08",
-      "ember": 12.49,
+      "ember": 13.87,
       "bls": 5.15
     },
     {
       "date": "2021-09",
-      "ember": 12.4,
+      "ember": 13.56,
       "bls": 5.35
     },
     {
       "date": "2021-10",
-      "ember": 13.24,
+      "ember": 14.4,
       "bls": 6.24
     },
     {
       "date": "2021-11",
-      "ember": 14.12,
+      "ember": 15.99,
       "bls": 6.9
     },
     {
       "date": "2021-12",
-      "ember": 14.11,
+      "ember": 16.15,
       "bls": 7.17
     },
     {
       "date": "2022-01",
-      "ember": 14.14,
+      "ember": 15.46,
       "bls": 7.56
     },
     {
       "date": "2022-02",
-      "ember": 14.53,
+      "ember": 15.52,
       "bls": 7.94
     },
     {
       "date": "2022-03",
-      "ember": 15.58,
+      "ember": 15.65,
       "bls": 8.57
     },
     {
       "date": "2022-04",
-      "ember": 15.0,
+      "ember": 16.28,
       "bls": 8.23
     },
     {
       "date": "2022-05",
-      "ember": 15.08,
+      "ember": 15.68,
       "bls": 8.54
     },
     {
       "date": "2022-06",
-      "ember": 15.06,
+      "ember": 15.85,
       "bls": 8.98
     },
     {
       "date": "2022-07",
-      "ember": 13.26,
+      "ember": 14.99,
       "bls": 8.46
     },
     {
       "date": "2022-08",
-      "ember": 11.49,
+      "ember": 12.11,
       "bls": 8.22
     },
     {
       "date": "2022-09",
-      "ember": 10.44,
+      "ember": 10.58,
       "bls": 8.19
     },
     {
       "date": "2022-10",
-      "ember": 9.39,
+      "ember": 9.33,
       "bls": 7.76
     },
     {
       "date": "2022-11",
-      "ember": 7.81,
+      "ember": 7.62,
       "bls": 7.12
     },
     {
       "date": "2022-12",
-      "ember": 5.98,
+      "ember": 5.82,
       "bls": 6.4
     },
     {
       "date": "2023-01",
-      "ember": 5.32,
+      "ember": 4.34,
       "bls": 6.33
     },
     {
       "date": "2023-02",
-      "ember": 4.17,
+      "ember": 4.08,
       "bls": 5.96
     },
     {
       "date": "2023-03",
-      "ember": 2.15,
+      "ember": 2.1,
       "bls": 4.92
     },
     {
       "date": "2023-04",
-      "ember": 2.04,
+      "ember": 1.05,
       "bls": 4.95
     },
     {
       "date": "2023-05",
-      "ember": 0.99,
+      "ember": 0.8,
       "bls": 4.13
     },
     {
       "date": "2023-06",
-      "ember": -0.03,
+      "ember": -0.46,
       "bls": 3.07
     },
     {
       "date": "2023-07",
-      "ember": 0.74,
+      "ember": -0.26,
       "bls": 3.29
     },
     {
       "date": "2023-08",
-      "ember": 2.39,
+      "ember": 1.92,
       "bls": 3.72
     },
     {
       "date": "2023-09",
-      "ember": 3.01,
+      "ember": 3.02,
       "bls": 3.69
     },
     {
       "date": "2023-10",
-      "ember": 2.71,
+      "ember": 3.25,
       "bls": 3.25
     },
     {
       "date": "2023-11",
-      "ember": 2.79,
+      "ember": 2.67,
       "bls": 3.13
     },
     {
       "date": "2023-12",
-      "ember": 3.47,
+      "ember": 3.02,
       "bls": 3.32
     },
     {
       "date": "2024-01",
-      "ember": 3.3,
+      "ember": 3.31,
       "bls": 3.09
     },
     {
       "date": "2024-02",
-      "ember": 3.71,
+      "ember": 3.05,
       "bls": 3.16
     },
     {
       "date": "2024-03",
-      "ember": 4.28,
+      "ember": 3.95,
       "bls": 3.49
     },
     {
       "date": "2024-04",
-      "ember": 4.15,
+      "ember": 4.02,
       "bls": 3.36
     },
     {
       "date": "2024-05",
-      "ember": 3.93,
+      "ember": 3.78,
       "bls": 3.24
     },
     {
       "date": "2024-06",
-      "ember": 3.35,
+      "ember": 3.3,
       "bls": 2.97
     },
     {
       "date": "2024-07",
-      "ember": 3.16,
+      "ember": 2.99,
       "bls": 2.94
     },
     {
       "date": "2024-08",
-      "ember": 2.29,
+      "ember": 2.07,
       "bls": 2.61
     },
     {
       "date": "2024-09",
-      "ember": 1.94,
+      "ember": 1.5,
       "bls": 2.43
     },
     {
       "date": "2024-10",
-      "ember": 2.1,
+      "ember": 1.3,
       "bls": 2.58
     },
     {
       "date": "2024-11",
-      "ember": 2.38,
+      "ember": 1.84,
       "bls": 2.72
     },
     {
       "date": "2024-12",
-      "ember": 2.84,
+      "ember": 2.44,
       "bls": 2.87
     },
     {
       "date": "2025-01",
-      "ember": 3.19,
+      "ember": 2.95,
       "bls": 2.99
     },
     {
       "date": "2025-02",
-      "ember": 2.8,
+      "ember": 2.85,
       "bls": 2.8
     },
     {
       "date": "2025-03",
-      "ember": 1.98,
+      "ember": 1.95,
       "bls": 2.38
     },
     {
       "date": "2025-04",
-      "ember": 1.67,
+      "ember": 1.21,
       "bls": 2.33
     },
     {
       "date": "2025-05",
-      "ember": 1.58,
+      "ember": 0.8,
       "bls": 2.38
     },
     {
       "date": "2025-06",
-      "ember": 1.87,
+      "ember": 1.1,
       "bls": 2.68
     },
     {
       "date": "2025-07",
-      "ember": 1.85,
+      "ember": 1.3,
       "bls": 2.74
     },
     {
       "date": "2025-08",
-      "ember": 2.09,
+      "ember": 1.34,
       "bls": 2.94
     },
     {
       "date": "2025-09",
-      "ember": 2.29,
+      "ember": 1.84,
       "bls": 3.02
     },
     {
       "date": "2025-11",
-      "ember": 2.11,
+      "ember": 1.68,
       "bls": 2.7
     },
     {
       "date": "2025-12",
-      "ember": 1.82,
+      "ember": 1.56,
       "bls": 2.65
     },
     {
       "date": "2026-01",
-      "ember": 1.32,
+      "ember": 0.89,
       "bls": 2.39
     },
     {
       "date": "2026-02",
-      "ember": 1.45,
+      "ember": 0.86,
       "bls": 2.43
     },
     {
       "date": "2026-03",
-      "ember": 3.11,
+      "ember": 1.81,
       "bls": 3.29
     },
     {
       "date": "2026-04",
-      "ember": 3.8,
+      "ember": 4.41,
       "bls": 3.78
     },
     {
       "date": "2026-05",
-      "ember": 4.52,
+      "ember": 5.12,
       "bls": 4.17
     }
   ],
   "methodology": {
-    "summary": "Ember True Inflation is a weighted average of year-over-year price changes across six consumer spending categories. Weights are BLS Consumer Expenditure Survey derived (the same source Truflation uses). The key methodological choice: we use S&P/Case-Shiller home prices for the shelter component instead of BLS's Owners' Equivalent Rent (OER), which historically lags real housing market movements by 12-18 months. This is what makes Ember's number diverge from BLS CPI in the direction of what people actually experience.",
+    "summary": "Ember True Inflation is a weighted average of year-over-year price changes across six consumer spending categories. Weights are BLS Consumer Expenditure Survey derived (the same source Truflation uses). Two methodological choices drive Ember's divergence from BLS CPI: (1) we use S&P/Case-Shiller home prices for the shelter component instead of BLS's Owners' Equivalent Rent (OER), which lags real housing prices by 12-18 months; (2) we use EIA's weekly retail gasoline prices for the energy component instead of BLS's monthly Energy CPI, which captures pump-price moves about 30 days late.",
     "weights_source": "BLS Consumer Expenditure Survey (CEX), 2024 weights",
-    "data_sources": "Federal Reserve Economic Data (FRED), St. Louis Fed",
-    "update_frequency": "Daily. Component data updates monthly; we recompute daily to pick up any FRED revisions."
+    "data_sources": "Federal Reserve Economic Data (FRED) + EIA Petroleum Data API",
+    "update_frequency": "Daily. Component data updates monthly (FRED) and weekly (EIA gas); we recompute daily to pick up any revisions."
   }
 }
