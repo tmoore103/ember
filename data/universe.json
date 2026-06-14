@@ -1,0 +1,98 @@
+{
+  "_comment": "Curated universe of candidate tickers per category. The fetch_ticker_data.py pipeline filters this list by history length (>=10y), AUM (>$50M), and average daily volume (>100K), then picks the top N per category by 10-year CAGR. Add or remove candidates here to influence what shows up in the Analyzer dropdown.",
+  "categories": {
+    "broad-market": {
+      "label": "Broad-market index",
+      "target_count": 5,
+      "candidates": [
+        "SPY", "VOO", "IVV", "VTI", "ITOT",
+        "QQQ", "QQQM", "VV", "MGC", "SCHB",
+        "SCHX", "SPLG", "IWB", "OEF", "VONE",
+        "RSP", "DIA", "VUG", "SPYG"
+      ]
+    },
+    "3x-leveraged": {
+      "label": "3x leveraged equity",
+      "target_count": 10,
+      "candidates": [
+        "TQQQ", "UPRO", "SPXL", "TNA", "FAS",
+        "SOXL", "TECL", "UDOW", "ERX", "LABU",
+        "DRN", "CURE", "MIDU", "YINN", "BRZU",
+        "EDC", "NUGT", "TYD", "TMF", "JNUG"
+      ]
+    },
+    "2x-leveraged": {
+      "label": "2x leveraged equity",
+      "target_count": 5,
+      "candidates": [
+        "QLD", "SSO", "DDM", "USD", "ROM",
+        "MVV", "SAA", "UYG", "UCC", "UPV"
+      ]
+    },
+    "sector-thematic": {
+      "label": "Sector/thematic",
+      "target_count": 10,
+      "candidates": [
+        "XLK", "XLF", "XLE", "XLV", "XLI",
+        "XLY", "XLP", "XLU", "XLB", "XLRE",
+        "VGT", "VFH", "VHT", "VDE", "VPU",
+        "SMH", "SOXX", "IBB", "XBI", "ITA",
+        "ITB", "KBE", "KRE", "VNQ"
+      ]
+    },
+    "bond": {
+      "label": "Bond ETFs",
+      "target_count": 8,
+      "candidates": [
+        "BND", "AGG", "TLT", "IEF", "SHY",
+        "LQD", "HYG", "JNK", "MUB", "TIP",
+        "SCHP", "EMB", "BSV", "BIV", "BLV",
+        "VCSH", "VCIT", "VCLT", "VTEB"
+      ]
+    },
+    "gold-commodity": {
+      "label": "Gold/commodity",
+      "target_count": 4,
+      "candidates": [
+        "GLD", "IAU", "SGOL", "SLV", "SIVR",
+        "DBC", "GSG", "USO", "BNO", "UNG",
+        "DBA", "PPLT", "PALL"
+      ]
+    },
+    "dividend": {
+      "label": "Dividend-focused",
+      "target_count": 8,
+      "candidates": [
+        "VYM", "SCHD", "DVY", "HDV", "NOBL",
+        "VIG", "DGRO", "SDY", "SPHD", "FDL",
+        "FVD", "DLN", "DON", "SPYD"
+      ]
+    },
+    "international": {
+      "label": "International",
+      "target_count": 8,
+      "candidates": [
+        "VXUS", "VEA", "VWO", "EFA", "EEM",
+        "ACWI", "VEU", "SCHF", "IEFA", "IEMG",
+        "ACWX", "EWJ", "EWG", "MCHI", "INDA",
+        "EWU", "EWA", "EWZ", "VYMI", "IXUS"
+      ]
+    },
+    "mutual-fund": {
+      "label": "Mutual funds",
+      "target_count": 6,
+      "candidates": [
+        "VFIAX", "FXAIX", "SWPPX", "VTSAX", "SWTSX",
+        "VTIAX", "FTIHX", "SWISX", "VBTLX", "FXNAX",
+        "SWAGX", "VGSTX", "VBINX", "DODGX"
+      ]
+    },
+    "cash-equivalent": {
+      "label": "Cash equivalents",
+      "target_count": 2,
+      "candidates": [
+        "BIL", "SHV", "MINT", "NEAR", "FLOT"
+      ]
+    }
+  }
+}

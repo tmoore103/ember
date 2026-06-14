@@ -1063,13 +1063,47 @@ function renderAddSelect(){
   const sel = $('addSel');
   const used = new Set(holdings.map(h => h.symbol));
   sel.innerHTML = '<option value="">+ Add a holding...</option>';
+
+  // Group by category (same ordering as the Analyzer dropdown)
+  const byCategory = {};
   Object.entries(TICKERS).forEach(([sym, t]) => {
     if(used.has(sym)) return;
-    const opt = document.createElement('option');
-    opt.value = sym;
-    opt.textContent = sym + ' — ' + t.name;
-    sel.appendChild(opt);
+    const cat = t.category_label || 'Other';
+    (byCategory[cat] = byCategory[cat] || []).push([sym, t]);
   });
+
+  const renderGroup = (cat) => {
+    const tickers = byCategory[cat];
+    if(!tickers || tickers.length === 0) return;
+    tickers.sort((a, b) => a[0].localeCompare(b[0]));
+    const group = document.createElement('optgroup');
+    group.label = cat;
+    tickers.forEach(([sym, t]) => {
+      const opt = document.createElement('option');
+      opt.value = sym;
+      opt.textContent = sym + ' — ' + t.name;
+      group.appendChild(opt);
+    });
+    sel.appendChild(group);
+  };
+
+  (typeof CATEGORY_ORDER !== 'undefined' ? CATEGORY_ORDER : []).forEach(renderGroup);
+  Object.keys(byCategory)
+    .filter(c => typeof CATEGORY_ORDER === 'undefined' || !CATEGORY_ORDER.includes(c))
+    .sort()
+    .forEach(renderGroup);
+
+  // If somehow no groups got rendered (e.g. no category info at all), fall back to flat.
+  if(sel.children.length <= 1){
+    Object.entries(TICKERS).forEach(([sym, t]) => {
+      if(used.has(sym)) return;
+      const opt = document.createElement('option');
+      opt.value = sym;
+      opt.textContent = sym + ' — ' + t.name;
+      sel.appendChild(opt);
+    });
+  }
+
   $('addBtn').disabled = sel.options.length <= 1;
 }
 
@@ -1583,6 +1617,19 @@ document.querySelectorAll('.mc-mode').forEach(btn => {
 const MAX_COMPARE = 4;
 // Distinct line colors for each comparison slot.
 const COMPARE_COLORS = ['#1E4D3C', '#C0531C', '#2C5F7A', '#6B4070'];
+// Display order for category headers in the dropdown.
+const CATEGORY_ORDER = [
+  'Broad-market index',
+  '3x leveraged equity',
+  '2x leveraged equity',
+  'Sector/thematic',
+  'Bond ETFs',
+  'Dividend-focused',
+  'International',
+  'Mutual funds',
+  'Gold/commodity',
+  'Cash equivalents',
+];
 let analyzerSelection = [];   // array of selected ticker symbols
 let anSingleChart = null;     // Chart instance for single mode
 let anCompareChart = null;    // Chart instance for comparison mode
@@ -1590,18 +1637,42 @@ let cameFromAnalyzer = false; // tracks bounce flow from Analyzer → Portfolio 
 
 function renderAnalyzerSelect(){
   const selects = [$('anSel'), ...document.querySelectorAll('#an-compare-rows .analyzer-select')];
-  selects.forEach((sel, idx) => {
+  selects.forEach((sel) => {
     if(!sel) return;
     const currentValue = sel.value;
     sel.innerHTML = '<option value="">— select a ticker —</option>';
-    const entries = Object.entries(TICKERS).filter(([sym]) => sym !== 'CASH');
-    entries.sort((a, b) => a[0].localeCompare(b[0]));
-    entries.forEach(([sym, t]) => {
-      const opt = document.createElement('option');
-      opt.value = sym;
-      opt.textContent = `${sym} — ${t.name}`;
-      sel.appendChild(opt);
+
+    // Group entries by their category label (falls back to "Other" if missing).
+    const byCategory = {};
+    Object.entries(TICKERS).forEach(([sym, t]) => {
+      if(sym === 'CASH') return;
+      const cat = t.category_label || 'Other';
+      (byCategory[cat] = byCategory[cat] || []).push([sym, t]);
     });
+
+    // Render groups in the defined order first, then any leftover categories
+    // (alphabetical) we didn't explicitly order.
+    const renderGroup = (cat) => {
+      const tickers = byCategory[cat];
+      if(!tickers || tickers.length === 0) return;
+      tickers.sort((a, b) => a[0].localeCompare(b[0]));
+      const group = document.createElement('optgroup');
+      group.label = cat;
+      tickers.forEach(([sym, t]) => {
+        const opt = document.createElement('option');
+        opt.value = sym;
+        opt.textContent = `${sym} — ${t.name}`;
+        group.appendChild(opt);
+      });
+      sel.appendChild(group);
+    };
+
+    CATEGORY_ORDER.forEach(renderGroup);
+    Object.keys(byCategory)
+      .filter(c => !CATEGORY_ORDER.includes(c))
+      .sort()
+      .forEach(renderGroup);
+
     if(currentValue && TICKERS[currentValue]) sel.value = currentValue;
   });
 }
@@ -1993,11 +2064,13 @@ fetch('data/tickers.json', {cache: 'no-cache'})
         yield:  t.yield,
         ret22:  t.ret22,
         lev:    !!t.lev,
-        description:   t.description || '',
-        inception:     t.inception || null,
-        expense_ratio: t.expense_ratio != null ? t.expense_ratio : null,
-        avg_volume:    t.avg_volume    != null ? t.avg_volume    : null,
-        prices:        Array.isArray(t.prices) ? t.prices : [],
+        description:    t.description || '',
+        inception:      t.inception || null,
+        expense_ratio:  t.expense_ratio != null ? t.expense_ratio : null,
+        avg_volume:     t.avg_volume    != null ? t.avg_volume    : null,
+        prices:         Array.isArray(t.prices) ? t.prices : [],
+        category:       t.category       || null,
+        category_label: t.category_label || null,
       };
       updated++;
     });

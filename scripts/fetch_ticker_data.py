@@ -1,13 +1,19 @@
 #!/usr/bin/env python3
-"""Fetch ticker stats for the Ember portfolio simulator.
+"""Discover, filter, rank, and persist ticker data for the Ember portfolio simulator.
 
-Pulls 10-year CAGR, annualized volatility, TTM dividend yield, 2022
-calendar-year return, fund metadata (description, inception date,
-expense ratio, average daily volume), and monthly close-price history
-for each ticker in the curated list. Writes results to data/tickers.json.
+Pipeline:
+  1. Load candidate tickers from data/universe.json (categorized).
+  2. For each candidate, fetch 10-year price history, stats, and fund metadata.
+  3. Apply filters:
+       - History: >= 10 years of trading data
+       - Average daily volume: >= 100,000 shares
+       - Net assets / AUM:    >= $50,000,000
+  4. Rank surviving candidates within each category by 10-year CAGR.
+  5. Take the top N per category (where N is the category's target_count).
+  6. Write the winners to data/tickers.json, tagged with category info.
 
-If a ticker fails to fetch and a previous value exists, the previous value
-is kept so transient yfinance errors don't blow away good data.
+Tickers that fail filters or fetches are skipped. Categories with fewer
+qualifying candidates than the target simply get fewer entries.
 
 Run manually:
     pip install -r requirements.txt
@@ -19,58 +25,21 @@ from __future__ import annotations
 import json
 import math
 import os
+import re
 import sys
 from datetime import datetime, timedelta, timezone
 
 import yfinance as yf
 
-# Curated list of ETFs to track. Keep in sync with the TICKERS object in index.html.
-TICKERS: dict[str, dict] = {
-    "VOO":   {"name": "Vanguard S&P 500",                       "lev": False},
-    "VTI":   {"name": "Vanguard Total US Market",               "lev": False},
-    "SPY":   {"name": "SPDR S&P 500",                           "lev": False},
-    "QQQ":   {"name": "Invesco Nasdaq 100",                     "lev": False},
-    "QQQM":  {"name": "Invesco Nasdaq 100 (low-cost)",          "lev": False},
-    "VFIAX": {"name": "Vanguard 500 Index Admiral",             "lev": False},
-    "SPYG":  {"name": "SPDR S&P 500 Growth",                    "lev": False},
-    "VGT":   {"name": "Vanguard Information Technology",        "lev": False},
-    "SMH":   {"name": "VanEck Semiconductor",                   "lev": False},
-    "SOXX":  {"name": "iShares Semiconductor",                  "lev": False},
-    "XLP":   {"name": "Consumer Staples Select Sector SPDR",    "lev": False},
-    "TQQQ":  {"name": "ProShares UltraPro QQQ (3x)",            "lev": True},
-    "UPRO":  {"name": "ProShares UltraPro S&P 500 (3x)",        "lev": True},
-    "USD":   {"name": "ProShares Ultra Semiconductors (2x)",    "lev": True},
-    "SOXL":  {"name": "Direxion Daily Semiconductor Bull (3x)", "lev": True},
-    "RETL":  {"name": "Direxion Daily Retail Bull (3x)",        "lev": True},
-    "NAIL":  {"name": "Direxion Daily Homebuilders Bull (3x)",  "lev": True},
-    "DFEN":  {"name": "Direxion Daily Aerospace & Defense (3x)","lev": True},
-    "FNGU":  {"name": "MicroSectors FANG+ (3x ETN)",            "lev": True},
-    "SCHD":  {"name": "Schwab US Dividend Equity",              "lev": False},
-    "VYM":   {"name": "Vanguard High Dividend Yield",           "lev": False},
-    "SPYD":  {"name": "SPDR S&P 500 High Dividend",             "lev": False},
-    "JEPI":  {"name": "JPMorgan Equity Premium Income",         "lev": False},
-    "JEPQ":  {"name": "JPMorgan Nasdaq Equity Premium Income",  "lev": False},
-    "QYLD":  {"name": "Global X Nasdaq-100 Covered Call",       "lev": False},
-    "QQQI":  {"name": "NEOS Nasdaq-100 High Income",            "lev": False},
-    "NVDY":  {"name": "YieldMax NVDA Option Income",            "lev": False},
-    "SVOL":  {"name": "Simplify Volatility Premium",            "lev": False},
-    "VNQ":   {"name": "Vanguard Real Estate (REITs)",           "lev": False},
-    "VWO":   {"name": "Vanguard Emerging Markets",              "lev": False},
-    "VXUS":  {"name": "Vanguard Total International",           "lev": False},
-    "GLD":   {"name": "SPDR Gold Shares",                       "lev": False},
-    "BND":   {"name": "Vanguard Total Bond Market",             "lev": False},
-    "AGG":   {"name": "iShares Core US Aggregate Bond",         "lev": False},
-    "TLT":   {"name": "iShares 20+ Year Treasury Bond",         "lev": False},
-    "SCHP":  {"name": "Schwab US TIPS",                         "lev": False},
-    "FLRT":  {"name": "Pacific Asset Floating Rate Income",     "lev": False},
-    "MAIN":  {"name": "Main Street Capital (BDC)",              "lev": False},
-    "HTGC":  {"name": "Hercules Capital (BDC)",                 "lev": False},
-    "PFLT":  {"name": "PennantPark Floating Rate (BDC)",        "lev": False},
-    "QPUX":  {"name": "QPUX",                                   "lev": False},
-    "DRAM":  {"name": "DRAM",                                   "lev": False},
-}
+UNIVERSE_PATH = "data/universe.json"
+OUTPUT_PATH   = "data/tickers.json"
 
-# Cash is a special "ticker" — not on the market, set manually.
+# Filter thresholds — funds must clear all three to be considered.
+MIN_HISTORY_DAYS = int(252 * 9.5)   # ~9.5 trading years (so a fund just shy of 10y still qualifies)
+MIN_AVG_VOLUME   = 100_000          # 100K shares/day
+MIN_NET_ASSETS   = 50_000_000       # $50M
+
+# Cash is always included as a special "ticker" — not from the market.
 CASH = {
     "name": "Cash / HYSA",
     "lev": False,
@@ -80,39 +49,48 @@ CASH = {
     "expense_ratio": 0.0,
     "avg_volume": None,
     "prices": [],
+    "category": "cash-equivalent",
+    "category_label": "Cash equivalents",
 }
 
-OUTPUT_PATH = "data/tickers.json"
+# Heuristic patterns used to detect leveraged funds when the category alone doesn't tell us.
+LEV_NAME_PATTERN = re.compile(
+    r"\b(2x|3x|ultrapro|ultra|daily\s+\w+\s+bull|daily\s+\w+\s+bear|3X|leveraged)\b",
+    re.IGNORECASE,
+)
 
 
-def fetch_stats(symbol: str) -> dict:
-    """Return cagr, yield (TTM), and 2022 calendar-year return for a ticker."""
-    t = yf.Ticker(symbol)
+def load_universe() -> dict:
+    """Read the universe.json file with categorized candidate tickers."""
+    if not os.path.exists(UNIVERSE_PATH):
+        raise FileNotFoundError(f"Missing {UNIVERSE_PATH} — Phase 3 requires the curated universe file.")
+    with open(UNIVERSE_PATH) as f:
+        return json.load(f)
 
-    # 10-year history with dividend reinvestment (auto_adjust=True) for CAGR.
+
+def fetch_stats_and_prices(t: yf.Ticker) -> dict | None:
+    """Compute CAGR, volatility, TTM yield, 2022 return, and monthly prices.
+
+    Returns None if the ticker fails the history-length filter.
+    """
     hist = t.history(period="10y", auto_adjust=True)
-    if len(hist) < 2:
-        raise RuntimeError("no price history returned")
+    if len(hist) < MIN_HISTORY_DAYS:
+        return None
 
     start_price = float(hist["Close"].iloc[0])
-    end_price = float(hist["Close"].iloc[-1])
-    years = (hist.index[-1] - hist.index[0]).days / 365.25
-    cagr = ((end_price / start_price) ** (1 / years) - 1) * 100
+    end_price   = float(hist["Close"].iloc[-1])
+    years       = (hist.index[-1] - hist.index[0]).days / 365.25
+    cagr        = ((end_price / start_price) ** (1 / years) - 1) * 100
 
-    # Annualized volatility: stddev of daily returns × sqrt(252 trading days).
     daily_returns = hist["Close"].pct_change().dropna()
-    if len(daily_returns) > 1:
-        stddev = float(daily_returns.std()) * math.sqrt(252) * 100
-    else:
-        stddev = 0.0
+    stddev = float(daily_returns.std()) * math.sqrt(252) * 100 if len(daily_returns) > 1 else 0.0
 
-    # TTM dividend yield from actual distributions in the past year.
+    # TTM dividend yield
     yield_pct = 0.0
     try:
         divs = t.dividends
         if len(divs) > 0:
             cutoff = hist.index[-1] - timedelta(days=365)
-            # Normalize timezones so the comparison works
             if divs.index.tz is not None and cutoff.tzinfo is None:
                 cutoff = cutoff.tz_localize(divs.index.tz)
             elif divs.index.tz is None and cutoff.tzinfo is not None:
@@ -122,7 +100,7 @@ def fetch_stats(symbol: str) -> dict:
     except Exception:
         pass
 
-    # 2022 calendar-year total return.
+    # 2022 calendar-year return
     ret22 = None
     try:
         hist_22 = t.history(start="2022-01-01", end="2023-01-01", auto_adjust=True)
@@ -131,8 +109,7 @@ def fetch_stats(symbol: str) -> dict:
     except Exception:
         pass
 
-    # Monthly close prices over the same 10-year window (for the analyzer chart).
-    # Resample to month-end; drop any NaN months that resulted from gaps.
+    # Monthly close prices for the analyzer chart
     monthly = hist["Close"].resample("ME").last().dropna()
     monthly_prices = [
         [d.strftime("%Y-%m-%d"), round(float(p), 2)]
@@ -148,24 +125,20 @@ def fetch_stats(symbol: str) -> dict:
     }
 
 
-def fetch_metadata(symbol: str) -> dict:
-    """Return fund description, inception date, expense ratio, and avg volume."""
-    t = yf.Ticker(symbol)
+def fetch_metadata(t: yf.Ticker) -> dict:
+    """Pull description, inception, expense ratio, average volume, and net assets."""
     try:
         info = t.info or {}
     except Exception:
         info = {}
 
-    # Description — prefer the longer business summary, fall back to shorter fields.
     description = (info.get("longBusinessSummary")
                    or info.get("description")
                    or info.get("longName")
                    or "").strip()
     if len(description) > 400:
-        # Truncate at last whole word before the limit and append ellipsis.
         description = description[:397].rsplit(" ", 1)[0] + "..."
 
-    # Inception date — yfinance returns a Unix timestamp; convert to YYYY-MM-DD.
     inception_date = None
     inception_ts = info.get("fundInceptionDate")
     if inception_ts:
@@ -174,7 +147,6 @@ def fetch_metadata(symbol: str) -> dict:
         except Exception:
             pass
 
-    # Expense ratio — yfinance returns as decimal (0.0003 = 0.03%); convert to percent.
     expense_ratio = info.get("annualReportExpenseRatio")
     if expense_ratio is not None:
         try:
@@ -182,7 +154,6 @@ def fetch_metadata(symbol: str) -> dict:
         except Exception:
             expense_ratio = None
 
-    # Average daily volume — try the 3-month average first for stability.
     avg_volume = (info.get("averageDailyVolume3Month")
                   or info.get("averageVolume")
                   or info.get("averageDailyVolume10Day"))
@@ -192,69 +163,125 @@ def fetch_metadata(symbol: str) -> dict:
         except Exception:
             avg_volume = None
 
+    # Net assets / total AUM — yfinance returns dollars
+    net_assets = info.get("totalAssets") or info.get("netAssets")
+    if net_assets is not None:
+        try:
+            net_assets = int(net_assets)
+        except Exception:
+            net_assets = None
+
+    name = info.get("longName") or info.get("shortName") or ""
+
     return {
+        "name":          name,
         "description":   description,
         "inception":     inception_date,
         "expense_ratio": expense_ratio,
         "avg_volume":    avg_volume,
+        "net_assets":    net_assets,
     }
+
+
+def detect_leverage(category_id: str, name: str) -> bool:
+    """A fund is leveraged if its category says so, or its name signals it."""
+    if category_id in ("3x-leveraged", "2x-leveraged"):
+        return True
+    return bool(LEV_NAME_PATTERN.search(name or ""))
+
+
+def fetch_candidate(symbol: str, category_id: str, category_label: str) -> dict | None:
+    """Fetch stats + metadata for a single candidate. Returns None on filter failure."""
+    try:
+        t = yf.Ticker(symbol)
+        stats = fetch_stats_and_prices(t)
+        if stats is None:
+            return {"symbol": symbol, "reason": "insufficient history (<10y)"}
+
+        metadata = fetch_metadata(t)
+
+        # AUM filter
+        if not metadata["net_assets"] or metadata["net_assets"] < MIN_NET_ASSETS:
+            assets_str = f"${metadata['net_assets']:,}" if metadata["net_assets"] else "unknown"
+            return {"symbol": symbol, "reason": f"AUM {assets_str} < ${MIN_NET_ASSETS:,}"}
+
+        # Volume filter
+        if not metadata["avg_volume"] or metadata["avg_volume"] < MIN_AVG_VOLUME:
+            vol_str = f"{metadata['avg_volume']:,}" if metadata["avg_volume"] else "unknown"
+            return {"symbol": symbol, "reason": f"volume {vol_str} < {MIN_AVG_VOLUME:,}"}
+
+        # Passed all filters — assemble the full record.
+        name = metadata.pop("name") or symbol
+        metadata.pop("net_assets")  # already used for filtering; not needed in final tickers.json
+
+        return {
+            "symbol": symbol,
+            "passed": True,
+            "data": {
+                "name":           name,
+                "lev":            detect_leverage(category_id, name),
+                "category":       category_id,
+                "category_label": category_label,
+                **stats,
+                **metadata,
+            },
+        }
+    except Exception as e:
+        return {"symbol": symbol, "reason": f"fetch error: {e}"}
 
 
 def main() -> int:
     os.makedirs("data", exist_ok=True)
+    universe = load_universe()
 
-    # Load existing data as fallback for failed fetches.
-    existing: dict = {}
-    if os.path.exists(OUTPUT_PATH):
-        try:
-            with open(OUTPUT_PATH) as f:
-                existing = json.load(f).get("tickers", {})
-        except Exception:
-            pass
+    final_tickers: dict = {}
+    summary: list[str] = []
 
-    result: dict = {}
-    failures: list[str] = []
+    for cat_id, cat_info in universe["categories"].items():
+        label  = cat_info["label"]
+        target = cat_info["target_count"]
+        candidates = cat_info["candidates"]
 
-    for symbol, meta in TICKERS.items():
-        try:
-            stats = fetch_stats(symbol)
-            try:
-                metadata = fetch_metadata(symbol)
-            except Exception as me:
-                # Metadata failure shouldn't kill the stats fetch.
-                metadata = {"description": "", "inception": None, "expense_ratio": None, "avg_volume": None}
-                print(f"  {symbol:5s}  metadata fetch failed ({me})")
-            result[symbol] = {**meta, **stats, **metadata}
-            print(f"  {symbol:5s}  CAGR={stats['cagr']:6.2f}%  σ={stats['stddev']:5.2f}%  yield={stats['yield']:5.2f}%  2022={stats['ret22']}")
-        except Exception as e:
-            failures.append(symbol)
-            if symbol in existing:
-                result[symbol] = existing[symbol]
-                print(f"  {symbol:5s}  fetch failed — kept previous data ({e})")
+        print(f"\n{label} (target {target} of {len(candidates)} candidates)")
+        print("-" * 64)
+
+        qualified: list = []
+        for symbol in candidates:
+            result = fetch_candidate(symbol, cat_id, label)
+            if result and result.get("passed"):
+                d = result["data"]
+                qualified.append((symbol, d))
+                print(f"  ✓ {symbol:6s}  CAGR={d['cagr']:6.2f}%  vol={d['avg_volume']:>12,}")
             else:
-                result[symbol] = {
-                    **meta,
-                    "cagr": None, "stddev": None, "yield": None, "ret22": None,
-                    "description": "", "inception": None, "expense_ratio": None, "avg_volume": None,
-                    "prices": [],
-                }
-                print(f"  {symbol:5s}  fetch failed and no fallback ({e})")
+                reason = (result or {}).get("reason", "unknown")
+                print(f"  ✗ {symbol:6s}  {reason}")
 
-    # Cash entry is set manually.
-    result["CASH"] = dict(CASH)
+        # Rank by 10-year CAGR (descending). Treat None CAGR as worst.
+        qualified.sort(key=lambda kv: kv[1]["cagr"] if kv[1]["cagr"] is not None else -999, reverse=True)
+        winners = qualified[:target]
+
+        for sym, data in winners:
+            final_tickers[sym] = data
+
+        summary.append(f"  {label:30s}  {len(winners):2d} of {target} target  ({len(qualified)} qualified)")
+
+    # Always include CASH as a known special case.
+    final_tickers["CASH"] = dict(CASH)
 
     payload = {
         "updated": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
-        "tickers": result,
+        "tickers": final_tickers,
     }
 
     with open(OUTPUT_PATH, "w") as f:
         json.dump(payload, f, indent=2)
         f.write("\n")
 
-    print(f"\nWrote {len(result)} tickers to {OUTPUT_PATH}")
-    if failures:
-        print(f"Failures: {', '.join(failures)}")
+    print(f"\n{'='*64}")
+    print(f"Wrote {len(final_tickers)} tickers to {OUTPUT_PATH}")
+    print(f"{'='*64}")
+    for line in summary:
+        print(line)
 
     return 0
 
