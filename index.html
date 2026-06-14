@@ -172,6 +172,8 @@
   .tab-btn.active::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:2px;background:var(--pine);border-radius:2px 2px 0 0}
   .tab-content{display:none}
   .tab-content.active{display:block}
+  .tab-divider{align-self:center;width:4px;height:4px;border-radius:50%;background:var(--line);margin:0 14px;flex-shrink:0}
+  @media(max-width:520px){.tab-divider{margin:0 8px}}
 
   /* simulator */
   .holding{display:grid;grid-template-columns:auto 1fr auto auto;gap:10px;align-items:center;padding:13px 0;border-bottom:1px solid var(--line-soft)}
@@ -216,6 +218,21 @@
   .sim-stat .v{font-family:'Fraunces',serif;font-size:clamp(21px,2.4vw,26px);font-weight:500;letter-spacing:-.01em;color:var(--ink);line-height:1}
   .sim-stat .v.neg{color:var(--ember)}
   .sim-stat .ann,.stat .ann{margin-top:6px;font-size:12px;color:var(--ink-faint);font-weight:500;line-height:1.35}
+
+  /* analyzer */
+  .analyzer-select{width:100%;font-family:inherit;font-size:14.5px;font-weight:600;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:13px 16px;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23928B7C' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:40px}
+  .analyzer-select:focus{outline:none;border-color:var(--pine);box-shadow:0 0 0 3px rgba(30,77,60,.12)}
+  .an-headline{font-family:'Fraunces',serif;font-weight:500;letter-spacing:-.02em;line-height:1.15;font-size:clamp(26px,3.6vw,38px);color:var(--ink);margin-top:28px}
+  .an-meta-row{display:flex;flex-wrap:wrap;align-items:center;margin-top:12px;font-size:13px;color:var(--ink-faint);row-gap:8px}
+  .an-symbol{font-weight:700;color:var(--pine);letter-spacing:.04em;text-transform:uppercase}
+  .an-meta-row .dot{margin:0 12px;color:var(--ink-faint);opacity:.45}
+  .an-meta-item b{color:var(--ink);font-weight:600;margin-left:5px}
+  .an-description{color:var(--ink-soft);font-size:14.5px;line-height:1.6;margin-top:20px;max-width:74ch}
+  .an-actions{margin-top:26px;display:flex;gap:12px;flex-wrap:wrap}
+  .an-use-btn{font-family:inherit;font-size:14px;font-weight:600;background:var(--pine);color:#fff;border:none;border-radius:11px;padding:12px 22px;cursor:pointer;transition:background .15s}
+  .an-use-btn:hover{background:var(--pine-bright)}
+  .an-use-btn:focus{outline:none;box-shadow:0 0 0 3px rgba(30,77,60,.18)}
+  .analyzer-empty{margin-top:32px;padding:52px 24px;text-align:center;color:var(--ink-faint);font-size:14px;background:var(--paper);border-radius:14px}
 
   .warning{margin-top:22px;padding:14px 16px;background:var(--ember-soft);border:1px solid rgba(192,83,28,.25);border-radius:12px;font-size:12.5px;color:#7A3210;line-height:1.6}
   .warning b{font-weight:700;color:var(--ember)}
@@ -303,6 +320,8 @@
       <button class="tab-btn active" data-tab="calc-tab">Calculator</button>
       <button class="tab-btn" data-tab="sim-tab">Portfolio simulator</button>
       <button class="tab-btn" data-tab="mc-tab">Monte Carlo</button>
+      <span class="tab-divider" aria-hidden="true"></span>
+      <button class="tab-btn" data-tab="analyzer-tab">Analyzer</button>
     </div>
     <button class="sync-toggle on" id="syncBtn" title="When linked: assets ↔ portfolio value, and the simulator's CAGR feeds the calculator's post-retirement return">
       <span class="sync-dot"></span>
@@ -558,6 +577,53 @@
     <div id="mc-worst-table-wrap" style="display:none;margin-top:6px"></div>
   </div>
   </div><!-- /mc-tab -->
+
+  <div id="analyzer-tab" class="tab-content">
+    <div class="panel panel-pad">
+      <div class="panel-title">Research a ticker</div>
+
+      <div class="field">
+        <div class="field-head"><label for="anSel">Choose a fund</label><span class="hint">explore the data behind each ticker</span></div>
+        <select id="anSel" class="analyzer-select">
+          <option value="">— select a ticker —</option>
+        </select>
+      </div>
+
+      <div id="analyzer-detail" style="display:none">
+        <div class="an-headline" id="an-name">—</div>
+        <div class="an-meta-row">
+          <span class="an-symbol" id="an-symbol">—</span>
+          <span class="dot">·</span>
+          <span class="an-meta-item">Inception <b id="an-inception">—</b></span>
+          <span class="dot">·</span>
+          <span class="an-meta-item">Expense ratio <b id="an-expense">—</b></span>
+          <span class="dot">·</span>
+          <span class="an-meta-item">Avg daily volume <b id="an-volume">—</b></span>
+        </div>
+
+        <p class="an-description" id="an-description">—</p>
+
+        <div class="sim-stats">
+          <div class="sim-stat"><div class="k">Expected return (CAGR)</div><div class="v" id="an-cagr">—</div><div class="ann">10-year annualized</div></div>
+          <div class="sim-stat"><div class="k">Volatility (annualized)</div><div class="v" id="an-vol">—</div><div class="ann">year-to-year swing</div></div>
+          <div class="sim-stat"><div class="k">Current yield (TTM)</div><div class="v" id="an-yield">—</div><div class="ann">trailing 12 months</div></div>
+          <div class="sim-stat"><div class="k">2022 stress test</div><div class="v" id="an-stress">—</div><div class="ann">a known bad year</div></div>
+        </div>
+
+        <div class="an-actions">
+          <button id="anUseBtn" class="an-use-btn">Add to portfolio →</button>
+        </div>
+
+        <p class="footnote" style="margin-top:18px">
+          <b>Read the data carefully.</b> Funds with less than several years of trading history may show CAGR and yield values that don't reflect full market-cycle behavior. Leveraged ETFs, option-income strategies, and BDCs in particular tend to behave differently in extended drawdowns than their recent history suggests.
+        </p>
+      </div>
+
+      <div id="analyzer-empty" class="analyzer-empty">
+        Choose a fund above to see its full data.
+      </div>
+    </div>
+  </div><!-- /analyzer-tab -->
 </div>
 
 <script>
@@ -1449,6 +1515,81 @@ document.querySelectorAll('.mc-mode').forEach(btn => {
   btn.addEventListener('click', () => applyMcMode(btn.dataset.mode));
 });
 
+// analyzer
+function renderAnalyzerSelect(){
+  const sel = $('anSel');
+  if(!sel) return;
+  const currentValue = sel.value;
+  sel.innerHTML = '<option value="">— select a ticker —</option>';
+  const entries = Object.entries(TICKERS).filter(([sym]) => sym !== 'CASH');
+  entries.sort((a, b) => a[0].localeCompare(b[0]));
+  entries.forEach(([sym, t]) => {
+    const opt = document.createElement('option');
+    opt.value = sym;
+    opt.textContent = `${sym} — ${t.name}`;
+    sel.appendChild(opt);
+  });
+  if(currentValue && TICKERS[currentValue]) sel.value = currentValue;
+}
+
+function formatVolume(n){
+  if(n == null) return '—';
+  if(n >= 1e9) return (n/1e9).toFixed(1) + 'B';
+  if(n >= 1e6) return (n/1e6).toFixed(1) + 'M';
+  if(n >= 1e3) return (n/1e3).toFixed(0) + 'K';
+  return n.toLocaleString();
+}
+
+function showAnalyzer(symbol){
+  const detail = $('analyzer-detail');
+  const empty  = $('analyzer-empty');
+  if(!detail || !empty) return;
+
+  const t = symbol ? TICKERS[symbol] : null;
+  if(!t){
+    detail.style.display = 'none';
+    empty.style.display  = 'block';
+    return;
+  }
+
+  detail.style.display = 'block';
+  empty.style.display  = 'none';
+
+  $('an-name').textContent      = t.name;
+  $('an-symbol').textContent    = symbol;
+  $('an-inception').textContent = t.inception || '—';
+  $('an-expense').textContent   = (t.expense_ratio != null) ? t.expense_ratio.toFixed(2) + '%' : '—';
+  $('an-volume').textContent    = formatVolume(t.avg_volume);
+  $('an-description').textContent = t.description
+    || 'No description available for this fund yet — run the data pipeline to populate fund metadata.';
+
+  const pct = v => (v == null) ? '—' : v.toFixed(2) + '%';
+
+  const cagrEl = $('an-cagr');
+  cagrEl.textContent = pct(t.cagr);
+  cagrEl.classList.toggle('neg', t.cagr != null && t.cagr < 0);
+
+  $('an-vol').textContent   = pct(t.stddev);
+  $('an-yield').textContent = pct(t.yield);
+
+  const stressEl = $('an-stress');
+  stressEl.textContent = pct(t.ret22);
+  stressEl.classList.toggle('neg', t.ret22 != null && t.ret22 < 0);
+}
+
+$('anSel').addEventListener('change', e => showAnalyzer(e.target.value));
+
+$('anUseBtn').addEventListener('click', () => {
+  const sym = $('anSel').value;
+  if(!sym) return;
+  // Switch to the Portfolio simulator tab
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === 'sim-tab'));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.toggle('active', c.id === 'sim-tab'));
+  // Add to portfolio via the existing add flow
+  $('addSel').value = sym;
+  $('addBtn').click();
+});
+
 // tabs
 document.querySelectorAll('.tab-btn').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -1474,6 +1615,7 @@ $('syncBtn').addEventListener('click', () => {
 renderHoldings();
 renderAddSelect();
 recomputeSim();
+renderAnalyzerSelect();
 
 // Try to refresh ticker stats from the data pipeline (data/tickers.json).
 // Falls back silently to the hardcoded TICKERS above if the fetch fails
@@ -1492,6 +1634,10 @@ fetch('data/tickers.json', {cache: 'no-cache'})
         yield:  t.yield,
         ret22:  t.ret22,
         lev:    !!t.lev,
+        description:   t.description || '',
+        inception:     t.inception || null,
+        expense_ratio: t.expense_ratio != null ? t.expense_ratio : null,
+        avg_volume:    t.avg_volume    != null ? t.avg_volume    : null,
       };
       updated++;
     });
@@ -1499,6 +1645,10 @@ fetch('data/tickers.json', {cache: 'no-cache'})
       renderHoldings();
       renderAddSelect();
       recomputeSim();
+      renderAnalyzerSelect();
+      // If the analyzer is currently displaying a ticker, refresh its data
+      const currentSel = $('anSel');
+      if(currentSel && currentSel.value) showAnalyzer(currentSel.value);
     }
   })
   .catch(() => { /* silent fallback to hardcoded data */ });

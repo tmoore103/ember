@@ -1,0 +1,372 @@
+{
+  "as_of": "2026-06-13",
+  "data_through": "2026-05-01",
+  "true_inflation_yoy": 4.52,
+  "bls_cpi_yoy": 4.17,
+  "bls_cpi_as_of": "2026-05-01",
+  "gap": 0.35,
+  "components": [
+    {
+      "name": "Shelter",
+      "weight": 0.33,
+      "yoy": 0.66,
+      "contribution": 0.22,
+      "source": "S&P/Case-Shiller U.S. National Home Price Index",
+      "note": "Uses real home prices instead of BLS's lagging Owners' Equivalent Rent.",
+      "as_of": "2026-03-01"
+    },
+    {
+      "name": "Food",
+      "weight": 0.14,
+      "yoy": 3.08,
+      "contribution": 0.43,
+      "source": "BLS CPI: Food (FRED: CPIUFDSL)",
+      "note": "All food (at home and away from home), urban consumers.",
+      "as_of": "2026-05-01"
+    },
+    {
+      "name": "Energy",
+      "weight": 0.07,
+      "yoy": 22.97,
+      "contribution": 1.61,
+      "source": "BLS CPI: Energy (FRED: CPIENGSL)",
+      "note": "Gasoline, electricity, natural gas, heating oil.",
+      "as_of": "2026-05-01"
+    },
+    {
+      "name": "Transportation",
+      "weight": 0.16,
+      "yoy": 8.95,
+      "contribution": 1.43,
+      "source": "BLS CPI: Transportation (FRED: CPITRNSL)",
+      "note": "Vehicles, fuel, maintenance, public transit, airfare.",
+      "as_of": "2026-05-01"
+    },
+    {
+      "name": "Medical care",
+      "weight": 0.08,
+      "yoy": 2.59,
+      "contribution": 0.21,
+      "source": "BLS CPI: Medical Care (FRED: CPIMEDSL)",
+      "note": "Insurance premiums, hospital services, prescription drugs.",
+      "as_of": "2026-05-01"
+    },
+    {
+      "name": "All other (core ex-food, energy)",
+      "weight": 0.22,
+      "yoy": 2.82,
+      "contribution": 0.62,
+      "source": "BLS Core CPI (FRED: CPILFESL)",
+      "note": "Apparel, recreation, education, communication, services.",
+      "as_of": "2026-05-01"
+    }
+  ],
+  "history": [
+    {
+      "date": "2021-05",
+      "ember": 11.82,
+      "bls": 4.92
+    },
+    {
+      "date": "2021-06",
+      "ember": 12.55,
+      "bls": 5.3
+    },
+    {
+      "date": "2021-07",
+      "ember": 12.59,
+      "bls": 5.25
+    },
+    {
+      "date": "2021-08",
+      "ember": 12.49,
+      "bls": 5.15
+    },
+    {
+      "date": "2021-09",
+      "ember": 12.4,
+      "bls": 5.35
+    },
+    {
+      "date": "2021-10",
+      "ember": 13.24,
+      "bls": 6.24
+    },
+    {
+      "date": "2021-11",
+      "ember": 14.12,
+      "bls": 6.9
+    },
+    {
+      "date": "2021-12",
+      "ember": 14.11,
+      "bls": 7.17
+    },
+    {
+      "date": "2022-01",
+      "ember": 14.14,
+      "bls": 7.56
+    },
+    {
+      "date": "2022-02",
+      "ember": 14.53,
+      "bls": 7.94
+    },
+    {
+      "date": "2022-03",
+      "ember": 15.58,
+      "bls": 8.57
+    },
+    {
+      "date": "2022-04",
+      "ember": 15.0,
+      "bls": 8.23
+    },
+    {
+      "date": "2022-05",
+      "ember": 15.08,
+      "bls": 8.54
+    },
+    {
+      "date": "2022-06",
+      "ember": 15.06,
+      "bls": 8.98
+    },
+    {
+      "date": "2022-07",
+      "ember": 13.26,
+      "bls": 8.46
+    },
+    {
+      "date": "2022-08",
+      "ember": 11.49,
+      "bls": 8.22
+    },
+    {
+      "date": "2022-09",
+      "ember": 10.44,
+      "bls": 8.19
+    },
+    {
+      "date": "2022-10",
+      "ember": 9.39,
+      "bls": 7.76
+    },
+    {
+      "date": "2022-11",
+      "ember": 7.81,
+      "bls": 7.12
+    },
+    {
+      "date": "2022-12",
+      "ember": 5.98,
+      "bls": 6.4
+    },
+    {
+      "date": "2023-01",
+      "ember": 5.32,
+      "bls": 6.33
+    },
+    {
+      "date": "2023-02",
+      "ember": 4.17,
+      "bls": 5.96
+    },
+    {
+      "date": "2023-03",
+      "ember": 2.15,
+      "bls": 4.92
+    },
+    {
+      "date": "2023-04",
+      "ember": 2.04,
+      "bls": 4.95
+    },
+    {
+      "date": "2023-05",
+      "ember": 0.99,
+      "bls": 4.13
+    },
+    {
+      "date": "2023-06",
+      "ember": -0.03,
+      "bls": 3.07
+    },
+    {
+      "date": "2023-07",
+      "ember": 0.74,
+      "bls": 3.29
+    },
+    {
+      "date": "2023-08",
+      "ember": 2.39,
+      "bls": 3.72
+    },
+    {
+      "date": "2023-09",
+      "ember": 3.01,
+      "bls": 3.69
+    },
+    {
+      "date": "2023-10",
+      "ember": 2.71,
+      "bls": 3.25
+    },
+    {
+      "date": "2023-11",
+      "ember": 2.79,
+      "bls": 3.13
+    },
+    {
+      "date": "2023-12",
+      "ember": 3.47,
+      "bls": 3.32
+    },
+    {
+      "date": "2024-01",
+      "ember": 3.3,
+      "bls": 3.09
+    },
+    {
+      "date": "2024-02",
+      "ember": 3.71,
+      "bls": 3.16
+    },
+    {
+      "date": "2024-03",
+      "ember": 4.28,
+      "bls": 3.49
+    },
+    {
+      "date": "2024-04",
+      "ember": 4.15,
+      "bls": 3.36
+    },
+    {
+      "date": "2024-05",
+      "ember": 3.93,
+      "bls": 3.24
+    },
+    {
+      "date": "2024-06",
+      "ember": 3.35,
+      "bls": 2.97
+    },
+    {
+      "date": "2024-07",
+      "ember": 3.16,
+      "bls": 2.94
+    },
+    {
+      "date": "2024-08",
+      "ember": 2.29,
+      "bls": 2.61
+    },
+    {
+      "date": "2024-09",
+      "ember": 1.94,
+      "bls": 2.43
+    },
+    {
+      "date": "2024-10",
+      "ember": 2.1,
+      "bls": 2.58
+    },
+    {
+      "date": "2024-11",
+      "ember": 2.38,
+      "bls": 2.72
+    },
+    {
+      "date": "2024-12",
+      "ember": 2.84,
+      "bls": 2.87
+    },
+    {
+      "date": "2025-01",
+      "ember": 3.19,
+      "bls": 2.99
+    },
+    {
+      "date": "2025-02",
+      "ember": 2.8,
+      "bls": 2.8
+    },
+    {
+      "date": "2025-03",
+      "ember": 1.98,
+      "bls": 2.38
+    },
+    {
+      "date": "2025-04",
+      "ember": 1.67,
+      "bls": 2.33
+    },
+    {
+      "date": "2025-05",
+      "ember": 1.58,
+      "bls": 2.38
+    },
+    {
+      "date": "2025-06",
+      "ember": 1.87,
+      "bls": 2.68
+    },
+    {
+      "date": "2025-07",
+      "ember": 1.85,
+      "bls": 2.74
+    },
+    {
+      "date": "2025-08",
+      "ember": 2.09,
+      "bls": 2.94
+    },
+    {
+      "date": "2025-09",
+      "ember": 2.29,
+      "bls": 3.02
+    },
+    {
+      "date": "2025-11",
+      "ember": 2.11,
+      "bls": 2.7
+    },
+    {
+      "date": "2025-12",
+      "ember": 1.82,
+      "bls": 2.65
+    },
+    {
+      "date": "2026-01",
+      "ember": 1.32,
+      "bls": 2.39
+    },
+    {
+      "date": "2026-02",
+      "ember": 1.45,
+      "bls": 2.43
+    },
+    {
+      "date": "2026-03",
+      "ember": 3.11,
+      "bls": 3.29
+    },
+    {
+      "date": "2026-04",
+      "ember": 3.8,
+      "bls": 3.78
+    },
+    {
+      "date": "2026-05",
+      "ember": 4.52,
+      "bls": 4.17
+    }
+  ],
+  "methodology": {
+    "summary": "Ember True Inflation is a weighted average of year-over-year price changes across six consumer spending categories. Weights are BLS Consumer Expenditure Survey derived (the same source Truflation uses). The key methodological choice: we use S&P/Case-Shiller home prices for the shelter component instead of BLS's Owners' Equivalent Rent (OER), which historically lags real housing market movements by 12-18 months. This is what makes Ember's number diverge from BLS CPI in the direction of what people actually experience.",
+    "weights_source": "BLS Consumer Expenditure Survey (CEX), 2024 weights",
+    "data_sources": "Federal Reserve Economic Data (FRED), St. Louis Fed",
+    "update_frequency": "Daily. Component data updates monthly; we recompute daily to pick up any FRED revisions."
+  }
+}

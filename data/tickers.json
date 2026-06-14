@@ -1,341 +1,509 @@
 {
-  "updated": "2026-06-08T11:03:13.187701Z",
+  "updated": "2026-06-14T21:36:32.470528Z",
   "tickers": {
     "VOO": {
       "name": "Vanguard S&P 500",
       "lev": false,
-      "cagr": 15.26,
-      "stddev": 18.02,
+      "cagr": 15.48,
+      "stddev": 18.03,
       "yield": 1.05,
-      "ret22": -18.67
+      "ret22": -18.67,
+      "description": "The fund manager employs an indexing investment approach designed to track the performance of the Standard & Poor's 500 Index, a widely recognized benchmark of U.S. stock market performance that is dominated by the stocks of large U.S. companies. The advisor attempts to replicate the target index by investing all, or substantially all, of its assets in the stocks that make up the index,...",
+      "inception": "2010-09-07",
+      "expense_ratio": null,
+      "avg_volume": 8505611
     },
     "VTI": {
       "name": "Vanguard Total US Market",
       "lev": false,
-      "cagr": 14.74,
-      "stddev": 18.32,
-      "yield": 1.04,
-      "ret22": -20.03
+      "cagr": 15.01,
+      "stddev": 18.33,
+      "yield": 1.03,
+      "ret22": -20.03,
+      "description": "The fund manager employs an indexing investment approach designed to track the performance of the CRSP U.S. Total Market Index (the \u201cTarget Index\u201d), which represents 100% of the investable U.S. stock market, as determined by the index provider. Under normal circumstances, the fund invests at least 80% of its net assets, plus the amount of any borrowings for investment purposes, in the stocks...",
+      "inception": "2001-05-24",
+      "expense_ratio": null,
+      "avg_volume": 3899101
     },
     "SPY": {
       "name": "SPDR S&P 500",
       "lev": false,
-      "cagr": 15.18,
-      "stddev": 17.95,
+      "cagr": 15.41,
+      "stddev": 17.96,
       "yield": 1.0,
-      "ret22": -18.65
+      "ret22": -18.65,
+      "description": "The trust seeks to achieve its investment objective by holding a portfolio of the common stocks that are included in the index (the \u201cPortfolio\u201d), with the weight of each stock in the Portfolio substantially corresponding to the weight of such stock in the index.",
+      "inception": "1993-01-22",
+      "expense_ratio": null,
+      "avg_volume": 64329955
     },
     "QQQ": {
       "name": "Invesco Nasdaq 100",
       "lev": false,
-      "cagr": 21.23,
-      "stddev": 22.34,
-      "yield": 0.4,
-      "ret22": -33.22
+      "cagr": 21.78,
+      "stddev": 22.38,
+      "yield": 0.39,
+      "ret22": -33.22,
+      "description": "To maintain the correspondence between the composition and weights of the securities in the trust (the \"securities\") and the stocks in the NASDAQ-100 Index\u00ae, the adviser adjusts the securities from time to time to conform to periodic changes in the identity and/or relative weights of index securities. The composition and weighting of the securities portion of a portfolio deposit are also...",
+      "inception": "1999-03-10",
+      "expense_ratio": null,
+      "avg_volume": 49787677
     },
     "QQQM": {
       "name": "Invesco Nasdaq 100 (low-cost)",
       "lev": false,
-      "cagr": 17.49,
-      "stddev": 22.2,
-      "yield": 0.44,
-      "ret22": -33.21
+      "cagr": 17.9,
+      "stddev": 22.23,
+      "yield": 0.43,
+      "ret22": -33.21,
+      "description": "The fund generally will invest at least 90% of its total assets in the securities that comprise the underlying index. The underlying index weights its component securities using a \u201cmodified market capitalization-weighted\u201d methodology, which takes into account the market value of the component securities subject to certain weight restrictions pursuant to the index provider\u2019s methodology. It is...",
+      "inception": "2020-10-13",
+      "expense_ratio": null,
+      "avg_volume": 4127936
     },
     "VFIAX": {
       "name": "Vanguard 500 Index Admiral",
       "lev": false,
-      "cagr": 15.23,
-      "stddev": 18.08,
+      "cagr": 15.47,
+      "stddev": 18.1,
       "yield": 1.04,
-      "ret22": -18.68
+      "ret22": -18.68,
+      "description": "The fund manager employs an indexing investment approach designed to track the performance of the Standard & Poor's 500 Index, a widely recognized benchmark of U.S. stock market performance that is dominated by the stocks of large U.S. companies. The advisor attempts to replicate the target index by investing all, or substantially all, of its assets in the stocks that make up the index,...",
+      "inception": "2010-09-07",
+      "expense_ratio": 0.49,
+      "avg_volume": 0
     },
     "SPYG": {
       "name": "SPDR S&P 500 Growth",
       "lev": false,
-      "cagr": 17.71,
-      "stddev": 20.68,
+      "cagr": 17.91,
+      "stddev": 20.7,
       "yield": 0.48,
-      "ret22": -29.95
+      "ret22": -29.95,
+      "description": "The fund generally invests substantially all, but at least 80%, of its total assets in the securities comprising the index. The index measures the performance of the large-capitalization growth segment of the U.S. equity market. It is non-diversified.",
+      "inception": "2000-09-25",
+      "expense_ratio": null,
+      "avg_volume": 3654687
     },
     "VGT": {
       "name": "Vanguard Information Technology",
       "lev": false,
-      "cagr": 24.84,
-      "stddev": 24.68,
+      "cagr": 25.21,
+      "stddev": 24.72,
       "yield": 0.33,
-      "ret22": -30.28
+      "ret22": -30.28,
+      "description": "The fund employs an indexing investment approach designed to track the performance of the index, an index made up of stocks of large, mid-size, and small U.S. companies within the information technology sector, as classified under the GICS. The Advisor attempts to replicate the target index by seeking to invest all of its assets in the stocks that make up the index, in order to hold each stock...",
+      "inception": "2004-01-26",
+      "expense_ratio": null,
+      "avg_volume": 4895353
     },
     "SMH": {
       "name": "VanEck Semiconductor",
       "lev": false,
-      "cagr": 36.18,
-      "stddev": 32.7,
-      "yield": 0.19,
-      "ret22": -34.97
+      "cagr": 37.49,
+      "stddev": 32.82,
+      "yield": 0.18,
+      "ret22": -34.97,
+      "description": "The fund normally invests at least 80% of its total assets in securities that comprise the fund's benchmark index. The index includes common stocks and depositary receipts of U.S. exchange-listed companies in the semiconductor industry. Such companies may include medium-capitalization companies and foreign companies that are listed on a U.S. exchange. The fund is non-diversified.",
+      "inception": "2011-12-20",
+      "expense_ratio": null,
+      "avg_volume": 10003239
     },
     "SOXX": {
       "name": "iShares Semiconductor",
       "lev": false,
-      "cagr": 34.06,
-      "stddev": 33.6,
-      "yield": 0.31,
-      "ret22": -36.35
+      "cagr": 35.56,
+      "stddev": 33.77,
+      "yield": 0.28,
+      "ret22": -36.35,
+      "description": "The fund generally will invest at least 80% of its assets in the component securities of its index and in investments that have economic characteristics that are substantially identical to the component securities of its index and may invest up to 20% of its assets in certain futures, options and swap contracts, cash and cash equivalents. The fund is non-diversified.",
+      "inception": "2001-07-10",
+      "expense_ratio": null,
+      "avg_volume": 8519085
     },
     "XLP": {
       "name": "Consumer Staples Select Sector SPDR",
       "lev": false,
-      "cagr": 7.36,
-      "stddev": 14.74,
-      "yield": 2.61,
-      "ret22": -0.8
+      "cagr": 7.65,
+      "stddev": 14.75,
+      "yield": 2.53,
+      "ret22": -0.8,
+      "description": "In seeking to track the performance of the index, the fund employs a replication strategy. It generally invests substantially all, but at least 95%, of its total assets in the securities comprising the index. The index includes companies that have been identified as Consumer Staples companies by the GICS\u00ae. It is non-diversified.",
+      "inception": "1998-12-16",
+      "expense_ratio": null,
+      "avg_volume": 13459188
     },
     "TQQQ": {
       "name": "ProShares UltraPro QQQ (3x)",
       "lev": true,
-      "cagr": 42.76,
-      "stddev": 66.11,
-      "yield": 0.43,
-      "ret22": -79.68
+      "cagr": 44.58,
+      "stddev": 66.22,
+      "yield": 0.41,
+      "ret22": -79.68,
+      "description": "The fund invests in financial instruments that ProShare Advisors believes, in combination, should produce daily returns consistent with the Daily Target. The index is designed to measure the performance of 100 of the largest Nasdaq-listed non-financial companies. Under normal circumstances, the fund will obtain leveraged exposure to at least 80% of its total assets in components of the index...",
+      "inception": "2010-02-09",
+      "expense_ratio": null,
+      "avg_volume": 85897658
     },
     "UPRO": {
       "name": "ProShares UltraPro S&P 500 (3x)",
       "lev": true,
-      "cagr": 28.99,
-      "stddev": 53.79,
-      "yield": 0.73,
-      "ret22": -57.59
+      "cagr": 29.71,
+      "stddev": 53.83,
+      "yield": 0.72,
+      "ret22": -57.59,
+      "description": "The fund invests in financial instruments that ProShare Advisors believes, in combination, should produce daily returns consistent with the Daily Target. The index is designed to measure the performance of 500 of the largest companies listed and domiciled in the U.S. Under normal circumstances, the fund will obtain leveraged exposure to at least 80% of its total assets in components of the...",
+      "inception": "2009-06-23",
+      "expense_ratio": null,
+      "avg_volume": 3550466
     },
     "USD": {
       "name": "ProShares Ultra Semiconductors (2x)",
       "lev": true,
-      "cagr": 58.32,
-      "stddev": 69.45,
-      "yield": 0.27,
-      "ret22": -69.75
+      "cagr": 60.3,
+      "stddev": 69.61,
+      "yield": 0.25,
+      "ret22": -69.75,
+      "description": "The fund invests in financial instruments that ProShare Advisors believes, in combination, should produce daily returns consistent with the Daily Target. The index is designed to measure the stock performance of U.S. companies in the semiconductors sub-sector. Under normal circumstances, the fund will obtain leveraged exposure to at least 80% of its total assets in components of the index or...",
+      "inception": "2007-01-30",
+      "expense_ratio": null,
+      "avg_volume": 1025441
     },
     "SOXL": {
       "name": "Direxion Daily Semiconductor Bull (3x)",
       "lev": true,
-      "cagr": 58.58,
-      "stddev": 99.53,
-      "yield": 0.04,
-      "ret22": -86.48
+      "cagr": 63.19,
+      "stddev": 99.99,
+      "yield": 0.03,
+      "ret22": -86.48,
+      "description": "The fund invests at least 80% of its net assets in financial instruments, such as swap agreements, securities of the index, and ETFs that track the index, that, in combination, provide 3X daily leveraged exposure to the index, consistent with the fund's investment objective. The index is a rules-based, modified float-adjusted market capitalization-weighted index that tracks the performance of...",
+      "inception": "2010-03-11",
+      "expense_ratio": null,
+      "avg_volume": 74538409
     },
     "RETL": {
       "name": "Direxion Daily Retail Bull (3x)",
       "lev": true,
-      "cagr": -5.76,
-      "stddev": 79.74,
-      "yield": 0.66,
-      "ret22": -81.54
+      "cagr": -3.68,
+      "stddev": 79.8,
+      "yield": 0.56,
+      "ret22": -81.54,
+      "description": "The fund invests at least 80% of its net assets in financial instruments, such as swap agreements, securities of the index, and ETFs that track the index, that, in combination, provide 3X daily leveraged exposure to the index, consistent with the fund's investment objective. The index is a modified equal-weighted index that is designed to measure performance of the stocks comprising the S&P...",
+      "inception": "2010-07-14",
+      "expense_ratio": null,
+      "avg_volume": 720387
     },
     "NAIL": {
       "name": "Direxion Daily Homebuilders Bull (3x)",
       "lev": true,
-      "cagr": 3.95,
-      "stddev": 89.19,
-      "yield": 1.02,
-      "ret22": -73.19
+      "cagr": 5.64,
+      "stddev": 89.35,
+      "yield": 0.91,
+      "ret22": -73.19,
+      "description": "The fund invests at least 80% of its net assets in financial instruments, that, in combination, provide 3X daily leveraged exposure to the index, consistent with the fund's investment objective. The index measures U.S. companies in the home construction sector and defines homebuilder & supplier companies as those that provide a wide range of products and services related to homebuilding,...",
+      "inception": "2015-08-19",
+      "expense_ratio": null,
+      "avg_volume": 1737268
     },
     "DFEN": {
       "name": "Direxion Daily Aerospace & Defense (3x)",
       "lev": true,
-      "cagr": 15.78,
-      "stddev": 96.55,
-      "yield": 8.26,
-      "ret22": 4.26
+      "cagr": 16.34,
+      "stddev": 96.62,
+      "yield": 7.89,
+      "ret22": 4.26,
+      "description": "The fund invests at least 80% of its net assets (plus borrowing for investment purposes) in financial instruments, such as swap agreements, securities of the index, and exchange-traded funds (\"ETFs\") that track the index, that, in combination, provide 3X daily leveraged exposure to the index, consistent with the fund's investment objective. The index attempts to measure the performance of the...",
+      "inception": "2017-05-03",
+      "expense_ratio": null,
+      "avg_volume": 265755
     },
     "FNGU": {
       "name": "MicroSectors FANG+ (3x ETN)",
       "lev": true,
-      "cagr": 8.75,
-      "stddev": 79.88,
+      "cagr": 6.36,
+      "stddev": 80.04,
       "yield": 0.0,
-      "ret22": null
+      "ret22": null,
+      "description": "",
+      "inception": null,
+      "expense_ratio": null,
+      "avg_volume": 6601566
     },
     "SCHD": {
       "name": "Schwab US Dividend Equity",
       "lev": false,
-      "cagr": 12.69,
+      "cagr": 12.93,
       "stddev": 16.72,
-      "yield": 3.27,
-      "ret22": -3.23
+      "yield": 3.21,
+      "ret22": -3.23,
+      "description": "To pursue its goal, the fund generally invests in stocks that are included in the index. The index is designed to measure the performance of high dividend yielding stocks issued by U.S. companies that have a record of consistently paying dividends, selected for fundamental strength relative to their peers, based on financial ratios. The fund will invest at least 90% of its net assets in these...",
+      "inception": "2011-10-20",
+      "expense_ratio": null,
+      "avg_volume": 21928717
     },
     "VYM": {
       "name": "Vanguard High Dividend Yield",
       "lev": false,
-      "cagr": 11.69,
-      "stddev": 16.34,
-      "yield": 2.22,
-      "ret22": -0.9
+      "cagr": 11.95,
+      "stddev": 16.35,
+      "yield": 2.19,
+      "ret22": -0.9,
+      "description": "The fund employs an indexing investment approach designed to track the performance of the the Target Index, which consists of common stocks of companies that pay dividends that generally are higher than average (excluding real estate investment trusts (\u201cREITs\u201d)). Under normal circumstances, it invests at least 80% of its net assets, plus the amount of any borrowings for investment purposes, in...",
+      "inception": "2006-11-10",
+      "expense_ratio": null,
+      "avg_volume": 1294642
     },
     "SPYD": {
       "name": "SPDR S&P 500 High Dividend",
       "lev": false,
-      "cagr": 8.55,
+      "cagr": 8.94,
       "stddev": 19.79,
-      "yield": 4.15,
-      "ret22": -1.97
+      "yield": 4.05,
+      "ret22": -1.97,
+      "description": "Under normal market conditions, the fund generally invests substantially all, but at least 80%, of its total assets in the securities comprising the index. The index is designed to measure the performance of 80 high dividend-yielding companies within the S&P 500\u00ae Index. The S&P 500 Index focuses on the large capitalization U.S. equity market, including common stock and real estate investment...",
+      "inception": "2015-10-21",
+      "expense_ratio": null,
+      "avg_volume": 1351303
     },
     "JEPI": {
       "name": "JPMorgan Equity Premium Income",
       "lev": false,
-      "cagr": 10.88,
-      "stddev": 10.79,
-      "yield": 8.26,
-      "ret22": -3.06
+      "cagr": 11.01,
+      "stddev": 10.8,
+      "yield": 8.18,
+      "ret22": -3.06,
+      "description": "The fund seeks to achieve this objective by (1) creating an actively managed portfolio of equity securities and (2) through equity-linked notes (ELNs),selling call options with exposure to the fund\u2019s primary benchmark, the Standard & Poor\u2019s 500 Total Return Index (the Benchmark). The resulting Fund is designed to provide investors with total return through capital appreciation and income,...",
+      "inception": "2020-05-20",
+      "expense_ratio": null,
+      "avg_volume": 5662093
     },
     "JEPQ": {
       "name": "JPMorgan Nasdaq Equity Premium Income",
       "lev": false,
-      "cagr": 15.64,
-      "stddev": 16.66,
-      "yield": 10.39,
-      "ret22": -12.89
+      "cagr": 16.02,
+      "stddev": 16.72,
+      "yield": 10.22,
+      "ret22": -12.89,
+      "description": "The fund seeks to achieve this objective by (1) creating an actively managed portfolio of equity securities comprised significantly of those included in the fund\u2019s primary benchmark, the Nasdaq-100 Index\u00ae (the Benchmark), and (2) through equity-linked notes (ELNs), selling call options with exposure to the Benchmark. It is non-diversified.",
+      "inception": "2022-05-03",
+      "expense_ratio": null,
+      "avg_volume": 7069455
     },
     "QYLD": {
       "name": "Global X Nasdaq-100 Covered Call",
       "lev": false,
-      "cagr": 9.54,
-      "stddev": 15.5,
-      "yield": 11.68,
-      "ret22": -19.43
+      "cagr": 9.78,
+      "stddev": 15.53,
+      "yield": 11.49,
+      "ret22": -19.43,
+      "description": "The fund will invest at least 80% of its total assets in the securities of the underlying index. The CBOE NASDAQ-100\u00ae BuyWrite Index is a benchmark index that measures the performance of a theoretical portfolio that holds a portfolio of the stocks included in the NASDAQ-100\u00ae Index, and \"writes\" (or sells) a succession of one-month at-the-money NASDAQ-100\u00ae Index covered call options. It is...",
+      "inception": "2013-12-11",
+      "expense_ratio": null,
+      "avg_volume": 7616352
     },
     "QQQI": {
       "name": "NEOS Nasdaq-100 High Income",
       "lev": false,
-      "cagr": 20.33,
-      "stddev": 17.25,
-      "yield": 13.79,
-      "ret22": null
+      "cagr": 21.1,
+      "stddev": 17.36,
+      "yield": 13.54,
+      "ret22": null,
+      "description": "The fund is an actively-managed exchange-traded fund (\u201cETF\u201d) that seeks to achieve its investment objective by investing in a portfolio of stocks that make up the Nasdaq-100\u00ae Index and a call options strategy, that consists of written (sold) call options on the Nasdaq-100\u00ae Index. Under normal circumstances, at least 80% of the fund\u2019s net assets, plus borrowings for investment purposes, will be...",
+      "inception": "2024-01-29",
+      "expense_ratio": null,
+      "avg_volume": 6522417
     },
     "NVDY": {
       "name": "YieldMax NVDA Option Income",
       "lev": false,
-      "cagr": 59.78,
-      "stddev": 38.31,
-      "yield": 65.45,
-      "ret22": null
+      "cagr": 59.4,
+      "stddev": 38.26,
+      "yield": 66.88,
+      "ret22": null,
+      "description": "The fund will employ its investment strategy as it relates to NVDA regardless of whether there are periods of adverse market, economic, or other conditions and will not take temporary defensive positions during such periods. The fund is non-diversified.",
+      "inception": "2023-05-10",
+      "expense_ratio": null,
+      "avg_volume": 4450192
     },
     "SVOL": {
       "name": "Simplify Volatility Premium",
       "lev": false,
-      "cagr": 7.24,
-      "stddev": 21.95,
-      "yield": 22.31,
-      "ret22": -6.47
+      "cagr": 7.32,
+      "stddev": 21.93,
+      "yield": 22.19,
+      "ret22": -6.47,
+      "description": "In pursuing its investment objective, the fund primarily purchases or sells futures contracts, call options, and put options on VIX futures. The fund holds cash, cash-like instruments or high-quality fixed income securities (collectively, \u201cCollateral\u201d).",
+      "inception": "2021-05-12",
+      "expense_ratio": null,
+      "avg_volume": 350904
     },
     "VNQ": {
       "name": "Vanguard Real Estate (REITs)",
       "lev": false,
-      "cagr": 5.55,
-      "stddev": 20.7,
-      "yield": 3.6,
-      "ret22": -25.67
+      "cagr": 5.63,
+      "stddev": 20.72,
+      "yield": 3.54,
+      "ret22": -25.67,
+      "description": "The fund invests at least 80% of its net assets, plus the amount of any borrowings for investment purposes, in the stocks that make up the Target Index. The advisor attempts to track the index by investing all, or substantially all, of its assets-either directly or indirectly through a wholly owned subsidiary. The fund is non-diversified.",
+      "inception": "2004-09-23",
+      "expense_ratio": null,
+      "avg_volume": 3360250
     },
     "VWO": {
       "name": "Vanguard Emerging Markets",
       "lev": false,
-      "cagr": 8.35,
-      "stddev": 19.23,
-      "yield": 2.5,
-      "ret22": -18.56
+      "cagr": 8.97,
+      "stddev": 19.22,
+      "yield": 2.44,
+      "ret22": -18.56,
+      "description": "The index measures the investment return of stocks issued by companies located in emerging market countries. The fund employs an indexing investment approach designed to track the performance of the FTSE Emerging Markets All Cap China A Inclusion Index. It invests by sampling the index, meaning that it holds a broadly diversified collection of securities that, in the aggregate, approximates...",
+      "inception": "2005-03-04",
+      "expense_ratio": null,
+      "avg_volume": 9131157
     },
     "VXUS": {
       "name": "Vanguard Total International",
       "lev": false,
-      "cagr": 9.28,
-      "stddev": 17.19,
-      "yield": 2.76,
-      "ret22": -16.62
+      "cagr": 10.1,
+      "stddev": 17.2,
+      "yield": 2.67,
+      "ret22": -16.62,
+      "description": "The manager employs an indexing investment approach designed to track the performance of the FTSE Global All Cap ex US Index, a float-adjusted market-capitalization-weighted index designed to measure equity market performance of companies located in developed and emerging markets, excluding the United States. The fund invests all, or substantially all, of its assets in the common stocks...",
+      "inception": "2011-01-26",
+      "expense_ratio": null,
+      "avg_volume": 6602468
     },
     "GLD": {
       "name": "SPDR Gold Shares",
       "lev": false,
-      "cagr": 12.8,
-      "stddev": 16.0,
+      "cagr": 12.17,
+      "stddev": 16.08,
       "yield": 0.0,
-      "ret22": 0.78
+      "ret22": 0.78,
+      "description": "The Trust holds gold bars and from time to time, issues Baskets in exchange for deposits of gold and distributes gold in connection with redemptions of Baskets. The investment objective of the Trust is for the Shares to reflect the performance of the price of gold bullion, less the Trust\u2019s expenses. The Sponsor believes that, for many investors, the Shares represent a cost-effective investment...",
+      "inception": "2004-11-18",
+      "expense_ratio": null,
+      "avg_volume": 9249863
     },
     "BND": {
       "name": "Vanguard Total Bond Market",
       "lev": false,
-      "cagr": 1.63,
+      "cagr": 1.65,
       "stddev": 5.53,
-      "yield": 3.98,
-      "ret22": -12.52
+      "yield": 3.96,
+      "ret22": -12.52,
+      "description": "This index measures the performance of a wide spectrum of public, investment-grade, taxable, fixed income securities in the United States-including government, corporate, and international dollar-denominated bonds, as well as mortgage-backed and asset-backed securities-all with maturities of more than 1 year. All of the fund's investments will be selected through the sampling process, and at...",
+      "inception": "2007-04-03",
+      "expense_ratio": null,
+      "avg_volume": 8363704
     },
     "AGG": {
       "name": "iShares Core US Aggregate Bond",
       "lev": false,
-      "cagr": 1.57,
+      "cagr": 1.59,
       "stddev": 5.41,
-      "yield": 4.0,
-      "ret22": -12.42
+      "yield": 3.98,
+      "ret22": -12.42,
+      "description": "The index measures the performance of the total U.S. investment-grade bond market. The fund will invest at least 80% of its assets in the component securities of the underlying index and TBAs that have economic characteristics that are substantially identical to the economic characteristics of the component securities of the underlying index, and the fund will invest at least 90% of its assets...",
+      "inception": "2003-09-22",
+      "expense_ratio": null,
+      "avg_volume": 9676790
     },
     "TLT": {
       "name": "iShares 20+ Year Treasury Bond",
       "lev": false,
-      "cagr": -1.61,
-      "stddev": 14.9,
-      "yield": 4.6,
-      "ret22": -29.38
+      "cagr": -1.76,
+      "stddev": 14.91,
+      "yield": 4.56,
+      "ret22": -29.38,
+      "description": "The fund will invest at least 80% of its assets in the component securities of the underlying index, and it will invest at least 90% of its assets in U.S. Treasury securities that the advisor believes will help the fund track the underlying index. The underlying index measures the performance of public obligations of the U.S. Treasury that have a remaining maturity greater than or equal to...",
+      "inception": "2002-07-22",
+      "expense_ratio": null,
+      "avg_volume": 28115382
     },
     "SCHP": {
       "name": "Schwab US TIPS",
       "lev": false,
-      "cagr": 2.65,
+      "cagr": 2.62,
       "stddev": 5.59,
-      "yield": 4.0,
-      "ret22": -11.55
+      "yield": 3.99,
+      "ret22": -11.55,
+      "description": "The fund will invest at least 90% of its net assets in securities included in the index. The index includes all publicly-issued U.S. Treasury Inflation-Protected Securities (TIPS) that have at least one year remaining to maturity, are rated investment grade and have $500 million or more of outstanding face value. The TIPS in the index must be denominated in U.S. dollars and must be fixed-rate...",
+      "inception": "2010-08-05",
+      "expense_ratio": null,
+      "avg_volume": 4018465
     },
     "FLRT": {
       "name": "Pacific Asset Floating Rate Income",
       "lev": false,
-      "cagr": 4.98,
-      "stddev": 6.17,
-      "yield": 6.82,
-      "ret22": -2.73
+      "cagr": 4.93,
+      "stddev": 6.14,
+      "yield": 6.8,
+      "ret22": -2.73,
+      "description": "The fund seeks to achieve its investment objective by selecting a focused portfolio comprised primarily of income-producing adjustable rate securities. Under normal circumstances, it will invest at least 80% of its net assets in senior secured floating rate loans and other adjustable rate securities. The fund is expected to invest primarily in loans and Adjustable Rate Securities that are...",
+      "inception": "2015-02-18",
+      "expense_ratio": null,
+      "avg_volume": 110952
     },
     "MAIN": {
       "name": "Main Street Capital (BDC)",
       "lev": false,
-      "cagr": 12.91,
+      "cagr": 13.08,
       "stddev": 27.3,
-      "yield": 8.26,
-      "ret22": -10.88
+      "yield": 8.25,
+      "ret22": -10.88,
+      "description": "Main Street Capital Corporation is a business development company and a small business investment company specializing in direct and indirect investments. In direct investments, the firm specializes in private equity capital to lower middle market companies. The firm specializes in recapitalizations, loan, growth capital, mezzanine debt, corporate carveouts, family estate planning, management...",
+      "inception": null,
+      "expense_ratio": null,
+      "avg_volume": 785328
     },
     "HTGC": {
       "name": "Hercules Capital (BDC)",
       "lev": false,
-      "cagr": 13.49,
+      "cagr": 13.93,
       "stddev": 27.84,
-      "yield": 12.3,
-      "ret22": -9.56
+      "yield": 12.13,
+      "ret22": -9.56,
+      "description": "Hercules Capital, Inc. is a business development company. The firm specializing in providing private equity, venture debt, and growth capital to privately held venture capital-backed companies at all stages of development from mid venture to expansion stage including select publicly listed companies and select special opportunity companies that require additional capital to fund acquisitions,...",
+      "inception": null,
+      "expense_ratio": null,
+      "avg_volume": 1866149
     },
     "PFLT": {
       "name": "PennantPark Floating Rate (BDC)",
       "lev": false,
-      "cagr": 6.31,
-      "stddev": 28.94,
-      "yield": 15.28,
-      "ret22": -6.84
+      "cagr": 6.2,
+      "stddev": 28.95,
+      "yield": 15.49,
+      "ret22": -6.84,
+      "description": "PennantPark Floating Rate Capital Ltd. is a business development company. It seeks to make secondary direct, debt, equity, and loan investments. The fund seeks to invest through floating rate loans in private or thinly traded or small market-cap, public middle market companies. It primarily invests in the United States and to a limited extent non-U.S. companies. The fund typically invests...",
+      "inception": null,
+      "expense_ratio": null,
+      "avg_volume": 1066930
     },
     "QPUX": {
       "name": "QPUX",
       "lev": false,
-      "cagr": -50.76,
-      "stddev": 196.15,
+      "cagr": -50.53,
+      "stddev": 195.76,
       "yield": 0.0,
-      "ret22": null
+      "ret22": null,
+      "description": "The fund seeks daily leveraged investment results, before fees and expenses, that correspond to two times (2X) the performance of an actively managed group of \u201cpure quantum\u201d company securities (the \u201cTarget Portfolio\u201d) by employing derivatives, namely swap agreements and/or listed options contracts. It is non-diversified.",
+      "inception": "2025-08-06",
+      "expense_ratio": null,
+      "avg_volume": 219215
     },
     "DRAM": {
       "name": "DRAM",
       "lev": false,
-      "cagr": 5270.46,
-      "stddev": 85.33,
+      "cagr": 7864.45,
+      "stddev": 87.89,
       "yield": 0.0,
-      "ret22": null
+      "ret22": null,
+      "description": "The fund will generally seek to invest primarily in the equity securities of \u201cMemory Companies,\u201d but may also seek exposure to Memory Companies through derivative instruments, such as swap agreements and forward contracts. Under normal circumstances, it invests at least 80% of its net assets (plus borrowings for investment purposes) in equity securities or instruments (i.e., swap agreements or...",
+      "inception": "2026-04-01",
+      "expense_ratio": null,
+      "avg_volume": 27749468
     },
     "CASH": {
       "name": "Cash / HYSA",
@@ -343,7 +511,11 @@
       "cagr": 2.0,
       "stddev": 0.5,
       "yield": 4.5,
-      "ret22": 1.5
+      "ret22": 1.5,
+      "description": "High-yield savings or money-market equivalent. Assumed steady real-dollar value with a modest yield matching prevailing short-rate benchmarks.",
+      "inception": null,
+      "expense_ratio": 0.0,
+      "avg_volume": null
     }
   }
 }

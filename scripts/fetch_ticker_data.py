@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """Fetch ticker stats for the Ember portfolio simulator.
 
-Pulls 10-year CAGR, TTM dividend yield, and 2022 calendar-year return
-for each ticker in the curated list, writes results to data/tickers.json.
+Pulls 10-year CAGR, annualized volatility, TTM dividend yield, 2022
+calendar-year return, and fund metadata (description, inception date,
+expense ratio, average daily volume) for each ticker in the curated list.
+Writes results to data/tickers.json.
 
 If a ticker fails to fetch and a previous value exists, the previous value
 is kept so transient yfinance errors don't blow away good data.
@@ -69,7 +71,15 @@ TICKERS: dict[str, dict] = {
 }
 
 # Cash is a special "ticker" — not on the market, set manually.
-CASH = {"name": "Cash / HYSA", "lev": False, "cagr": 2.0, "stddev": 0.5, "yield": 4.5, "ret22": 1.5}
+CASH = {
+    "name": "Cash / HYSA",
+    "lev": False,
+    "cagr": 2.0, "stddev": 0.5, "yield": 4.5, "ret22": 1.5,
+    "description": "High-yield savings or money-market equivalent. Assumed steady real-dollar value with a modest yield matching prevailing short-rate benchmarks.",
+    "inception": None,
+    "expense_ratio": 0.0,
+    "avg_volume": None,
+}
 
 OUTPUT_PATH = "data/tickers.json"
 
@@ -128,6 +138,58 @@ def fetch_stats(symbol: str) -> dict:
     }
 
 
+def fetch_metadata(symbol: str) -> dict:
+    """Return fund description, inception date, expense ratio, and avg volume."""
+    t = yf.Ticker(symbol)
+    try:
+        info = t.info or {}
+    except Exception:
+        info = {}
+
+    # Description — prefer the longer business summary, fall back to shorter fields.
+    description = (info.get("longBusinessSummary")
+                   or info.get("description")
+                   or info.get("longName")
+                   or "").strip()
+    if len(description) > 400:
+        # Truncate at last whole word before the limit and append ellipsis.
+        description = description[:397].rsplit(" ", 1)[0] + "..."
+
+    # Inception date — yfinance returns a Unix timestamp; convert to YYYY-MM-DD.
+    inception_date = None
+    inception_ts = info.get("fundInceptionDate")
+    if inception_ts:
+        try:
+            inception_date = datetime.utcfromtimestamp(int(inception_ts)).strftime("%Y-%m-%d")
+        except Exception:
+            pass
+
+    # Expense ratio — yfinance returns as decimal (0.0003 = 0.03%); convert to percent.
+    expense_ratio = info.get("annualReportExpenseRatio")
+    if expense_ratio is not None:
+        try:
+            expense_ratio = round(float(expense_ratio) * 100, 3)
+        except Exception:
+            expense_ratio = None
+
+    # Average daily volume — try the 3-month average first for stability.
+    avg_volume = (info.get("averageDailyVolume3Month")
+                  or info.get("averageVolume")
+                  or info.get("averageDailyVolume10Day"))
+    if avg_volume is not None:
+        try:
+            avg_volume = int(avg_volume)
+        except Exception:
+            avg_volume = None
+
+    return {
+        "description":   description,
+        "inception":     inception_date,
+        "expense_ratio": expense_ratio,
+        "avg_volume":    avg_volume,
+    }
+
+
 def main() -> int:
     os.makedirs("data", exist_ok=True)
 
@@ -146,7 +208,13 @@ def main() -> int:
     for symbol, meta in TICKERS.items():
         try:
             stats = fetch_stats(symbol)
-            result[symbol] = {**meta, **stats}
+            try:
+                metadata = fetch_metadata(symbol)
+            except Exception as me:
+                # Metadata failure shouldn't kill the stats fetch.
+                metadata = {"description": "", "inception": None, "expense_ratio": None, "avg_volume": None}
+                print(f"  {symbol:5s}  metadata fetch failed ({me})")
+            result[symbol] = {**meta, **stats, **metadata}
             print(f"  {symbol:5s}  CAGR={stats['cagr']:6.2f}%  σ={stats['stddev']:5.2f}%  yield={stats['yield']:5.2f}%  2022={stats['ret22']}")
         except Exception as e:
             failures.append(symbol)
@@ -154,7 +222,11 @@ def main() -> int:
                 result[symbol] = existing[symbol]
                 print(f"  {symbol:5s}  fetch failed — kept previous data ({e})")
             else:
-                result[symbol] = {**meta, "cagr": None, "stddev": None, "yield": None, "ret22": None}
+                result[symbol] = {
+                    **meta,
+                    "cagr": None, "stddev": None, "yield": None, "ret22": None,
+                    "description": "", "inception": None, "expense_ratio": None, "avg_volume": None,
+                }
                 print(f"  {symbol:5s}  fetch failed and no fallback ({e})")
 
     # Cash entry is set manually.
