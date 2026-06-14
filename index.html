@@ -31,6 +31,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
 <style>
   :root{
     --paper:#F6F2EA;
@@ -233,6 +234,42 @@
   .an-use-btn:hover{background:var(--pine-bright)}
   .an-use-btn:focus{outline:none;box-shadow:0 0 0 3px rgba(30,77,60,.18)}
   .analyzer-empty{margin-top:32px;padding:52px 24px;text-align:center;color:var(--ink-faint);font-size:14px;background:var(--paper);border-radius:14px}
+
+  /* analyzer — comparison mode */
+  .an-add-compare{margin-top:14px;background:none;border:1px dashed var(--line);border-radius:11px;padding:11px 16px;font-family:inherit;font-size:13px;font-weight:600;color:var(--ink-soft);cursor:pointer;width:100%;text-align:left;transition:border-color .15s,color .15s,background .15s}
+  .an-add-compare:hover{border-color:var(--pine);color:var(--pine);background:rgba(30,77,60,.03)}
+  .an-add-compare:disabled{opacity:.45;cursor:not-allowed}
+  .an-compare-row{display:flex;gap:8px;align-items:center;margin-top:10px}
+  .an-compare-row .analyzer-select{flex:1}
+  .an-compare-row .an-remove{background:none;border:none;width:34px;height:42px;border-radius:8px;color:var(--ink-faint);cursor:pointer;font-size:18px;line-height:1;flex-shrink:0;transition:background .15s,color .15s}
+  .an-compare-row .an-remove:hover{background:var(--ember-soft);color:var(--ember)}
+
+  .an-compare-table{margin-top:24px;width:100%;border-collapse:collapse;font-size:13.5px;font-variant-numeric:tabular-nums;background:var(--card);border:1px solid var(--line-soft);border-radius:14px;overflow:hidden}
+  .an-compare-table thead th{background:var(--line-soft);text-align:right;padding:14px 14px;font-weight:600;color:var(--ink);font-size:13px;border-bottom:1px solid var(--line)}
+  .an-compare-table thead th:first-child{text-align:left;color:var(--ink-faint);font-size:11px;text-transform:uppercase;letter-spacing:.08em;font-weight:600}
+  .an-compare-table thead th .sym{display:block;font-family:'Fraunces',serif;font-size:16px;font-weight:600;color:var(--pine);letter-spacing:.02em}
+  .an-compare-table thead th .sub{display:block;font-size:11px;font-weight:500;color:var(--ink-faint);margin-top:2px;max-width:140px;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;text-align:right;margin-left:auto}
+  .an-compare-table thead th .x{background:none;border:none;color:var(--ink-faint);font-size:14px;line-height:1;cursor:pointer;padding:2px 6px;border-radius:4px;margin-left:6px;float:right;transition:background .15s,color .15s}
+  .an-compare-table thead th .x:hover{background:var(--ember-soft);color:var(--ember)}
+  .an-compare-table tbody td{padding:11px 14px;text-align:right;border-bottom:1px solid var(--line-soft);color:var(--ink)}
+  .an-compare-table tbody td:first-child{text-align:left;color:var(--ink-soft);font-weight:500;font-size:12.5px}
+  .an-compare-table tbody tr:last-child td{border-bottom:none}
+  .an-compare-table td.best{background:rgba(46,139,92,.10);color:var(--pine-bright);font-weight:600}
+  .an-compare-table td.worst{background:rgba(192,83,28,.08);color:var(--ember);font-weight:500}
+
+  .an-chart-wrap{margin-top:24px;background:var(--card);border:1px solid var(--line-soft);border-radius:14px;padding:18px 18px 12px;height:340px;position:relative}
+  .an-chart-wrap .chart-title{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-faint);font-weight:600;margin-bottom:6px}
+  .an-chart-wrap canvas{max-height:290px}
+
+  /* clickable ticker in holdings */
+  .ticker-tag.clickable{cursor:pointer;transition:color .15s}
+  .ticker-tag.clickable:hover{color:var(--pine-bright)}
+  .ticker-tag.clickable:hover .sym-underline{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+
+  /* back-to-analyzer breadcrumb */
+  .sim-back-bar{margin-bottom:16px}
+  .sim-back-btn{background:none;border:none;font-family:inherit;font-size:13px;font-weight:600;color:var(--ink-soft);cursor:pointer;padding:8px 12px;border-radius:8px;display:inline-flex;align-items:center;gap:6px;transition:background .15s,color .15s}
+  .sim-back-btn:hover{background:var(--paper);color:var(--pine)}
 
   .warning{margin-top:22px;padding:14px 16px;background:var(--ember-soft);border:1px solid rgba(192,83,28,.25);border-radius:12px;font-size:12.5px;color:#7A3210;line-height:1.6}
   .warning b{font-weight:700;color:var(--ember)}
@@ -445,6 +482,9 @@
   </div><!-- /calc-tab -->
 
   <div id="sim-tab" class="tab-content">
+    <div id="sim-back-bar" class="sim-back-bar" style="display:none">
+      <button class="sim-back-btn" id="simBackBtn">← Back to Analyzer</button>
+    </div>
     <div class="grid">
       <div class="panel panel-pad">
         <div class="panel-title">Build your portfolio</div>
@@ -587,6 +627,8 @@
         <select id="anSel" class="analyzer-select">
           <option value="">— select a ticker —</option>
         </select>
+        <div id="an-compare-rows"></div>
+        <button id="anAddCompareBtn" class="an-add-compare" style="display:none">+ Compare with another fund</button>
       </div>
 
       <div id="analyzer-detail" style="display:none">
@@ -610,12 +652,28 @@
           <div class="sim-stat"><div class="k">2022 stress test</div><div class="v" id="an-stress">—</div><div class="ann">a known bad year</div></div>
         </div>
 
+        <div id="an-chart-single" class="an-chart-wrap" style="display:none">
+          <div class="chart-title" id="an-chart-single-title">Growth of $10,000</div>
+          <canvas id="an-chart-canvas-single"></canvas>
+        </div>
+
         <div class="an-actions">
           <button id="anUseBtn" class="an-use-btn">Add to portfolio →</button>
         </div>
 
         <p class="footnote" style="margin-top:18px">
           <b>Read the data carefully.</b> Funds with less than several years of trading history may show CAGR and yield values that don't reflect full market-cycle behavior. Leveraged ETFs, option-income strategies, and BDCs in particular tend to behave differently in extended drawdowns than their recent history suggests.
+        </p>
+      </div>
+
+      <div id="analyzer-compare" style="display:none">
+        <table class="an-compare-table" id="an-compare-table"></table>
+        <div id="an-chart-compare" class="an-chart-wrap" style="display:none">
+          <div class="chart-title" id="an-chart-compare-title">Growth of $10,000 since the latest common start date</div>
+          <canvas id="an-chart-canvas-compare"></canvas>
+        </div>
+        <p class="footnote" style="margin-top:18px">
+          <b>Compare with care.</b> The chart normalizes to a $10,000 starting investment so funds at different price levels are directly comparable. The starting date is the latest inception among selected funds — so a 1-year-old fund and a 10-year-old fund will both chart only the last 1 year. CAGR and 2022 stress test values still reflect each fund's own full history.
         </p>
       </div>
 
@@ -971,7 +1029,7 @@ function renderHoldings(){
     const row = document.createElement('div');
     row.className = 'holding';
     row.innerHTML =
-      '<div class="ticker-tag '+(t.lev?'lev':'')+'">'+h.symbol+'</div>'+
+      '<div class="ticker-tag clickable '+(t.lev?'lev':'')+'" data-sym="'+h.symbol+'" title="Research '+h.symbol+' in Analyzer"><span class="sym-underline">'+h.symbol+'</span></div>'+
       '<div class="holding-name" title="'+t.name+'">'+t.name+'</div>'+
       '<div class="alloc-input"><input type="number" min="0" max="200" step="1" value="'+h.alloc+'" data-i="'+i+'"><span class="pct">%</span></div>'+
       '<button class="holding-remove" data-i="'+i+'" aria-label="Remove">×</button>';
@@ -991,6 +1049,12 @@ function renderHoldings(){
       renderHoldings();
       renderAddSelect();
       recomputeSim();
+    });
+  });
+  wrap.querySelectorAll('.ticker-tag.clickable').forEach(el => {
+    el.addEventListener('click', e => {
+      const sym = e.currentTarget.dataset.sym;
+      if(sym && typeof jumpToAnalyzer === 'function') jumpToAnalyzer(sym);
     });
   });
 }
@@ -1516,20 +1580,30 @@ document.querySelectorAll('.mc-mode').forEach(btn => {
 });
 
 // analyzer
+const MAX_COMPARE = 4;
+// Distinct line colors for each comparison slot.
+const COMPARE_COLORS = ['#1E4D3C', '#C0531C', '#2C5F7A', '#6B4070'];
+let analyzerSelection = [];   // array of selected ticker symbols
+let anSingleChart = null;     // Chart instance for single mode
+let anCompareChart = null;    // Chart instance for comparison mode
+let cameFromAnalyzer = false; // tracks bounce flow from Analyzer → Portfolio Sim
+
 function renderAnalyzerSelect(){
-  const sel = $('anSel');
-  if(!sel) return;
-  const currentValue = sel.value;
-  sel.innerHTML = '<option value="">— select a ticker —</option>';
-  const entries = Object.entries(TICKERS).filter(([sym]) => sym !== 'CASH');
-  entries.sort((a, b) => a[0].localeCompare(b[0]));
-  entries.forEach(([sym, t]) => {
-    const opt = document.createElement('option');
-    opt.value = sym;
-    opt.textContent = `${sym} — ${t.name}`;
-    sel.appendChild(opt);
+  const selects = [$('anSel'), ...document.querySelectorAll('#an-compare-rows .analyzer-select')];
+  selects.forEach((sel, idx) => {
+    if(!sel) return;
+    const currentValue = sel.value;
+    sel.innerHTML = '<option value="">— select a ticker —</option>';
+    const entries = Object.entries(TICKERS).filter(([sym]) => sym !== 'CASH');
+    entries.sort((a, b) => a[0].localeCompare(b[0]));
+    entries.forEach(([sym, t]) => {
+      const opt = document.createElement('option');
+      opt.value = sym;
+      opt.textContent = `${sym} — ${t.name}`;
+      sel.appendChild(opt);
+    });
+    if(currentValue && TICKERS[currentValue]) sel.value = currentValue;
   });
-  if(currentValue && TICKERS[currentValue]) sel.value = currentValue;
 }
 
 function formatVolume(n){
@@ -1540,20 +1614,81 @@ function formatVolume(n){
   return n.toLocaleString();
 }
 
-function showAnalyzer(symbol){
-  const detail = $('analyzer-detail');
-  const empty  = $('analyzer-empty');
-  if(!detail || !empty) return;
+// Read the current selection from the main dropdown + any comparison dropdowns,
+// dedupe and drop empties.
+function collectAnalyzerSelection(){
+  const symbols = [];
+  const primary = $('anSel').value;
+  if(primary) symbols.push(primary);
+  document.querySelectorAll('#an-compare-rows .analyzer-select').forEach(sel => {
+    if(sel.value && !symbols.includes(sel.value)) symbols.push(sel.value);
+  });
+  return symbols;
+}
 
-  const t = symbol ? TICKERS[symbol] : null;
-  if(!t){
-    detail.style.display = 'none';
-    empty.style.display  = 'block';
-    return;
+// Add a new comparison dropdown row (with remove button).
+function addCompareDropdown(){
+  const rows = $('an-compare-rows');
+  if(rows.children.length >= MAX_COMPARE - 1) return; // primary + (MAX-1) extra
+  const row = document.createElement('div');
+  row.className = 'an-compare-row';
+  row.innerHTML =
+    '<select class="analyzer-select"><option value="">— select another ticker —</option></select>' +
+    '<button class="an-remove" aria-label="Remove this comparison" title="Remove">×</button>';
+  rows.appendChild(row);
+  // Populate the new dropdown with the ticker list
+  renderAnalyzerSelect();
+  // Wire events
+  const newSel = row.querySelector('select');
+  newSel.addEventListener('change', () => renderAnalyzer());
+  row.querySelector('.an-remove').addEventListener('click', () => {
+    row.remove();
+    renderAnalyzer();
+    updateCompareButtonState();
+  });
+  updateCompareButtonState();
+}
+
+function updateCompareButtonState(){
+  const btn = $('anAddCompareBtn');
+  const rows = $('an-compare-rows');
+  const primarySelected = !!$('anSel').value;
+  // Only show after a primary ticker is chosen; hide when at max.
+  btn.style.display = primarySelected ? 'block' : 'none';
+  btn.disabled = rows.children.length >= (MAX_COMPARE - 1);
+  btn.textContent = btn.disabled
+    ? `Maximum of ${MAX_COMPARE} funds — remove one to compare a different fund`
+    : '+ Compare with another fund';
+}
+
+// Main render dispatcher — empty / single / comparison.
+function renderAnalyzer(){
+  analyzerSelection = collectAnalyzerSelection();
+  const detail  = $('analyzer-detail');
+  const compare = $('analyzer-compare');
+  const empty   = $('analyzer-empty');
+
+  if(analyzerSelection.length === 0){
+    detail.style.display  = 'none';
+    compare.style.display = 'none';
+    empty.style.display   = 'block';
+  } else if(analyzerSelection.length === 1){
+    detail.style.display  = 'block';
+    compare.style.display = 'none';
+    empty.style.display   = 'none';
+    renderAnalyzerSingle(analyzerSelection[0]);
+  } else {
+    detail.style.display  = 'none';
+    compare.style.display = 'block';
+    empty.style.display   = 'none';
+    renderAnalyzerComparison(analyzerSelection);
   }
+  updateCompareButtonState();
+}
 
-  detail.style.display = 'block';
-  empty.style.display  = 'none';
+function renderAnalyzerSingle(symbol){
+  const t = TICKERS[symbol];
+  if(!t) return;
 
   $('an-name').textContent      = t.name;
   $('an-symbol').textContent    = symbol;
@@ -1575,27 +1710,251 @@ function showAnalyzer(symbol){
   const stressEl = $('an-stress');
   stressEl.textContent = pct(t.ret22);
   stressEl.classList.toggle('neg', t.ret22 != null && t.ret22 < 0);
+
+  renderPriceChart([symbol], 'single');
 }
 
-$('anSel').addEventListener('change', e => showAnalyzer(e.target.value));
+// Rows shown in the comparison table — id is the field key, label is the row label,
+// fmt is the formatter, dir is +1 if higher is better, -1 if lower is better, 0 if neutral.
+const COMPARE_ROWS = [
+  {id:'cagr',          label:'Expected return (CAGR, 10y)', fmt:v => v==null?'—':v.toFixed(2)+'%', dir: 1},
+  {id:'stddev',        label:'Volatility (annualized)',     fmt:v => v==null?'—':v.toFixed(2)+'%', dir:-1},
+  {id:'yield',         label:'Current yield (TTM)',         fmt:v => v==null?'—':v.toFixed(2)+'%', dir: 1},
+  {id:'ret22',         label:'2022 stress test',            fmt:v => v==null?'—':v.toFixed(2)+'%', dir: 1},
+  {id:'expense_ratio', label:'Expense ratio',               fmt:v => v==null?'—':v.toFixed(2)+'%', dir:-1},
+  {id:'inception',     label:'Inception date',              fmt:v => v || '—',                    dir: 0},
+  {id:'avg_volume',    label:'Avg daily volume',            fmt:v => formatVolume(v),             dir: 1},
+];
+
+function renderAnalyzerComparison(symbols){
+  const tbl = $('an-compare-table');
+  // Header row — one column per ticker
+  let html = '<thead><tr><th>Stat</th>';
+  symbols.forEach((sym, i) => {
+    const t = TICKERS[sym];
+    const color = COMPARE_COLORS[i % COMPARE_COLORS.length];
+    html += `<th><span class="sym" style="color:${color}">${sym}<button class="x" data-sym="${sym}" aria-label="Remove ${sym}">×</button></span><span class="sub">${t ? t.name : '—'}</span></th>`;
+  });
+  html += '</tr></thead><tbody>';
+
+  // Data rows
+  COMPARE_ROWS.forEach(row => {
+    const values = symbols.map(sym => TICKERS[sym] ? TICKERS[sym][row.id] : null);
+    const numericValues = values.filter(v => v != null && typeof v === 'number');
+    let bestVal = null, worstVal = null;
+    if(row.dir !== 0 && numericValues.length > 1){
+      if(row.dir > 0){
+        bestVal  = Math.max(...numericValues);
+        worstVal = Math.min(...numericValues);
+      } else {
+        bestVal  = Math.min(...numericValues);
+        worstVal = Math.max(...numericValues);
+      }
+    }
+    html += `<tr><td>${row.label}</td>`;
+    values.forEach(v => {
+      let cls = '';
+      if(row.dir !== 0 && typeof v === 'number'){
+        if(v === bestVal) cls = 'best';
+        else if(v === worstVal) cls = 'worst';
+      }
+      html += `<td class="${cls}">${row.fmt(v)}</td>`;
+    });
+    html += '</tr>';
+  });
+  html += '</tbody>';
+  tbl.innerHTML = html;
+
+  // Wire remove buttons
+  tbl.querySelectorAll('.x').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      removeFromAnalyzerSelection(btn.dataset.sym);
+    });
+  });
+
+  renderPriceChart(symbols, 'compare');
+}
+
+function removeFromAnalyzerSelection(symbol){
+  // Reset whichever dropdown holds this symbol.
+  if($('anSel').value === symbol){
+    // If removing the primary, promote the first compare dropdown into the primary slot (if any).
+    const firstCompare = document.querySelector('#an-compare-rows .analyzer-select');
+    if(firstCompare && firstCompare.value){
+      $('anSel').value = firstCompare.value;
+      firstCompare.closest('.an-compare-row').remove();
+    } else {
+      $('anSel').value = '';
+    }
+  } else {
+    document.querySelectorAll('#an-compare-rows .an-compare-row').forEach(row => {
+      const sel = row.querySelector('select');
+      if(sel && sel.value === symbol){
+        row.remove();
+      }
+    });
+  }
+  renderAnalyzer();
+}
+
+// Build a "growth of $10,000" series for one ticker, starting at a given date.
+// `from` is a Date object — only price points on or after `from` are used.
+function buildGrowthSeries(prices, from){
+  if(!prices || prices.length === 0) return [];
+  // Find first price on or after `from`
+  let startIdx = 0;
+  if(from){
+    while(startIdx < prices.length && new Date(prices[startIdx][0]) < from) startIdx++;
+  }
+  if(startIdx >= prices.length) return [];
+  const startPrice = prices[startIdx][1];
+  if(!startPrice) return [];
+  const series = [];
+  for(let i = startIdx; i < prices.length; i++){
+    series.push({x: prices[i][0], y: +(10000 * prices[i][1] / startPrice).toFixed(2)});
+  }
+  return series;
+}
+
+function renderPriceChart(symbols, mode){
+  const canvasId = mode === 'single' ? 'an-chart-canvas-single' : 'an-chart-canvas-compare';
+  const wrapId   = mode === 'single' ? 'an-chart-single'        : 'an-chart-compare';
+  const titleId  = mode === 'single' ? 'an-chart-single-title'  : 'an-chart-compare-title';
+  const canvas   = $(canvasId);
+  const wrap     = $(wrapId);
+  if(!canvas || !wrap) return;
+
+  // Only show chart if we have price data
+  const tickersWithPrices = symbols.filter(s => TICKERS[s] && TICKERS[s].prices && TICKERS[s].prices.length > 1);
+  if(tickersWithPrices.length === 0){
+    wrap.style.display = 'none';
+    return;
+  }
+  wrap.style.display = 'block';
+
+  // Find the latest common start date among the selected tickers
+  // (so they're compared apples-to-apples from a common starting point).
+  const latestStarts = tickersWithPrices.map(s => new Date(TICKERS[s].prices[0][0]));
+  const commonStart = new Date(Math.max(...latestStarts.map(d => d.getTime())));
+
+  const datasets = tickersWithPrices.map((sym, i) => {
+    const baseColor = COMPARE_COLORS[symbols.indexOf(sym) % COMPARE_COLORS.length];
+    return {
+      label: sym,
+      data: buildGrowthSeries(TICKERS[sym].prices, commonStart),
+      borderColor: baseColor,
+      backgroundColor: baseColor + '15',
+      borderWidth: 2,
+      tension: 0.15,
+      pointRadius: 0,
+      pointHoverRadius: 4,
+      fill: mode === 'single',
+    };
+  });
+
+  // Update title to reflect time window
+  const startLabel = commonStart.toLocaleDateString('en-US', {month:'short', year:'numeric'});
+  if(mode === 'single'){
+    $(titleId).textContent = `Growth of $10,000 since ${startLabel}`;
+  } else {
+    $(titleId).textContent = `Growth of $10,000 since ${startLabel} (latest common start)`;
+  }
+
+  // Destroy any existing chart for this canvas
+  const existing = mode === 'single' ? anSingleChart : anCompareChart;
+  if(existing) existing.destroy();
+
+  const ctx = canvas.getContext('2d');
+  const newChart = new Chart(ctx, {
+    type: 'line',
+    data: { datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: mode === 'compare', position: 'top', align: 'end', labels: { font:{size:11, family:"'Hanken Grotesk',sans-serif", weight:'600'}, boxWidth:10, boxHeight:10, padding:14 } },
+        tooltip: {
+          backgroundColor: '#1B1A16',
+          titleFont: { family:"'Hanken Grotesk',sans-serif", weight:'600' },
+          bodyFont:  { family:"'Hanken Grotesk',sans-serif" },
+          padding: 10,
+          callbacks: {
+            label: ctx => `${ctx.dataset.label}: $${ctx.parsed.y.toLocaleString(undefined,{maximumFractionDigits:0})}`,
+          },
+        },
+      },
+      scales: {
+        x: {
+          type: 'time',
+          time: { unit: 'year', tooltipFormat: 'MMM yyyy', displayFormats:{year:'yyyy'} },
+          grid: { display: false },
+          ticks: { color:'#928B7C', font:{size:11, family:"'Hanken Grotesk',sans-serif"} },
+        },
+        y: {
+          beginAtZero: false,
+          grid: { color: '#EFEAE0' },
+          border: { display: false },
+          ticks: {
+            color: '#928B7C',
+            font: { size:11, family:"'Hanken Grotesk',sans-serif" },
+            callback: v => '$' + Math.round(v).toLocaleString(),
+          },
+        },
+      },
+    },
+  });
+  if(mode === 'single') anSingleChart = newChart;
+  else                  anCompareChart = newChart;
+}
+
+// Event wiring
+$('anSel').addEventListener('change', () => renderAnalyzer());
+$('anAddCompareBtn').addEventListener('click', () => addCompareDropdown());
 
 $('anUseBtn').addEventListener('click', () => {
   const sym = $('anSel').value;
   if(!sym) return;
+  cameFromAnalyzer = true;
   // Switch to the Portfolio simulator tab
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === 'sim-tab'));
-  document.querySelectorAll('.tab-content').forEach(c => c.classList.toggle('active', c.id === 'sim-tab'));
+  switchTab('sim-tab');
   // Add to portfolio via the existing add flow
   $('addSel').value = sym;
   $('addBtn').click();
 });
 
+// Centralized tab switcher, used by the back button and analyzer "Add to portfolio".
+function switchTab(targetTabId){
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === targetTabId));
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.toggle('active', c.id === targetTabId));
+  $('sim-back-bar').style.display = (targetTabId === 'sim-tab' && cameFromAnalyzer) ? 'block' : 'none';
+}
+
+// Back-to-Analyzer button in the Portfolio Simulator
+$('simBackBtn').addEventListener('click', () => {
+  cameFromAnalyzer = false;
+  switchTab('analyzer-tab');
+});
+
+// Jump from a holding ticker to the Analyzer with that ticker selected.
+function jumpToAnalyzer(symbol){
+  if(!TICKERS[symbol]) return;
+  // Clear any existing comparison dropdowns and reset primary selection.
+  $('an-compare-rows').innerHTML = '';
+  $('anSel').value = symbol;
+  cameFromAnalyzer = false;
+  switchTab('analyzer-tab');
+  renderAnalyzer();
+}
+
 // tabs
 document.querySelectorAll('.tab-btn').forEach(btn => {
   btn.addEventListener('click', () => {
-    const tab = btn.dataset.tab;
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b === btn));
-    document.querySelectorAll('.tab-content').forEach(c => c.classList.toggle('active', c.id === tab));
+    // Manually clicking any tab clears the "I came from Analyzer" bounce flag —
+    // it's only meant for the immediate round-trip from "Add to portfolio".
+    cameFromAnalyzer = false;
+    switchTab(btn.dataset.tab);
   });
 });
 
@@ -1638,6 +1997,7 @@ fetch('data/tickers.json', {cache: 'no-cache'})
         inception:     t.inception || null,
         expense_ratio: t.expense_ratio != null ? t.expense_ratio : null,
         avg_volume:    t.avg_volume    != null ? t.avg_volume    : null,
+        prices:        Array.isArray(t.prices) ? t.prices : [],
       };
       updated++;
     });
@@ -1646,9 +2006,8 @@ fetch('data/tickers.json', {cache: 'no-cache'})
       renderAddSelect();
       recomputeSim();
       renderAnalyzerSelect();
-      // If the analyzer is currently displaying a ticker, refresh its data
-      const currentSel = $('anSel');
-      if(currentSel && currentSel.value) showAnalyzer(currentSel.value);
+      // If the analyzer is currently displaying anything, refresh it with the new data.
+      if(collectAnalyzerSelection().length > 0) renderAnalyzer();
     }
   })
   .catch(() => { /* silent fallback to hardcoded data */ });

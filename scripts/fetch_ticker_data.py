@@ -2,9 +2,9 @@
 """Fetch ticker stats for the Ember portfolio simulator.
 
 Pulls 10-year CAGR, annualized volatility, TTM dividend yield, 2022
-calendar-year return, and fund metadata (description, inception date,
-expense ratio, average daily volume) for each ticker in the curated list.
-Writes results to data/tickers.json.
+calendar-year return, fund metadata (description, inception date,
+expense ratio, average daily volume), and monthly close-price history
+for each ticker in the curated list. Writes results to data/tickers.json.
 
 If a ticker fails to fetch and a previous value exists, the previous value
 is kept so transient yfinance errors don't blow away good data.
@@ -20,7 +20,7 @@ import json
 import math
 import os
 import sys
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 import yfinance as yf
 
@@ -79,6 +79,7 @@ CASH = {
     "inception": None,
     "expense_ratio": 0.0,
     "avg_volume": None,
+    "prices": [],
 }
 
 OUTPUT_PATH = "data/tickers.json"
@@ -130,11 +131,20 @@ def fetch_stats(symbol: str) -> dict:
     except Exception:
         pass
 
+    # Monthly close prices over the same 10-year window (for the analyzer chart).
+    # Resample to month-end; drop any NaN months that resulted from gaps.
+    monthly = hist["Close"].resample("ME").last().dropna()
+    monthly_prices = [
+        [d.strftime("%Y-%m-%d"), round(float(p), 2)]
+        for d, p in monthly.items()
+    ]
+
     return {
         "cagr":   round(cagr, 2),
         "stddev": round(stddev, 2),
         "yield":  round(yield_pct, 2),
         "ret22":  round(ret22, 2) if ret22 is not None else None,
+        "prices": monthly_prices,
     }
 
 
@@ -160,7 +170,7 @@ def fetch_metadata(symbol: str) -> dict:
     inception_ts = info.get("fundInceptionDate")
     if inception_ts:
         try:
-            inception_date = datetime.utcfromtimestamp(int(inception_ts)).strftime("%Y-%m-%d")
+            inception_date = datetime.fromtimestamp(int(inception_ts), tz=timezone.utc).strftime("%Y-%m-%d")
         except Exception:
             pass
 
@@ -226,6 +236,7 @@ def main() -> int:
                     **meta,
                     "cagr": None, "stddev": None, "yield": None, "ret22": None,
                     "description": "", "inception": None, "expense_ratio": None, "avg_volume": None,
+                    "prices": [],
                 }
                 print(f"  {symbol:5s}  fetch failed and no fallback ({e})")
 
@@ -233,7 +244,7 @@ def main() -> int:
     result["CASH"] = dict(CASH)
 
     payload = {
-        "updated": datetime.utcnow().isoformat() + "Z",
+        "updated": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
         "tickers": result,
     }
 
