@@ -272,15 +272,20 @@
   .sim-back-btn:hover{background:var(--paper);color:var(--pine)}
 
   /* true inflation tab */
-  .ti-hero{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);border-radius:18px;overflow:hidden;margin-top:8px}
-  @media(max-width:680px){.ti-hero{grid-template-columns:1fr}}
+  .ti-hero{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);border-radius:18px;overflow:hidden;margin-top:8px}
+  @media(max-width:920px){.ti-hero{grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.ti-hero{grid-template-columns:1fr}}
   .ti-hero-card{background:var(--card);padding:28px 28px 26px;position:relative}
   .ti-hero-card.ember{background:linear-gradient(135deg,var(--card) 0%,var(--ember-soft) 220%)}
+  .ti-hero-card.truflation{background:linear-gradient(135deg,var(--card) 0%,rgba(44,95,122,.08) 220%)}
   .ti-hero-label{font-size:11.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-faint);font-weight:600;margin-bottom:10px}
-  .ti-hero-num{font-family:'Fraunces',serif;font-weight:500;letter-spacing:-.025em;line-height:1;font-size:clamp(44px,5.5vw,68px);color:var(--ink)}
+  .ti-hero-num{font-family:'Fraunces',serif;font-weight:500;letter-spacing:-.025em;line-height:1;font-size:clamp(40px,4.5vw,58px);color:var(--ink)}
   .ti-hero-card.ember .ti-hero-num{color:var(--ember)}
+  .ti-hero-card.truflation .ti-hero-num{color:#2C5F7A}
   .ti-hero-asof{font-size:12.5px;color:var(--ink-faint);margin-top:10px}
   .ti-hero-asof b{color:var(--ink-soft);font-weight:600}
+  .ti-hero-asof a{color:var(--ink-faint);text-decoration:none;border-bottom:1px dotted var(--ink-faint)}
+  .ti-hero-asof a:hover{color:var(--ink-soft);border-bottom-color:var(--ink-soft)}
 
   .ti-gap{margin-top:18px;padding:14px 18px;background:var(--paper);border-radius:11px;font-size:13.5px;color:var(--ink-soft);line-height:1.5}
   .ti-gap b{color:var(--ink);font-weight:600}
@@ -320,6 +325,7 @@
   .infl-quickfill .qf-btn{background:var(--paper);border:1px solid var(--line);font-family:inherit;font-size:12px;font-weight:600;color:var(--ink-soft);padding:5px 11px;border-radius:99px;cursor:pointer;transition:background .15s,color .15s,border-color .15s;font-variant-numeric:tabular-nums}
   .infl-quickfill .qf-btn:hover{background:var(--card);color:var(--pine);border-color:var(--pine)}
   .infl-quickfill .qf-btn.ember:hover{color:var(--ember);border-color:var(--ember)}
+  .infl-quickfill .qf-btn.truflation:hover{color:#2C5F7A;border-color:#2C5F7A}
   .infl-quickfill a.qf-source{color:var(--ink-faint);text-decoration:none;margin-left:auto;font-size:11.5px}
   .infl-quickfill a.qf-source:hover{color:var(--pine);text-decoration:underline}
 
@@ -476,6 +482,7 @@
               <span class="qf-label">Use current:</span>
               <button type="button" class="qf-btn" id="qf-bls" data-source="bls">BLS —%</button>
               <button type="button" class="qf-btn ember" id="qf-ember" data-source="ember">Ember True —%</button>
+              <button type="button" class="qf-btn truflation" id="qf-truflation" data-source="truflation" style="display:none">Truflation —%</button>
               <a href="#" class="qf-source" id="qf-source">See True Inflation →</a>
             </div>
           </div>
@@ -744,7 +751,7 @@
 
   <div id="ti-tab" class="tab-content">
     <div class="panel panel-pad">
-      <div class="panel-title">Two readings of inflation</div>
+      <div class="panel-title">Three readings of inflation</div>
 
       <div id="ti-content" style="display:none">
         <div class="ti-hero">
@@ -757,6 +764,14 @@
             <div class="ti-hero-label">Ember True Inflation</div>
             <div class="ti-hero-num" id="ti-ember-num">—</div>
             <div class="ti-hero-asof">Year-over-year · as of <b id="ti-ember-date">—</b></div>
+          </div>
+          <div class="ti-hero-card truflation">
+            <div class="ti-hero-label">Truflation (real-time)</div>
+            <div class="ti-hero-num" id="ti-truf-num">—</div>
+            <div class="ti-hero-asof">
+              <span id="ti-truf-asof">Loading…</span>
+              · <a id="ti-truf-link" href="https://truflation.com/marketplace/us-inflation-rate" target="_blank" rel="noopener">truflation.com ↗</a>
+            </div>
           </div>
         </div>
 
@@ -2203,14 +2218,46 @@ fetch('data/tickers.json', {cache: 'no-cache'})
 // True Inflation tab
 // ─────────────────────────────────────────────────────────────────────────────
 let inflationData = null;
+let truflationData = null;
 let tiChart = null;
 
 function formatDate(isoStr){
   if(!isoStr) return '—';
   try {
-    const d = new Date(isoStr + 'T00:00:00');
+    const d = new Date(isoStr + (isoStr.includes('T') ? '' : 'T00:00:00'));
     return d.toLocaleDateString('en-US', {month:'short', year:'numeric'});
   } catch { return isoStr; }
+}
+
+function formatDateTime(isoStr){
+  if(!isoStr) return '—';
+  try {
+    const d = new Date(isoStr);
+    return d.toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'});
+  } catch { return isoStr; }
+}
+
+function renderTruflationCard(){
+  // Render whatever we have right now into the hero card + quickfill.
+  const numEl  = $('ti-truf-num');
+  const asofEl = $('ti-truf-asof');
+  if(truflationData && truflationData.truflation_cpi_yoy != null){
+    numEl.textContent = truflationData.truflation_cpi_yoy.toFixed(2) + '%';
+    asofEl.textContent = 'Daily · scraped ' + formatDateTime(truflationData.as_of);
+  } else {
+    numEl.textContent = '—';
+    asofEl.textContent = 'Currently unavailable';
+  }
+  // Quickfill button — only show when we have a value
+  const qf = $('qf-truflation');
+  if(qf){
+    if(truflationData && truflationData.truflation_cpi_yoy != null){
+      qf.textContent = 'Truflation ' + truflationData.truflation_cpi_yoy.toFixed(2) + '%';
+      qf.style.display = '';
+    } else {
+      qf.style.display = 'none';
+    }
+  }
 }
 
 function renderTrueInflation(){
@@ -2332,6 +2379,9 @@ $('qf-bls').addEventListener('click', () => {
 $('qf-ember').addEventListener('click', () => {
   if(inflationData) setInflationFromQuickfill(inflationData.true_inflation_yoy);
 });
+$('qf-truflation').addEventListener('click', () => {
+  if(truflationData) setInflationFromQuickfill(truflationData.truflation_cpi_yoy);
+});
 $('qf-source').addEventListener('click', e => {
   e.preventDefault();
   cameFromAnalyzer = false;
@@ -2357,6 +2407,17 @@ fetch('data/inflation.json', {cache: 'no-cache'})
   })
   .catch(() => {
     $('ti-empty').textContent = 'Inflation data is not available right now.';
+  });
+
+fetch('data/truflation.json', {cache: 'no-cache'})
+  .then(r => r.ok ? r.json() : null)
+  .then(data => {
+    truflationData = data || null;
+    renderTruflationCard();
+  })
+  .catch(() => {
+    truflationData = null;
+    renderTruflationCard();
   });
 </script>
 </body>

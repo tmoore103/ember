@@ -1,0 +1,42 @@
+name: Refresh Truflation data
+
+on:
+  schedule:
+    # Daily at 12:00 UTC (early morning Pacific). Truflation updates daily;
+    # we run shortly after the typical update window.
+    - cron: '0 12 * * *'
+  workflow_dispatch:  # Manual trigger from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install Playwright + Chromium
+        run: |
+          pip install playwright
+          playwright install --with-deps chromium
+
+      - name: Scrape Truflation headline
+        run: python scripts/fetch_truflation.py
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/truflation.json
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "chore: refresh Truflation data"
+            git push
+          fi
