@@ -339,7 +339,8 @@
 
   /* sync toggle */
   .tabs{justify-content:space-between;align-items:center;gap:12px}
-  .tab-list{display:flex;min-width:0}
+  .tab-list{display:flex;flex:1 1 0;min-width:0;overflow-x:auto;-ms-overflow-style:none;scrollbar-width:none}
+  .tab-list::-webkit-scrollbar{display:none}
   .sync-toggle{display:flex;align-items:center;gap:7px;background:none;border:1px solid var(--line);border-radius:99px;padding:5px 12px 5px 10px;font-family:inherit;font-size:12px;font-weight:600;color:var(--ink-faint);cursor:pointer;flex-shrink:0;margin-bottom:8px;transition:border-color .15s,color .15s,background .15s;white-space:nowrap}
   .sync-toggle:hover{border-color:var(--ink-faint);color:var(--ink-soft)}
   .sync-toggle.on{color:var(--pine);border-color:rgba(46,139,92,.4);background:rgba(46,139,92,.06)}
