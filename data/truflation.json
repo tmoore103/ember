@@ -1,6 +1,6 @@
 {
-  "as_of": "2026-06-14T23:55:20.623310Z",
-  "truflation_cpi_yoy": 1.1,
-  "source": "Truflation",
+  "as_of": "2026-06-14T18:00:00Z",
+  "truflation_cpi_yoy": 1.84,
+  "source": "Truflation (manual reset after scraper bug; verified against truflation.com on 2026-06-14)",
   "source_url": "https://truflation.com/marketplace/us-inflation-rate"
 }
