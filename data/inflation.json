@@ -1,45 +1,45 @@
 {
   "as_of": "2026-06-14",
   "data_through": "2026-05-01",
-  "true_inflation_yoy": 4.52,
+  "true_inflation_yoy": 3.87,
   "bls_cpi_yoy": 4.17,
   "bls_cpi_as_of": "2026-05-01",
-  "gap": 0.35,
+  "gap": -0.3,
   "components": [
     {
       "name": "Shelter",
-      "weight": 0.33,
-      "yoy": 0.66,
-      "contribution": 0.22,
-      "source": "S&P/Case-Shiller U.S. National Home Price Index",
-      "note": "Uses real home prices instead of BLS's lagging Owners' Equivalent Rent.",
-      "as_of": "2026-03-01"
+      "weight": 0.23,
+      "yoy": 1.73,
+      "contribution": 0.4,
+      "source": "Zillow Observed Rent Index (ZORI), national, smoothed seasonally adjusted",
+      "note": "Real market-rate rents tracked from millions of Zillow rental listings, replacing BLS's Owners' Equivalent Rent which lags by 6-12 months. Weight matches Truflation's published 23.2% housing weight (BLS-CEX uses 33% \u2014 we believe Truflation's weight better reflects current consumer expenditure).",
+      "as_of": "2026-04-30"
     },
     {
       "name": "Food",
-      "weight": 0.14,
+      "weight": 0.15,
       "yoy": 3.08,
-      "contribution": 0.43,
+      "contribution": 0.46,
       "source": "BLS CPI: Food (FRED: CPIUFDSL)",
-      "note": "All food (at home and away from home), urban consumers.",
+      "note": "All food (at home and away from home), urban consumers. Weight matches Truflation's 15.3%.",
       "as_of": "2026-05-01"
     },
     {
-      "name": "Energy",
-      "weight": 0.07,
-      "yoy": 22.97,
-      "contribution": 1.61,
-      "source": "BLS CPI: Energy (FRED: CPIENGSL)",
-      "note": "Gasoline, electricity, natural gas, heating oil. Set EIA_API_KEY env var to swap in real-time weekly gas prices for a more responsive read.",
+      "name": "Utilities",
+      "weight": 0.05,
+      "yoy": 5.92,
+      "contribution": 0.3,
+      "source": "BLS CPI: Electricity (FRED: CUSR0000SEHF01)",
+      "note": "Electricity costs \u2014 used as proxy for household utility costs (NOT motor fuel). Electricity is the largest single household utility expense. Motor fuel is captured inside the Transportation component instead, matching Truflation's basket structure and avoiding the double-count that occurs when motor fuel is also a separate component.",
       "as_of": "2026-05-01"
     },
     {
       "name": "Transportation",
-      "weight": 0.16,
+      "weight": 0.19,
       "yoy": 8.95,
-      "contribution": 1.43,
-      "source": "BLS CPI: Transportation (FRED: CPITRNSL)",
-      "note": "Vehicles, fuel, maintenance, public transit, airfare.",
+      "contribution": 1.7,
+      "source": "BLS CPI: Transportation (FRED: CPITRNSL) \u2014 includes motor fuel",
+      "note": "Vehicles, motor fuel, maintenance, insurance, public transit, airfare. BLS Transportation already includes motor fuel, so this component naturally carries our fuel exposure. Weight matches Truflation's published 19.8%.",
       "as_of": "2026-05-01"
     },
     {
@@ -48,325 +48,361 @@
       "yoy": 2.59,
       "contribution": 0.21,
       "source": "BLS CPI: Medical Care (FRED: CPIMEDSL)",
-      "note": "Insurance premiums, hospital services, prescription drugs.",
+      "note": "Insurance premiums, hospital services, prescription drugs. Weight matches Truflation's 8.5%.",
       "as_of": "2026-05-01"
     },
     {
-      "name": "All other (core ex-food, energy)",
-      "weight": 0.22,
+      "name": "Apparel",
+      "weight": 0.03,
+      "yoy": 4.81,
+      "contribution": 0.14,
+      "source": "BLS CPI: Apparel (FRED: CPIAPPSL)",
+      "note": "Clothing and footwear. Carved out from the broad 'core' category \u2014 apparel has been deflating since 2023, which gets washed out in BLS Core CPI.",
+      "as_of": "2026-05-01"
+    },
+    {
+      "name": "Recreation",
+      "weight": 0.05,
+      "yoy": 2.63,
+      "contribution": 0.13,
+      "source": "BLS CPI: Recreation (FRED: CPIRECSL)",
+      "note": "Sports, hobbies, media, pets, recreational services. Carved out from broad 'core' \u2014 typically grows slower than headline core.",
+      "as_of": "2026-05-01"
+    },
+    {
+      "name": "Education & Communication",
+      "weight": 0.05,
+      "yoy": 0.84,
+      "contribution": 0.04,
+      "source": "BLS CPI: Education and Communication (FRED: CPIEDUSL)",
+      "note": "Tuition, school supplies, phone plans, internet, postage. Carved out from broad 'core' \u2014 communications subindex has been deflating, dragging this lower.",
+      "as_of": "2026-05-01"
+    },
+    {
+      "name": "Household furnishings",
+      "weight": 0.05,
+      "yoy": 2.98,
+      "contribution": 0.15,
+      "source": "BLS CPI: Household Furnishings and Operations (FRED: CUUR0000SAH3)",
+      "note": "Furniture, appliances, kitchen, cleaning supplies, household services. Carved out from broad 'core' \u2014 durables have been broadly deflating since 2023.",
+      "as_of": "2026-05-01"
+    },
+    {
+      "name": "Other (residual core)",
+      "weight": 0.12,
       "yoy": 2.82,
-      "contribution": 0.62,
+      "contribution": 0.34,
       "source": "BLS Core CPI (FRED: CPILFESL)",
-      "note": "Apparel, recreation, education, communication, services.",
+      "note": "Everything not captured above \u2014 alcohol, tobacco, personal care, miscellaneous services. Uses headline core CPI as a proxy.",
       "as_of": "2026-05-01"
     }
   ],
   "history": [
     {
       "date": "2021-05",
-      "ember": 11.82,
+      "ember": 6.32,
       "bls": 4.92
     },
     {
       "date": "2021-06",
-      "ember": 12.55,
+      "ember": 7.03,
       "bls": 5.3
     },
     {
       "date": "2021-07",
-      "ember": 12.59,
+      "ember": 7.14,
       "bls": 5.25
     },
     {
       "date": "2021-08",
-      "ember": 12.49,
+      "ember": 7.3,
       "bls": 5.15
     },
     {
       "date": "2021-09",
-      "ember": 12.4,
+      "ember": 7.72,
       "bls": 5.35
     },
     {
       "date": "2021-10",
-      "ember": 13.24,
+      "ember": 8.97,
       "bls": 6.24
     },
     {
       "date": "2021-11",
-      "ember": 14.12,
+      "ember": 9.97,
       "bls": 6.9
     },
     {
       "date": "2021-12",
-      "ember": 14.11,
+      "ember": 10.39,
       "bls": 7.17
     },
     {
       "date": "2022-01",
-      "ember": 14.14,
+      "ember": 10.93,
       "bls": 7.56
     },
     {
       "date": "2022-02",
-      "ember": 14.53,
+      "ember": 11.2,
       "bls": 7.94
     },
     {
       "date": "2022-03",
-      "ember": 15.58,
+      "ember": 11.78,
       "bls": 8.57
     },
     {
       "date": "2022-04",
-      "ember": 15.0,
+      "ember": 11.2,
       "bls": 8.23
     },
     {
       "date": "2022-05",
-      "ember": 15.08,
+      "ember": 11.2,
       "bls": 8.54
     },
     {
       "date": "2022-06",
-      "ember": 15.06,
+      "ember": 11.33,
       "bls": 8.98
     },
     {
       "date": "2022-07",
-      "ember": 13.26,
+      "ember": 10.69,
       "bls": 8.46
     },
     {
       "date": "2022-08",
-      "ember": 11.49,
+      "ember": 10.03,
       "bls": 8.22
     },
     {
       "date": "2022-09",
-      "ember": 10.44,
+      "ember": 9.59,
       "bls": 8.19
     },
     {
       "date": "2022-10",
-      "ember": 9.39,
+      "ember": 8.69,
       "bls": 7.76
     },
     {
       "date": "2022-11",
-      "ember": 7.81,
+      "ember": 7.59,
       "bls": 7.12
     },
     {
       "date": "2022-12",
-      "ember": 5.98,
+      "ember": 6.47,
       "bls": 6.4
     },
     {
       "date": "2023-01",
-      "ember": 5.32,
+      "ember": 5.98,
       "bls": 6.33
     },
     {
       "date": "2023-02",
-      "ember": 4.17,
+      "ember": 5.55,
       "bls": 5.96
     },
     {
       "date": "2023-03",
-      "ember": 2.15,
+      "ember": 4.4,
       "bls": 4.92
     },
     {
       "date": "2023-04",
-      "ember": 2.04,
+      "ember": 4.38,
       "bls": 4.95
     },
     {
       "date": "2023-05",
-      "ember": 0.99,
+      "ember": 3.46,
       "bls": 4.13
     },
     {
       "date": "2023-06",
-      "ember": -0.03,
+      "ember": 2.4,
       "bls": 3.07
     },
     {
       "date": "2023-07",
-      "ember": 0.74,
+      "ember": 2.27,
       "bls": 3.29
     },
     {
       "date": "2023-08",
-      "ember": 2.39,
+      "ember": 2.71,
       "bls": 3.72
     },
     {
       "date": "2023-09",
-      "ember": 3.01,
+      "ember": 2.64,
       "bls": 3.69
     },
     {
       "date": "2023-10",
-      "ember": 2.71,
+      "ember": 2.25,
       "bls": 3.25
     },
     {
       "date": "2023-11",
-      "ember": 2.79,
+      "ember": 2.18,
       "bls": 3.13
     },
     {
       "date": "2023-12",
-      "ember": 3.47,
+      "ember": 2.47,
       "bls": 3.32
     },
     {
       "date": "2024-01",
-      "ember": 3.3,
+      "ember": 2.28,
       "bls": 3.09
     },
     {
       "date": "2024-02",
-      "ember": 3.71,
+      "ember": 2.37,
       "bls": 3.16
     },
     {
       "date": "2024-03",
-      "ember": 4.28,
+      "ember": 2.76,
       "bls": 3.49
     },
     {
       "date": "2024-04",
-      "ember": 4.15,
+      "ember": 2.59,
       "bls": 3.36
     },
     {
       "date": "2024-05",
-      "ember": 3.93,
+      "ember": 2.46,
       "bls": 3.24
     },
     {
       "date": "2024-06",
-      "ember": 3.35,
+      "ember": 2.14,
       "bls": 2.97
     },
     {
       "date": "2024-07",
-      "ember": 3.16,
+      "ember": 2.21,
       "bls": 2.94
     },
     {
       "date": "2024-08",
-      "ember": 2.29,
+      "ember": 1.81,
       "bls": 2.61
     },
     {
       "date": "2024-09",
-      "ember": 1.94,
+      "ember": 1.77,
       "bls": 2.43
     },
     {
       "date": "2024-10",
-      "ember": 2.1,
+      "ember": 1.92,
       "bls": 2.58
     },
     {
       "date": "2024-11",
-      "ember": 2.38,
+      "ember": 2.06,
       "bls": 2.72
     },
     {
       "date": "2024-12",
-      "ember": 2.84,
+      "ember": 2.26,
       "bls": 2.87
     },
     {
       "date": "2025-01",
-      "ember": 3.19,
+      "ember": 2.46,
       "bls": 2.99
     },
     {
       "date": "2025-02",
-      "ember": 2.8,
+      "ember": 2.25,
       "bls": 2.8
     },
     {
       "date": "2025-03",
-      "ember": 1.98,
+      "ember": 1.78,
       "bls": 2.38
     },
     {
       "date": "2025-04",
-      "ember": 1.67,
+      "ember": 1.71,
       "bls": 2.33
     },
     {
       "date": "2025-05",
-      "ember": 1.58,
+      "ember": 1.81,
       "bls": 2.38
     },
     {
       "date": "2025-06",
-      "ember": 1.87,
+      "ember": 2.19,
       "bls": 2.68
     },
     {
       "date": "2025-07",
-      "ember": 1.85,
+      "ember": 2.3,
       "bls": 2.74
     },
     {
       "date": "2025-08",
-      "ember": 2.09,
+      "ember": 2.55,
       "bls": 2.94
     },
     {
       "date": "2025-09",
-      "ember": 2.29,
+      "ember": 2.64,
       "bls": 3.02
     },
     {
       "date": "2025-11",
-      "ember": 2.11,
+      "ember": 2.51,
       "bls": 2.7
     },
     {
       "date": "2025-12",
-      "ember": 1.82,
+      "ember": 2.33,
       "bls": 2.65
     },
     {
       "date": "2026-01",
-      "ember": 1.32,
+      "ember": 2.02,
       "bls": 2.39
     },
     {
       "date": "2026-02",
-      "ember": 1.45,
+      "ember": 2.02,
       "bls": 2.43
     },
     {
       "date": "2026-03",
-      "ember": 3.11,
+      "ember": 2.99,
       "bls": 3.29
     },
     {
       "date": "2026-04",
-      "ember": 3.8,
+      "ember": 3.47,
       "bls": 3.78
     },
     {
       "date": "2026-05",
-      "ember": 4.52,
+      "ember": 3.87,
       "bls": 4.17
     }
   ],
   "methodology": {
-    "summary": "Ember True Inflation is a weighted average of year-over-year price changes across six consumer spending categories. Weights are BLS Consumer Expenditure Survey derived (the same source Truflation uses). Two methodological choices drive Ember's divergence from BLS CPI: (1) we use S&P/Case-Shiller home prices for the shelter component instead of BLS's Owners' Equivalent Rent (OER), which lags real housing prices by 12-18 months; (2) energy uses BLS Energy CPI for now \u2014 set EIA_API_KEY in the pipeline to swap in real-time weekly gas prices.",
-    "weights_source": "BLS Consumer Expenditure Survey (CEX), 2024 weights",
-    "data_sources": "Federal Reserve Economic Data (FRED), St. Louis Fed",
-    "update_frequency": "Daily. Component data updates monthly; we recompute daily to pick up any FRED revisions."
+    "summary": "Ember True Inflation is a weighted average of year-over-year price changes across 10 consumer spending categories, modeled after Truflation's published category structure. Three methodological choices drive Ember's divergence from BLS CPI: (1) we use Zillow's Observed Rent Index (ZORI) for shelter instead of BLS's lagging Owners' Equivalent Rent; (2) we structure Energy/Transportation the way Truflation does \u2014 Utilities covers electricity (motor fuel is captured inside Transportation, avoiding the double-count that occurs when motor fuel is also a separate component); (3) we carve out apparel, recreation, education/communication, and household furnishings as separate components rather than folding them into a single 'core' category \u2014 important since tariff effects on goods are no longer uniformly deflationary.",
+    "weights_source": "Truflation 2026 published weights where defensible (housing 23%, transportation 19%, food 15%, medical 8%), with sub-category carve-outs to expose goods inflation that gets averaged away in broad core indices",
+    "data_sources": "Zillow Research + Federal Reserve Economic Data (FRED), St. Louis Fed",
+    "update_frequency": "Daily. Component data updates monthly; we recompute daily to pick up any revisions."
   }
 }

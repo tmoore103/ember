@@ -1,8 +1,8 @@
 """
 fetch_inflation_data.py
 
-Computes the Ember True Inflation Index from FRED data and writes
-data/inflation.json for the True Inflation page on Ember.
+Computes the Ember True Inflation Index from a mix of real-time data sources
+and writes data/inflation.json for the True Inflation page on Ember.
 
 Methodology
 -----------
@@ -10,8 +10,10 @@ Methodology
   Truflation uses. Weights represent the share of typical household spending
   going to each category.
 - Data sources are the freshest free options available:
-    * Shelter:   S&P/Case-Shiller home prices (FRED) instead of BLS's lagging
-                 Owners' Equivalent Rent (OER) — captures real housing prices.
+    * Shelter:   Zillow Observed Rent Index (ZORI), national smoothed
+                 seasonally adjusted. Falls back to S&P/Case-Shiller home
+                 prices (FRED) if Zillow CSV is unavailable. Rents are what
+                 consumers actually pay monthly; home prices are an asset.
     * Energy:    EIA weekly retail gasoline (when EIA_API_KEY is set) instead
                  of BLS's monthly Energy CPI — captures pump-price moves in
                  near-real-time. Falls back to BLS CPIENGSL if EIA key missing.
@@ -27,8 +29,9 @@ Run locally
 In GitHub Actions, both keys are injected from repository secrets.
 
 API key signup:
-    FRED: https://fred.stlouisfed.org/docs/api/api_key.html
-    EIA:  https://www.eia.gov/opendata/register.php
+    FRED:   https://fred.stlouisfed.org/docs/api/api_key.html
+    EIA:    https://www.eia.gov/opendata/register.php
+    Zillow: No key required — free public CSV downloads.
 """
 
 import os
@@ -61,63 +64,103 @@ EIA_BASE  = "https://api.eia.gov/v2/petroleum/pri/gnd/data/"
 # EIA series ID for "Weekly U.S. Regular All Formulations Retail Gasoline Prices" ($/gallon)
 EIA_GAS_SERIES = "EMM_EPMR_PTE_NUS_DPG"
 
+# Zillow ZORI download URLs (no API key required — these are free public CSVs).
+# Try the smoothed+seasonally-adjusted version first; fall back to smoothed-only.
+# These paths occasionally change — Zillow warns users of that on their data page.
+ZILLOW_ZORI_URLS = [
+    "https://files.zillowstatic.com/research/public_csvs/zori/Metro_zori_uc_sfrcondomfr_sm_sa_month.csv",
+    "https://files.zillowstatic.com/research/public_csvs/zori/Metro_zori_uc_sfrcondomfr_sm_month.csv",
+]
+
 # Component definitions: series ID, BLS-CEX-derived weight, display name, source label.
 # Weights sum to 1.00 and approximate BLS's 2024 consumer expenditure shares.
 COMPONENTS = [
     {
         "name": "Shelter",
-        "series": "CSUSHPISA",
-        "weight": 0.33,
-        "source": "S&P/Case-Shiller U.S. National Home Price Index",
-        "note": "Uses real home prices instead of BLS's lagging Owners' Equivalent Rent.",
+        "series": "ZORI_US",
+        "source_type": "zillow_zori",
+        "weight": 0.23,
+        "source": "Zillow Observed Rent Index (ZORI), national, smoothed seasonally adjusted",
+        "note": "Real market-rate rents tracked from millions of Zillow rental listings, "
+                "replacing BLS's Owners' Equivalent Rent which lags by 6-12 months. "
+                "Weight matches Truflation's published 23.2% housing weight (BLS-CEX uses 33% — "
+                "we believe Truflation's weight better reflects current consumer expenditure).",
     },
     {
         "name": "Food",
         "series": "CPIUFDSL",
-        "weight": 0.14,
+        "weight": 0.15,
         "source": "BLS CPI: Food (FRED: CPIUFDSL)",
-        "note": "All food (at home and away from home), urban consumers.",
+        "note": "All food (at home and away from home), urban consumers. "
+                "Weight matches Truflation's 15.3%.",
     },
     {
-        "name": "Energy",
-        "series": EIA_GAS_SERIES if EIA_API_KEY else "CPIENGSL",
-        "source_type": "eia_petroleum" if EIA_API_KEY else "fred",
-        "weight": 0.07,
-        "source": (
-            "EIA Weekly U.S. Retail Gasoline Prices (regular, all formulations)"
-            if EIA_API_KEY else
-            "BLS CPI: Energy (FRED: CPIENGSL)"
-        ),
-        "note": (
-            "Real-time weekly retail gasoline prices replace BLS's monthly Energy CPI. "
-            "Gasoline is the dominant driver of energy price volatility, so it serves "
-            "as a leading proxy for the broader energy basket while electricity and "
-            "natural gas move slowly."
-            if EIA_API_KEY else
-            "Gasoline, electricity, natural gas, heating oil. Set EIA_API_KEY env var "
-            "to swap in real-time weekly gas prices for a more responsive read."
-        ),
+        "name": "Utilities",
+        "series": "CUSR0000SEHF01",
+        "weight": 0.05,
+        "source": "BLS CPI: Electricity (FRED: CUSR0000SEHF01)",
+        "note": "Electricity costs — used as proxy for household utility costs (NOT motor fuel). "
+                "Electricity is the largest single household utility expense. Motor fuel is "
+                "captured inside the Transportation component instead, matching Truflation's "
+                "basket structure and avoiding the double-count that occurs when motor fuel "
+                "is also a separate component.",
     },
     {
         "name": "Transportation",
         "series": "CPITRNSL",
-        "weight": 0.16,
-        "source": "BLS CPI: Transportation (FRED: CPITRNSL)",
-        "note": "Vehicles, fuel, maintenance, public transit, airfare.",
+        "weight": 0.19,
+        "source": "BLS CPI: Transportation (FRED: CPITRNSL) — includes motor fuel",
+        "note": "Vehicles, motor fuel, maintenance, insurance, public transit, airfare. "
+                "BLS Transportation already includes motor fuel, so this component naturally "
+                "carries our fuel exposure. Weight matches Truflation's published 19.8%.",
     },
     {
         "name": "Medical care",
         "series": "CPIMEDSL",
         "weight": 0.08,
         "source": "BLS CPI: Medical Care (FRED: CPIMEDSL)",
-        "note": "Insurance premiums, hospital services, prescription drugs.",
+        "note": "Insurance premiums, hospital services, prescription drugs. "
+                "Weight matches Truflation's 8.5%.",
     },
     {
-        "name": "All other (core ex-food, energy)",
+        "name": "Apparel",
+        "series": "CPIAPPSL",
+        "weight": 0.03,
+        "source": "BLS CPI: Apparel (FRED: CPIAPPSL)",
+        "note": "Clothing and footwear. Carved out from the broad 'core' category — "
+                "apparel has been deflating since 2023, which gets washed out in BLS Core CPI.",
+    },
+    {
+        "name": "Recreation",
+        "series": "CPIRECSL",
+        "weight": 0.05,
+        "source": "BLS CPI: Recreation (FRED: CPIRECSL)",
+        "note": "Sports, hobbies, media, pets, recreational services. Carved out from "
+                "broad 'core' — typically grows slower than headline core.",
+    },
+    {
+        "name": "Education & Communication",
+        "series": "CPIEDUSL",
+        "weight": 0.05,
+        "source": "BLS CPI: Education and Communication (FRED: CPIEDUSL)",
+        "note": "Tuition, school supplies, phone plans, internet, postage. Carved out from "
+                "broad 'core' — communications subindex has been deflating, dragging this lower.",
+    },
+    {
+        "name": "Household furnishings",
+        "series": "CUUR0000SAH3",
+        "weight": 0.05,
+        "source": "BLS CPI: Household Furnishings and Operations (FRED: CUUR0000SAH3)",
+        "note": "Furniture, appliances, kitchen, cleaning supplies, household services. "
+                "Carved out from broad 'core' — durables have been broadly deflating since 2023.",
+    },
+    {
+        "name": "Other (residual core)",
         "series": "CPILFESL",
-        "weight": 0.22,
+        "weight": 0.12,
         "source": "BLS Core CPI (FRED: CPILFESL)",
-        "note": "Apparel, recreation, education, communication, services.",
+        "note": "Everything not captured above — alcohol, tobacco, personal care, "
+                "miscellaneous services. Uses headline core CPI as a proxy.",
     },
 ]
 
@@ -189,11 +232,94 @@ def fetch_eia_gas(start_date="2010-01-01"):
     ]
 
 
+def fetch_zillow_zori():
+    """Fetch Zillow Observed Rent Index (ZORI) for the United States.
+
+    ZORI is a smoothed measure of typical observed market-rate rents, derived
+    from millions of Zillow rental listings. It's published monthly as free
+    public CSVs. We download the metro-level CSV (which also contains the US
+    national row), find the "United States" row, and extract the monthly
+    time series. Falls through to a backup URL if the primary 404s.
+
+    Returns the same {date, value} shape as fetch_series for drop-in use.
+    """
+    import csv
+    from io import StringIO
+
+    headers = {
+        # Some CDNs reject empty/missing User-Agents. Identify ourselves clearly.
+        "User-Agent": "Mozilla/5.0 (compatible; ember-fire-inflation-fetcher/1.0)",
+    }
+
+    last_error = None
+    for url in ZILLOW_ZORI_URLS:
+        try:
+            req = urllib.request.Request(url, headers=headers)
+            with urllib.request.urlopen(req, timeout=60) as resp:
+                content = resp.read().decode("utf-8")
+
+            reader = csv.DictReader(StringIO(content))
+            us_row = None
+            for row in reader:
+                # The national row is identified by RegionType=country in newer
+                # CSVs and SizeRank=0 with RegionName="United States" in older
+                # ones. Match either pattern.
+                region_type = (row.get("RegionType") or "").strip().lower()
+                region_name = (row.get("RegionName") or "").strip()
+                if region_type == "country" or region_name == "United States":
+                    us_row = row
+                    break
+
+            if not us_row:
+                last_error = f"No United States row found in {url}"
+                continue
+
+            # Date columns are all the non-metadata fields that parse as ISO dates.
+            metadata_cols = {
+                "RegionID", "SizeRank", "RegionName", "RegionType", "StateName",
+                "Metro", "City", "County", "State",
+            }
+            observations = []
+            for col, val in us_row.items():
+                if col in metadata_cols or not col:
+                    continue
+                if val is None or str(val).strip() == "":
+                    continue
+                try:
+                    datetime.date.fromisoformat(col)  # confirms it's a date column
+                except (ValueError, TypeError):
+                    continue
+                try:
+                    observations.append({"date": col, "value": float(val)})
+                except (ValueError, TypeError):
+                    continue
+
+            observations.sort(key=lambda o: o["date"])
+            if len(observations) < 24:
+                # Sanity check: we expect years of monthly data.
+                last_error = f"Only {len(observations)} observations in {url}"
+                continue
+
+            return observations
+
+        except Exception as e:
+            last_error = f"{url}: {e}"
+            continue
+
+    raise RuntimeError(f"All Zillow ZORI URLs failed. Last error: {last_error}")
+
+
 def fetch_component(comp, start_date="2010-01-01"):
-    """Dispatch fetching based on component's source_type."""
+    """Dispatch fetching based on component's source_type.
+
+    For zillow_zori we don't pass start_date — Zillow's CSV is what it is, and
+    we filter by date downstream if needed.
+    """
     source_type = comp.get("source_type", "fred")
     if source_type == "eia_petroleum":
         return fetch_eia_gas(start_date)
+    if source_type == "zillow_zori":
+        return fetch_zillow_zori()
     return fetch_series(comp["series"], start_date)
 
 
@@ -215,7 +341,11 @@ def yoy_at(observations, as_of_date):
 
     latest = candidates[-1]
     latest_date = _parse(latest["date"])
-    target_prior_date = latest_date.replace(year=latest_date.year - 1)
+    try:
+        target_prior_date = latest_date.replace(year=latest_date.year - 1)
+    except ValueError:
+        # Leap day (Feb 29) — the prior year has no Feb 29, so use Feb 28 instead.
+        target_prior_date = latest_date.replace(year=latest_date.year - 1, day=28)
 
     # Find the observation closest to 12 months before the latest one.
     prior = min(
@@ -277,10 +407,8 @@ def build_history(all_series, bls_series, months=60):
 
 def main():
     print(f"Fetching {len(COMPONENTS) + 1} data series...")
-    if EIA_API_KEY:
-        print("  Energy component: using EIA real-time gas prices ✓")
-    else:
-        print("  Energy component: using BLS CPIENGSL (set EIA_API_KEY for real-time gas)")
+    print("  Shelter component:  using Zillow ZORI (rent index) with Case-Shiller fallback")
+    print("  Utilities component: using BLS electricity CPI (motor fuel captured in Transportation)")
 
     # BLS headline CPI (for comparison)
     print(f"  {BLS_CPI_SERIES:30s}  BLS headline CPI")
@@ -292,7 +420,25 @@ def main():
     all_series = []
     for comp in COMPONENTS:
         print(f"  {comp['series']:30s}  {comp['name']}")
-        observations = fetch_component(comp)
+        try:
+            observations = fetch_component(comp)
+        except Exception as e:
+            # Zillow CSV path can change occasionally — if shelter via ZORI
+            # fails, fall back to Case-Shiller (FRED CSUSHPISA) so the run
+            # still completes with a sensible shelter component.
+            if comp.get("source_type") == "zillow_zori":
+                print(f"    ⚠ ZORI fetch failed ({e}). Falling back to Case-Shiller.")
+                comp = {
+                    **comp,
+                    "series": "CSUSHPISA",
+                    "source_type": "fred",
+                    "source": "S&P/Case-Shiller U.S. National Home Price Index (FRED fallback)",
+                    "note": "ZORI download unavailable this run — using home-price index instead.",
+                }
+                observations = fetch_component(comp)
+            else:
+                raise
+
         date, yoy, _ = yoy_at(observations, datetime.date.today())
         contribution = round(yoy * comp["weight"], 2) if yoy is not None else None
         component_results.append({
@@ -327,33 +473,30 @@ def main():
         "methodology": {
             "summary": (
                 "Ember True Inflation is a weighted average of year-over-year price "
-                "changes across six consumer spending categories. Weights are BLS "
-                "Consumer Expenditure Survey derived (the same source Truflation uses). "
-                "Two methodological choices drive Ember's divergence from BLS CPI: "
-                "(1) we use S&P/Case-Shiller home prices for the shelter component "
-                "instead of BLS's Owners' Equivalent Rent (OER), which lags real "
-                "housing prices by 12-18 months; "
-                + (
-                    "(2) we use EIA's weekly retail gasoline prices for the energy "
-                    "component instead of BLS's monthly Energy CPI, which captures "
-                    "pump-price moves about 30 days late."
-                    if EIA_API_KEY else
-                    "(2) energy uses BLS Energy CPI for now — set EIA_API_KEY in the "
-                    "pipeline to swap in real-time weekly gas prices."
-                )
+                "changes across 10 consumer spending categories, modeled after "
+                "Truflation's published category structure. Three methodological choices "
+                "drive Ember's divergence from BLS CPI: "
+                "(1) we use Zillow's Observed Rent Index (ZORI) for shelter instead of "
+                "BLS's lagging Owners' Equivalent Rent; "
+                "(2) we structure Energy/Transportation the way Truflation does — Utilities "
+                "covers electricity (motor fuel is captured inside Transportation, avoiding "
+                "the double-count that occurs when motor fuel is also a separate component); "
+                "(3) we carve out apparel, recreation, education/communication, and "
+                "household furnishings as separate components rather than folding them "
+                "into a single 'core' category — important since tariff effects on goods "
+                "are no longer uniformly deflationary."
             ),
-            "weights_source": "BLS Consumer Expenditure Survey (CEX), 2024 weights",
+            "weights_source": (
+                "Truflation 2026 published weights where defensible (housing 23%, "
+                "transportation 19%, food 15%, medical 8%), with sub-category carve-outs "
+                "to expose goods inflation that gets averaged away in broad core indices"
+            ),
             "data_sources": (
-                "Federal Reserve Economic Data (FRED) + EIA Petroleum Data API"
-                if EIA_API_KEY else
-                "Federal Reserve Economic Data (FRED), St. Louis Fed"
+                "Zillow Research + Federal Reserve Economic Data (FRED), St. Louis Fed"
             ),
             "update_frequency": (
-                "Daily. Component data updates monthly (FRED) and weekly (EIA gas); "
-                "we recompute daily to pick up any revisions."
-                if EIA_API_KEY else
                 "Daily. Component data updates monthly; we recompute daily to pick up "
-                "any FRED revisions."
+                "any revisions."
             ),
         },
     }
