@@ -286,6 +286,10 @@
   .ti-hero-asof b{color:var(--ink-soft);font-weight:600}
   .ti-hero-asof a{color:var(--ink-faint);text-decoration:none;border-bottom:1px dotted var(--ink-faint)}
   .ti-hero-asof a:hover{color:var(--ink-soft);border-bottom-color:var(--ink-soft)}
+  @media(max-width:560px){
+    .ti-asof-sep{display:none}
+    .ti-hero-asof #ti-truf-link{display:inline-block;margin-top:6px}
+  }
 
   .ti-gap{margin-top:18px;padding:14px 18px;background:var(--paper);border-radius:11px;font-size:13.5px;color:var(--ink-soft);line-height:1.5}
   .ti-gap b{color:var(--ink);font-weight:600}
@@ -769,8 +773,7 @@
             <div class="ti-hero-label">Truflation (real-time)</div>
             <div class="ti-hero-num" id="ti-truf-num">—</div>
             <div class="ti-hero-asof">
-              <span id="ti-truf-asof">Loading…</span>
-              · <a id="ti-truf-link" href="https://truflation.com/marketplace/us-inflation-rate" target="_blank" rel="noopener">truflation.com ↗</a>
+              <span id="ti-truf-asof">Loading…</span><span class="ti-asof-sep"> · </span><a id="ti-truf-link" href="https://truflation.com/marketplace/us-inflation-rate" target="_blank" rel="noopener">truflation.com ↗</a>
             </div>
           </div>
         </div>
