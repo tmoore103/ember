@@ -1591,6 +1591,16 @@ function drawRetirementReturn(yearOffset, blockStart, userMeanPct, userStddevPct
 }
 
 function gatherMcParams(){
+  // Convert nominal returns to real (inflation-adjusted) so MC works in the
+  // same "today's dollars" frame as the Calculator. Without this, MC would
+  // grow assets at nominal rates while spending stays constant — the inflation
+  // premium becomes free portfolio growth that never gets eaten by rising
+  // costs, dramatically overstating success rates.
+  const infl    = +$('infl').value / 100 || 0;
+  const nomPre  = +$('ret').value  / 100 || 0;
+  const nomPost = +$('swr').value  / 100 || 0;
+  const realPre  = ((1 + nomPre)  / (1 + infl) - 1) * 100;
+  const realPost = ((1 + nomPost) / (1 + infl) - 1) * 100;
   return {
     currentAge:    +$('age').value || 30,
     retireAge:     +$('trad').value || 65,
@@ -1600,8 +1610,8 @@ function gatherMcParams(){
     contribGrowth: +$('cgrow').value || 0,
     spending:      +$('spend').value || 0,
     cushionYrs:    +$('cushion').value || 0,
-    preRet:        +$('ret').value || 0,
-    postRet:       +$('swr').value || 0,
+    preRet:        realPre,
+    postRet:       realPost,
     postVol:       +$('mcVolPost').value || 0,
   };
 }
