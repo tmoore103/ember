@@ -337,6 +337,130 @@
   .warning b{font-weight:700;color:var(--ember)}
   .warning .icon{font-weight:700;margin-right:4px;color:var(--ember)}
 
+  /* how-it-works modal */
+  header{position:relative}
+  .help-btn{
+    position:absolute;top:4px;right:0;
+    width:30px;height:30px;border-radius:50%;
+    background:none;border:1px solid var(--line);
+    font-family:inherit;font-size:15px;font-weight:600;
+    color:var(--ink-faint);cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    transition:border-color .15s,color .15s,background .15s;
+    padding:0;line-height:1;
+  }
+  .help-btn:hover{border-color:var(--ink-faint);color:var(--ink-soft);background:var(--card)}
+  .help-btn:focus-visible{outline:2px solid var(--pine);outline-offset:2px}
+
+  .how-modal{
+    position:fixed;inset:0;z-index:1000;
+    display:flex;align-items:center;justify-content:center;
+    padding:20px;
+  }
+  .how-modal[hidden]{display:none}
+  .how-backdrop{
+    position:absolute;inset:0;
+    background:rgba(27,26,22,.5);
+    animation:howFade .18s ease-out;
+  }
+  .how-dialog{
+    position:relative;
+    background:var(--card);
+    border-radius:18px;
+    box-shadow:0 20px 60px rgba(27,26,22,.25);
+    width:100%;max-width:760px;max-height:90vh;
+    display:flex;flex-direction:column;
+    overflow:hidden;
+    animation:howRise .22s cubic-bezier(.2,.8,.2,1);
+  }
+  @keyframes howFade{from{opacity:0}to{opacity:1}}
+  @keyframes howRise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+  .how-head{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:22px 26px 18px;
+    border-bottom:1px solid var(--line-soft);
+  }
+  .how-head h2{
+    font-family:'Fraunces',serif;font-weight:500;letter-spacing:-.015em;
+    font-size:22px;color:var(--ink);margin:0;
+  }
+  .how-close{
+    background:none;border:none;color:var(--ink-faint);
+    font-size:24px;font-weight:300;line-height:1;
+    cursor:pointer;padding:4px 8px;border-radius:6px;
+    transition:color .15s,background .15s;
+  }
+  .how-close:hover{color:var(--ink);background:var(--paper)}
+
+  .how-body{padding:24px 26px 28px;overflow-y:auto}
+  .how-intro{
+    font-size:15px;line-height:1.6;color:var(--ink-soft);
+    margin:0 0 26px;max-width:60ch;
+  }
+  .how-intro b{color:var(--ink);font-weight:600}
+
+  .how-flow{
+    display:grid;grid-template-columns:1fr auto 1fr auto 1fr;
+    align-items:stretch;gap:6px;
+  }
+  .how-step{
+    display:flex;flex-direction:column;align-items:flex-start;gap:8px;
+    background:var(--paper);
+    border:1px solid var(--line-soft);
+    border-radius:14px;
+    padding:18px 16px 18px;
+    font-family:inherit;text-align:left;
+    cursor:pointer;
+    transition:border-color .15s,transform .15s,box-shadow .15s;
+  }
+  .how-step:hover{
+    border-color:var(--ink-faint);
+    transform:translateY(-2px);
+    box-shadow:0 4px 12px rgba(27,26,22,.06);
+  }
+  .how-step:focus-visible{outline:2px solid var(--pine);outline-offset:2px}
+  .how-step-num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:26px;height:26px;border-radius:50%;
+    font-family:'Fraunces',serif;font-weight:500;font-size:14px;
+    color:#fff;
+  }
+  .how-step:nth-child(1) .how-step-num{background:var(--pine)}
+  .how-step:nth-child(3) .how-step-num{background:var(--pine-bright)}
+  .how-step:nth-child(5) .how-step-num{background:var(--ember)}
+  .how-step-name{
+    font-size:14.5px;font-weight:600;color:var(--ink);
+  }
+  .how-step-desc{
+    font-size:12.5px;line-height:1.5;color:var(--ink-soft);
+  }
+  .how-arrow{
+    display:flex;align-items:center;justify-content:center;
+    color:var(--ink-faint);font-size:18px;
+    user-select:none;
+  }
+
+  .how-footer{
+    font-size:12px;color:var(--ink-faint);
+    margin-top:22px;padding-top:18px;
+    border-top:1px solid var(--line-soft);
+    line-height:1.5;
+  }
+  .how-footer b{color:var(--ink-soft);font-weight:600}
+
+  @media(max-width:600px){
+    .how-modal{padding:12px}
+    .how-head{padding:18px 20px 14px}
+    .how-head h2{font-size:19px}
+    .how-body{padding:20px 20px 24px}
+    .how-flow{
+      grid-template-columns:1fr;
+      gap:4px;
+    }
+    .how-arrow{transform:rotate(90deg);padding:2px 0}
+  }
+
   /* sync toggle */
   .tabs{justify-content:space-between;align-items:center;gap:12px}
   .tab-list{display:flex;flex:1 1 0;min-width:0;overflow-x:auto;-ms-overflow-style:none;scrollbar-width:none}
@@ -413,6 +537,7 @@
       <span class="tag">FIRE &amp; Retirement Calculator</span>
     </div>
     <p class="sub">Built for early retirement, works for any retirement. Set your own return and see exactly when work becomes optional.</p>
+    <button class="help-btn" id="howBtn" type="button" aria-label="How Ember works" title="How Ember works">?</button>
   </header>
 
   <nav class="tabs">
@@ -2423,6 +2548,87 @@ fetch('data/truflation.json', {cache: 'no-cache'})
     truflationData = null;
     renderTruflationCard();
   });
+</script>
+
+<!-- How it works modal -->
+<div class="how-modal" id="howModal" hidden>
+  <div class="how-backdrop" data-how-close="1"></div>
+  <div class="how-dialog" role="dialog" aria-modal="true" aria-labelledby="howTitle">
+    <header class="how-head">
+      <h2 id="howTitle">How Ember works</h2>
+      <button class="how-close" type="button" data-how-close="1" aria-label="Close">×</button>
+    </header>
+    <div class="how-body">
+      <p class="how-intro">
+        Most retirement calculators assume you spend your portfolio down — slowly liquidating principal in the hope it lasts. <b>Ember is built on a different premise:</b> a thoughtfully managed portfolio can generate real income, so retirement doesn't have to mean drawdown. When you model that honestly, the number you actually need is often less than the traditional 4% rule suggests.
+      </p>
+      <div class="how-flow">
+        <button class="how-step" type="button" data-how-jump="calc-tab">
+          <span class="how-step-num">1</span>
+          <span class="how-step-name">Calculator</span>
+          <span class="how-step-desc">Enter your age, current assets, contributions, and target retirement spending. Everything else builds from these numbers.</span>
+        </button>
+        <span class="how-arrow" aria-hidden="true">→</span>
+        <button class="how-step" type="button" data-how-jump="sim-tab">
+          <span class="how-step-num">2</span>
+          <span class="how-step-name">Portfolio Simulator</span>
+          <span class="how-step-desc">Build a realistic portfolio mix from real ticker data — past returns, volatility, drawdowns. The simulator feeds a grounded expected return back to the Calculator.</span>
+        </button>
+        <span class="how-arrow" aria-hidden="true">→</span>
+        <button class="how-step" type="button" data-how-jump="mc-tab">
+          <span class="how-step-num">3</span>
+          <span class="how-step-name">Monte Carlo</span>
+          <span class="how-step-desc">Run thousands of randomized scenarios to see how your plan holds up against actual market volatility, not just the average case.</span>
+        </button>
+      </div>
+      <div class="how-footer">
+        <b>Two more tabs</b> are tools rather than steps: the <b>Analyzer</b> looks up any ticker or fund (returns, drawdowns, comparison), and <b>True Inflation</b> shows an alternative inflation reading you can use in the Calculator instead of the official BLS number.
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// "How Ember works" modal — open/close + tab jumps
+(function(){
+  const modal = document.getElementById('howModal');
+  const openBtn = document.getElementById('howBtn');
+  if(!modal || !openBtn) return;
+
+  function openModal(){
+    modal.hidden = false;
+    // Move focus into the dialog for keyboard users.
+    const close = modal.querySelector('.how-close');
+    if(close) close.focus();
+  }
+  function closeModal(){
+    modal.hidden = true;
+    openBtn.focus();
+  }
+
+  openBtn.addEventListener('click', openModal);
+
+  // Close on backdrop click or X button (anything with data-how-close).
+  modal.addEventListener('click', (e) => {
+    if(e.target.dataset && e.target.dataset.howClose) closeModal();
+  });
+
+  // ESC to close.
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape' && !modal.hidden) closeModal();
+  });
+
+  // Step cards jump to their tab AND close the modal.
+  modal.querySelectorAll('[data-how-jump]').forEach(card => {
+    card.addEventListener('click', () => {
+      const targetTab = card.dataset.howJump;
+      if(typeof switchTab === 'function') switchTab(targetTab);
+      closeModal();
+      // Smoothly scroll to top so the user sees the tab they jumped to.
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    });
+  });
+})();
 </script>
 </body>
 </html>
