@@ -2319,8 +2319,8 @@ function renderTrueInflation(){
   // 5-year history chart
   if(Array.isArray(d.history) && d.history.length > 0 && typeof Chart !== 'undefined'){
     const canvas = $('ti-chart-canvas');
-    const blsData   = d.history.map(h => ({x: h.date, y: h.bls_cpi}));
-    const emberData = d.history.map(h => ({x: h.date, y: h.true_inflation}));
+    const blsData   = d.history.map(h => ({x: h.date, y: h.bls}));
+    const emberData = d.history.map(h => ({x: h.date, y: h.ember}));
     if(tiChart) tiChart.destroy();
     tiChart = new Chart(canvas.getContext('2d'), {
       type: 'line',
