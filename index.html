@@ -1030,6 +1030,11 @@ let linked = true; // cross-tab linking: assets ↔ pv, sim CAGR → post-retire
 // retirement (more useful for modeling retirement income); 'today' shows the
 // user's current assets (the legacy behavior). 'future' is the default.
 let pvMode = 'future';
+// Tracks whether the current pvMode came from a deliberate user click on the
+// toggle, vs. an auto-fallback during a transient bad state (e.g. age >= trad
+// while user was mid-typing). Auto-fallbacks must auto-restore when the
+// underlying condition resolves; explicit user choices stick.
+let pvModeIsExplicit = false;
 let lastBalAtRetire = null; // populated by compute() each run
 // Cushion allocation: percentage of the simulator portfolio earmarked for the
 // Calculator's cash cushion. Auto-derived from cushion_years × spending. Only
@@ -1062,9 +1067,19 @@ function applyPvProjection(){
   futureBtn.disabled = !futureAvailable;
   futureBtn.title = futureAvailable ? '' : 'Available when tabs are linked and retirement is still ahead';
 
-  // If 'future' is selected but no longer available, gracefully fall back.
+  // If 'future' is selected but no longer available, gracefully fall back to
+  // 'today'. This is a SOFT fallback — we don't mark it explicit, so we can
+  // auto-restore once conditions return.
   if(pvMode === 'future' && !futureAvailable){
     pvMode = 'today';
+  }
+  // The flip side: if conditions have returned and 'today' was only set by
+  // the auto-fallback path (not by an explicit user click), restore 'future'.
+  // This fixes the bug where transient invalid inputs during typing (e.g.
+  // age >= trad momentarily) would silently kick the simulator into 'today'
+  // mode and never restore it once the inputs settled.
+  else if(pvMode === 'today' && futureAvailable && !pvModeIsExplicit){
+    pvMode = 'future';
   }
 
   todayBtn.classList.toggle('is-active', pvMode === 'today');
@@ -1101,8 +1116,22 @@ function rebalanceHoldingsForCushion(newCushionAlloc){
   if(typeof holdings === 'undefined') return;
   const target = Math.max(0, 100 - newCushionAlloc);
   const currentTotal = holdings.reduce((s, h) => s + h.alloc, 0);
-  if(currentTotal <= 0) return; // nothing to scale
+  // Don't scale up from tiny totals — that's how scale factors of 10,000+ would
+  // appear. If holdings have collapsed near zero (e.g. from a previous cushion
+  // = 100% capture), reset them to a sensible default rather than multiplying
+  // them by a huge factor.
+  if(currentTotal < 1){
+    // Can't recover meaningful ratios from near-zero values. Bail and let the
+    // user re-add holdings, or let the next state change reset things.
+    return;
+  }
   const scale = target / currentTotal;
+  if(!isFinite(scale) || scale < 0 || scale > 5){
+    // Sanity ceiling: legitimate scaling for cushion ranges 0–95% only needs
+    // scale ∈ [0.05, 20]. A 5× ceiling is well above any reasonable case while
+    // catching pathological values.
+    return;
+  }
   holdings.forEach(h => { h.alloc = +(h.alloc * scale).toFixed(2); });
 }
 
@@ -2555,6 +2584,7 @@ document.querySelectorAll('.pv-mode-btn').forEach(btn => {
     const mode = btn.dataset.pvMode;
     if(mode === pvMode) return;
     pvMode = mode;
+    pvModeIsExplicit = true; // user actively chose this mode; don't auto-restore
     if(mode === 'today'){
       // Switching back to 'today' resets pv to current assets (if linked).
       if(linked){
