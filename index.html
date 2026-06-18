@@ -337,6 +337,38 @@
   .warning b{font-weight:700;color:var(--ember)}
   .warning .icon{font-weight:700;margin-right:4px;color:var(--ember)}
 
+  /* portfolio value source toggle (Today / At retirement) */
+  .pv-mode-row{
+    display:flex;align-items:center;justify-content:space-between;
+    gap:12px;flex-wrap:wrap;margin-top:10px;
+  }
+  .pv-mode{
+    display:inline-flex;
+    background:var(--paper);
+    border:1px solid var(--line-soft);
+    border-radius:8px;
+    padding:2px;gap:2px;
+  }
+  .pv-mode-btn{
+    background:transparent;border:none;
+    font-family:inherit;font-size:12px;font-weight:500;
+    color:var(--ink-faint);
+    padding:5px 10px;border-radius:6px;
+    cursor:pointer;letter-spacing:.005em;
+    transition:background .15s,color .15s;
+  }
+  .pv-mode-btn.is-active{
+    background:var(--card);
+    color:var(--ink);
+    box-shadow:0 1px 2px rgba(27,26,22,.04);
+  }
+  .pv-mode-btn:hover:not(.is-active):not(:disabled){color:var(--ink-soft)}
+  .pv-mode-btn:disabled{opacity:.4;cursor:not-allowed}
+  .pv-mode-note{
+    font-size:11.5px;color:var(--ink-faint);
+    font-style:italic;flex:1;text-align:right;min-width:0;
+  }
+
   /* site footer */
   .site-footer{
     margin-top:48px;
@@ -701,6 +733,13 @@
           <div class="field-head"><label for="pv">Portfolio value</label><span class="hint">total amount to allocate</span></div>
           <div class="val-wrap"><span class="prefix">$</span><input class="has-prefix" type="number" id="pv" value="50000" min="0" step="10000"></div>
           <input type="range" id="pv-r" min="0" max="5000000" step="10000" value="50000">
+          <div class="pv-mode-row">
+            <div class="pv-mode" role="group" aria-label="Portfolio value source">
+              <button type="button" class="pv-mode-btn" data-pv-mode="today" aria-pressed="false">Today</button>
+              <button type="button" class="pv-mode-btn is-active" data-pv-mode="future" aria-pressed="true">At retirement</button>
+            </div>
+            <span class="pv-mode-note" id="pv-mode-note">projected value at retirement</span>
+          </div>
         </div>
 
         <div id="holdings" style="margin-top:8px"></div>
@@ -963,6 +1002,64 @@ const $ = id => document.getElementById(id);
 const pairs = ['age','assets','contrib','ret','spend','infl','swr','trad','cgrow','cushion','chartEnd','mcVolPost','mcRuns'];
 let linked = true; // cross-tab linking: assets ↔ pv, sim CAGR → post-retirement return
 
+// Portfolio value source: 'future' shows the Calculator's projected balance at
+// retirement (more useful for modeling retirement income); 'today' shows the
+// user's current assets (the legacy behavior). 'future' is the default.
+let pvMode = 'future';
+let lastBalAtRetire = null; // populated by compute() each run
+// Guard so the first compute() call (which fires before the simulator's
+// holdings are initialized) doesn't try to recomputeSim() while `holdings`
+// is still in its temporal dead zone.
+let simInitDone = false;
+
+function isFutureModeAvailable(){
+  if(!linked) return false;
+  const age = +$('age').value || 0;
+  const trad = +$('trad').value || 0;
+  if(age >= trad) return false;                                  // already retired
+  if(!isFinite(lastBalAtRetire) || lastBalAtRetire <= 0) return false;
+  return true;
+}
+
+function applyPvProjection(){
+  const futureBtn = document.querySelector('.pv-mode-btn[data-pv-mode="future"]');
+  const todayBtn  = document.querySelector('.pv-mode-btn[data-pv-mode="today"]');
+  const note      = $('pv-mode-note');
+  if(!futureBtn || !todayBtn || !note) return;
+
+  const futureAvailable = isFutureModeAvailable();
+
+  futureBtn.disabled = !futureAvailable;
+  futureBtn.title = futureAvailable ? '' : 'Available when tabs are linked and retirement is still ahead';
+
+  // If 'future' is selected but no longer available, gracefully fall back.
+  if(pvMode === 'future' && !futureAvailable){
+    pvMode = 'today';
+  }
+
+  todayBtn.classList.toggle('is-active', pvMode === 'today');
+  todayBtn.setAttribute('aria-pressed', pvMode === 'today');
+  futureBtn.classList.toggle('is-active', pvMode === 'future');
+  futureBtn.setAttribute('aria-pressed', pvMode === 'future');
+
+  note.textContent = pvMode === 'future' ? 'projected value at retirement' : '';
+
+  // In 'future' mode, push the latest projection into the pv field.
+  if(pvMode === 'future' && futureAvailable){
+    const v = Math.round(lastBalAtRetire);
+    if(+$('pv').value !== v){
+      $('pv').value = v;
+      const r = $('pv-r');
+      if(r) r.value = Math.min(Math.max(v, +r.min), +r.max);
+      // Only trigger recomputeSim if the sim has finished initializing.
+      // (Init order: compute() fires before `holdings` is declared, so we
+      // can't touch the simulator yet — the natural recomputeSim() call
+      // later in init will pick up the new pv value.)
+      if(simInitDone && typeof recomputeSim === 'function') recomputeSim();
+    }
+  }
+}
+
 // keep number <-> slider in sync (slider clamps to its range; number is free)
 pairs.forEach(id=>{
   const n=$(id), r=$(id+'-r');
@@ -974,6 +1071,9 @@ pairs.forEach(id=>{
 // cross-tab sync helpers
 function pushAssetsToPv(){
   if(!linked) return;
+  // In 'future' mode the pv field shows the projected balAtRetire (handled by
+  // applyPvProjection); we don't want to overwrite it with current assets here.
+  if(pvMode !== 'today') return;
   const v = +$('assets').value || 0;
   if(+$('pv').value === v) return;
   $('pv').value = v;
@@ -982,6 +1082,9 @@ function pushAssetsToPv(){
 }
 function pushPvToAssets(){
   if(!linked) return;
+  // In 'future' mode the pv field is a projection (or a what-if override);
+  // pushing it back to current assets would be incoherent.
+  if(pvMode !== 'today') return;
   const v = +$('pv').value || 0;
   if(+$('assets').value === v) return;
   $('assets').value = v;
@@ -1069,6 +1172,10 @@ function compute(){
   const atFi = fiAge!==null ? series.find(p=>p.x===fiAge).y : null;
   const balRetireEntry = series.find(p=>p.x===trad);
   const balAtRetire = balRetireEntry ? balRetireEntry.y : null;
+  // Surface this to the Portfolio Simulator's mode toggle. applyPvProjection()
+  // checks if 'future' mode is still valid and pushes the new value to pv.
+  lastBalAtRetire = balAtRetire;
+  if(typeof applyPvProjection === 'function') applyPvProjection();
 
   if(fiAge!==null){
     if(fiAge<=trad){
@@ -2323,6 +2430,29 @@ $('syncBtn').addEventListener('click', () => {
     pushAssetsToPv();
     recomputeSim();
   }
+  // Linked state affects whether 'At retirement' mode is available.
+  applyPvProjection();
+});
+
+// Portfolio value source toggle (Today / At retirement)
+document.querySelectorAll('.pv-mode-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    if(btn.disabled) return;
+    const mode = btn.dataset.pvMode;
+    if(mode === pvMode) return;
+    pvMode = mode;
+    if(mode === 'today'){
+      // Switching back to 'today' resets pv to current assets (if linked).
+      if(linked){
+        const v = +$('assets').value || 0;
+        $('pv').value = v;
+        const r = $('pv-r');
+        if(r) r.value = Math.min(Math.max(v, +r.min), +r.max);
+        if(typeof recomputeSim === 'function') recomputeSim();
+      }
+    }
+    applyPvProjection();
+  });
 });
 
 // init simulator
@@ -2330,6 +2460,9 @@ renderHoldings();
 renderAddSelect();
 recomputeSim();
 renderAnalyzerSelect();
+// Simulator is now fully initialized — applyPvProjection() can safely
+// trigger recomputeSim() from here on.
+simInitDone = true;
 
 // Try to refresh ticker stats from the data pipeline (data/tickers.json).
 // Falls back silently to the hardcoded TICKERS above if the fetch fails
