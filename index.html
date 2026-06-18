@@ -191,6 +191,30 @@
   .holding-remove{background:none;border:none;width:26px;height:26px;border-radius:99px;color:var(--ink-faint);cursor:pointer;font-size:18px;line-height:1;display:flex;align-items:center;justify-content:center;transition:background .15s,color .15s;padding:0}
   .holding-remove:hover{background:var(--ember-soft);color:var(--ember)}
 
+  /* cushion row — read-only, auto-derived from Calculator's cash cushion */
+  .holding.cushion-row{
+    background:rgba(46,139,92,.04);
+    margin:0 -14px 0;
+    padding:13px 14px;
+    border-left:2px solid var(--pine-bright);
+    border-bottom:1px solid var(--line-soft);
+  }
+  .cushion-tag{
+    background:#A8A095;color:#fff;border-radius:6px;padding:4px 8px;
+    font-size:12px;font-weight:600;letter-spacing:.04em;
+    font-family:'Hanken Grotesk',sans-serif;
+  }
+  .cushion-tag .sym-underline{border-bottom:none}
+  .cushion-source{
+    font-size:11px;color:var(--ink-faint);font-style:italic;font-weight:400;
+    margin-left:2px;
+  }
+  .cushion-pct{
+    font-size:13px;font-weight:600;color:var(--ink-soft);
+    padding:6px 10px;text-align:right;min-width:60px;
+  }
+  .cushion-placeholder{width:26px}
+
   .add-holding{margin-top:18px;display:flex;gap:9px}
   .add-holding select{flex:1;font-family:inherit;font-size:14px;font-weight:600;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:11px 14px;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23928B7C' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:34px;min-width:0}
   .add-holding select:focus{outline:none;border-color:var(--pine);box-shadow:0 0 0 3px rgba(30,77,60,.12)}
@@ -1007,6 +1031,12 @@ let linked = true; // cross-tab linking: assets ↔ pv, sim CAGR → post-retire
 // user's current assets (the legacy behavior). 'future' is the default.
 let pvMode = 'future';
 let lastBalAtRetire = null; // populated by compute() each run
+// Cushion allocation: percentage of the simulator portfolio earmarked for the
+// Calculator's cash cushion. Auto-derived from cushion_years × spending. Only
+// active in 'future' mode; rendered as a dedicated read-only row at the top
+// of the holdings list; other holdings get proportionally rebalanced so the
+// total stays at 100%.
+let cushionAlloc = 0;
 // Guard so the first compute() call (which fires before the simulator's
 // holdings are initialized) doesn't try to recomputeSim() while `holdings`
 // is still in its temporal dead zone.
@@ -1058,6 +1088,50 @@ function applyPvProjection(){
       if(simInitDone && typeof recomputeSim === 'function') recomputeSim();
     }
   }
+
+  // After pv is updated, refresh the cushion allocation. updateCushionAlloc
+  // is what actually changes holdings, so it's the source of truth for
+  // re-rendering and re-computing the simulator stats.
+  if(typeof updateCushionAlloc === 'function') updateCushionAlloc();
+}
+
+// Rebalance non-cushion holdings to fit alongside a given cushion %.
+// Preserves the user's ratios between holdings — only scales the total.
+function rebalanceHoldingsForCushion(newCushionAlloc){
+  if(typeof holdings === 'undefined') return;
+  const target = Math.max(0, 100 - newCushionAlloc);
+  const currentTotal = holdings.reduce((s, h) => s + h.alloc, 0);
+  if(currentTotal <= 0) return; // nothing to scale
+  const scale = target / currentTotal;
+  holdings.forEach(h => { h.alloc = +(h.alloc * scale).toFixed(2); });
+}
+
+// Compute the cushion's percentage of the at-retirement portfolio and apply it.
+// Called from applyPvProjection (i.e. whenever Calculator inputs change).
+function updateCushionAlloc(){
+  if(!simInitDone) return; // can't touch holdings before they exist
+
+  // Cushion is only meaningful in 'future' mode when we have a real
+  // projected portfolio to size it against.
+  let newAlloc = 0;
+  if(pvMode === 'future' && isFinite(lastBalAtRetire) && lastBalAtRetire > 0){
+    const cushionYrs = +$('cushion').value || 0;
+    const spend      = +$('spend').value || 0;
+    const cushionDollars = cushionYrs * spend;
+    if(cushionDollars > 0){
+      newAlloc = Math.min(100, (cushionDollars / lastBalAtRetire) * 100);
+    }
+  }
+
+  // Only rebalance + re-render if the cushion % actually changed.
+  if(Math.abs(newAlloc - cushionAlloc) < 0.01) return;
+
+  cushionAlloc = newAlloc;
+  rebalanceHoldingsForCushion(cushionAlloc);
+
+  if(typeof renderHoldings === 'function') renderHoldings();
+  if(typeof renderAddSelect === 'function') renderAddSelect();
+  if(typeof recomputeSim === 'function') recomputeSim();
 }
 
 // keep number <-> slider in sync (slider clamps to its range; number is free)
@@ -1405,6 +1479,25 @@ let holdings = [
 function renderHoldings(){
   const wrap = $('holdings');
   wrap.innerHTML = '';
+
+  // Cushion row: read-only, sourced from the Calculator's cash cushion field.
+  // Sits above the user-managed holdings as a fixed "foundation."
+  if(cushionAlloc > 0){
+    const cushionYrs = +$('cushion').value || 0;
+    const spend      = +$('spend').value || 0;
+    const cushDollars = cushionYrs * spend;
+    const row = document.createElement('div');
+    row.className = 'holding cushion-row';
+    row.innerHTML =
+      '<div class="ticker-tag cushion-tag"><span class="sym-underline">CASH</span></div>' +
+      '<div class="holding-name" title="Auto-derived from your Calculator cushion (' +
+        cushionYrs + ' yrs × $' + spend.toLocaleString() + ')">' +
+        'Cash cushion <span class="cushion-source">— from Calculator</span></div>' +
+      '<div class="cushion-pct">' + cushionAlloc.toFixed(1) + '%</div>' +
+      '<div class="cushion-placeholder" aria-hidden="true"></div>';
+    wrap.appendChild(row);
+  }
+
   holdings.forEach((h,i) => {
     const t = TICKERS[h.symbol];
     const row = document.createElement('div');
@@ -1515,7 +1608,15 @@ $('pv-r').addEventListener('input', () => {
 
 function recomputeSim(){
   const pv = +$('pv').value || 0;
-  const total = holdings.reduce((s,h) => s + h.alloc, 0);
+
+  // Cushion contributes to the simulator's weighted stats too — that's how the
+  // CAGR drag from holding cash gets reflected back into the Calculator's
+  // post-retirement return.
+  const cushionTicker = (cushionAlloc > 0) ? TICKERS['CASH'] : null;
+  const cushionContrib = cushionTicker ? cushionAlloc : 0;
+
+  const holdingsTotal = holdings.reduce((s,h) => s + h.alloc, 0);
+  const total = holdingsTotal + cushionContrib;
 
   // weighted sums
   let cagrW = 0, yieldW = 0, stressW = 0, volW = 0;
@@ -1526,6 +1627,12 @@ function recomputeSim(){
     stressW += h.alloc * t.ret22;
     volW += h.alloc * (t.stddev || 0);
   });
+  if(cushionTicker){
+    cagrW += cushionContrib * cushionTicker.cagr;
+    yieldW += cushionContrib * cushionTicker.yield;
+    stressW += cushionContrib * cushionTicker.ret22;
+    volW += cushionContrib * (cushionTicker.stddev || 0);
+  }
   // per-dollar metrics (normalize to total allocation)
   const norm = total > 0 ? total : 100;
   const cagr   = cagrW   / norm;
@@ -1558,6 +1665,13 @@ function recomputeSim(){
   const bar = $('allocBar');
   bar.innerHTML = '';
   const denom = Math.max(total, 100);
+  if(cushionContrib > 0){
+    // Cushion gets its own segment at the start, in the standard CASH color.
+    const seg = document.createElement('span');
+    seg.style.background = TICKER_COLORS['CASH'] || '#A8A095';
+    seg.style.width = (cushionContrib / denom * 100) + '%';
+    bar.appendChild(seg);
+  }
   holdings.forEach(h => {
     const seg = document.createElement('span');
     seg.style.background = TICKER_COLORS[h.symbol] || '#928B7C';
