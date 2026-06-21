@@ -1628,8 +1628,12 @@ function renderAddSelect(){
 $('addBtn').addEventListener('click', () => {
   const sym = $('addSel').value;
   if(!sym) return;
-  const total = holdings.reduce((s,h)=>s+h.alloc, 0);
-  const newAlloc = total < 100 ? (100 - total) : 10;
+  // Available space is what's left after BOTH existing holdings AND the cushion.
+  // Without including cushionAlloc here, adding a holding into a portfolio with
+  // an active cushion would overshoot 100%.
+  const holdingsTotal = holdings.reduce((s,h)=>s+h.alloc, 0);
+  const used = holdingsTotal + cushionAlloc;
+  const newAlloc = used < 100 ? +(100 - used).toFixed(2) : 10;
   holdings.push({symbol: sym, alloc: newAlloc});
   renderHoldings();
   renderAddSelect();
