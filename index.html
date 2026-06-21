@@ -1051,7 +1051,7 @@ function isFutureModeAvailable(){
   if(!linked) return false;
   const age = +$('age').value || 0;
   const trad = +$('trad').value || 0;
-  if(age >= trad) return false;                                  // already retired
+  if(age > trad) return false;                                   // past retirement
   if(!isFinite(lastBalAtRetire) || lastBalAtRetire <= 0) return false;
   return true;
 }
@@ -1111,28 +1111,43 @@ function applyPvProjection(){
 }
 
 // Rebalance non-cushion holdings to fit alongside a given cushion %.
-// Preserves the user's ratios between holdings — only scales the total.
+// Strategy: take the needed space out of the LARGEST position (cascade to the
+// next largest if that one runs dry). Keeps the smaller positions at clean
+// whole numbers — only the largest position picks up the decimal places from
+// the cushion's fractional %. When cushion shrinks, the freed space goes back
+// to the currently-largest position (symmetric).
 function rebalanceHoldingsForCushion(newCushionAlloc){
   if(typeof holdings === 'undefined') return;
+  if(holdings.length === 0) return;
+
   const target = Math.max(0, 100 - newCushionAlloc);
   const currentTotal = holdings.reduce((s, h) => s + h.alloc, 0);
-  // Don't scale up from tiny totals — that's how scale factors of 10,000+ would
-  // appear. If holdings have collapsed near zero (e.g. from a previous cushion
-  // = 100% capture), reset them to a sensible default rather than multiplying
-  // them by a huge factor.
-  if(currentTotal < 1){
-    // Can't recover meaningful ratios from near-zero values. Bail and let the
-    // user re-add holdings, or let the next state change reset things.
-    return;
+  const reduction = currentTotal - target;
+
+  if(Math.abs(reduction) < 0.01) return;     // nothing to do
+  if(currentTotal < 1 && reduction < 0) return; // can't grow from near-zero
+
+  // Sort holding indices by current alloc, largest first.
+  const sortedIndices = holdings
+    .map((h, i) => ({i, alloc: h.alloc}))
+    .sort((a, b) => b.alloc - a.alloc)
+    .map(x => x.i);
+
+  if(reduction > 0){
+    // Need to free up `reduction` percentage points. Take from largest first;
+    // if it runs out (would go negative), cascade to the next largest.
+    let remaining = reduction;
+    for(const i of sortedIndices){
+      if(remaining < 0.01) break;
+      const canTake = Math.min(holdings[i].alloc, remaining);
+      holdings[i].alloc = +(holdings[i].alloc - canTake).toFixed(2);
+      remaining -= canTake;
+    }
+  } else {
+    // Cushion shrank — give the space back to the (currently) largest position.
+    const i = sortedIndices[0];
+    holdings[i].alloc = +(holdings[i].alloc + Math.abs(reduction)).toFixed(2);
   }
-  const scale = target / currentTotal;
-  if(!isFinite(scale) || scale < 0 || scale > 5){
-    // Sanity ceiling: legitimate scaling for cushion ranges 0–95% only needs
-    // scale ∈ [0.05, 20]. A 5× ceiling is well above any reasonable case while
-    // catching pathological values.
-    return;
-  }
-  holdings.forEach(h => { h.alloc = +(h.alloc * scale).toFixed(2); });
 }
 
 // Compute the cushion's percentage of the at-retirement portfolio and apply it.
