@@ -1,13 +1,13 @@
 {
-  "updated": "2026-08-10T07:47:56.128505Z",
+  "updated": "2026-08-17T07:02:14.085759Z",
   "tickers": {
     "QQQ": {
       "name": "Invesco QQQ Trust",
       "lev": false,
       "category": "broad-market",
       "category_label": "Broad-market index",
-      "cagr": 20.86,
-      "stddev": 22.53,
+      "cagr": 20.88,
+      "stddev": 22.54,
       "yield": 0.42,
       "ret22": -33.22,
       "prices": [
@@ -493,21 +493,21 @@
         ],
         [
           "2026-08-31",
-          723.03
+          731.07
         ]
       ],
       "description": "To maintain the correspondence between the composition and weights of the securities in the trust (the \"securities\") and the stocks in the NASDAQ-100 Index\u00ae, the adviser adjusts the securities from time to time to conform to periodic changes in the identity and/or relative weights of index securities. The composition and weighting of the securities portion of a portfolio deposit are also...",
       "inception": "1999-03-10",
       "expense_ratio": null,
-      "avg_volume": 44295929
+      "avg_volume": 43214711
     },
     "SPYG": {
       "name": "State Street SPDR Portfolio S&P 500 Growth ETF",
       "lev": false,
       "category": "broad-market",
       "category_label": "Broad-market index",
-      "cagr": 17.88,
-      "stddev": 20.81,
+      "cagr": 17.8,
+      "stddev": 20.82,
       "yield": 0.47,
       "ret22": -29.95,
       "prices": [
@@ -725,7 +725,7 @@
         ],
         [
           "2021-01-31",
-          52.67
+          52.66
         ],
         [
           "2021-02-28",
@@ -993,20 +993,20 @@
         ],
         [
           "2026-08-31",
-          123.02
+          122.92
         ]
       ],
       "description": "The fund generally invests substantially all, but at least 80%, of its total assets in the securities comprising the index. The index measures the performance of the large-capitalization growth segment of the U.S. equity market. It is non-diversified.",
       "inception": "2000-09-25",
       "expense_ratio": null,
-      "avg_volume": 2655232
+      "avg_volume": 2556183
     },
     "VUG": {
       "name": "Vanguard Morningstar Growth ETF",
       "lev": false,
       "category": "broad-market",
       "category_label": "Broad-market index",
-      "cagr": 17.86,
+      "cagr": 17.76,
       "stddev": 21.58,
       "yield": 0.38,
       "ret22": -33.61,
@@ -1493,20 +1493,20 @@
         ],
         [
           "2026-08-31",
-          89.4
+          89.34
         ]
       ],
       "description": "The fund manager employs an indexing investment approach designed to track the performance of the target index, a broadly diversified index made up of the growth stocks of large U.S. companies, as determined by the index provider. Under normal circumstances, it invests at least 80% of its net assets, plus the amount of any borrowings for investment purposes, in the stocks that make up the...",
-      "inception": "2000-11-13",
+      "inception": "2004-01-26",
       "expense_ratio": null,
-      "avg_volume": 7597825
+      "avg_volume": 7583819
     },
     "OEF": {
       "name": "iShares S&P 100 ETF",
       "lev": false,
       "category": "broad-market",
       "category_label": "Broad-market index",
-      "cagr": 16.49,
+      "cagr": 16.43,
       "stddev": 18.5,
       "yield": 0.84,
       "ret22": -21.92,
@@ -1993,21 +1993,21 @@
         ],
         [
           "2026-08-31",
-          383.05
+          382.53
         ]
       ],
       "description": "The index measures the performance of the large-capitalization sector of the U.S. equity market. The fund generally will invest at least 80% of its assets in the component securities of its underlying index and may invest up to 20% of its assets in certain futures, options and swap contracts, cash and cash equivalents. The fund is non-diversified.",
       "inception": "2000-10-23",
       "expense_ratio": null,
-      "avg_volume": 304859
+      "avg_volume": 296896
     },
     "MGC": {
       "name": "Vanguard Morningstar Mega Cap ETF",
       "lev": false,
       "category": "broad-market",
       "category_label": "Broad-market index",
-      "cagr": 16.17,
-      "stddev": 18.26,
+      "cagr": 16.13,
+      "stddev": 18.27,
       "yield": 0.89,
       "ret22": -20.55,
       "prices": [
@@ -2493,21 +2493,21 @@
         ],
         [
           "2026-08-31",
-          283.77
+          284.07
         ]
       ],
       "description": "The fund employs an indexing investment approach designed to track the performance of the index. The index is a float-adjusted, market-capitalization-weighted index designed to measure equity market performance of mega-capitalization stocks in the U.S. The Advisor attempts to replicate the target index by investing all, or substantially all, of its assets in the stocks that make up the index,...",
-      "inception": "2008-02-22",
+      "inception": "2007-12-17",
       "expense_ratio": null,
-      "avg_volume": 103298
+      "avg_volume": 102453
     },
     "SOXL": {
       "name": "Direxion Daily Semiconductor Bull 3X Shares",
       "lev": true,
       "category": "3x-leveraged",
       "category_label": "3x leveraged equity",
-      "cagr": 50.68,
-      "stddev": 102.31,
+      "cagr": 50.12,
+      "stddev": 102.35,
       "yield": 0.01,
       "ret22": -86.48,
       "prices": [
@@ -2993,22 +2993,22 @@
         ],
         [
           "2026-08-31",
-          140.25
+          144.95
         ]
       ],
       "description": "The fund invests at least 80% of its net assets in financial instruments, such as swap agreements, securities of the index, and ETFs that track the index, that, in combination, provide 3X daily leveraged exposure to the index, consistent with the fund's investment objective. The index is a rules-based, modified float-adjusted market capitalization-weighted index that tracks the performance of...",
       "inception": "2010-03-11",
       "expense_ratio": null,
-      "avg_volume": 65840604
+      "avg_volume": 64832414
     },
     "TECL": {
       "name": "Direxion Daily Technology Bull 3X Shares",
       "lev": true,
       "category": "3x-leveraged",
       "category_label": "3x leveraged equity",
-      "cagr": 48.0,
-      "stddev": 73.73,
-      "yield": 3.95,
+      "cagr": 48.19,
+      "stddev": 73.75,
+      "yield": 3.84,
       "ret22": -75.03,
       "prices": [
         [
@@ -3493,22 +3493,22 @@
         ],
         [
           "2026-08-31",
-          211.64
+          217.67
         ]
       ],
       "description": "The fund invests at least 80% of its net assets (plus borrowing for investment purposes) in financial instruments, such as swap agreements, securities of the index, and exchange-traded funds (\"ETFs\") that track the index, that, in combination, provide 3X daily leveraged exposure to the index, consistent with the fund's investment objective. The index includes domestic companies from the...",
       "inception": "2008-12-17",
       "expense_ratio": null,
-      "avg_volume": 1065885
+      "avg_volume": 994503
     },
     "TQQQ": {
       "name": "ProShares UltraPro QQQ",
       "lev": true,
       "category": "3x-leveraged",
       "category_label": "3x leveraged equity",
-      "cagr": 40.86,
-      "stddev": 66.67,
-      "yield": 0.51,
+      "cagr": 40.93,
+      "stddev": 66.68,
+      "yield": 0.49,
       "ret22": -79.68,
       "prices": [
         [
@@ -3993,20 +3993,20 @@
         ],
         [
           "2026-08-31",
-          74.47
+          76.79
         ]
       ],
       "description": "The fund invests in financial instruments that ProShare Advisors believes, in combination, should produce daily returns consistent with the Daily Target. The index is designed to measure the performance of 100 of the largest Nasdaq-listed non-financial companies. Under normal circumstances, the fund will obtain leveraged exposure to at least 80% of its total assets in components of the index...",
       "inception": "2010-02-09",
       "expense_ratio": null,
-      "avg_volume": 71377387
+      "avg_volume": 69215890
     },
     "SPXL": {
       "name": "Direxion Daily S&P500 Bull 3X Shares",
       "lev": true,
       "category": "3x-leveraged",
       "category_label": "3x leveraged equity",
-      "cagr": 29.47,
+      "cagr": 29.41,
       "stddev": 53.49,
       "yield": 0.48,
       "ret22": -57.31,
@@ -4493,20 +4493,20 @@
         ],
         [
           "2026-08-31",
-          296.33
+          299.31
         ]
       ],
       "description": "The fund, under normal circumstances, invests at least 80% of its net assets (plus borrowing for investment purposes) in financial instruments, such as swap agreements, securities of the index, and exchange-traded funds (\"ETFs\") that track the index, that, in combination, provide 3X daily leveraged exposure to the index, consistent with the fund's investment objective. The index is designed to...",
       "inception": "2008-11-05",
       "expense_ratio": null,
-      "avg_volume": 2032661
+      "avg_volume": 1967945
     },
     "UPRO": {
       "name": "ProShares UltraPro S&P500",
       "lev": true,
       "category": "3x-leveraged",
       "category_label": "3x leveraged equity",
-      "cagr": 29.34,
+      "cagr": 29.28,
       "stddev": 53.81,
       "yield": 0.69,
       "ret22": -57.59,
@@ -4993,22 +4993,22 @@
         ],
         [
           "2026-08-31",
-          155.06
+          156.63
         ]
       ],
       "description": "The fund invests in financial instruments that ProShare Advisors believes, in combination, should produce daily returns consistent with the Daily Target. The index is designed to measure the performance of 500 of the largest companies listed and domiciled in the U.S. Under normal circumstances, the fund will obtain leveraged exposure to at least 80% of its total assets in components of the...",
       "inception": "2009-06-23",
       "expense_ratio": null,
-      "avg_volume": 2530077
+      "avg_volume": 2430458
     },
     "UDOW": {
       "name": "ProShares UltraPro Dow30",
       "lev": true,
       "category": "3x-leveraged",
       "category_label": "3x leveraged equity",
-      "cagr": 23.9,
+      "cagr": 23.45,
       "stddev": 51.79,
-      "yield": 1.02,
+      "yield": 1.03,
       "ret22": -33.73,
       "prices": [
         [
@@ -5493,22 +5493,22 @@
         ],
         [
           "2026-08-31",
-          76.14
+          74.81
         ]
       ],
       "description": "The fund invests in financial instruments that ProShare Advisors believes, in combination, should produce daily returns consistent with the Daily Target. The index is designed to measure the performance of some of the largest U.S. companies. Under normal circumstances, the fund will obtain leveraged exposure to at least 80% of its total assets in components of the index or in instruments with...",
       "inception": "2010-02-09",
       "expense_ratio": null,
-      "avg_volume": 2095212
+      "avg_volume": 1981754
     },
     "FAS": {
       "name": "Direxion Daily Financial Bull 3X Shares",
       "lev": true,
       "category": "3x-leveraged",
       "category_label": "3x leveraged equity",
-      "cagr": 21.95,
+      "cagr": 22.3,
       "stddev": 61.09,
-      "yield": 7.8,
+      "yield": 7.59,
       "ret22": -44.8,
       "prices": [
         [
@@ -5993,22 +5993,22 @@
         ],
         [
           "2026-08-31",
-          179.57
+          184.55
         ]
       ],
       "description": "The fund invests at least 80% of its net assets in financial instruments, such as swap agreements, securities of the index, and ETFs that track the index, that, in combination, provide 3X daily leveraged exposure to the index, consistent with the fund's investment objective. The index includes securities of companies from the following industries: financial services; insurance; banks; capital...",
       "inception": "2008-11-06",
       "expense_ratio": null,
-      "avg_volume": 570716
+      "avg_volume": 545362
     },
     "TNA": {
       "name": "Direxion Daily Small Cap Bull 3X Shares",
       "lev": true,
       "category": "3x-leveraged",
       "category_label": "3x leveraged equity",
-      "cagr": 7.47,
+      "cagr": 7.52,
       "stddev": 68.37,
-      "yield": 0.28,
+      "yield": 0.27,
       "ret22": -63.77,
       "prices": [
         [
@@ -6145,7 +6145,7 @@
         ],
         [
           "2019-05-31",
-          49.38
+          49.37
         ],
         [
           "2019-06-30",
@@ -6493,22 +6493,22 @@
         ],
         [
           "2026-08-31",
-          74.68
+          77.14
         ]
       ],
       "description": "The fund invests at least 80% of its net assets in financial instruments, such as swap agreements, securities of the index, and exchange-traded funds (\"ETFs\") that track the index, that, in combination, provide 3X daily leveraged exposure to the index, consistent with the fund's investment objective. The index measures the performance of approximately 2,000 small-capitalization companies in...",
       "inception": "2008-11-05",
       "expense_ratio": null,
-      "avg_volume": 5858146
+      "avg_volume": 5511329
     },
     "EDC": {
       "name": "Direxion Daily MSCI Emerging Markets Bull 3X Shares",
       "lev": true,
       "category": "3x-leveraged",
       "category_label": "3x leveraged equity",
-      "cagr": 3.3,
-      "stddev": 61.63,
-      "yield": 1.42,
+      "cagr": 2.89,
+      "stddev": 61.64,
+      "yield": 1.37,
       "ret22": -61.05,
       "prices": [
         [
@@ -6993,22 +6993,22 @@
         ],
         [
           "2026-08-31",
-          75.4
+          78.29
         ]
       ],
       "description": "The fund invests at least 80% of its net assets (plus borrowing for investment purposes) in financial instruments, such as swap agreements, securities of the index, and exchange-traded funds (\"ETFs\") that track the index, that, in combination, provide 3X daily leveraged exposure to the index, consistent with the fund's investment objective. The index is designed to represent the performance of...",
       "inception": "2008-12-17",
       "expense_ratio": null,
-      "avg_volume": 111435
+      "avg_volume": 105672
     },
     "ERX": {
-      "name": "Direxion Energy Bull 2X ETF",
+      "name": "Direxion Daily Energy Bull 2X Shares",
       "lev": true,
       "category": "3x-leveraged",
       "category_label": "3x leveraged equity",
-      "cagr": -9.81,
-      "stddev": 68.82,
-      "yield": 1.6,
+      "cagr": -8.81,
+      "stddev": 68.87,
+      "yield": 1.38,
       "ret22": 117.24,
       "prices": [
         [
@@ -7493,21 +7493,21 @@
         ],
         [
           "2026-08-31",
-          88.24
+          101.9
         ]
       ],
       "description": "The index is provided by S&P Dow Jones Indices and includes domestic companies from the energy sector which includes the following industries: oil, gas and consumable fuels; and energy equipment and services. The fund invests at least 80% of its net assets in financial instruments, such as swap agreements, securities of the index, and ETFs that track the index, that, in combination, provide 2X...",
       "inception": "2008-11-06",
       "expense_ratio": null,
-      "avg_volume": 314258
+      "avg_volume": 313059
     },
     "USD": {
       "name": "ProShares Ultra Semiconductors",
       "lev": true,
       "category": "2x-leveraged",
       "category_label": "2x leveraged equity",
-      "cagr": 56.3,
-      "stddev": 70.44,
+      "cagr": 55.85,
+      "stddev": 70.47,
       "yield": 0.32,
       "ret22": -69.75,
       "prices": [
@@ -7993,22 +7993,22 @@
         ],
         [
           "2026-08-31",
-          93.67
+          94.16
         ]
       ],
       "description": "The fund invests in financial instruments that ProShare Advisors believes, in combination, should produce daily returns consistent with the Daily Target. The index is designed to measure the stock performance of U.S. companies in the semiconductors sub-sector. Under normal circumstances, the fund will obtain leveraged exposure to at least 80% of its total assets in components of the index or...",
       "inception": "2007-01-30",
       "expense_ratio": null,
-      "avg_volume": 1001332
+      "avg_volume": 944812
     },
     "QLD": {
       "name": "ProShares Ultra QQQ",
       "lev": true,
       "category": "2x-leveraged",
       "category_label": "2x leveraged equity",
-      "cagr": 33.48,
-      "stddev": 45.03,
-      "yield": 0.13,
+      "cagr": 33.52,
+      "stddev": 45.04,
+      "yield": 0.12,
       "ret22": -61.33,
       "prices": [
         [
@@ -8493,20 +8493,20 @@
         ],
         [
           "2026-08-31",
-          92.21
+          94.15
         ]
       ],
       "description": "The fund invests in financial instruments that ProShare Advisors believes, in combination, should produce daily returns consistent with the Daily Target. The index is designed to measure the performance of 100 of the largest Nasdaq-listed non-financial companies. Under normal circumstances, the fund will obtain leveraged exposure to at least 80% of its total assets in components of the index...",
       "inception": "2006-06-19",
       "expense_ratio": null,
-      "avg_volume": 4838364
+      "avg_volume": 4716780
     },
     "SSO": {
       "name": "ProShares Ultra S&P500",
       "lev": true,
       "category": "2x-leveraged",
       "category_label": "2x leveraged equity",
-      "cagr": 23.76,
+      "cagr": 23.73,
       "stddev": 35.93,
       "yield": 0.63,
       "ret22": -39.7,
@@ -8993,22 +8993,22 @@
         ],
         [
           "2026-08-31",
-          71.68
+          72.2
         ]
       ],
       "description": "The fund invests in financial instruments that the advisors believe, in combination, should produce daily returns consistent with the Daily Target. The index is designed to measure the performance of 500 of the largest companies listed and domiciled in the U.S. Under normal circumstances, the fund will obtain leveraged exposure to at least 80% of its total assets in components of the index or...",
       "inception": "2006-06-19",
       "expense_ratio": null,
-      "avg_volume": 3331324
+      "avg_volume": 3250269
     },
     "DDM": {
       "name": "ProShares Ultra Dow30",
       "lev": true,
       "category": "2x-leveraged",
       "category_label": "2x leveraged equity",
-      "cagr": 19.94,
+      "cagr": 19.64,
       "stddev": 34.78,
-      "yield": 0.88,
+      "yield": 0.89,
       "ret22": -20.51,
       "prices": [
         [
@@ -9493,21 +9493,21 @@
         ],
         [
           "2026-08-31",
-          69.42
+          68.59
         ]
       ],
       "description": "The index is designed to measure the performance of some of the largest U.S. companies. Under normal circumstances, the fund will obtain leveraged exposure to at least 80% of its total assets in components of the index or in instruments with similar economic characteristics. The fund is non-diversified.",
       "inception": "2006-06-19",
       "expense_ratio": null,
-      "avg_volume": 181525
+      "avg_volume": 183388
     },
     "SMH": {
       "name": "VanEck Semiconductor ETF",
       "lev": false,
       "category": "sector-thematic",
       "category_label": "Sector/thematic",
-      "cagr": 34.9,
-      "stddev": 33.37,
+      "cagr": 34.75,
+      "stddev": 33.38,
       "yield": 0.19,
       "ret22": -34.97,
       "prices": [
@@ -9993,21 +9993,21 @@
         ],
         [
           "2026-08-31",
-          582.7
+          587.82
         ]
       ],
       "description": "The fund normally invests at least 80% of its total assets in securities that comprise the fund's benchmark index. The index includes common stocks and depositary receipts of U.S. exchange-listed companies in the semiconductor industry. Such companies may include medium-capitalization companies and foreign companies that are listed on a U.S. exchange. The fund is non-diversified.",
       "inception": "2011-12-20",
       "expense_ratio": null,
-      "avg_volume": 11887814
+      "avg_volume": 11400329
     },
     "SOXX": {
       "name": "iShares Semiconductor ETF",
       "lev": false,
       "category": "sector-thematic",
       "category_label": "Sector/thematic",
-      "cagr": 32.89,
-      "stddev": 34.61,
+      "cagr": 32.75,
+      "stddev": 34.62,
       "yield": 0.27,
       "ret22": -36.35,
       "prices": [
@@ -10493,22 +10493,22 @@
         ],
         [
           "2026-08-31",
-          543.27
+          550.42
         ]
       ],
       "description": "The fund generally will invest at least 80% of its assets in the component securities of its index and in investments that have economic characteristics that are substantially identical to the component securities of its index and may invest up to 20% of its assets in certain futures, options and swap contracts, cash and cash equivalents. The fund is non-diversified.",
       "inception": "2001-07-10",
       "expense_ratio": null,
-      "avg_volume": 10549937
+      "avg_volume": 10385641
     },
     "VGT": {
-      "name": "Vanguard Information Tech ETF",
+      "name": "Vanguard Information Technology Index Fund ETF Shares",
       "lev": false,
       "category": "sector-thematic",
       "category_label": "Sector/thematic",
-      "cagr": 24.68,
+      "cagr": 24.7,
       "stddev": 24.93,
-      "yield": 0.36,
+      "yield": 0.35,
       "ret22": -30.28,
       "prices": [
         [
@@ -10993,21 +10993,21 @@
         ],
         [
           "2026-08-31",
-          121.45
+          122.56
         ]
       ],
       "description": "The fund employs an indexing investment approach designed to track the performance of the index, an index made up of stocks of large, mid-size, and small U.S. companies within the information technology sector, as classified under the GICS. The Advisor attempts to replicate the target index by seeking to invest all of its assets in the stocks that make up the index, in order to hold each stock...",
-      "inception": "2004-03-25",
+      "inception": "2004-01-26",
       "expense_ratio": null,
-      "avg_volume": 4940979
+      "avg_volume": 4808909
     },
     "XLK": {
-      "name": "State Street Technology Select ",
+      "name": "State Street Technology Select Sector SPDR ETF",
       "lev": false,
       "category": "sector-thematic",
       "category_label": "Sector/thematic",
-      "cagr": 24.41,
-      "stddev": 24.95,
+      "cagr": 24.47,
+      "stddev": 24.96,
       "yield": 0.42,
       "ret22": -28.41,
       "prices": [
@@ -11493,20 +11493,20 @@
         ],
         [
           "2026-08-31",
-          187.97
+          190.01
         ]
       ],
       "description": "In seeking to track the performance of the index, the fund employs a replication strategy, which means that the fund typically invests in substantially all of the securities represented in the index in approximately the same proportions as the index. It generally invests substantially all, but at least 95%, of its total assets in the securities comprising the index. The fund is non-diversified.",
       "inception": "1998-12-16",
       "expense_ratio": null,
-      "avg_volume": 12076251
+      "avg_volume": 11503180
     },
     "ITA": {
       "name": "iShares U.S. Aerospace & Defense ETF",
       "lev": false,
       "category": "sector-thematic",
       "category_label": "Sector/thematic",
-      "cagr": 15.56,
+      "cagr": 15.48,
       "stddev": 23.31,
       "yield": 0.42,
       "ret22": 8.93,
@@ -11993,22 +11993,22 @@
         ],
         [
           "2026-08-31",
-          250.75
+          253.22
         ]
       ],
       "description": "The index measures the performance of the aerospace and defense sector of the U.S. equity market, as defined by SPDJI. The fund generally will invest at least 80% of its assets in the component securities of its index and in investments that have economic characteristics that are substantially identical to the component securities of its index and may invest up to 20% of its assets in certain...",
       "inception": "2006-05-01",
       "expense_ratio": null,
-      "avg_volume": 760632
+      "avg_volume": 740290
     },
     "XLI": {
       "name": "State Street Industrial Select Sector SPDR ETF",
       "lev": false,
       "category": "sector-thematic",
       "category_label": "Sector/thematic",
-      "cagr": 14.19,
+      "cagr": 14.16,
       "stddev": 20.05,
-      "yield": 1.11,
+      "yield": 1.1,
       "ret22": -4.79,
       "prices": [
         [
@@ -12493,22 +12493,22 @@
         ],
         [
           "2026-08-31",
-          185.18
+          186.51
         ]
       ],
       "description": "Under normal market conditions, the fund generally invests substantially all, but at least 95%, of its total assets in the securities comprising the index. The index includes companies that have been identified as Industrial companies by the Global Industry Classification Standard, including securities of companies from the following industries: aerospace and defense; industrial conglomerates;...",
       "inception": "1998-12-16",
       "expense_ratio": null,
-      "avg_volume": 7504653
+      "avg_volume": 7277503
     },
     "ITB": {
       "name": "iShares U.S. Home Construction ETF",
       "lev": false,
       "category": "sector-thematic",
       "category_label": "Sector/thematic",
-      "cagr": 14.14,
-      "stddev": 30.25,
-      "yield": 0.64,
+      "cagr": 13.8,
+      "stddev": 30.28,
+      "yield": 0.65,
       "ret22": -24.22,
       "prices": [
         [
@@ -12993,22 +12993,22 @@
         ],
         [
           "2026-08-31",
-          101.14
+          98.78
         ]
       ],
       "description": "The index measures the performance of the home construction sector of the U.S. equity market, as defined by the index provider. The fund generally will invest at least 80% of its assets in the component securities of its underlying index and may invest up to 20% of its assets in certain futures, options and swap contracts, cash and cash equivalents. It is non-diversified.",
       "inception": "2006-05-01",
       "expense_ratio": null,
-      "avg_volume": 2254540
+      "avg_volume": 2227804
     },
     "XLF": {
       "name": "State Street Financial Select Sector SPDR ETF",
       "lev": false,
       "category": "sector-thematic",
       "category_label": "Sector/thematic",
-      "cagr": 13.51,
+      "cagr": 13.63,
       "stddev": 22.07,
-      "yield": 1.4,
+      "yield": 1.39,
       "ret22": -11.67,
       "prices": [
         [
@@ -13493,22 +13493,22 @@
         ],
         [
           "2026-08-31",
-          57.6
+          58.16
         ]
       ],
       "description": "The fund generally invests substantially all, but at least 95%, of its total assets in the securities comprising the index. The index includes companies that have been identified as Financial companies by the Global Industry Classification Standard, including securities of companies from the following industries: financial services; insurance; banks; capital markets; mortgage real estate...",
       "inception": "1998-12-16",
       "expense_ratio": null,
-      "avg_volume": 35262772
+      "avg_volume": 34303361
     },
     "VFH": {
-      "name": "Vanguard Financials ETF",
+      "name": "Vanguard Financials Index Fund ETF Shares",
       "lev": false,
       "category": "sector-thematic",
       "category_label": "Sector/thematic",
-      "cagr": 13.3,
+      "cagr": 13.45,
       "stddev": 22.47,
-      "yield": 1.65,
+      "yield": 1.63,
       "ret22": -13.3,
       "prices": [
         [
@@ -13553,7 +13553,7 @@
         ],
         [
           "2017-06-30",
-          51.65
+          51.66
         ],
         [
           "2017-07-31",
@@ -13993,22 +13993,22 @@
         ],
         [
           "2026-08-31",
-          140.9
+          142.63
         ]
       ],
       "description": "The fund employs an indexing investment approach designed to track the performance of the index, an index made up of stocks of large, mid-size, and small U.S. companies within the financials sector, as classified under the GICS. The Advisor attempts to replicate the target index by seeking to invest all, or substantially all, of its assets in the stocks that make up the index, in order to hold...",
-      "inception": "2004-02-04",
+      "inception": "2004-01-26",
       "expense_ratio": null,
-      "avg_volume": 547891
+      "avg_volume": 536000
     },
     "XLY": {
-      "name": "State Street Consumer Discretio",
+      "name": "State Street Consumer Discretionary Select Sector SPDR ETF",
       "lev": false,
       "category": "sector-thematic",
       "category_label": "Sector/thematic",
-      "cagr": 12.59,
+      "cagr": 12.31,
       "stddev": 22.18,
-      "yield": 0.75,
+      "yield": 0.76,
       "ret22": -38.05,
       "prices": [
         [
@@ -14493,22 +14493,22 @@
         ],
         [
           "2026-08-31",
-          119.86
+          118.2
         ]
       ],
       "description": "The Advisor employs a replication strategy. The fund generally invests substantially all, but at least 95%, of its total assets in the securities comprising the index. The index includes companies that have been identified as Consumer Discretionary companies by the Global Industry Classification Standard (GICS\u00ae). It is non-diversified.",
       "inception": "1998-12-16",
       "expense_ratio": null,
-      "avg_volume": 8072462
+      "avg_volume": 7872759
     },
     "JNK": {
-      "name": "State Street SPDR Bloomberg Hig",
+      "name": "State Street SPDR Bloomberg High Yield Bond ETF",
       "lev": false,
       "category": "bond",
       "category_label": "Bond ETFs",
-      "cagr": 4.67,
+      "cagr": 4.6,
       "stddev": 8.22,
-      "yield": 6.61,
+      "yield": 6.6,
       "ret22": -12.14,
       "prices": [
         [
@@ -14993,22 +14993,22 @@
         ],
         [
           "2026-08-31",
-          95.81
+          95.97
         ]
       ],
       "description": "The fund generally invests substantially all, but at least 80%, of its total assets in the securities comprising the index and in securities that the Adviser determines have economic characteristics that are substantially identical to the economic characteristics of the securities that comprise the index. The index is designed to measure the performance of publicly issued U.S. dollar...",
       "inception": "2007-11-28",
       "expense_ratio": null,
-      "avg_volume": 2817625
+      "avg_volume": 2750438
     },
     "HYG": {
-      "name": "iShares iBoxx $ High Yield Corp",
+      "name": "iShares iBoxx $ High Yield Corporate Bond ETF",
       "lev": false,
       "category": "bond",
       "category_label": "Bond ETFs",
-      "cagr": 4.64,
+      "cagr": 4.57,
       "stddev": 8.21,
-      "yield": 5.89,
+      "yield": 5.88,
       "ret22": -10.94,
       "prices": [
         [
@@ -15493,22 +15493,22 @@
         ],
         [
           "2026-08-31",
-          79.61
+          79.71
         ]
       ],
       "description": "The underlying index is a rules-based index consisting of U.S. dollar-denominated, high yield corporate bonds for sale in the U.S. The fund will invest at least 80% of its assets in the component securities of the underlying index, and the fund will invest at least 90% of its assets in fixed income securities of the types included in the underlying index that the advisor believes will help the...",
       "inception": "2007-04-04",
       "expense_ratio": null,
-      "avg_volume": 33301048
+      "avg_volume": 32366358
     },
     "EMB": {
-      "name": "iShares J.P. Morgan USD Emergin",
+      "name": "iShares J.P. Morgan USD Emerging Markets Bond ETF",
       "lev": false,
       "category": "bond",
       "category_label": "Bond ETFs",
-      "cagr": 2.83,
+      "cagr": 2.69,
       "stddev": 9.95,
-      "yield": 5.12,
+      "yield": 5.13,
       "ret22": -17.81,
       "prices": [
         [
@@ -15993,22 +15993,522 @@
         ],
         [
           "2026-08-31",
-          95.24
+          95.05
         ]
       ],
       "description": "The fund will invest at least 80% of its assets in the component securities of the underlying index and will invest at least 90% of its assets in fixed income securities of the types included in the underlying index. The index is a broad, diverse U.S. dollar-denominated emerging markets debt benchmark that tracks the total return of actively traded external debt instruments in emerging market...",
       "inception": "2007-12-17",
       "expense_ratio": null,
-      "avg_volume": 6214301
+      "avg_volume": 6033375
+    },
+    "VCSH": {
+      "name": "Vanguard Short-Term Corporate Bond Index Fund ETF Shares",
+      "lev": false,
+      "category": "bond",
+      "category_label": "Bond ETFs",
+      "cagr": 2.66,
+      "stddev": 3.35,
+      "yield": 4.46,
+      "ret22": -5.48,
+      "prices": [
+        [
+          "2016-08-31",
+          60.5
+        ],
+        [
+          "2016-09-30",
+          60.48
+        ],
+        [
+          "2016-10-31",
+          60.42
+        ],
+        [
+          "2016-11-30",
+          59.84
+        ],
+        [
+          "2016-12-31",
+          60.03
+        ],
+        [
+          "2017-01-31",
+          60.22
+        ],
+        [
+          "2017-02-28",
+          60.43
+        ],
+        [
+          "2017-03-31",
+          60.5
+        ],
+        [
+          "2017-04-30",
+          60.76
+        ],
+        [
+          "2017-05-31",
+          61.04
+        ],
+        [
+          "2017-06-30",
+          61.07
+        ],
+        [
+          "2017-07-31",
+          61.34
+        ],
+        [
+          "2017-08-31",
+          61.56
+        ],
+        [
+          "2017-09-30",
+          61.49
+        ],
+        [
+          "2017-10-31",
+          61.53
+        ],
+        [
+          "2017-11-30",
+          61.34
+        ],
+        [
+          "2017-12-31",
+          61.33
+        ],
+        [
+          "2018-01-31",
+          61.13
+        ],
+        [
+          "2018-02-28",
+          60.79
+        ],
+        [
+          "2018-03-31",
+          60.88
+        ],
+        [
+          "2018-04-30",
+          60.81
+        ],
+        [
+          "2018-05-31",
+          61.04
+        ],
+        [
+          "2018-06-30",
+          61.03
+        ],
+        [
+          "2018-07-31",
+          61.2
+        ],
+        [
+          "2018-08-31",
+          61.53
+        ],
+        [
+          "2018-09-30",
+          61.48
+        ],
+        [
+          "2018-10-31",
+          61.44
+        ],
+        [
+          "2018-11-30",
+          61.39
+        ],
+        [
+          "2018-12-31",
+          61.9
+        ],
+        [
+          "2019-01-31",
+          62.72
+        ],
+        [
+          "2019-02-28",
+          62.88
+        ],
+        [
+          "2019-03-31",
+          63.62
+        ],
+        [
+          "2019-04-30",
+          63.77
+        ],
+        [
+          "2019-05-31",
+          64.23
+        ],
+        [
+          "2019-06-30",
+          64.85
+        ],
+        [
+          "2019-07-31",
+          64.93
+        ],
+        [
+          "2019-08-31",
+          65.66
+        ],
+        [
+          "2019-09-30",
+          65.63
+        ],
+        [
+          "2019-10-31",
+          65.96
+        ],
+        [
+          "2019-11-30",
+          65.97
+        ],
+        [
+          "2019-12-31",
+          66.24
+        ],
+        [
+          "2020-01-31",
+          66.85
+        ],
+        [
+          "2020-02-29",
+          67.28
+        ],
+        [
+          "2020-03-31",
+          64.94
+        ],
+        [
+          "2020-04-30",
+          66.74
+        ],
+        [
+          "2020-05-31",
+          67.71
+        ],
+        [
+          "2020-06-30",
+          68.32
+        ],
+        [
+          "2020-07-31",
+          68.81
+        ],
+        [
+          "2020-08-31",
+          68.94
+        ],
+        [
+          "2020-09-30",
+          68.86
+        ],
+        [
+          "2020-10-31",
+          68.92
+        ],
+        [
+          "2020-11-30",
+          69.36
+        ],
+        [
+          "2020-12-31",
+          69.64
+        ],
+        [
+          "2021-01-31",
+          69.53
+        ],
+        [
+          "2021-02-28",
+          69.34
+        ],
+        [
+          "2021-03-31",
+          69.21
+        ],
+        [
+          "2021-04-30",
+          69.5
+        ],
+        [
+          "2021-05-31",
+          69.7
+        ],
+        [
+          "2021-06-30",
+          69.67
+        ],
+        [
+          "2021-07-31",
+          69.89
+        ],
+        [
+          "2021-08-31",
+          69.84
+        ],
+        [
+          "2021-09-30",
+          69.68
+        ],
+        [
+          "2021-10-31",
+          69.32
+        ],
+        [
+          "2021-11-30",
+          69.13
+        ],
+        [
+          "2021-12-31",
+          69.21
+        ],
+        [
+          "2022-01-31",
+          68.38
+        ],
+        [
+          "2022-02-28",
+          67.9
+        ],
+        [
+          "2022-03-31",
+          66.67
+        ],
+        [
+          "2022-04-30",
+          65.65
+        ],
+        [
+          "2022-05-31",
+          66.26
+        ],
+        [
+          "2022-06-30",
+          65.38
+        ],
+        [
+          "2022-07-31",
+          66.45
+        ],
+        [
+          "2022-08-31",
+          65.41
+        ],
+        [
+          "2022-09-30",
+          64.0
+        ],
+        [
+          "2022-10-31",
+          63.88
+        ],
+        [
+          "2022-11-30",
+          65.31
+        ],
+        [
+          "2022-12-31",
+          65.32
+        ],
+        [
+          "2023-01-31",
+          66.44
+        ],
+        [
+          "2023-02-28",
+          65.54
+        ],
+        [
+          "2023-03-31",
+          66.52
+        ],
+        [
+          "2023-04-30",
+          66.87
+        ],
+        [
+          "2023-05-31",
+          66.6
+        ],
+        [
+          "2023-06-30",
+          66.51
+        ],
+        [
+          "2023-07-31",
+          66.92
+        ],
+        [
+          "2023-08-31",
+          66.98
+        ],
+        [
+          "2023-09-30",
+          66.59
+        ],
+        [
+          "2023-10-31",
+          66.52
+        ],
+        [
+          "2023-11-30",
+          68.12
+        ],
+        [
+          "2023-12-31",
+          69.37
+        ],
+        [
+          "2024-01-31",
+          69.59
+        ],
+        [
+          "2024-02-29",
+          69.27
+        ],
+        [
+          "2024-03-31",
+          69.73
+        ],
+        [
+          "2024-04-30",
+          69.28
+        ],
+        [
+          "2024-05-31",
+          70.02
+        ],
+        [
+          "2024-06-30",
+          70.39
+        ],
+        [
+          "2024-07-31",
+          71.49
+        ],
+        [
+          "2024-08-31",
+          72.36
+        ],
+        [
+          "2024-09-30",
+          73.07
+        ],
+        [
+          "2024-10-31",
+          72.39
+        ],
+        [
+          "2024-11-30",
+          72.86
+        ],
+        [
+          "2024-12-31",
+          72.78
+        ],
+        [
+          "2025-01-31",
+          73.21
+        ],
+        [
+          "2025-02-28",
+          73.85
+        ],
+        [
+          "2025-03-31",
+          74.15
+        ],
+        [
+          "2025-04-30",
+          74.65
+        ],
+        [
+          "2025-05-31",
+          74.83
+        ],
+        [
+          "2025-06-30",
+          75.5
+        ],
+        [
+          "2025-07-31",
+          75.57
+        ],
+        [
+          "2025-08-31",
+          76.42
+        ],
+        [
+          "2025-09-30",
+          76.76
+        ],
+        [
+          "2025-10-31",
+          77.01
+        ],
+        [
+          "2025-11-30",
+          77.45
+        ],
+        [
+          "2025-12-31",
+          77.7
+        ],
+        [
+          "2026-01-31",
+          78.02
+        ],
+        [
+          "2026-02-28",
+          78.45
+        ],
+        [
+          "2026-03-31",
+          77.81
+        ],
+        [
+          "2026-04-30",
+          78.1
+        ],
+        [
+          "2026-05-31",
+          78.31
+        ],
+        [
+          "2026-06-30",
+          78.44
+        ],
+        [
+          "2026-07-31",
+          78.32
+        ],
+        [
+          "2026-08-31",
+          78.64
+        ]
+      ],
+      "description": "The fund manager employs an indexing investment approach designed to track the performance of the Bloomberg U.S. 1-5 Year Corporate Bond Index, which includes U.S. dollar-denominated, investment-grade, fixed-rate, taxable debt securities issued by U.S. and non-U.S. industrial, utility, and financial companies, all with maturities between 1 and 5 years. Under normal circumstances, it invests at...",
+      "inception": "2009-11-19",
+      "expense_ratio": null,
+      "avg_volume": 4221014
     },
     "VCIT": {
       "name": "Vanguard Intermediate-Term Corporate Bond Index Fund ETF Shares",
       "lev": false,
       "category": "bond",
       "category_label": "Bond ETFs",
-      "cagr": 2.73,
+      "cagr": 2.66,
       "stddev": 6.28,
-      "yield": 4.87,
+      "yield": 4.88,
       "ret22": -13.43,
       "prices": [
         [
@@ -16493,522 +16993,22 @@
         ],
         [
           "2026-08-31",
-          81.42
+          81.23
         ]
       ],
       "description": "The fund employs an indexing investment approach designed to track the performance of the Bloomberg U.S. 5-10 Year Corporate Bond Index. This index includes U.S. dollar-denominated, investment-grade, fixed-rate, taxable securities issued by U.S. and non-U.S. industrial, utility, and financial companies, with maturities between 5 and 10 years. Under normal circumstances, at least 80% of the...",
       "inception": "2009-11-19",
       "expense_ratio": null,
-      "avg_volume": 8750669
-    },
-    "VCSH": {
-      "name": "Vanguard Short-Term Corporate Bond Index Fund ETF Shares",
-      "lev": false,
-      "category": "bond",
-      "category_label": "Bond ETFs",
-      "cagr": 2.67,
-      "stddev": 3.35,
-      "yield": 4.46,
-      "ret22": -5.48,
-      "prices": [
-        [
-          "2016-08-31",
-          60.5
-        ],
-        [
-          "2016-09-30",
-          60.48
-        ],
-        [
-          "2016-10-31",
-          60.42
-        ],
-        [
-          "2016-11-30",
-          59.84
-        ],
-        [
-          "2016-12-31",
-          60.03
-        ],
-        [
-          "2017-01-31",
-          60.22
-        ],
-        [
-          "2017-02-28",
-          60.43
-        ],
-        [
-          "2017-03-31",
-          60.51
-        ],
-        [
-          "2017-04-30",
-          60.76
-        ],
-        [
-          "2017-05-31",
-          61.04
-        ],
-        [
-          "2017-06-30",
-          61.07
-        ],
-        [
-          "2017-07-31",
-          61.34
-        ],
-        [
-          "2017-08-31",
-          61.56
-        ],
-        [
-          "2017-09-30",
-          61.49
-        ],
-        [
-          "2017-10-31",
-          61.53
-        ],
-        [
-          "2017-11-30",
-          61.34
-        ],
-        [
-          "2017-12-31",
-          61.33
-        ],
-        [
-          "2018-01-31",
-          61.13
-        ],
-        [
-          "2018-02-28",
-          60.79
-        ],
-        [
-          "2018-03-31",
-          60.88
-        ],
-        [
-          "2018-04-30",
-          60.81
-        ],
-        [
-          "2018-05-31",
-          61.04
-        ],
-        [
-          "2018-06-30",
-          61.03
-        ],
-        [
-          "2018-07-31",
-          61.2
-        ],
-        [
-          "2018-08-31",
-          61.53
-        ],
-        [
-          "2018-09-30",
-          61.48
-        ],
-        [
-          "2018-10-31",
-          61.44
-        ],
-        [
-          "2018-11-30",
-          61.39
-        ],
-        [
-          "2018-12-31",
-          61.9
-        ],
-        [
-          "2019-01-31",
-          62.72
-        ],
-        [
-          "2019-02-28",
-          62.88
-        ],
-        [
-          "2019-03-31",
-          63.62
-        ],
-        [
-          "2019-04-30",
-          63.77
-        ],
-        [
-          "2019-05-31",
-          64.23
-        ],
-        [
-          "2019-06-30",
-          64.85
-        ],
-        [
-          "2019-07-31",
-          64.93
-        ],
-        [
-          "2019-08-31",
-          65.66
-        ],
-        [
-          "2019-09-30",
-          65.63
-        ],
-        [
-          "2019-10-31",
-          65.96
-        ],
-        [
-          "2019-11-30",
-          65.97
-        ],
-        [
-          "2019-12-31",
-          66.24
-        ],
-        [
-          "2020-01-31",
-          66.85
-        ],
-        [
-          "2020-02-29",
-          67.28
-        ],
-        [
-          "2020-03-31",
-          64.94
-        ],
-        [
-          "2020-04-30",
-          66.74
-        ],
-        [
-          "2020-05-31",
-          67.71
-        ],
-        [
-          "2020-06-30",
-          68.32
-        ],
-        [
-          "2020-07-31",
-          68.81
-        ],
-        [
-          "2020-08-31",
-          68.94
-        ],
-        [
-          "2020-09-30",
-          68.86
-        ],
-        [
-          "2020-10-31",
-          68.92
-        ],
-        [
-          "2020-11-30",
-          69.36
-        ],
-        [
-          "2020-12-31",
-          69.64
-        ],
-        [
-          "2021-01-31",
-          69.53
-        ],
-        [
-          "2021-02-28",
-          69.34
-        ],
-        [
-          "2021-03-31",
-          69.21
-        ],
-        [
-          "2021-04-30",
-          69.5
-        ],
-        [
-          "2021-05-31",
-          69.7
-        ],
-        [
-          "2021-06-30",
-          69.67
-        ],
-        [
-          "2021-07-31",
-          69.89
-        ],
-        [
-          "2021-08-31",
-          69.84
-        ],
-        [
-          "2021-09-30",
-          69.68
-        ],
-        [
-          "2021-10-31",
-          69.32
-        ],
-        [
-          "2021-11-30",
-          69.13
-        ],
-        [
-          "2021-12-31",
-          69.21
-        ],
-        [
-          "2022-01-31",
-          68.38
-        ],
-        [
-          "2022-02-28",
-          67.9
-        ],
-        [
-          "2022-03-31",
-          66.67
-        ],
-        [
-          "2022-04-30",
-          65.65
-        ],
-        [
-          "2022-05-31",
-          66.26
-        ],
-        [
-          "2022-06-30",
-          65.38
-        ],
-        [
-          "2022-07-31",
-          66.45
-        ],
-        [
-          "2022-08-31",
-          65.41
-        ],
-        [
-          "2022-09-30",
-          64.0
-        ],
-        [
-          "2022-10-31",
-          63.88
-        ],
-        [
-          "2022-11-30",
-          65.31
-        ],
-        [
-          "2022-12-31",
-          65.32
-        ],
-        [
-          "2023-01-31",
-          66.44
-        ],
-        [
-          "2023-02-28",
-          65.54
-        ],
-        [
-          "2023-03-31",
-          66.52
-        ],
-        [
-          "2023-04-30",
-          66.87
-        ],
-        [
-          "2023-05-31",
-          66.6
-        ],
-        [
-          "2023-06-30",
-          66.51
-        ],
-        [
-          "2023-07-31",
-          66.92
-        ],
-        [
-          "2023-08-31",
-          66.98
-        ],
-        [
-          "2023-09-30",
-          66.59
-        ],
-        [
-          "2023-10-31",
-          66.52
-        ],
-        [
-          "2023-11-30",
-          68.12
-        ],
-        [
-          "2023-12-31",
-          69.37
-        ],
-        [
-          "2024-01-31",
-          69.59
-        ],
-        [
-          "2024-02-29",
-          69.27
-        ],
-        [
-          "2024-03-31",
-          69.73
-        ],
-        [
-          "2024-04-30",
-          69.28
-        ],
-        [
-          "2024-05-31",
-          70.02
-        ],
-        [
-          "2024-06-30",
-          70.39
-        ],
-        [
-          "2024-07-31",
-          71.49
-        ],
-        [
-          "2024-08-31",
-          72.36
-        ],
-        [
-          "2024-09-30",
-          73.07
-        ],
-        [
-          "2024-10-31",
-          72.39
-        ],
-        [
-          "2024-11-30",
-          72.86
-        ],
-        [
-          "2024-12-31",
-          72.78
-        ],
-        [
-          "2025-01-31",
-          73.21
-        ],
-        [
-          "2025-02-28",
-          73.85
-        ],
-        [
-          "2025-03-31",
-          74.15
-        ],
-        [
-          "2025-04-30",
-          74.65
-        ],
-        [
-          "2025-05-31",
-          74.83
-        ],
-        [
-          "2025-06-30",
-          75.5
-        ],
-        [
-          "2025-07-31",
-          75.57
-        ],
-        [
-          "2025-08-31",
-          76.42
-        ],
-        [
-          "2025-09-30",
-          76.76
-        ],
-        [
-          "2025-10-31",
-          77.01
-        ],
-        [
-          "2025-11-30",
-          77.45
-        ],
-        [
-          "2025-12-31",
-          77.7
-        ],
-        [
-          "2026-01-31",
-          78.02
-        ],
-        [
-          "2026-02-28",
-          78.45
-        ],
-        [
-          "2026-03-31",
-          77.81
-        ],
-        [
-          "2026-04-30",
-          78.1
-        ],
-        [
-          "2026-05-31",
-          78.31
-        ],
-        [
-          "2026-06-30",
-          78.44
-        ],
-        [
-          "2026-07-31",
-          78.32
-        ],
-        [
-          "2026-08-31",
-          78.61
-        ]
-      ],
-      "description": "The fund manager employs an indexing investment approach designed to track the performance of the Bloomberg U.S. 1-5 Year Corporate Bond Index, which includes U.S. dollar-denominated, investment-grade, fixed-rate, taxable debt securities issued by U.S. and non-U.S. industrial, utility, and financial companies, all with maturities between 1 and 5 years. Under normal circumstances, it invests at...",
-      "inception": "2010-11-18",
-      "expense_ratio": null,
-      "avg_volume": 4210266
+      "avg_volume": 8634016
     },
     "SCHP": {
       "name": "Schwab U.S. TIPS ETF",
       "lev": false,
       "category": "bond",
       "category_label": "Bond ETFs",
-      "cagr": 2.47,
-      "stddev": 5.58,
-      "yield": 5.02,
+      "cagr": 2.46,
+      "stddev": 5.57,
+      "yield": 5.03,
       "ret22": -11.55,
       "prices": [
         [
@@ -17493,20 +17493,20 @@
         ],
         [
           "2026-08-31",
-          25.96
+          25.94
         ]
       ],
       "description": "The fund will invest at least 90% of its net assets in securities included in the index. The index includes all publicly-issued U.S. Treasury Inflation-Protected Securities (TIPS) that have at least one year remaining to maturity, are rated investment grade and have $500 million or more of outstanding face value. The TIPS in the index must be denominated in U.S. dollars and must be fixed-rate...",
       "inception": "2010-08-05",
       "expense_ratio": null,
-      "avg_volume": 4312993
+      "avg_volume": 4488806
     },
     "TIP": {
       "name": "iShares TIPS Bond ETF",
       "lev": false,
       "category": "bond",
       "category_label": "Bond ETFs",
-      "cagr": 2.34,
+      "cagr": 2.33,
       "stddev": 5.72,
       "yield": 4.97,
       "ret22": -11.76,
@@ -17993,22 +17993,22 @@
         ],
         [
           "2026-08-31",
-          107.08
+          106.99
         ]
       ],
       "description": "The index tracks the performance of inflation-protected public obligations of the U.S. Treasury, commonly known as \u201cTIPS,\u201d that have a remaining maturity of more than one year. The fund will invest at least 80% of its assets in the component securities of the index, and it will invest at least 90% of its assets in U.S. Treasury securities that BFA believes will help the fund track the index.",
       "inception": "2003-12-04",
       "expense_ratio": null,
-      "avg_volume": 2019319
+      "avg_volume": 1901387
     },
     "LQD": {
-      "name": "iShares iBoxx $ Investment Grad",
+      "name": "iShares iBoxx $ Investment Grade Corporate Bond ETF",
       "lev": false,
       "category": "bond",
       "category_label": "Bond ETFs",
-      "cagr": 2.16,
+      "cagr": 2.05,
       "stddev": 8.68,
-      "yield": 4.65,
+      "yield": 4.67,
       "ret22": -17.04,
       "prices": [
         [
@@ -18349,7 +18349,7 @@
         ],
         [
           "2023-08-31",
-          92.85
+          92.84
         ],
         [
           "2023-09-30",
@@ -18493,21 +18493,21 @@
         ],
         [
           "2026-08-31",
-          106.55
+          106.12
         ]
       ],
       "description": "The fund will invest at least 80% of its assets in the component securities of the underlying index, and it will invest at least 90% of its assets in fixed income securities of the types included in the underlying index that the advisor believes will help the fund track the underlying index. The underlying index is designed to provide a broad representation of the U.S. dollar-denominated...",
       "inception": "2002-07-22",
       "expense_ratio": null,
-      "avg_volume": 28186916
+      "avg_volume": 28067080
     },
     "BNO": {
-      "name": "United States Brent Oil Fund, L",
+      "name": "United States Brent Oil Fund, LP",
       "lev": false,
       "category": "gold-commodity",
       "category_label": "Gold/commodity",
-      "cagr": 13.39,
-      "stddev": 37.05,
+      "cagr": 13.46,
+      "stddev": 37.07,
       "yield": 0.0,
       "ret22": 33.65,
       "prices": [
@@ -18993,21 +18993,21 @@
         ],
         [
           "2026-08-31",
-          46.93
+          50.64
         ]
       ],
       "description": "The Benchmark Futures Contract is the futures contract on Brent crude oil as traded on the Ice Futures Europe Exchange that is the near month contract to expire, except when the near month contract is within two weeks of expiration, in which case it will be measured by the futures contract that is the next month contract to expire.",
       "inception": "2010-06-02",
       "expense_ratio": null,
-      "avg_volume": 2683151
+      "avg_volume": 2614648
     },
     "SGOL": {
       "name": "abrdn Physical Gold Shares ETF",
       "lev": false,
       "category": "gold-commodity",
       "category_label": "Gold/commodity",
-      "cagr": 12.27,
-      "stddev": 16.15,
+      "cagr": 12.32,
+      "stddev": 16.16,
       "yield": 0.0,
       "ret22": 0.98,
       "prices": [
@@ -19493,21 +19493,21 @@
         ],
         [
           "2026-08-31",
-          41.35
+          41.67
         ]
       ],
       "description": "The Shares are intended to constitute a simple and cost-effective means of making an investment similar to an investment in gold. An investment in physical gold requires expensive and sometimes complicated arrangements in connection with the assay, transportation, warehousing and insurance of the metal. Although the Shares are not the exact equivalent of an investment in gold, they provide...",
       "inception": "2009-09-09",
       "expense_ratio": null,
-      "avg_volume": 2486296
+      "avg_volume": 2475293
     },
     "IAU": {
       "name": "iShares Gold Trust",
       "lev": false,
       "category": "gold-commodity",
       "category_label": "Gold/commodity",
-      "cagr": 12.24,
-      "stddev": 16.13,
+      "cagr": 12.29,
+      "stddev": 16.14,
       "yield": 0.0,
       "ret22": 0.96,
       "prices": [
@@ -19993,21 +19993,21 @@
         ],
         [
           "2026-08-31",
-          81.68
+          82.28
         ]
       ],
       "description": "The Trust seeks to reflect such performance before payment of the Trust\u2019s expenses and liabilities. It is not actively managed. The Trust does not engage in any activities designed to obtain a profit from, or to ameliorate losses caused by, changes in the price of gold. The advisor intends to constitute a simple and cost-effective means of making an investment similar to an investment in gold....",
       "inception": "2005-01-21",
       "expense_ratio": null,
-      "avg_volume": 6093579
+      "avg_volume": 6134243
     },
     "SIVR": {
       "name": "abrdn Physical Silver Shares ETF",
       "lev": false,
       "category": "gold-commodity",
       "category_label": "Gold/commodity",
-      "cagr": 12.09,
-      "stddev": 32.29,
+      "cagr": 12.22,
+      "stddev": 32.3,
       "yield": 0.0,
       "ret22": 4.22,
       "prices": [
@@ -20493,22 +20493,22 @@
         ],
         [
           "2026-08-31",
-          60.46
+          61.47
         ]
       ],
       "description": "The shares are intended to constitute a simple and cost-effective means of making an investment similar to an investment in silver. An investment in physical silver requires expensive and sometimes complicated arrangements in connection with the assay, transportation, warehousing and insurance of the metal. Although the shares are not the exact equivalent of an investment in silver, they...",
       "inception": "2009-07-24",
       "expense_ratio": null,
-      "avg_volume": 1274212
+      "avg_volume": 1170553
     },
     "DGRO": {
       "name": "iShares Core Dividend Growth ETF",
       "lev": false,
       "category": "dividend",
       "category_label": "Dividend-focused",
-      "cagr": 13.57,
+      "cagr": 13.56,
       "stddev": 16.58,
-      "yield": 1.86,
+      "yield": 1.85,
       "ret22": -8.02,
       "prices": [
         [
@@ -20829,7 +20829,7 @@
         ],
         [
           "2023-03-31",
-          46.43
+          46.44
         ],
         [
           "2023-04-30",
@@ -20993,20 +20993,20 @@
         ],
         [
           "2026-08-31",
-          79.47
+          79.83
         ]
       ],
       "description": "The fund generally will invest at least 80% of its assets in the component securities of its underlying index and in investments that have economic characteristics that are substantially identical to the component securities of its underlying index. The underlying index is a subset of the Morningstar\u00ae U.S. Market IndexSM, which is a broad market index that represents approximately 97% of the...",
       "inception": "2014-06-10",
       "expense_ratio": null,
-      "avg_volume": 1445670
+      "avg_volume": 1437869
     },
     "VIG": {
       "name": "Vanguard Dividend Appreciation Index Fund ETF Shares",
       "lev": false,
       "category": "dividend",
       "category_label": "Dividend-focused",
-      "cagr": 13.24,
+      "cagr": 13.17,
       "stddev": 16.02,
       "yield": 1.46,
       "ret22": -9.5,
@@ -21285,7 +21285,7 @@
         ],
         [
           "2022-04-30",
-          142.16
+          142.17
         ],
         [
           "2022-05-31",
@@ -21493,22 +21493,22 @@
         ],
         [
           "2026-08-31",
-          245.23
+          245.38
         ]
       ],
       "description": "The adviser employs an indexing investment approach designed to track the performance of the index, which consists of common stocks of companies that have a record of increasing dividends over time. The adviser attempts to replicate the target index by investing all, or substantially all, of its assets in the stocks that make up the index, holding each stock in approximately the same...",
-      "inception": "2013-12-19",
+      "inception": "2006-04-21",
       "expense_ratio": null,
-      "avg_volume": 1110680
+      "avg_volume": 1097396
     },
     "SCHD": {
       "name": "Schwab U.S. Dividend Equity ETF",
       "lev": false,
       "category": "dividend",
       "category_label": "Dividend-focused",
-      "cagr": 12.82,
+      "cagr": 12.94,
       "stddev": 16.73,
-      "yield": 3.09,
+      "yield": 3.04,
       "ret22": -3.23,
       "prices": [
         [
@@ -21993,22 +21993,22 @@
         ],
         [
           "2026-08-31",
-          33.9
+          34.52
         ]
       ],
       "description": "To pursue its goal, the fund generally invests in stocks that are included in the index. The index is designed to measure the performance of high dividend yielding stocks issued by U.S. companies that have a record of consistently paying dividends, selected for fundamental strength relative to their peers, based on financial ratios. The fund will invest at least 90% of its net assets in these...",
       "inception": "2011-10-20",
       "expense_ratio": null,
-      "avg_volume": 21399556
+      "avg_volume": 21466212
     },
     "DLN": {
-      "name": "WisdomTree U.S. LargeCap Divide",
+      "name": "WisdomTree U.S. LargeCap Dividend Fund",
       "lev": false,
       "category": "dividend",
       "category_label": "Dividend-focused",
-      "cagr": 12.71,
+      "cagr": 12.77,
       "stddev": 16.12,
-      "yield": 1.71,
+      "yield": 1.7,
       "ret22": -4.1,
       "prices": [
         [
@@ -22337,7 +22337,7 @@
         ],
         [
           "2023-05-31",
-          56.63
+          56.62
         ],
         [
           "2023-06-30",
@@ -22493,22 +22493,22 @@
         ],
         [
           "2026-08-31",
-          100.64
+          101.56
         ]
       ],
       "description": "Under normal circumstances, at least 95% of the fund's total assets (exclusive of collateral held from securities lending) will be invested in constituent securities of the index and investments that have economic characteristics that are substantially identical to the economic characteristics of such constituent securities. The index is a fundamentally weighted index that is comprised of the...",
       "inception": "2006-06-16",
       "expense_ratio": null,
-      "avg_volume": 128322
+      "avg_volume": 128812
     },
     "VYM": {
-      "name": "Vanguard High Dividend Yield ET",
+      "name": "Vanguard High Dividend Yield Index Fund ETF Shares",
       "lev": false,
       "category": "dividend",
       "category_label": "Dividend-focused",
-      "cagr": 11.88,
+      "cagr": 11.92,
       "stddev": 16.3,
-      "yield": 2.19,
+      "yield": 2.18,
       "ret22": -0.9,
       "prices": [
         [
@@ -22993,22 +22993,22 @@
         ],
         [
           "2026-08-31",
-          165.63
+          166.52
         ]
       ],
       "description": "The fund employs an indexing investment approach designed to track the performance of the the Target Index, which consists of common stocks of companies that pay dividends that generally are higher than average (excluding real estate investment trusts (\u201cREITs\u201d)). Under normal circumstances, it invests at least 80% of its net assets, plus the amount of any borrowings for investment purposes, in...",
-      "inception": "2019-02-07",
+      "inception": "2006-11-10",
       "expense_ratio": null,
-      "avg_volume": 1284943
+      "avg_volume": 1270325
     },
     "FDL": {
       "name": "First Trust Morningstar Dividend Leaders Index Fund",
       "lev": false,
       "category": "dividend",
       "category_label": "Dividend-focused",
-      "cagr": 11.14,
+      "cagr": 11.31,
       "stddev": 17.16,
-      "yield": 3.56,
+      "yield": 3.49,
       "ret22": 6.12,
       "prices": [
         [
@@ -23493,22 +23493,22 @@
         ],
         [
           "2026-08-31",
-          51.89
+          52.88
         ]
       ],
       "description": "The fund will normally invest at least 90% of its net assets (including investment borrowings) in the securities that comprise the index. The index is designed to measure the performance of the 100 highest-yielding stocks that have a consistent record of dividend payment and have the ability to sustain their dividend payments. It is non-diversified.",
       "inception": "2006-03-09",
       "expense_ratio": null,
-      "avg_volume": 845832
+      "avg_volume": 847198
     },
     "DVY": {
       "name": "iShares Select Dividend ETF",
       "lev": false,
       "category": "dividend",
       "category_label": "Dividend-focused",
-      "cagr": 10.31,
+      "cagr": 10.53,
       "stddev": 18.03,
-      "yield": 3.25,
+      "yield": 3.18,
       "ret22": 1.32,
       "prices": [
         [
@@ -23993,20 +23993,20 @@
         ],
         [
           "2026-08-31",
-          161.91
+          165.5
         ]
       ],
       "description": "The fund generally will invest at least 80% of its assets in the component securities of its underlying index and in investments that have economic characteristics that are substantially identical to the component securities of its underlying index. The underlying index measures the performance of the U.S.'s leading stocks by dividend yield.",
       "inception": "2003-11-03",
       "expense_ratio": null,
-      "avg_volume": 451541
+      "avg_volume": 433530
     },
     "NOBL": {
       "name": "ProShares S&P 500 Dividend Aristocrats ETF",
       "lev": false,
       "category": "dividend",
       "category_label": "Dividend-focused",
-      "cagr": 10.05,
+      "cagr": 10.0,
       "stddev": 16.64,
       "yield": 1.99,
       "ret22": -6.01,
@@ -24493,22 +24493,22 @@
         ],
         [
           "2026-08-31",
-          58.42
+          58.52
         ]
       ],
       "description": "The fund invests in financial instruments that ProShare Advisors believes, in combination, should track the performance of the index. The index is designed to measure the performance of companies in the S&P 500 Index that have consistently increased dividends each year for at least 25 years. Under normal circumstances, it will invest at least 80% of its total assets in components of the index...",
       "inception": "2013-10-09",
       "expense_ratio": null,
-      "avg_volume": 1131343
+      "avg_volume": 1145029
     },
     "ACWI": {
       "name": "iShares MSCI ACWI ETF",
       "lev": false,
       "category": "international",
       "category_label": "International",
-      "cagr": 12.75,
+      "cagr": 12.65,
       "stddev": 17.07,
-      "yield": 1.39,
+      "yield": 1.38,
       "ret22": -18.82,
       "prices": [
         [
@@ -24993,22 +24993,22 @@
         ],
         [
           "2026-08-31",
-          161.44
+          162.29
         ]
       ],
       "description": "The fund generally will invest at least 80% of its assets in the component securities of its underlying index and in investments that have economic characteristics that are substantially identical to the component securities of its underlying index. The index is a free float-adjusted market capitalization weighted index designed to measure the combined equity market performance of developed...",
       "inception": "2008-03-26",
       "expense_ratio": null,
-      "avg_volume": 3172767
+      "avg_volume": 3098077
     },
     "VYMI": {
       "name": "Vanguard International High Dividend Yield Index Fund ETF Shares",
       "lev": false,
       "category": "international",
       "category_label": "International",
-      "cagr": 11.04,
+      "cagr": 10.77,
       "stddev": 16.53,
-      "yield": 3.43,
+      "yield": 3.44,
       "ret22": -7.67,
       "prices": [
         [
@@ -25493,22 +25493,22 @@
         ],
         [
           "2026-08-31",
-          105.05
+          104.63
         ]
       ],
       "description": "Under normal circumstances,the fund invests at least 80% of its net assets,plus the amount of any borrowings for investment purposes,in the stocks that make up the target index.",
-      "inception": "2016-03-02",
+      "inception": "2016-02-25",
       "expense_ratio": null,
-      "avg_volume": 907704
+      "avg_volume": 901720
     },
     "SCHF": {
       "name": "Schwab International Equity ETF",
       "lev": false,
       "category": "international",
       "category_label": "International",
-      "cagr": 10.4,
+      "cagr": 10.28,
       "stddev": 17.06,
-      "yield": 2.99,
+      "yield": 2.96,
       "ret22": -15.34,
       "prices": [
         [
@@ -25993,22 +25993,22 @@
         ],
         [
           "2026-08-31",
-          28.23
+          28.5
         ]
       ],
       "description": "The index is comprised of large and mid capitalization companies in developed countries outside the United States, as defined by the index provider. The index defines the large and mid capitalization universe as approximately the top 90% of the eligible universe. The fund will invest at least 90% of its net assets in stocks, including depositary receipts representing securities of the index;...",
       "inception": "2009-11-03",
       "expense_ratio": null,
-      "avg_volume": 7758543
+      "avg_volume": 7713554
     },
     "VEA": {
       "name": "Vanguard FTSE Developed Markets Index Fund ETF Shares",
       "lev": false,
       "category": "international",
       "category_label": "International",
-      "cagr": 10.31,
+      "cagr": 10.18,
       "stddev": 17.22,
-      "yield": 2.49,
+      "yield": 2.46,
       "ret22": -15.85,
       "prices": [
         [
@@ -26493,22 +26493,22 @@
         ],
         [
           "2026-08-31",
-          72.89
+          73.58
         ]
       ],
       "description": "The fund employs an indexing investment approach designed to track the performance of the FTSE Developed All Cap ex U.S. Index, a market-capitalization-weighted index that is made up of approximately 3,957 common stocks of large-, mid-, and small-cap companies located in Canada and the major markets of Europe and the Pacific region. The Advisor attempts to replicate the target index by...",
-      "inception": "2001-01-04",
+      "inception": "2007-07-20",
       "expense_ratio": null,
-      "avg_volume": 11095620
+      "avg_volume": 11056154
     },
     "VEU": {
-      "name": "Vanguard FTSE All World Ex US E",
+      "name": "Vanguard FTSE All-World ex-US Index Fund ETF Shares",
       "lev": false,
       "category": "international",
       "category_label": "International",
-      "cagr": 9.83,
-      "stddev": 17.09,
-      "yield": 2.48,
+      "cagr": 9.65,
+      "stddev": 17.08,
+      "yield": 2.47,
       "ret22": -16.13,
       "prices": [
         [
@@ -26993,20 +26993,20 @@
         ],
         [
           "2026-08-31",
-          85.22
+          85.68
         ]
       ],
       "description": "The fund employs an indexing investment approach designed to track the performance of the FTSE All-World ex US Index. The advisor attempts to replicate the target index by investing all, or substantially all, of its assets in the stocks that make up the index, holding each stock in approximately the same proportion as its weighting in the index.",
-      "inception": "2007-04-30",
+      "inception": "2007-03-02",
       "expense_ratio": null,
-      "avg_volume": 2719758
+      "avg_volume": 2751533
     },
     "IEFA": {
       "name": "iShares Core MSCI EAFE ETF",
       "lev": false,
       "category": "international",
       "category_label": "International",
-      "cagr": 9.76,
+      "cagr": 9.55,
       "stddev": 17.04,
       "yield": 3.25,
       "ret22": -15.72,
@@ -27493,22 +27493,22 @@
         ],
         [
           "2026-08-31",
-          101.08
+          101.19
         ]
       ],
       "description": "The fund generally will invest at least 80% of its assets in the component securities of its underlying index and in investments that have economic characteristics that are substantially identical to the component securities of its underlying index. The index is designed to measure large-, mid- and small-capitalization equity market performance and includes stocks from Europe, Australasia and...",
       "inception": "2012-10-18",
       "expense_ratio": null,
-      "avg_volume": 9520417
+      "avg_volume": 9321222
     },
     "IXUS": {
       "name": "iShares Core MSCI Total International Stock ETF",
       "lev": false,
       "category": "international",
       "category_label": "International",
-      "cagr": 9.7,
+      "cagr": 9.53,
       "stddev": 16.98,
-      "yield": 2.88,
+      "yield": 2.86,
       "ret22": -16.9,
       "prices": [
         [
@@ -27993,513 +27993,513 @@
         ],
         [
           "2026-08-31",
-          97.34
+          98.0
         ]
       ],
       "description": "The fund generally will invest at least 80% of its assets in the component securities of its underlying index and in investments that have economic characteristics that are substantially identical to the component securities of its underlying index. The index is a free float-adjusted market capitalization weighted index designed to measure the combined equity market performance of developed...",
       "inception": "2012-10-18",
       "expense_ratio": null,
-      "avg_volume": 1813703
+      "avg_volume": 1861611
     },
-    "EFA": {
-      "name": "iShares MSCI EAFE ETF",
+    "VXUS": {
+      "name": "Vanguard Total International Stock Index Fund ETF Shares",
       "lev": false,
       "category": "international",
       "category_label": "International",
-      "cagr": 9.68,
-      "stddev": 17.01,
-      "yield": 3.1,
-      "ret22": -14.94,
+      "cagr": 9.49,
+      "stddev": 17.03,
+      "yield": 2.5,
+      "ret22": -16.62,
       "prices": [
         [
           "2016-08-31",
-          43.46
+          34.76
         ],
         [
           "2016-09-30",
-          44.04
+          35.35
         ],
         [
           "2016-10-31",
-          43.06
+          34.67
         ],
         [
           "2016-11-30",
-          42.3
+          33.98
         ],
         [
           "2016-12-31",
-          43.44
+          34.65
         ],
         [
           "2017-01-31",
-          44.87
+          36.06
         ],
         [
           "2017-02-28",
-          45.41
+          36.54
         ],
         [
           "2017-03-31",
-          46.87
+          37.64
         ],
         [
           "2017-04-30",
-          48.01
+          38.41
         ],
         [
           "2017-05-31",
-          49.71
+          39.55
         ],
         [
           "2017-06-30",
-          49.86
+          39.79
         ],
         [
           "2017-07-31",
-          51.18
+          41.13
         ],
         [
           "2017-08-31",
-          51.16
+          41.36
         ],
         [
           "2017-09-30",
-          52.37
+          42.14
         ],
         [
           "2017-10-31",
-          53.25
+          42.99
         ],
         [
           "2017-11-30",
-          53.61
+          43.26
         ],
         [
           "2017-12-31",
-          54.34
+          44.16
         ],
         [
           "2018-01-31",
-          57.06
+          46.68
         ],
         [
           "2018-02-28",
-          54.3
+          44.24
         ],
         [
           "2018-03-31",
-          53.85
+          44.07
         ],
         [
           "2018-04-30",
-          54.67
+          44.27
         ],
         [
           "2018-05-31",
-          53.63
+          43.55
         ],
         [
           "2018-06-30",
-          52.78
+          42.62
         ],
         [
           "2018-07-31",
-          54.29
+          43.71
         ],
         [
           "2018-08-31",
-          53.07
+          42.66
         ],
         [
           "2018-09-30",
-          53.59
+          42.75
         ],
         [
           "2018-10-31",
-          49.23
+          39.09
         ],
         [
           "2018-11-30",
-          49.47
+          39.75
         ],
         [
           "2018-12-31",
-          46.83
+          37.79
         ],
         [
           "2019-01-31",
-          49.93
+          40.68
         ],
         [
           "2019-02-28",
-          51.2
+          41.35
         ],
         [
           "2019-03-31",
-          51.67
+          41.66
         ],
         [
           "2019-04-30",
-          53.18
+          42.82
         ],
         [
           "2019-05-31",
-          50.51
+          40.5
         ],
         [
           "2019-06-30",
-          53.49
+          42.84
         ],
         [
           "2019-07-31",
-          52.45
+          41.98
         ],
         [
           "2019-08-31",
-          51.44
+          41.08
         ],
         [
           "2019-09-30",
-          53.07
+          42.19
         ],
         [
           "2019-10-31",
-          54.87
+          43.64
         ],
         [
           "2019-11-30",
-          55.49
+          44.07
         ],
         [
           "2019-12-31",
-          57.15
+          46.0
         ],
         [
           "2020-01-31",
-          55.53
+          44.44
         ],
         [
           "2020-02-29",
-          51.22
+          41.51
         ],
         [
           "2020-03-31",
-          44.0
+          34.76
         ],
         [
           "2020-04-30",
-          46.56
+          37.4
         ],
         [
           "2020-05-31",
-          49.08
+          39.27
         ],
         [
           "2020-06-30",
-          50.81
+          40.94
         ],
         [
           "2020-07-31",
-          51.79
+          42.64
         ],
         [
           "2020-08-31",
-          54.24
+          44.53
         ],
         [
           "2020-09-30",
-          53.13
+          43.72
         ],
         [
           "2020-10-31",
-          51.24
+          42.71
         ],
         [
           "2020-11-30",
-          58.55
+          48.1
         ],
         [
           "2020-12-31",
-          61.49
+          50.91
         ],
         [
           "2021-01-31",
-          61.01
+          51.04
         ],
         [
           "2021-02-28",
-          62.37
+          52.21
         ],
         [
           "2021-03-31",
-          63.94
+          53.19
         ],
         [
           "2021-04-30",
-          65.83
+          54.66
         ],
         [
           "2021-05-31",
-          68.12
+          56.34
         ],
         [
           "2021-06-30",
-          67.39
+          56.16
         ],
         [
           "2021-07-31",
-          67.91
+          55.52
         ],
         [
           "2021-08-31",
-          68.89
+          56.34
         ],
         [
           "2021-09-30",
-          66.64
+          54.39
         ],
         [
           "2021-10-31",
-          68.76
+          55.95
         ],
         [
           "2021-11-30",
-          65.64
+          53.57
         ],
         [
           "2021-12-31",
-          68.53
+          55.48
         ],
         [
           "2022-01-31",
-          66.03
+          53.91
         ],
         [
           "2022-02-28",
-          63.77
+          52.38
         ],
         [
           "2022-03-31",
-          64.1
+          52.23
         ],
         [
           "2022-04-30",
-          59.78
+          48.83
         ],
         [
           "2022-05-31",
-          60.97
+          49.58
         ],
         [
           "2022-06-30",
-          55.63
+          45.64
         ],
         [
           "2022-07-31",
-          58.5
+          47.3
         ],
         [
           "2022-08-31",
-          54.93
+          45.18
         ],
         [
           "2022-09-30",
-          49.86
+          40.71
         ],
         [
           "2022-10-31",
-          52.8
+          42.09
         ],
         [
           "2022-11-30",
-          59.75
+          47.58
         ],
         [
           "2022-12-31",
-          58.67
+          46.56
         ],
         [
           "2023-01-31",
-          63.95
+          50.6
         ],
         [
           "2023-02-28",
-          61.98
+          48.44
         ],
         [
           "2023-03-31",
-          63.92
+          49.82
         ],
         [
           "2023-04-30",
-          65.8
+          50.76
         ],
         [
           "2023-05-31",
-          63.16
+          48.98
         ],
         [
           "2023-06-30",
-          65.99
+          51.15
         ],
         [
           "2023-07-31",
-          67.77
+          53.14
         ],
         [
           "2023-08-31",
-          65.1
+          50.8
         ],
         [
           "2023-09-30",
-          62.73
+          49.08
         ],
         [
           "2023-10-31",
-          60.91
+          47.43
         ],
         [
           "2023-11-30",
-          65.91
+          51.33
         ],
         [
           "2023-12-31",
-          69.44
+          53.95
         ],
         [
           "2024-01-31",
-          69.13
+          53.03
         ],
         [
           "2024-02-29",
-          71.19
+          54.57
         ],
         [
           "2024-03-31",
-          73.6
+          56.34
         ],
         [
           "2024-04-30",
-          71.21
+          55.03
         ],
         [
           "2024-05-31",
-          74.81
+          57.24
         ],
         [
           "2024-06-30",
-          73.45
+          56.79
         ],
         [
           "2024-07-31",
-          75.35
+          58.27
         ],
         [
           "2024-08-31",
-          77.81
+          59.68
         ],
         [
           "2024-09-30",
-          78.42
+          61.23
         ],
         [
           "2024-10-31",
-          74.28
+          58.5
         ],
         [
           "2024-11-30",
-          74.05
+          58.36
         ],
         [
           "2024-12-31",
-          71.86
+          56.69
         ],
         [
           "2025-01-31",
-          75.31
+          58.6
         ],
         [
           "2025-02-28",
-          77.54
+          59.69
         ],
         [
           "2025-03-31",
-          77.68
+          59.91
         ],
         [
           "2025-04-30",
-          80.55
+          61.61
         ],
         [
           "2025-05-31",
-          84.41
+          64.58
         ],
         [
           "2025-06-30",
-          86.43
+          67.14
         ],
         [
           "2025-07-31",
-          84.62
+          66.54
         ],
         [
           "2025-08-31",
-          88.45
+          69.36
         ],
         [
           "2025-09-30",
-          90.28
+          71.74
         ],
         [
           "2025-10-31",
-          91.36
+          72.88
         ],
         [
           "2025-11-30",
-          92.04
+          73.18
         ],
         [
           "2025-12-31",
-          94.53
+          75.02
         ],
         [
           "2026-01-31",
-          99.17
+          79.22
         ],
         [
           "2026-02-28",
-          103.74
+          83.35
         ],
         [
           "2026-03-31",
-          95.62
+          76.76
         ],
         [
           "2026-04-30",
-          100.73
+          82.69
         ],
         [
           "2026-05-31",
-          103.17
+          85.67
         ],
         [
           "2026-06-30",
-          103.88
+          85.49
         ],
         [
           "2026-07-31",
-          105.58
+          84.59
         ],
         [
           "2026-08-31",
-          108.55
+          87.7
         ]
       ],
-      "description": "The fund generally will invest at least 80% of its assets in the component securities of its underlying index and in investments that have economic characteristics that are substantially identical to the component securities of its underlying index. The index is a free float-adjusted, market capitalization-weighted index designed to measure large- and mid-capitalization equity market...",
-      "inception": "2001-08-14",
+      "description": "The manager employs an indexing investment approach designed to track the performance of the FTSE Global All Cap ex US Index, a float-adjusted market-capitalization-weighted index designed to measure equity market performance of companies located in developed and emerging markets, excluding the United States. The fund invests all, or substantially all, of its assets in the common stocks...",
+      "inception": "2011-01-26",
       "expense_ratio": null,
-      "avg_volume": 12890238
+      "avg_volume": 5783908
     },
     "FLOT": {
       "name": "iShares Floating Rate Bond ETF",
@@ -28508,7 +28508,7 @@
       "category_label": "Cash equivalents",
       "cagr": 3.07,
       "stddev": 4.15,
-      "yield": 4.41,
+      "yield": 4.4,
       "ret22": 1.32,
       "prices": [
         [
@@ -28993,13 +28993,13 @@
         ],
         [
           "2026-08-31",
-          50.93
+          50.96
         ]
       ],
       "description": "The fund will invest at least 80% of its assets in the component securities of the underlying index, and the fund will invest at least 90% of its assets in fixed income securities of the types included in the underlying index that BFA believes will help the fund track the underlying index.",
       "inception": "2011-06-14",
       "expense_ratio": null,
-      "avg_volume": 1898133
+      "avg_volume": 1970119
     },
     "NEAR": {
       "name": "iShares Short Duration Bond Active ETF",
@@ -29493,13 +29493,13 @@
         ],
         [
           "2026-08-31",
-          50.47
+          50.54
         ]
       ],
       "description": "The fund seeks to achieve its investment objective by investing, under normal circumstances, at least 80% of its net assets in a portfolio of U.S. dollar-denominated investment-grade fixed-income securities. Under normal circumstances, the effective duration of its portfolio is expected to be three year or less, as calculated by the management team. It is an actively managed exchange-traded...",
       "inception": "2013-09-25",
       "expense_ratio": null,
-      "avg_volume": 558772
+      "avg_volume": 536558
     },
     "CASH": {
       "name": "Cash / HYSA",
