@@ -559,6 +559,39 @@
   .mc-stats .stat{background:var(--card);padding:14px 16px}
   .mc-stats .stat .k{font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-faint);font-weight:600;margin-bottom:6px}
   .mc-stats .stat .v{font-family:'Fraunces',serif;font-size:clamp(19px,2.2vw,24px);font-weight:500;letter-spacing:-.01em;color:var(--ink);line-height:1}
+  /* MC redesign: gauge + bars + table */
+  .mc-top{display:grid;grid-template-columns:1fr 1.15fr;gap:30px;align-items:center;margin-bottom:20px}
+  @media(max-width:680px){.mc-top{grid-template-columns:1fr;gap:40px;margin-bottom:20px}}
+  .gauge-wrap{display:flex;flex-direction:column;align-items:center}
+  .gauge{position:relative;width:230px;height:230px;max-width:100%}
+  .gauge svg{transform:rotate(-90deg);width:100%;height:auto}
+  .gauge-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+  .gauge-pct{font-family:'Fraunces',serif;font-size:52px;font-weight:500;line-height:1;letter-spacing:-.02em;color:var(--pine)}
+  .gauge-pct.warn{color:#B07820}
+  .gauge-pct.bad{color:var(--ember)}
+  .gauge-label{font-size:12.5px;font-weight:600;color:var(--ink-soft);margin-top:6px;text-transform:uppercase;letter-spacing:.06em;max-width:130px;line-height:1.3}
+  .gauge-legend{display:flex;gap:16px;margin-top:20px;flex-wrap:wrap;justify-content:center}
+  .gl{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;color:var(--ink-soft)}
+  .gl .dot{width:9px;height:9px;border-radius:50%}
+  .bars-title{font-family:'Fraunces',serif;font-size:18px;font-weight:600;letter-spacing:-.01em;margin-bottom:18px;text-align:center}
+  .bars{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:end;height:190px;padding-bottom:14px}
+  .bar-col{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+  .bar-val{font-family:'Fraunces',serif;font-size:15px;font-weight:600;color:var(--ink);margin-bottom:8px;white-space:nowrap}
+  .bar-val.dep{color:var(--ember)}
+  .bar{width:100%;max-width:78px;border-radius:8px 8px 0 0;transition:height .3s}
+  .bar-label{font-size:12px;font-weight:600;color:var(--ink-soft);margin-top:10px}
+  .bar-pctile{font-size:11px;color:var(--ink-faint);font-weight:500;margin-top:2px}
+  .mc-table{width:100%;border-collapse:collapse;margin-top:34px}
+  .mc-table th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-faint);font-weight:600;padding:0 0 14px;border-bottom:1px solid var(--line-soft)}
+  .mc-table th.r,.mc-table td.r{text-align:right}
+  .mc-table td{padding:16px 0;border-bottom:1px solid var(--line-soft);font-size:14px;font-weight:600;color:var(--ink)}
+  .mc-table tr:last-child td{border-bottom:none}
+  .mc-table .cond{display:flex;align-items:center;gap:9px}
+  .mc-table .cond .dot{width:9px;height:9px;border-radius:50%}
+  .mc-table .assets{font-family:'Fraunces',serif;font-size:16px;font-weight:500}
+  .mc-table .dep{color:var(--ember)}
+  .mc-table .dep small{font-family:'Hanken Grotesk';font-size:12px;color:var(--ink-faint);font-weight:600;display:block;margin-top:2px}
+  .mc-earliest{font-size:12.5px;color:var(--ink-faint);margin-top:20px;line-height:1.5}
   .mc-lede{font-size:13.5px;color:var(--ink-faint);line-height:1.55;margin-bottom:14px}
   .mc-lede b{color:var(--ink-soft);font-weight:600}
   .mc-inherited{margin:0 0 22px;padding:14px 16px;background:var(--bg);border:1px solid var(--line-soft);border-radius:11px}
@@ -854,16 +887,74 @@
     <!-- RESULTS -->
     <div class="panel panel-pad">
       <div class="panel-title">Probability of success</div>
-      <div class="mc-headline">
-        <div class="mc-pct" id="mc-pct">—</div>
-        <div class="mc-pct-label" id="mc-pct-label">Hit Run to see results</div>
+      <div class="mc-top">
+        <!-- gauge -->
+        <div class="gauge-wrap">
+          <div class="gauge">
+            <svg width="230" height="230" viewBox="0 0 230 230">
+              <circle cx="115" cy="115" r="100" fill="none" stroke="#EFEAE0" stroke-width="16"/>
+              <circle id="mc-gauge-arc" cx="115" cy="115" r="100" fill="none" stroke="#2E8B5C" stroke-width="16"
+                      stroke-linecap="round" stroke-dasharray="628" stroke-dashoffset="628"/>
+            </svg>
+            <div class="gauge-center">
+              <div class="gauge-pct" id="mc-pct">—</div>
+              <div class="gauge-label" id="mc-pct-label">Hit Run</div>
+            </div>
+          </div>
+          <div class="gauge-legend">
+            <div class="gl"><span class="dot" style="background:var(--ember)"></span>Low 0–69%</div>
+            <div class="gl"><span class="dot" style="background:#B07820"></span>Med 70–89%</div>
+            <div class="gl"><span class="dot" style="background:var(--pine-bright)"></span>High 90–100%</div>
+          </div>
+        </div>
+        <!-- bars -->
+        <div>
+          <div class="bars-title">Ending portfolio</div>
+          <div class="bars">
+            <div class="bar-col">
+              <div class="bar-val" id="mc-bar-p90-val">—</div>
+              <div class="bar" id="mc-bar-p90" style="background:var(--pine-bright);height:0"></div>
+              <div class="bar-label">Good luck</div>
+              <div class="bar-pctile">90th pctile</div>
+            </div>
+            <div class="bar-col">
+              <div class="bar-val" id="mc-bar-p50-val">—</div>
+              <div class="bar" id="mc-bar-p50" style="background:var(--pine);height:0"></div>
+              <div class="bar-label">Median</div>
+              <div class="bar-pctile">50th pctile</div>
+            </div>
+            <div class="bar-col">
+              <div class="bar-val" id="mc-bar-p10-val">—</div>
+              <div class="bar" id="mc-bar-p10" style="background:var(--ink-faint);height:0"></div>
+              <div class="bar-label">Bad luck</div>
+              <div class="bar-pctile">10th pctile</div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="mc-stats">
-        <div class="stat"><div class="k">Median ending portfolio</div><div class="v" id="mc-med">—</div></div>
-        <div class="stat"><div class="k">10th percentile (bad luck)</div><div class="v" id="mc-p10">—</div></div>
-        <div class="stat"><div class="k">90th percentile (good luck)</div><div class="v" id="mc-p90">—</div></div>
-        <div class="stat"><div class="k">Earliest depletion</div><div class="v" id="mc-fail">—</div></div>
-      </div>
+      <table class="mc-table">
+        <thead>
+          <tr><th>Market conditions</th><th>Percentile</th><th class="r">Ending portfolio</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="cond"><span class="dot" style="background:var(--pine-bright)"></span>Good luck</div></td>
+            <td>90th</td>
+            <td class="r assets" id="mc-p90">—</td>
+          </tr>
+          <tr>
+            <td><div class="cond"><span class="dot" id="mc-row-med-dot" style="background:var(--pine)"></span>Median</div></td>
+            <td>50th</td>
+            <td class="r assets" id="mc-med">—</td>
+          </tr>
+          <tr>
+            <td><div class="cond"><span class="dot" id="mc-row-bad-dot" style="background:var(--ink-faint)"></span>Bad luck</div></td>
+            <td>10th</td>
+            <td class="r assets" id="mc-p10">—</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="mc-earliest" id="mc-earliest">Earliest depletion: <b style="color:var(--ink-soft)" id="mc-fail">—</b></div>
       <p class="footnote" style="margin-top:18px;border-top:none;padding-top:0">
         <b>How to read this.</b> Success probability is the share of simulated futures where your portfolio survives to your chart end age. The 10th/90th percentile bands show the spread of outcomes — eighty percent of futures land between them. Plan against the bad-luck scenarios, not the median.
       </p>
@@ -2000,6 +2091,22 @@ function runMonteCarlo(){
     const successRate = (successCount / n) * 100;
     const ages = Array.from({length: ageCount}, (_, i) => params.currentAge + i);
 
+    // Depletion-age percentiles, for the bar/table callouts. A percentile's
+    // ending value is 0 when that share of paths has already run dry; the
+    // matching depletion age is the corresponding percentile of the sorted
+    // depletion-age list (earliest failures first).
+    const sortedDep = depletionAges.slice().sort((a, b) => a - b);
+    const failRate = (n - successCount) / n;   // share of paths that deplete
+    const depAgeAtEndPctile = (pctile) => {
+      // pctile is the ending-value percentile (0.10 = bad luck, 0.50 = median).
+      // That path depleted only if the cumulative failure share reaches it.
+      if(failRate <= pctile || sortedDep.length === 0) return null;
+      // Among failed paths, this ending percentile maps to a spot in the
+      // sorted depletion list: worst (earliest) failures sit at the bottom.
+      const idx = Math.min(sortedDep.length - 1, Math.floor(pctile / failRate * sortedDep.length));
+      return sortedDep[idx];
+    };
+
     renderMcResults({
       successRate,
       failedCount: n - successCount,
@@ -2008,6 +2115,8 @@ function runMonteCarlo(){
       endP10: p10[ageCount - 1],
       endP50: p50[ageCount - 1],
       endP90: p90[ageCount - 1],
+      depAgeP10: depAgeAtEndPctile(0.10),
+      depAgeP50: depAgeAtEndPctile(0.50),
       earliestDepletion: depletionAges.length ? Math.min.apply(null, depletionAges) : null,
       worstPath:    worstResult ? worstResult.path : null,
       worstReturns: worstResult ? worstResult.returns : null,
@@ -2028,20 +2137,85 @@ function renderMcResults(r){
   if(r.failedCount === 0) pctText = '100%';
   else if(r.successRate >= 99.95) pctText = '99.9%';
   else pctText = r.successRate.toFixed(1) + '%';
+
+  // Band: High >=90 (pine), Med 70-89 (amber), Low <70 (ember).
+  const band = r.successRate >= 90 ? 'good' : r.successRate >= 70 ? 'warn' : 'bad';
+  const bandColor = band === 'good' ? '#2E8B5C' : band === 'warn' ? '#B07820' : '#C0531C';
+
   pct.textContent = pctText;
-  pct.className = 'mc-pct ' + (r.successRate >= 90 ? 'good' : r.successRate >= 75 ? 'warn' : 'bad');
-  $('mc-pct-label').textContent =
-    r.failedCount === 0 ? 'of simulated futures survive to your end age (zero failures)'
-    : r.successRate >= 90 ? 'of simulated futures survive to your end age'
-    : r.successRate >= 75 ? 'survive — meaningful tail risk worth planning for'
-    : r.successRate >= 50 ? 'survive — this plan is fragile against bad luck'
-    : 'survive — significant restructuring needed';
+  pct.className = 'gauge-pct ' + band;
+  $('mc-pct-label').textContent = 'Probability of success';
+
+  // Drive the gauge ring: circumference 2*pi*100 ≈ 628.
+  const CIRC = 628;
+  const arc = $('mc-gauge-arc');
+  if(arc){
+    arc.setAttribute('stroke', bandColor);
+    arc.setAttribute('stroke-dashoffset', String(CIRC * (1 - r.successRate / 100)));
+  }
 
   const fmt$ = v => v == null ? '—' : (v < 0 ? '−$' : '$') + Math.abs(Math.round(v)).toLocaleString();
-  $('mc-med').textContent  = fmt$(r.endP50);
-  $('mc-p10').textContent  = fmt$(r.endP10);
-  $('mc-p90').textContent  = fmt$(r.endP90);
-  $('mc-fail').textContent = r.earliestDepletion ? 'age ' + r.earliestDepletion : 'never (in any run)';
+  const fmtM = v => {
+    // Compact form for the bar labels: $86.3M, $1.73M, $940K.
+    const a = Math.abs(v);
+    if(a >= 1e9) return '$' + (v/1e9).toFixed(a >= 1e10 ? 0 : 1) + 'B';
+    if(a >= 1e6) return '$' + (v/1e6).toFixed(a >= 1e7 ? 0 : 1) + 'M';
+    if(a >= 1e3) return '$' + Math.round(v/1e3) + 'K';
+    return '$' + Math.round(v);
+  };
+  // A percentile "depleted" when its ending value is at/near zero.
+  const isDep = v => v == null || v <= 1;
+
+  // ---- Bars ----
+  // Heights are relative to the tallest surviving bar (p90 is always >= others).
+  const maxEnd = Math.max(r.endP90, r.endP50, r.endP10, 1);
+  const barH = v => isDep(v) ? 4 : Math.max(6, Math.round(v / maxEnd * 170)); // px, floor so tiny survivors still show
+  const setBar = (barId, valId, v, depAge, survColor) => {
+    const bar = $(barId), val = $(valId);
+    if(isDep(v)){
+      bar.style.height = '4px';
+      bar.style.background = 'var(--ember)';
+      val.textContent = '$0';
+      val.className = 'bar-val dep';
+    } else {
+      bar.style.height = barH(v) + 'px';
+      bar.style.background = survColor;
+      val.textContent = fmtM(v);
+      val.className = 'bar-val';
+    }
+  };
+  setBar('mc-bar-p90','mc-bar-p90-val', r.endP90, null, 'var(--pine-bright)');
+  setBar('mc-bar-p50','mc-bar-p50-val', r.endP50, r.depAgeP50, 'var(--pine)');
+  setBar('mc-bar-p10','mc-bar-p10-val', r.endP10, r.depAgeP10, 'var(--ink-faint)');
+
+  // ---- Table ----
+  const setCell = (id, dotId, v, depAge, survDot) => {
+    const cell = $(id);
+    const dot  = dotId ? $(dotId) : null;
+    if(isDep(v)){
+      cell.innerHTML = '<span class="dep">Depleted' +
+        (depAge ? '<small>at age ' + depAge + '</small>' : '') + '</span>';
+      if(dot) dot.style.background = 'var(--ember)';
+    } else {
+      cell.textContent = fmt$(v);
+      if(dot) dot.style.background = survDot;
+    }
+  };
+  $('mc-p90').textContent = fmt$(r.endP90);   // good luck never depletes if p10/p50 don't
+  setCell('mc-med','mc-row-med-dot', r.endP50, r.depAgeP50, 'var(--pine)');
+  setCell('mc-p10','mc-row-bad-dot', r.endP10, r.depAgeP10, 'var(--ink-faint)');
+
+  // ---- Earliest-depletion caption ----
+  const earliest = $('mc-earliest');
+  if(r.failedCount === 0){
+    earliest.innerHTML = 'Earliest depletion: <b style="color:var(--ink-soft)">never (in any run)</b>. Every simulated retirement survived to your end age — plan against the bad-luck column anyway.';
+  } else {
+    const verb = r.successRate >= 70 ? 'meaningful tail risk worth planning for'
+      : r.successRate >= 50 ? 'this plan is fragile against bad luck'
+      : 'significant restructuring needed';
+    earliest.innerHTML = 'Earliest depletion: <b style="color:var(--ember)">age ' + r.earliestDepletion +
+      '</b>. Only ' + pctText + ' of simulated retirements survived to your end age — ' + verb + '.';
+  }
 
   // chart
   const datasets = [
