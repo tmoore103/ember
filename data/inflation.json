@@ -1,221 +1,206 @@
 {
-  "as_of": "2026-06-14",
-  "data_through": "2026-05-01",
-  "true_inflation_yoy": 3.87,
-  "bls_cpi_yoy": 4.17,
-  "bls_cpi_as_of": "2026-05-01",
-  "gap": -0.3,
+  "as_of": "2026-09-27",
+  "data_through": "2026-08-31",
+  "true_inflation_yoy": 3.18,
+  "bls_cpi_yoy": 3.35,
+  "bls_cpi_as_of": "2026-08-01",
+  "gap": -0.17,
   "components": [
     {
       "name": "Shelter",
       "weight": 0.23,
-      "yoy": 1.73,
-      "contribution": 0.4,
+      "yoy": 2.65,
+      "contribution": 0.61,
       "source": "Zillow Observed Rent Index (ZORI), national, smoothed seasonally adjusted",
       "note": "Real market-rate rents tracked from millions of Zillow rental listings, replacing BLS's Owners' Equivalent Rent which lags by 6-12 months. Weight matches Truflation's published 23.2% housing weight (BLS-CEX uses 33% \u2014 we believe Truflation's weight better reflects current consumer expenditure).",
-      "as_of": "2026-04-30"
+      "as_of": "2026-08-31"
     },
     {
       "name": "Food",
       "weight": 0.15,
-      "yoy": 3.08,
-      "contribution": 0.46,
+      "yoy": 2.63,
+      "contribution": 0.39,
       "source": "BLS CPI: Food (FRED: CPIUFDSL)",
       "note": "All food (at home and away from home), urban consumers. Weight matches Truflation's 15.3%.",
-      "as_of": "2026-05-01"
+      "as_of": "2026-08-01"
     },
     {
       "name": "Utilities",
       "weight": 0.05,
-      "yoy": 5.92,
-      "contribution": 0.3,
+      "yoy": 3.79,
+      "contribution": 0.19,
       "source": "BLS CPI: Electricity (FRED: CUSR0000SEHF01)",
       "note": "Electricity costs \u2014 used as proxy for household utility costs (NOT motor fuel). Electricity is the largest single household utility expense. Motor fuel is captured inside the Transportation component instead, matching Truflation's basket structure and avoiding the double-count that occurs when motor fuel is also a separate component.",
-      "as_of": "2026-05-01"
+      "as_of": "2026-08-01"
     },
     {
       "name": "Transportation",
       "weight": 0.19,
-      "yoy": 8.95,
-      "contribution": 1.7,
+      "yoy": 5.97,
+      "contribution": 1.13,
       "source": "BLS CPI: Transportation (FRED: CPITRNSL) \u2014 includes motor fuel",
       "note": "Vehicles, motor fuel, maintenance, insurance, public transit, airfare. BLS Transportation already includes motor fuel, so this component naturally carries our fuel exposure. Weight matches Truflation's published 19.8%.",
-      "as_of": "2026-05-01"
+      "as_of": "2026-08-01"
     },
     {
       "name": "Medical care",
       "weight": 0.08,
-      "yoy": 2.59,
-      "contribution": 0.21,
+      "yoy": 1.56,
+      "contribution": 0.12,
       "source": "BLS CPI: Medical Care (FRED: CPIMEDSL)",
       "note": "Insurance premiums, hospital services, prescription drugs. Weight matches Truflation's 8.5%.",
-      "as_of": "2026-05-01"
+      "as_of": "2026-08-01"
     },
     {
       "name": "Apparel",
       "weight": 0.03,
-      "yoy": 4.81,
-      "contribution": 0.14,
+      "yoy": 3.62,
+      "contribution": 0.11,
       "source": "BLS CPI: Apparel (FRED: CPIAPPSL)",
       "note": "Clothing and footwear. Carved out from the broad 'core' category \u2014 apparel has been deflating since 2023, which gets washed out in BLS Core CPI.",
-      "as_of": "2026-05-01"
+      "as_of": "2026-08-01"
     },
     {
       "name": "Recreation",
       "weight": 0.05,
-      "yoy": 2.63,
+      "yoy": 2.68,
       "contribution": 0.13,
       "source": "BLS CPI: Recreation (FRED: CPIRECSL)",
       "note": "Sports, hobbies, media, pets, recreational services. Carved out from broad 'core' \u2014 typically grows slower than headline core.",
-      "as_of": "2026-05-01"
+      "as_of": "2026-08-01"
     },
     {
       "name": "Education & Communication",
       "weight": 0.05,
-      "yoy": 0.84,
-      "contribution": 0.04,
+      "yoy": 2.15,
+      "contribution": 0.11,
       "source": "BLS CPI: Education and Communication (FRED: CPIEDUSL)",
       "note": "Tuition, school supplies, phone plans, internet, postage. Carved out from broad 'core' \u2014 communications subindex has been deflating, dragging this lower.",
-      "as_of": "2026-05-01"
+      "as_of": "2026-08-01"
     },
     {
       "name": "Household furnishings",
       "weight": 0.05,
-      "yoy": 2.98,
-      "contribution": 0.15,
+      "yoy": 1.98,
+      "contribution": 0.1,
       "source": "BLS CPI: Household Furnishings and Operations (FRED: CUUR0000SAH3)",
       "note": "Furniture, appliances, kitchen, cleaning supplies, household services. Carved out from broad 'core' \u2014 durables have been broadly deflating since 2023.",
-      "as_of": "2026-05-01"
+      "as_of": "2026-08-01"
     },
     {
       "name": "Other (residual core)",
       "weight": 0.12,
-      "yoy": 2.82,
-      "contribution": 0.34,
+      "yoy": 2.45,
+      "contribution": 0.29,
       "source": "BLS Core CPI (FRED: CPILFESL)",
       "note": "Everything not captured above \u2014 alcohol, tobacco, personal care, miscellaneous services. Uses headline core CPI as a proxy.",
-      "as_of": "2026-05-01"
+      "as_of": "2026-08-01"
     }
   ],
   "history": [
     {
-      "date": "2021-05",
-      "ember": 6.32,
-      "bls": 4.92
-    },
-    {
-      "date": "2021-06",
-      "ember": 7.03,
-      "bls": 5.3
-    },
-    {
-      "date": "2021-07",
-      "ember": 7.14,
-      "bls": 5.25
-    },
-    {
       "date": "2021-08",
-      "ember": 7.3,
+      "ember": 7.29,
       "bls": 5.15
     },
     {
       "date": "2021-09",
-      "ember": 7.72,
+      "ember": 7.71,
       "bls": 5.35
     },
     {
       "date": "2021-10",
-      "ember": 8.97,
+      "ember": 8.96,
       "bls": 6.24
     },
     {
       "date": "2021-11",
-      "ember": 9.97,
+      "ember": 9.96,
       "bls": 6.9
     },
     {
       "date": "2021-12",
-      "ember": 10.39,
+      "ember": 10.38,
       "bls": 7.17
     },
     {
       "date": "2022-01",
-      "ember": 10.93,
+      "ember": 10.91,
       "bls": 7.56
     },
     {
       "date": "2022-02",
-      "ember": 11.2,
+      "ember": 11.18,
       "bls": 7.94
     },
     {
       "date": "2022-03",
-      "ember": 11.78,
+      "ember": 11.76,
       "bls": 8.57
     },
     {
       "date": "2022-04",
-      "ember": 11.2,
+      "ember": 11.18,
       "bls": 8.23
     },
     {
       "date": "2022-05",
-      "ember": 11.2,
+      "ember": 11.18,
       "bls": 8.54
     },
     {
       "date": "2022-06",
-      "ember": 11.33,
+      "ember": 11.3,
       "bls": 8.98
     },
     {
       "date": "2022-07",
-      "ember": 10.69,
+      "ember": 10.67,
       "bls": 8.46
     },
     {
       "date": "2022-08",
-      "ember": 10.03,
+      "ember": 10.01,
       "bls": 8.22
     },
     {
       "date": "2022-09",
-      "ember": 9.59,
+      "ember": 9.57,
       "bls": 8.19
     },
     {
       "date": "2022-10",
-      "ember": 8.69,
+      "ember": 8.68,
       "bls": 7.76
     },
     {
       "date": "2022-11",
-      "ember": 7.59,
+      "ember": 7.58,
       "bls": 7.12
     },
     {
       "date": "2022-12",
-      "ember": 6.47,
+      "ember": 6.46,
       "bls": 6.4
     },
     {
       "date": "2023-01",
-      "ember": 5.98,
+      "ember": 5.97,
       "bls": 6.33
     },
     {
       "date": "2023-02",
-      "ember": 5.55,
+      "ember": 5.53,
       "bls": 5.96
     },
     {
       "date": "2023-03",
-      "ember": 4.4,
+      "ember": 4.39,
       "bls": 4.92
     },
     {
       "date": "2023-04",
-      "ember": 4.38,
+      "ember": 4.37,
       "bls": 4.95
     },
     {
@@ -225,67 +210,67 @@
     },
     {
       "date": "2023-06",
-      "ember": 2.4,
+      "ember": 2.39,
       "bls": 3.07
     },
     {
       "date": "2023-07",
-      "ember": 2.27,
+      "ember": 2.26,
       "bls": 3.29
     },
     {
       "date": "2023-08",
-      "ember": 2.71,
+      "ember": 2.69,
       "bls": 3.72
     },
     {
       "date": "2023-09",
-      "ember": 2.64,
+      "ember": 2.63,
       "bls": 3.69
     },
     {
       "date": "2023-10",
-      "ember": 2.25,
+      "ember": 2.24,
       "bls": 3.25
     },
     {
       "date": "2023-11",
-      "ember": 2.18,
+      "ember": 2.17,
       "bls": 3.13
     },
     {
       "date": "2023-12",
-      "ember": 2.47,
+      "ember": 2.46,
       "bls": 3.32
     },
     {
       "date": "2024-01",
-      "ember": 2.28,
+      "ember": 2.26,
       "bls": 3.09
     },
     {
       "date": "2024-02",
-      "ember": 2.37,
+      "ember": 2.36,
       "bls": 3.16
     },
     {
       "date": "2024-03",
-      "ember": 2.76,
+      "ember": 2.75,
       "bls": 3.49
     },
     {
       "date": "2024-04",
-      "ember": 2.59,
+      "ember": 2.57,
       "bls": 3.36
     },
     {
       "date": "2024-05",
-      "ember": 2.46,
+      "ember": 2.45,
       "bls": 3.24
     },
     {
       "date": "2024-06",
-      "ember": 2.14,
+      "ember": 2.13,
       "bls": 2.97
     },
     {
@@ -295,108 +280,123 @@
     },
     {
       "date": "2024-08",
-      "ember": 1.81,
+      "ember": 1.8,
       "bls": 2.61
     },
     {
       "date": "2024-09",
-      "ember": 1.77,
+      "ember": 1.74,
       "bls": 2.43
     },
     {
       "date": "2024-10",
-      "ember": 1.92,
+      "ember": 1.9,
       "bls": 2.58
     },
     {
       "date": "2024-11",
-      "ember": 2.06,
+      "ember": 2.03,
       "bls": 2.72
     },
     {
       "date": "2024-12",
-      "ember": 2.26,
+      "ember": 2.23,
       "bls": 2.87
     },
     {
       "date": "2025-01",
-      "ember": 2.46,
+      "ember": 2.43,
       "bls": 2.99
     },
     {
       "date": "2025-02",
-      "ember": 2.25,
+      "ember": 2.23,
       "bls": 2.8
     },
     {
       "date": "2025-03",
-      "ember": 1.78,
+      "ember": 1.76,
       "bls": 2.38
     },
     {
       "date": "2025-04",
-      "ember": 1.71,
+      "ember": 1.69,
       "bls": 2.33
     },
     {
       "date": "2025-05",
-      "ember": 1.81,
+      "ember": 1.79,
       "bls": 2.38
     },
     {
       "date": "2025-06",
-      "ember": 2.19,
+      "ember": 2.17,
       "bls": 2.68
     },
     {
       "date": "2025-07",
-      "ember": 2.3,
+      "ember": 2.26,
       "bls": 2.74
     },
     {
       "date": "2025-08",
-      "ember": 2.55,
+      "ember": 2.5,
       "bls": 2.94
     },
     {
       "date": "2025-09",
-      "ember": 2.64,
+      "ember": 2.57,
       "bls": 3.02
     },
     {
       "date": "2025-11",
-      "ember": 2.51,
+      "ember": 2.45,
       "bls": 2.7
     },
     {
       "date": "2025-12",
-      "ember": 2.33,
+      "ember": 2.29,
       "bls": 2.65
     },
     {
       "date": "2026-01",
-      "ember": 2.02,
+      "ember": 1.99,
       "bls": 2.39
     },
     {
       "date": "2026-02",
-      "ember": 2.02,
+      "ember": 2.0,
       "bls": 2.43
     },
     {
       "date": "2026-03",
-      "ember": 2.99,
+      "ember": 2.97,
       "bls": 3.29
     },
     {
       "date": "2026-04",
-      "ember": 3.47,
+      "ember": 3.46,
       "bls": 3.78
     },
     {
       "date": "2026-05",
-      "ember": 3.87,
+      "ember": 3.88,
       "bls": 4.17
+    },
+    {
+      "date": "2026-06",
+      "ember": 3.13,
+      "bls": 3.46
+    },
+    {
+      "date": "2026-07",
+      "ember": 3.02,
+      "bls": 3.3
+    },
+    {
+      "date": "2026-08",
+      "ember": 3.14,
+      "bls": 3.35
     }
   ],
   "methodology": {
