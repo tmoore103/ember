@@ -1,9 +1,9 @@
 {
-  "as_of": "2026-10-13",
-  "data_through": "2026-08-31",
-  "true_inflation_yoy": 3.18,
-  "bls_cpi_yoy": 3.35,
-  "bls_cpi_as_of": "2026-08-01",
+  "as_of": "2026-10-14",
+  "data_through": "2026-09-01",
+  "true_inflation_yoy": 3.55,
+  "bls_cpi_yoy": 3.72,
+  "bls_cpi_as_of": "2026-09-01",
   "gap": -0.17,
   "components": [
     {
@@ -18,91 +18,86 @@
     {
       "name": "Food",
       "weight": 0.15,
-      "yoy": 2.63,
-      "contribution": 0.39,
+      "yoy": 2.45,
+      "contribution": 0.37,
       "source": "BLS CPI: Food (FRED: CPIUFDSL)",
       "note": "All food (at home and away from home), urban consumers. Weight matches Truflation's 15.3%.",
-      "as_of": "2026-08-01"
+      "as_of": "2026-09-01"
     },
     {
       "name": "Utilities",
       "weight": 0.05,
-      "yoy": 3.79,
-      "contribution": 0.19,
+      "yoy": 4.37,
+      "contribution": 0.22,
       "source": "BLS CPI: Electricity (FRED: CUSR0000SEHF01)",
       "note": "Electricity costs \u2014 used as proxy for household utility costs (NOT motor fuel). Electricity is the largest single household utility expense. Motor fuel is captured inside the Transportation component instead, matching Truflation's basket structure and avoiding the double-count that occurs when motor fuel is also a separate component.",
-      "as_of": "2026-08-01"
+      "as_of": "2026-09-01"
     },
     {
       "name": "Transportation",
       "weight": 0.19,
-      "yoy": 5.97,
-      "contribution": 1.13,
+      "yoy": 7.77,
+      "contribution": 1.48,
       "source": "BLS CPI: Transportation (FRED: CPITRNSL) \u2014 includes motor fuel",
       "note": "Vehicles, motor fuel, maintenance, insurance, public transit, airfare. BLS Transportation already includes motor fuel, so this component naturally carries our fuel exposure. Weight matches Truflation's published 19.8%.",
-      "as_of": "2026-08-01"
+      "as_of": "2026-09-01"
     },
     {
       "name": "Medical care",
       "weight": 0.08,
-      "yoy": 1.56,
+      "yoy": 1.5,
       "contribution": 0.12,
       "source": "BLS CPI: Medical Care (FRED: CPIMEDSL)",
       "note": "Insurance premiums, hospital services, prescription drugs. Weight matches Truflation's 8.5%.",
-      "as_of": "2026-08-01"
+      "as_of": "2026-09-01"
     },
     {
       "name": "Apparel",
       "weight": 0.03,
-      "yoy": 3.62,
-      "contribution": 0.11,
+      "yoy": 3.37,
+      "contribution": 0.1,
       "source": "BLS CPI: Apparel (FRED: CPIAPPSL)",
       "note": "Clothing and footwear. Carved out from the broad 'core' category \u2014 apparel has been deflating since 2023, which gets washed out in BLS Core CPI.",
-      "as_of": "2026-08-01"
+      "as_of": "2026-09-01"
     },
     {
       "name": "Recreation",
       "weight": 0.05,
-      "yoy": 2.68,
-      "contribution": 0.13,
+      "yoy": 2.82,
+      "contribution": 0.14,
       "source": "BLS CPI: Recreation (FRED: CPIRECSL)",
       "note": "Sports, hobbies, media, pets, recreational services. Carved out from broad 'core' \u2014 typically grows slower than headline core.",
-      "as_of": "2026-08-01"
+      "as_of": "2026-09-01"
     },
     {
       "name": "Education & Communication",
       "weight": 0.05,
-      "yoy": 2.15,
-      "contribution": 0.11,
+      "yoy": 2.32,
+      "contribution": 0.12,
       "source": "BLS CPI: Education and Communication (FRED: CPIEDUSL)",
       "note": "Tuition, school supplies, phone plans, internet, postage. Carved out from broad 'core' \u2014 communications subindex has been deflating, dragging this lower.",
-      "as_of": "2026-08-01"
+      "as_of": "2026-09-01"
     },
     {
       "name": "Household furnishings",
       "weight": 0.05,
-      "yoy": 1.98,
-      "contribution": 0.1,
+      "yoy": 1.55,
+      "contribution": 0.08,
       "source": "BLS CPI: Household Furnishings and Operations (FRED: CUUR0000SAH3)",
       "note": "Furniture, appliances, kitchen, cleaning supplies, household services. Carved out from broad 'core' \u2014 durables have been broadly deflating since 2023.",
-      "as_of": "2026-08-01"
+      "as_of": "2026-09-01"
     },
     {
       "name": "Other (residual core)",
       "weight": 0.12,
-      "yoy": 2.45,
-      "contribution": 0.29,
+      "yoy": 2.57,
+      "contribution": 0.31,
       "source": "BLS Core CPI (FRED: CPILFESL)",
       "note": "Everything not captured above \u2014 alcohol, tobacco, personal care, miscellaneous services. Uses headline core CPI as a proxy.",
-      "as_of": "2026-08-01"
+      "as_of": "2026-09-01"
     }
   ],
   "history": [
-    {
-      "date": "2021-08",
-      "ember": 7.29,
-      "bls": 5.15
-    },
     {
       "date": "2021-09",
       "ember": 7.71,
@@ -397,6 +392,11 @@
       "date": "2026-08",
       "ember": 3.14,
       "bls": 3.35
+    },
+    {
+      "date": "2026-09",
+      "ember": 3.54,
+      "bls": 3.72
     }
   ],
   "methodology": {
