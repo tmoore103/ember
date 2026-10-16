@@ -1,19 +1,19 @@
 {
-  "as_of": "2026-10-15",
-  "data_through": "2026-09-01",
-  "true_inflation_yoy": 3.55,
+  "as_of": "2026-10-16",
+  "data_through": "2026-09-30",
+  "true_inflation_yoy": 3.6,
   "bls_cpi_yoy": 3.72,
   "bls_cpi_as_of": "2026-09-01",
-  "gap": -0.17,
+  "gap": -0.12,
   "components": [
     {
       "name": "Shelter",
       "weight": 0.23,
-      "yoy": 2.65,
-      "contribution": 0.61,
+      "yoy": 2.88,
+      "contribution": 0.66,
       "source": "Zillow Observed Rent Index (ZORI), national, smoothed seasonally adjusted",
       "note": "Real market-rate rents tracked from millions of Zillow rental listings, replacing BLS's Owners' Equivalent Rent which lags by 6-12 months. Weight matches Truflation's published 23.2% housing weight (BLS-CEX uses 33% \u2014 we believe Truflation's weight better reflects current consumer expenditure).",
-      "as_of": "2026-08-31"
+      "as_of": "2026-09-30"
     },
     {
       "name": "Food",
@@ -125,7 +125,7 @@
     },
     {
       "date": "2022-02",
-      "ember": 11.18,
+      "ember": 11.17,
       "bls": 7.94
     },
     {
@@ -135,7 +135,7 @@
     },
     {
       "date": "2022-04",
-      "ember": 11.18,
+      "ember": 11.17,
       "bls": 8.23
     },
     {
@@ -150,7 +150,7 @@
     },
     {
       "date": "2022-07",
-      "ember": 10.67,
+      "ember": 10.66,
       "bls": 8.46
     },
     {
@@ -165,7 +165,7 @@
     },
     {
       "date": "2022-10",
-      "ember": 8.68,
+      "ember": 8.67,
       "bls": 7.76
     },
     {
@@ -175,7 +175,7 @@
     },
     {
       "date": "2022-12",
-      "ember": 6.46,
+      "ember": 6.45,
       "bls": 6.4
     },
     {
@@ -200,7 +200,7 @@
     },
     {
       "date": "2023-05",
-      "ember": 3.46,
+      "ember": 3.45,
       "bls": 4.13
     },
     {
@@ -250,7 +250,7 @@
     },
     {
       "date": "2024-03",
-      "ember": 2.75,
+      "ember": 2.74,
       "bls": 3.49
     },
     {
@@ -280,12 +280,12 @@
     },
     {
       "date": "2024-09",
-      "ember": 1.74,
+      "ember": 1.75,
       "bls": 2.43
     },
     {
       "date": "2024-10",
-      "ember": 1.9,
+      "ember": 1.89,
       "bls": 2.58
     },
     {
@@ -305,7 +305,7 @@
     },
     {
       "date": "2025-02",
-      "ember": 2.23,
+      "ember": 2.22,
       "bls": 2.8
     },
     {
@@ -345,22 +345,22 @@
     },
     {
       "date": "2025-11",
-      "ember": 2.45,
+      "ember": 2.43,
       "bls": 2.7
     },
     {
       "date": "2025-12",
-      "ember": 2.29,
+      "ember": 2.27,
       "bls": 2.65
     },
     {
       "date": "2026-01",
-      "ember": 1.99,
+      "ember": 1.97,
       "bls": 2.39
     },
     {
       "date": "2026-02",
-      "ember": 2.0,
+      "ember": 1.99,
       "bls": 2.43
     },
     {
@@ -375,7 +375,7 @@
     },
     {
       "date": "2026-05",
-      "ember": 3.88,
+      "ember": 3.87,
       "bls": 4.17
     },
     {
