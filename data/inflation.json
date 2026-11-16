@@ -1,19 +1,19 @@
 {
-  "as_of": "2026-11-15",
-  "data_through": "2026-10-01",
-  "true_inflation_yoy": 3.88,
+  "as_of": "2026-11-16",
+  "data_through": "2026-10-31",
+  "true_inflation_yoy": 3.92,
   "bls_cpi_yoy": 4.08,
   "bls_cpi_as_of": "2026-10-01",
-  "gap": -0.2,
+  "gap": -0.16,
   "components": [
     {
       "name": "Shelter",
       "weight": 0.23,
-      "yoy": 2.88,
-      "contribution": 0.66,
+      "yoy": 3.03,
+      "contribution": 0.7,
       "source": "Zillow Observed Rent Index (ZORI), national, smoothed seasonally adjusted",
       "note": "Real market-rate rents tracked from millions of Zillow rental listings, replacing BLS's Owners' Equivalent Rent which lags by 6-12 months. Weight matches Truflation's published 23.2% housing weight (BLS-CEX uses 33% \u2014 we believe Truflation's weight better reflects current consumer expenditure).",
-      "as_of": "2026-09-30"
+      "as_of": "2026-10-31"
     },
     {
       "name": "Food",
@@ -145,7 +145,7 @@
     },
     {
       "date": "2022-07",
-      "ember": 10.66,
+      "ember": 10.67,
       "bls": 8.46
     },
     {
@@ -185,47 +185,47 @@
     },
     {
       "date": "2023-03",
-      "ember": 4.39,
+      "ember": 4.38,
       "bls": 4.92
     },
     {
       "date": "2023-04",
-      "ember": 4.37,
+      "ember": 4.36,
       "bls": 4.95
     },
     {
       "date": "2023-05",
-      "ember": 3.45,
+      "ember": 3.44,
       "bls": 4.13
     },
     {
       "date": "2023-06",
-      "ember": 2.39,
+      "ember": 2.37,
       "bls": 3.07
     },
     {
       "date": "2023-07",
-      "ember": 2.26,
+      "ember": 2.25,
       "bls": 3.29
     },
     {
       "date": "2023-08",
-      "ember": 2.69,
+      "ember": 2.68,
       "bls": 3.72
     },
     {
       "date": "2023-09",
-      "ember": 2.63,
+      "ember": 2.62,
       "bls": 3.69
     },
     {
       "date": "2023-10",
-      "ember": 2.24,
+      "ember": 2.23,
       "bls": 3.25
     },
     {
       "date": "2023-11",
-      "ember": 2.17,
+      "ember": 2.16,
       "bls": 3.13
     },
     {
@@ -240,7 +240,7 @@
     },
     {
       "date": "2024-02",
-      "ember": 2.36,
+      "ember": 2.35,
       "bls": 3.16
     },
     {
@@ -265,7 +265,7 @@
     },
     {
       "date": "2024-07",
-      "ember": 2.21,
+      "ember": 2.2,
       "bls": 2.94
     },
     {
@@ -275,7 +275,7 @@
     },
     {
       "date": "2024-09",
-      "ember": 1.75,
+      "ember": 1.74,
       "bls": 2.43
     },
     {
@@ -285,7 +285,7 @@
     },
     {
       "date": "2024-11",
-      "ember": 2.03,
+      "ember": 2.02,
       "bls": 2.72
     },
     {
@@ -305,22 +305,22 @@
     },
     {
       "date": "2025-03",
-      "ember": 1.76,
+      "ember": 1.75,
       "bls": 2.38
     },
     {
       "date": "2025-04",
-      "ember": 1.69,
+      "ember": 1.68,
       "bls": 2.33
     },
     {
       "date": "2025-05",
-      "ember": 1.79,
+      "ember": 1.78,
       "bls": 2.38
     },
     {
       "date": "2025-06",
-      "ember": 2.17,
+      "ember": 2.16,
       "bls": 2.68
     },
     {
@@ -330,42 +330,42 @@
     },
     {
       "date": "2025-08",
-      "ember": 2.5,
+      "ember": 2.49,
       "bls": 2.94
     },
     {
       "date": "2025-09",
-      "ember": 2.57,
+      "ember": 2.56,
       "bls": 3.02
     },
     {
       "date": "2025-11",
-      "ember": 2.43,
+      "ember": 2.42,
       "bls": 2.7
     },
     {
       "date": "2025-12",
-      "ember": 2.27,
+      "ember": 2.25,
       "bls": 2.65
     },
     {
       "date": "2026-01",
-      "ember": 1.97,
+      "ember": 1.95,
       "bls": 2.39
     },
     {
       "date": "2026-02",
-      "ember": 1.99,
+      "ember": 1.98,
       "bls": 2.43
     },
     {
       "date": "2026-03",
-      "ember": 2.97,
+      "ember": 2.96,
       "bls": 3.29
     },
     {
       "date": "2026-04",
-      "ember": 3.46,
+      "ember": 3.45,
       "bls": 3.78
     },
     {
@@ -375,7 +375,7 @@
     },
     {
       "date": "2026-06",
-      "ember": 3.13,
+      "ember": 3.12,
       "bls": 3.46
     },
     {
