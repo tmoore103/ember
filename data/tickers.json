@@ -1,14 +1,14 @@
 {
-  "updated": "2026-11-16T15:13:27.375680Z",
+  "updated": "2026-11-23T17:41:55.524879Z",
   "tickers": {
     "QQQ": {
       "name": "Invesco QQQ Trust",
       "lev": false,
       "category": "broad-market",
       "category_label": "Broad-market index",
-      "cagr": 19.79,
-      "stddev": 22.77,
-      "yield": 0.46,
+      "cagr": 19.4,
+      "stddev": 22.96,
+      "yield": 0.47,
       "ret22": -33.22,
       "prices": [
         [
@@ -493,22 +493,22 @@
         ],
         [
           "2026-11-30",
-          664.8
+          651.62
         ]
       ],
       "description": "To maintain the correspondence between the composition and weights of the securities in the trust (the \"securities\") and the stocks in the NASDAQ-100 Index\u00ae, the adviser adjusts the securities from time to time to conform to periodic changes in the identity and/or relative weights of index securities. The composition and weighting of the securities portion of a portfolio deposit are also...",
       "inception": "1999-03-10",
       "expense_ratio": null,
-      "avg_volume": 38728960
+      "avg_volume": 41424200
     },
     "VUG": {
       "name": "Vanguard Morningstar Growth ETF",
       "lev": false,
       "category": "broad-market",
       "category_label": "Broad-market index",
-      "cagr": 17.17,
-      "stddev": 21.76,
-      "yield": 0.42,
+      "cagr": 16.78,
+      "stddev": 21.96,
+      "yield": 0.43,
       "ret22": -33.61,
       "prices": [
         [
@@ -993,22 +993,22 @@
         ],
         [
           "2026-11-30",
-          82.63
+          81.01
         ]
       ],
       "description": "The fund manager employs an indexing investment approach designed to track the performance of the target index, a broadly diversified index made up of the growth stocks of large U.S. companies, as determined by the index provider. Under normal circumstances, it invests at least 80% of its net assets, plus the amount of any borrowings for investment purposes, in the stocks that make up the...",
       "inception": "2004-01-26",
       "expense_ratio": null,
-      "avg_volume": 6003978
+      "avg_volume": 6561251
     },
     "SPYG": {
       "name": "State Street SPDR Portfolio S&P 500 Growth ETF",
       "lev": false,
       "category": "broad-market",
       "category_label": "Broad-market index",
-      "cagr": 17.04,
-      "stddev": 21.0,
-      "yield": 0.52,
+      "cagr": 16.61,
+      "stddev": 21.22,
+      "yield": 0.53,
       "ret22": -29.95,
       "prices": [
         [
@@ -1493,22 +1493,22 @@
         ],
         [
           "2026-11-30",
-          112.57
+          109.76
         ]
       ],
       "description": "The fund generally invests substantially all, but at least 80%, of its total assets in the securities comprising the index. The index measures the performance of the large-capitalization growth segment of the U.S. equity market. It is non-diversified.",
       "inception": "2000-09-25",
       "expense_ratio": null,
-      "avg_volume": 2568626
+      "avg_volume": 2648834
     },
     "OEF": {
       "name": "iShares S&P 100 ETF",
       "lev": false,
       "category": "broad-market",
       "category_label": "Broad-market index",
-      "cagr": 15.97,
-      "stddev": 18.61,
-      "yield": 0.89,
+      "cagr": 15.53,
+      "stddev": 18.76,
+      "yield": 0.92,
       "ret22": -21.92,
       "prices": [
         [
@@ -1993,522 +1993,522 @@
         ],
         [
           "2026-11-30",
-          366.15
+          356.06
         ]
       ],
       "description": "The fund seeks to track the investment results of the S&P 100\u00ae (the \u201cunderlying index\u201d), which measures the performance of the large-capitalization sector of the U.S. equity market. It is a subset of the S&P 500\u00ae (the \u201cParent Index\u201d) and consists of blue chip stocks from a diverse range of industries in the Parent Index with exchange listed options. The underlying index is a product of S&P Dow...",
       "inception": "2000-10-23",
       "expense_ratio": null,
-      "avg_volume": 205300
+      "avg_volume": 213476
     },
-    "VV": {
-      "name": "Vanguard Morningstar Large-Cap ETF",
+    "VOO": {
+      "name": "Vanguard S&P 500 ETF",
       "lev": false,
       "category": "broad-market",
       "category_label": "Broad-market index",
-      "cagr": 14.96,
-      "stddev": 18.3,
-      "yield": 1.05,
-      "ret22": -20.13,
+      "cagr": 14.47,
+      "stddev": 18.21,
+      "yield": 1.12,
+      "ret22": -18.67,
       "prices": [
         [
           "2016-11-30",
-          86.12
+          171.9
         ],
         [
           "2016-12-31",
-          87.81
+          175.46
         ],
         [
           "2017-01-31",
-          89.52
+          178.59
         ],
         [
           "2017-02-28",
-          93.07
+          185.51
         ],
         [
           "2017-03-31",
-          93.15
+          185.75
         ],
         [
           "2017-04-30",
-          94.18
+          187.68
         ],
         [
           "2017-05-31",
-          95.48
+          190.32
         ],
         [
           "2017-06-30",
-          96.08
+          191.52
         ],
         [
           "2017-07-31",
-          98.07
+          195.47
         ],
         [
           "2017-08-31",
-          98.34
+          196.04
         ],
         [
           "2017-09-30",
-          100.38
+          200.04
         ],
         [
           "2017-10-31",
-          102.74
+          204.7
         ],
         [
           "2017-11-30",
-          105.8
+          210.95
         ],
         [
           "2017-12-31",
-          107.13
+          213.66
         ],
         [
           "2018-01-31",
-          113.25
+          225.59
         ],
         [
           "2018-02-28",
-          109.05
+          217.19
         ],
         [
           "2018-03-31",
-          106.38
+          211.83
         ],
         [
           "2018-04-30",
-          106.71
+          212.56
         ],
         [
           "2018-05-31",
-          109.32
+          217.7
         ],
         [
           "2018-06-30",
-          109.98
+          219.35
         ],
         [
           "2018-07-31",
-          113.96
+          227.17
         ],
         [
           "2018-08-31",
-          117.67
+          234.48
         ],
         [
           "2018-09-30",
-          118.27
+          235.83
         ],
         [
           "2018-10-31",
-          110.1
+          219.71
         ],
         [
           "2018-11-30",
-          112.2
+          223.85
         ],
         [
           "2018-12-31",
-          102.36
+          204.04
         ],
         [
           "2019-01-31",
-          110.61
+          220.2
         ],
         [
           "2019-02-28",
-          114.23
+          227.36
         ],
         [
           "2019-03-31",
-          116.35
+          231.74
         ],
         [
           "2019-04-30",
-          121.04
+          241.09
         ],
         [
           "2019-05-31",
-          113.37
+          225.78
         ],
         [
           "2019-06-30",
-          121.3
+          241.57
         ],
         [
           "2019-07-31",
-          123.13
+          245.09
         ],
         [
           "2019-08-31",
-          120.96
+          241.07
         ],
         [
           "2019-09-30",
-          123.24
+          245.83
         ],
         [
           "2019-10-31",
-          125.92
+          251.19
         ],
         [
           "2019-11-30",
-          130.59
+          260.3
         ],
         [
           "2019-12-31",
-          134.35
+          268.04
         ],
         [
           "2020-01-31",
-          134.7
+          267.94
         ],
         [
           "2020-02-29",
-          123.74
+          246.24
         ],
         [
           "2020-03-31",
-          108.23
+          215.61
         ],
         [
           "2020-04-30",
-          122.26
+          243.17
         ],
         [
           "2020-05-31",
-          128.57
+          254.69
         ],
         [
           "2020-06-30",
-          131.26
+          259.38
         ],
         [
           "2020-07-31",
-          139.11
+          274.64
         ],
         [
           "2020-08-31",
-          149.72
+          293.78
         ],
         [
           "2020-09-30",
-          144.18
+          282.75
         ],
         [
           "2020-10-31",
-          140.59
+          275.55
         ],
         [
           "2020-11-30",
-          156.21
+          305.71
         ],
         [
           "2020-12-31",
-          162.61
+          317.16
         ],
         [
           "2021-01-31",
-          161.23
+          313.92
         ],
         [
           "2021-02-28",
-          165.42
+          322.6
         ],
         [
           "2021-03-31",
-          172.03
+          337.36
         ],
         [
           "2021-04-30",
-          181.27
+          355.21
         ],
         [
           "2021-05-31",
-          182.13
+          357.58
         ],
         [
           "2021-06-30",
-          186.96
+          365.66
         ],
         [
           "2021-07-31",
-          191.36
+          374.61
         ],
         [
           "2021-08-31",
-          196.96
+          385.67
         ],
         [
           "2021-09-30",
-          187.69
+          367.68
         ],
         [
           "2021-10-31",
-          200.94
+          393.56
         ],
         [
           "2021-11-30",
-          198.88
+          390.67
         ],
         [
           "2021-12-31",
-          207.18
+          408.48
         ],
         [
           "2022-01-31",
-          194.76
+          387.08
         ],
         [
           "2022-02-28",
-          189.0
+          375.54
         ],
         [
           "2022-03-31",
-          196.05
+          389.77
         ],
         [
           "2022-04-30",
-          177.79
+          355.53
         ],
         [
           "2022-05-31",
-          177.37
+          356.45
         ],
         [
           "2022-06-30",
-          162.73
+          326.99
         ],
         [
           "2022-07-31",
-          177.7
+          357.07
         ],
         [
           "2022-08-31",
-          170.8
+          342.33
         ],
         [
           "2022-09-30",
-          155.08
+          310.84
         ],
         [
           "2022-10-31",
-          167.31
+          336.07
         ],
         [
           "2022-11-30",
-          176.29
+          354.57
         ],
         [
           "2022-12-31",
-          165.94
+          334.25
         ],
         [
           "2023-01-31",
-          176.67
+          355.27
         ],
         [
           "2023-02-28",
-          172.43
+          346.4
         ],
         [
           "2023-03-31",
-          178.65
+          359.25
         ],
         [
           "2023-04-30",
-          181.25
+          364.96
         ],
         [
           "2023-05-31",
-          182.57
+          366.72
         ],
         [
           "2023-06-30",
-          194.59
+          390.59
         ],
         [
           "2023-07-31",
-          201.18
+          403.44
         ],
         [
           "2023-08-31",
-          197.89
+          396.87
         ],
         [
           "2023-09-30",
-          188.52
+          378.04
         ],
         [
           "2023-10-31",
-          184.46
+          369.83
         ],
         [
           "2023-11-30",
-          201.95
+          403.75
         ],
         [
           "2023-12-31",
-          211.04
+          422.23
         ],
         [
           "2024-01-31",
-          214.78
+          429.02
         ],
         [
           "2024-02-29",
-          226.03
+          451.36
         ],
         [
           "2024-03-31",
-          232.74
+          466.16
         ],
         [
           "2024-04-30",
-          223.45
+          447.48
         ],
         [
           "2024-05-31",
-          234.44
+          469.97
         ],
         [
           "2024-06-30",
-          243.15
+          486.73
         ],
         [
           "2024-07-31",
-          245.8
+          492.37
         ],
         [
           "2024-08-31",
-          251.99
+          504.16
         ],
         [
           "2024-09-30",
-          257.25
+          515.13
         ],
         [
           "2024-10-31",
-          255.1
+          510.25
         ],
         [
           "2024-11-30",
-          270.97
+          540.3
         ],
         [
           "2024-12-31",
-          264.33
+          527.69
         ],
         [
           "2025-01-31",
-          272.24
+          541.91
         ],
         [
           "2025-02-28",
-          268.26
+          535.06
         ],
         [
           "2025-03-31",
-          252.77
+          505.05
         ],
         [
           "2025-04-30",
-          251.06
+          500.95
         ],
         [
           "2025-05-31",
-          267.28
+          532.42
         ],
         [
           "2025-06-30",
-          281.41
+          559.96
         ],
         [
           "2025-07-31",
-          288.08
+          572.77
         ],
         [
           "2025-08-31",
-          294.06
+          584.65
         ],
         [
           "2025-09-30",
-          304.48
+          605.41
         ],
         [
           "2025-10-31",
-          312.07
+          619.9
         ],
         [
           "2025-11-30",
-          312.23
+          621.25
         ],
         [
           "2025-12-31",
-          312.19
+          621.74
         ],
         [
           "2026-01-31",
-          315.77
+          630.75
         ],
         [
           "2026-02-28",
-          312.56
+          625.62
         ],
         [
           "2026-03-31",
-          297.24
+          594.29
         ],
         [
           "2026-04-30",
-          328.57
+          656.97
         ],
         [
           "2026-05-31",
-          346.35
+          691.69
         ],
         [
           "2026-06-30",
-          343.04
+          685.05
         ],
         [
           "2026-07-31",
-          342.73
+          684.89
         ],
         [
           "2026-08-31",
-          352.53
+          703.08
         ],
         [
           "2026-09-30",
-          351.85
+          700.86
         ],
         [
           "2026-10-31",
-          348.05
+          694.81
         ],
         [
           "2026-11-30",
-          343.31
+          664.73
         ]
       ],
-      "description": "The fund manager employs an indexing investment approach designed to track the performance of the target index, a broadly diversified index of large U.S. companies representing approximately the top 85% of the U.S. investable market capitalization, as determined by the index provider. Under normal circumstances, it invests at least 80% of its net assets, plus the amount of any borrowings for...",
-      "inception": "2004-01-27",
+      "description": "The fund manager employs an indexing investment approach designed to track the performance of the Standard & Poor's 500 Index, a widely recognized benchmark of U.S. stock market performance that is dominated by the stocks of large U.S. companies. The advisor attempts to replicate the target index by investing all, or substantially all, of its assets in the stocks that make up the index,...",
+      "inception": "2010-09-07",
       "expense_ratio": null,
-      "avg_volume": 231975
+      "avg_volume": 8108429
     },
     "TECL": {
       "name": "Direxion Daily Technology Bull 3X Shares",
       "lev": true,
       "category": "3x-leveraged",
       "category_label": "3x leveraged equity",
-      "cagr": 40.99,
-      "stddev": 75.01,
-      "yield": 6.59,
+      "cagr": 39.04,
+      "stddev": 75.82,
+      "yield": 7.27,
       "ret22": -75.03,
       "prices": [
         [
@@ -2993,22 +2993,22 @@
         ],
         [
           "2026-11-30",
-          129.8
+          117.72
         ]
       ],
       "description": "The fund invests at least 80% of its net assets (plus borrowing for investment purposes) in financial instruments, such as swap agreements, securities of the index, and exchange-traded funds (\"ETFs\") that track the index, that, in combination, provide 3X daily leveraged exposure to the index, consistent with the fund's investment objective. The index includes domestic companies from the...",
       "inception": "2008-12-17",
       "expense_ratio": null,
-      "avg_volume": 671748
+      "avg_volume": 777559
     },
     "TQQQ": {
       "name": "ProShares UltraPro QQQ",
       "lev": true,
       "category": "3x-leveraged",
       "category_label": "3x leveraged equity",
-      "cagr": 36.5,
-      "stddev": 67.36,
-      "yield": 0.9,
+      "cagr": 34.74,
+      "stddev": 67.88,
+      "yield": 0.98,
       "ret22": -79.68,
       "prices": [
         [
@@ -3493,22 +3493,22 @@
         ],
         [
           "2026-11-30",
-          54.02
+          49.28
         ]
       ],
       "description": "The fund invests in financial instruments that ProShare Advisors believes, in combination, should produce daily returns consistent with the Daily Target. The index is designed to measure the performance of 100 of the largest Nasdaq-listed non-financial companies. Under normal circumstances, the fund will obtain leveraged exposure to at least 80% of its total assets in components of the index...",
       "inception": "2010-02-09",
       "expense_ratio": null,
-      "avg_volume": 60028465
+      "avg_volume": 67660265
     },
     "SOXL": {
       "name": "Direxion Daily Semiconductor Bull 3X Shares",
       "lev": true,
       "category": "3x-leveraged",
       "category_label": "3x leveraged equity",
-      "cagr": 31.92,
-      "stddev": 105.19,
-      "yield": 0.19,
+      "cagr": 28.67,
+      "stddev": 106.47,
+      "yield": 0.22,
       "ret22": -86.48,
       "prices": [
         [
@@ -3993,22 +3993,22 @@
         ],
         [
           "2026-11-30",
-          49.69
+          43.2
         ]
       ],
       "description": "The fund invests at least 80% of its net assets in financial instruments, such as swap agreements, securities of the index, and ETFs that track the index, that, in combination, provide 3X daily leveraged exposure to the index, consistent with the fund's investment objective. The index is a rules-based, modified float-adjusted market capitalization-weighted index that tracks the performance of...",
       "inception": "2010-03-11",
       "expense_ratio": null,
-      "avg_volume": 100451928
+      "avg_volume": 119590826
     },
     "SPXL": {
       "name": "Direxion Daily S&P500 Bull 3X Shares",
       "lev": true,
       "category": "3x-leveraged",
       "category_label": "3x leveraged equity",
-      "cagr": 27.58,
-      "stddev": 53.72,
-      "yield": 0.57,
+      "cagr": 25.81,
+      "stddev": 54.05,
+      "yield": 0.63,
       "ret22": -57.31,
       "prices": [
         [
@@ -4493,22 +4493,22 @@
         ],
         [
           "2026-11-30",
-          254.77
+          229.96
         ]
       ],
       "description": "The fund, under normal circumstances, invests at least 80% of its net assets (plus borrowing for investment purposes) in financial instruments, such as swap agreements, securities of the index, and exchange-traded funds (\"ETFs\") that track the index, that, in combination, provide 3X daily leveraged exposure to the index, consistent with the fund's investment objective. The index is designed to...",
       "inception": "2008-11-05",
       "expense_ratio": null,
-      "avg_volume": 1694739
+      "avg_volume": 1923242
     },
     "UPRO": {
       "name": "ProShares UltraPro S&P500",
       "lev": true,
       "category": "3x-leveraged",
       "category_label": "3x leveraged equity",
-      "cagr": 27.43,
-      "stddev": 54.04,
-      "yield": 0.85,
+      "cagr": 25.63,
+      "stddev": 54.38,
+      "yield": 0.94,
       "ret22": -57.59,
       "prices": [
         [
@@ -4993,22 +4993,22 @@
         ],
         [
           "2026-11-30",
-          133.13
+          119.97
         ]
       ],
       "description": "The fund invests in financial instruments that ProShare Advisors believes, in combination, should produce daily returns consistent with the Daily Target. The index is designed to measure the performance of 500 of the largest companies listed and domiciled in the U.S. Under normal circumstances, the fund will obtain leveraged exposure to at least 80% of its total assets in components of the...",
       "inception": "2009-06-23",
       "expense_ratio": null,
-      "avg_volume": 2096470
+      "avg_volume": 2370770
     },
     "UDOW": {
       "name": "ProShares UltraPro Dow30",
       "lev": true,
       "category": "3x-leveraged",
       "category_label": "3x leveraged equity",
-      "cagr": 21.33,
-      "stddev": 52.01,
-      "yield": 1.06,
+      "cagr": 19.15,
+      "stddev": 52.22,
+      "yield": 1.22,
       "ret22": -33.73,
       "prices": [
         [
@@ -5493,22 +5493,22 @@
         ],
         [
           "2026-11-30",
-          65.7
+          56.69
         ]
       ],
       "description": "The fund invests in financial instruments that ProShare Advisors believes, in combination, should produce daily returns consistent with the Daily Target. The index is designed to measure the performance of some of the largest U.S. companies. Under normal circumstances, the fund will obtain leveraged exposure to at least 80% of its total assets in components of the index or in instruments with...",
       "inception": "2010-02-09",
       "expense_ratio": null,
-      "avg_volume": 1906942
+      "avg_volume": 2035000
     },
     "FAS": {
       "name": "Direxion Daily Financial Bull 3X Shares",
       "lev": true,
       "category": "3x-leveraged",
       "category_label": "3x leveraged equity",
-      "cagr": 20.0,
-      "stddev": 61.27,
-      "yield": 8.12,
+      "cagr": 17.53,
+      "stddev": 61.38,
+      "yield": 9.44,
       "ret22": -44.8,
       "prices": [
         [
@@ -5993,22 +5993,22 @@
         ],
         [
           "2026-11-30",
-          180.0
+          154.89
         ]
       ],
       "description": "The fund invests at least 80% of its net assets in financial instruments, such as swap agreements, securities of the index, and ETFs that track the index, that, in combination, provide 3X daily leveraged exposure to the index, consistent with the fund's investment objective. The index includes securities of companies from the following industries: financial services; insurance; banks; capital...",
       "inception": "2008-11-06",
       "expense_ratio": null,
-      "avg_volume": 397978
+      "avg_volume": 408220
     },
     "TNA": {
       "name": "Direxion Daily Small Cap Bull 3X Shares",
       "lev": true,
       "category": "3x-leveraged",
       "category_label": "3x leveraged equity",
-      "cagr": 2.45,
-      "stddev": 68.44,
-      "yield": 0.33,
+      "cagr": 0.35,
+      "stddev": 68.61,
+      "yield": 0.37,
       "ret22": -63.77,
       "prices": [
         [
@@ -6493,22 +6493,22 @@
         ],
         [
           "2026-11-30",
-          54.01
+          48.1
         ]
       ],
       "description": "The fund invests at least 80% of its net assets in financial instruments, such as swap agreements, securities of the index, and exchange-traded funds (\"ETFs\") that track the index, that, in combination, provide 3X daily leveraged exposure to the index, consistent with the fund's investment objective. The index measures the performance of approximately 2,000 small-capitalization companies in...",
       "inception": "2008-11-05",
       "expense_ratio": null,
-      "avg_volume": 4572623
+      "avg_volume": 4818798
     },
     "NUGT": {
       "name": "Direxion Daily Gold Miners Index Bull 2X Shares",
       "lev": true,
       "category": "3x-leveraged",
       "category_label": "3x leveraged equity",
-      "cagr": -3.7,
-      "stddev": 85.82,
-      "yield": 0.93,
+      "cagr": -3.84,
+      "stddev": 85.94,
+      "yield": 1.15,
       "ret22": -28.66,
       "prices": [
         [
@@ -6993,22 +6993,22 @@
         ],
         [
           "2026-11-30",
-          119.71
+          96.54
         ]
       ],
       "description": "The index is comprised of publicly traded common stocks, ADRs or global depositary receipts of companies that operate globally in both developed and emerging markets, and the index provider defines as involved primarily in mining for gold and, to a lesser extent, in mining for silver. The fund invests at least 80% of its net assets in financial instruments, that, in combination, provide 2X...",
       "inception": "2010-12-08",
       "expense_ratio": null,
-      "avg_volume": 718273
+      "avg_volume": 733265
     },
     "ERX": {
       "name": "Direxion Daily Energy Bull 2X Shares",
       "lev": true,
       "category": "3x-leveraged",
       "category_label": "3x leveraged equity",
-      "cagr": -9.02,
+      "cagr": -10.78,
       "stddev": 68.66,
-      "yield": 1.31,
+      "yield": 1.47,
       "ret22": 117.24,
       "prices": [
         [
@@ -7493,22 +7493,22 @@
         ],
         [
           "2026-11-30",
-          106.41
+          94.44
         ]
       ],
       "description": "The index is provided by S&P Dow Jones Indices and includes domestic companies from the energy sector which includes the following industries: oil, gas and consumable fuels; and energy equipment and services. The fund invests at least 80% of its net assets in financial instruments, such as swap agreements, securities of the index, and ETFs that track the index, that, in combination, provide 2X...",
       "inception": "2008-11-06",
       "expense_ratio": null,
-      "avg_volume": 334673
+      "avg_volume": 362298
     },
     "USD": {
       "name": "ProShares Ultra Semiconductors",
       "lev": true,
       "category": "2x-leveraged",
       "category_label": "2x leveraged equity",
-      "cagr": 45.06,
-      "stddev": 71.66,
-      "yield": 0.82,
+      "cagr": 43.12,
+      "stddev": 73.02,
+      "yield": 0.87,
       "ret22": -69.75,
       "prices": [
         [
@@ -7993,22 +7993,522 @@
         ],
         [
           "2026-11-30",
-          50.57
+          47.69
         ]
       ],
       "description": "The fund invests in financial instruments that ProShare Advisors believes, in combination, should produce daily returns consistent with the Daily Target. The index is designed to measure the stock performance of U.S. companies in the semiconductors sub-sector. Under normal circumstances, the fund will obtain leveraged exposure to at least 80% of its total assets in components of the index or...",
       "inception": "2007-01-30",
       "expense_ratio": null,
-      "avg_volume": 751800
+      "avg_volume": 860523
+    },
+    "ROM": {
+      "name": "ProShares Ultra Technology",
+      "lev": true,
+      "category": "2x-leveraged",
+      "category_label": "2x leveraged equity",
+      "cagr": 33.31,
+      "stddev": 51.98,
+      "yield": 0.04,
+      "ret22": -64.26,
+      "prices": [
+        [
+          "2016-11-30",
+          1.95
+        ],
+        [
+          "2016-12-31",
+          2.0
+        ],
+        [
+          "2017-01-31",
+          2.17
+        ],
+        [
+          "2017-02-28",
+          2.4
+        ],
+        [
+          "2017-03-31",
+          2.53
+        ],
+        [
+          "2017-04-30",
+          2.64
+        ],
+        [
+          "2017-05-31",
+          2.86
+        ],
+        [
+          "2017-06-30",
+          2.69
+        ],
+        [
+          "2017-07-31",
+          2.88
+        ],
+        [
+          "2017-08-31",
+          3.08
+        ],
+        [
+          "2017-09-30",
+          3.08
+        ],
+        [
+          "2017-10-31",
+          3.59
+        ],
+        [
+          "2017-11-30",
+          3.63
+        ],
+        [
+          "2017-12-31",
+          3.61
+        ],
+        [
+          "2018-01-31",
+          4.15
+        ],
+        [
+          "2018-02-28",
+          4.15
+        ],
+        [
+          "2018-03-31",
+          3.81
+        ],
+        [
+          "2018-04-30",
+          3.78
+        ],
+        [
+          "2018-05-31",
+          4.34
+        ],
+        [
+          "2018-06-30",
+          4.24
+        ],
+        [
+          "2018-07-31",
+          4.41
+        ],
+        [
+          "2018-08-31",
+          5.07
+        ],
+        [
+          "2018-09-30",
+          4.98
+        ],
+        [
+          "2018-10-31",
+          4.11
+        ],
+        [
+          "2018-11-30",
+          3.9
+        ],
+        [
+          "2018-12-31",
+          3.26
+        ],
+        [
+          "2019-01-31",
+          3.83
+        ],
+        [
+          "2019-02-28",
+          4.24
+        ],
+        [
+          "2019-03-31",
+          4.57
+        ],
+        [
+          "2019-04-30",
+          5.18
+        ],
+        [
+          "2019-05-31",
+          4.21
+        ],
+        [
+          "2019-06-30",
+          4.87
+        ],
+        [
+          "2019-07-31",
+          5.29
+        ],
+        [
+          "2019-08-31",
+          4.94
+        ],
+        [
+          "2019-09-30",
+          5.1
+        ],
+        [
+          "2019-10-31",
+          5.48
+        ],
+        [
+          "2019-11-30",
+          6.09
+        ],
+        [
+          "2019-12-31",
+          6.58
+        ],
+        [
+          "2020-01-31",
+          7.08
+        ],
+        [
+          "2020-02-29",
+          6.13
+        ],
+        [
+          "2020-03-31",
+          4.61
+        ],
+        [
+          "2020-04-30",
+          5.98
+        ],
+        [
+          "2020-05-31",
+          6.84
+        ],
+        [
+          "2020-06-30",
+          7.73
+        ],
+        [
+          "2020-07-31",
+          8.71
+        ],
+        [
+          "2020-08-31",
+          10.83
+        ],
+        [
+          "2020-09-30",
+          9.43
+        ],
+        [
+          "2020-10-31",
+          8.97
+        ],
+        [
+          "2020-11-30",
+          10.9
+        ],
+        [
+          "2020-12-31",
+          11.88
+        ],
+        [
+          "2021-01-31",
+          11.97
+        ],
+        [
+          "2021-02-28",
+          12.26
+        ],
+        [
+          "2021-03-31",
+          12.45
+        ],
+        [
+          "2021-04-30",
+          14.05
+        ],
+        [
+          "2021-05-31",
+          13.84
+        ],
+        [
+          "2021-06-30",
+          15.96
+        ],
+        [
+          "2021-07-31",
+          17.2
+        ],
+        [
+          "2021-08-31",
+          18.95
+        ],
+        [
+          "2021-09-30",
+          16.47
+        ],
+        [
+          "2021-10-31",
+          19.46
+        ],
+        [
+          "2021-11-30",
+          20.61
+        ],
+        [
+          "2021-12-31",
+          21.11
+        ],
+        [
+          "2022-01-31",
+          17.6
+        ],
+        [
+          "2022-02-28",
+          15.74
+        ],
+        [
+          "2022-03-31",
+          16.59
+        ],
+        [
+          "2022-04-30",
+          12.31
+        ],
+        [
+          "2022-05-31",
+          11.6
+        ],
+        [
+          "2022-06-30",
+          9.48
+        ],
+        [
+          "2022-07-31",
+          11.74
+        ],
+        [
+          "2022-08-31",
+          10.31
+        ],
+        [
+          "2022-09-30",
+          7.85
+        ],
+        [
+          "2022-10-31",
+          8.39
+        ],
+        [
+          "2022-11-30",
+          9.29
+        ],
+        [
+          "2022-12-31",
+          7.63
+        ],
+        [
+          "2023-01-31",
+          9.23
+        ],
+        [
+          "2023-02-28",
+          9.21
+        ],
+        [
+          "2023-03-31",
+          11.53
+        ],
+        [
+          "2023-04-30",
+          11.4
+        ],
+        [
+          "2023-05-31",
+          13.41
+        ],
+        [
+          "2023-06-30",
+          14.92
+        ],
+        [
+          "2023-07-31",
+          15.57
+        ],
+        [
+          "2023-08-31",
+          15.0
+        ],
+        [
+          "2023-09-30",
+          12.99
+        ],
+        [
+          "2023-10-31",
+          12.89
+        ],
+        [
+          "2023-11-30",
+          16.29
+        ],
+        [
+          "2023-12-31",
+          17.6
+        ],
+        [
+          "2024-01-31",
+          18.35
+        ],
+        [
+          "2024-02-29",
+          20.01
+        ],
+        [
+          "2024-03-31",
+          20.14
+        ],
+        [
+          "2024-04-30",
+          17.72
+        ],
+        [
+          "2024-05-31",
+          20.07
+        ],
+        [
+          "2024-06-30",
+          23.17
+        ],
+        [
+          "2024-07-31",
+          21.4
+        ],
+        [
+          "2024-08-31",
+          21.41
+        ],
+        [
+          "2024-09-30",
+          22.27
+        ],
+        [
+          "2024-10-31",
+          21.49
+        ],
+        [
+          "2024-11-30",
+          23.5
+        ],
+        [
+          "2024-12-31",
+          23.17
+        ],
+        [
+          "2025-01-31",
+          22.51
+        ],
+        [
+          "2025-02-28",
+          21.33
+        ],
+        [
+          "2025-03-31",
+          17.76
+        ],
+        [
+          "2025-04-30",
+          17.65
+        ],
+        [
+          "2025-05-31",
+          21.15
+        ],
+        [
+          "2025-06-30",
+          25.34
+        ],
+        [
+          "2025-07-31",
+          27.11
+        ],
+        [
+          "2025-08-31",
+          26.86
+        ],
+        [
+          "2025-09-30",
+          30.87
+        ],
+        [
+          "2025-10-31",
+          34.79
+        ],
+        [
+          "2025-11-30",
+          31.21
+        ],
+        [
+          "2025-12-31",
+          31.42
+        ],
+        [
+          "2026-01-31",
+          31.19
+        ],
+        [
+          "2026-02-28",
+          28.7
+        ],
+        [
+          "2026-03-31",
+          26.13
+        ],
+        [
+          "2026-04-30",
+          37.21
+        ],
+        [
+          "2026-05-31",
+          52.98
+        ],
+        [
+          "2026-06-30",
+          51.73
+        ],
+        [
+          "2026-07-31",
+          43.16
+        ],
+        [
+          "2026-08-31",
+          48.35
+        ],
+        [
+          "2026-09-30",
+          53.06
+        ],
+        [
+          "2026-10-31",
+          44.0
+        ],
+        [
+          "2026-11-30",
+          35.02
+        ]
+      ],
+      "description": "The fund invests in financial instruments that ProShare Advisors believes, in combination, should produce daily returns consistent with the Daily Target. The index is designed to measure the performance of information technology companies included in the S&P 500 Index. Under normal circumstances, the fund will obtain leveraged exposure to at least 80% of its total assets in components of the...",
+      "inception": "2007-01-30",
+      "expense_ratio": null,
+      "avg_volume": 158446
     },
     "QLD": {
       "name": "ProShares Ultra QQQ",
       "lev": true,
       "category": "2x-leveraged",
       "category_label": "2x leveraged equity",
-      "cagr": 30.89,
-      "stddev": 45.5,
-      "yield": 0.16,
+      "cagr": 29.88,
+      "stddev": 45.85,
+      "yield": 0.17,
       "ret22": -61.33,
       "prices": [
         [
@@ -8493,22 +8993,22 @@
         ],
         [
           "2026-11-30",
-          75.93
+          72.09
         ]
       ],
       "description": "The fund invests in financial instruments that ProShare Advisors believes, in combination, should produce daily returns consistent with the Daily Target. The index is designed to measure the performance of 100 of the largest Nasdaq-listed non-financial companies. Under normal circumstances, the fund will obtain leveraged exposure to at least 80% of its total assets in components of the index...",
       "inception": "2006-06-19",
       "expense_ratio": null,
-      "avg_volume": 4725157
+      "avg_volume": 5370790
     },
     "SSO": {
       "name": "ProShares Ultra S&P500",
       "lev": true,
       "category": "2x-leveraged",
       "category_label": "2x leveraged equity",
-      "cagr": 22.63,
-      "stddev": 36.09,
-      "yield": 0.73,
+      "cagr": 21.52,
+      "stddev": 36.31,
+      "yield": 0.78,
       "ret22": -39.7,
       "prices": [
         [
@@ -8993,22 +9493,22 @@
         ],
         [
           "2026-11-30",
-          65.39
+          61.27
         ]
       ],
       "description": "The fund invests in financial instruments that the advisors believe, in combination, should produce daily returns consistent with the Daily Target. The index is designed to measure the performance of 500 of the largest companies listed and domiciled in the U.S. Under normal circumstances, the fund will obtain leveraged exposure to at least 80% of its total assets in components of the index or...",
       "inception": "2006-06-19",
       "expense_ratio": null,
-      "avg_volume": 3916446
+      "avg_volume": 4244575
     },
     "DDM": {
       "name": "ProShares Ultra Dow30",
       "lev": true,
       "category": "2x-leveraged",
       "category_label": "2x leveraged equity",
-      "cagr": 18.32,
-      "stddev": 34.92,
-      "yield": 0.98,
+      "cagr": 16.95,
+      "stddev": 35.06,
+      "yield": 1.07,
       "ret22": -20.51,
       "prices": [
         [
@@ -9493,21 +9993,21 @@
         ],
         [
           "2026-11-30",
-          63.31
+          57.62
         ]
       ],
       "description": "The index is designed to measure the performance of some of the largest U.S. companies. Under normal circumstances, the fund will obtain leveraged exposure to at least 80% of its total assets in components of the index or in instruments with similar economic characteristics. The fund is non-diversified.",
       "inception": "2006-06-19",
       "expense_ratio": null,
-      "avg_volume": 227100
+      "avg_volume": 238037
     },
     "SMH": {
       "name": "VanEck Semiconductor ETF",
       "lev": false,
       "category": "sector-thematic",
       "category_label": "Sector/thematic",
-      "cagr": 30.83,
-      "stddev": 34.07,
+      "cagr": 30.32,
+      "stddev": 34.58,
       "yield": 0.24,
       "ret22": -34.97,
       "prices": [
@@ -9993,22 +10493,22 @@
         ],
         [
           "2026-11-30",
-          464.96
+          460.02
         ]
       ],
       "description": "The fund normally invests at least 80% of its total assets in securities that comprise the fund's benchmark index. The index includes common stocks and depositary receipts of U.S. exchange-listed companies in the semiconductor industry. Such companies may include medium-capitalization companies and foreign companies that are listed on a U.S. exchange. The fund is non-diversified.",
       "inception": "2011-12-20",
       "expense_ratio": null,
-      "avg_volume": 8627623
+      "avg_volume": 8938210
     },
     "SOXX": {
       "name": "iShares Semiconductor ETF",
       "lev": false,
       "category": "sector-thematic",
       "category_label": "Sector/thematic",
-      "cagr": 28.27,
-      "stddev": 35.54,
-      "yield": 0.29,
+      "cagr": 27.63,
+      "stddev": 35.95,
+      "yield": 0.3,
       "ret22": -36.35,
       "prices": [
         [
@@ -10493,21 +10993,21 @@
         ],
         [
           "2026-11-30",
-          141.55
+          139.7
         ]
       ],
       "description": "The fund generally will invest at least 80% of its assets in the component securities of its index and in investments that have economic characteristics that are substantially identical to the component securities of its index and may invest up to 20% of its assets in certain futures, options and swap contracts, cash and cash equivalents. The fund is non-diversified.",
       "inception": "2001-07-10",
       "expense_ratio": null,
-      "avg_volume": 27619317
+      "avg_volume": 29617193
     },
     "VGT": {
       "name": "Vanguard Information Technology Index Fund ETF Shares",
       "lev": false,
       "category": "sector-thematic",
       "category_label": "Sector/thematic",
-      "cagr": 22.96,
-      "stddev": 25.27,
+      "cagr": 22.6,
+      "stddev": 25.55,
       "yield": 0.44,
       "ret22": -30.28,
       "prices": [
@@ -10993,22 +11493,22 @@
         ],
         [
           "2026-11-30",
-          108.33
+          106.57
         ]
       ],
       "description": "The fund employs an indexing investment approach designed to track the performance of the index, an index made up of stocks of large, mid-size, and small U.S. companies within the information technology sector, as classified under the GICS. The Advisor attempts to replicate the target index by seeking to invest all of its assets in the stocks that make up the index, in order to hold each stock...",
       "inception": "2004-01-26",
       "expense_ratio": null,
-      "avg_volume": 4663857
+      "avg_volume": 5084628
     },
     "XLK": {
       "name": "State Street Technology Select Sector SPDR ETF",
       "lev": false,
       "category": "sector-thematic",
       "category_label": "Sector/thematic",
-      "cagr": 22.8,
-      "stddev": 25.37,
-      "yield": 0.5,
+      "cagr": 22.38,
+      "stddev": 25.65,
+      "yield": 0.51,
       "ret22": -28.41,
       "prices": [
         [
@@ -11493,22 +11993,22 @@
         ],
         [
           "2026-11-30",
-          165.69
+          162.52
         ]
       ],
       "description": "In seeking to track the performance of the index, the fund employs a replication strategy, which means that the fund typically invests in substantially all of the securities represented in the index in approximately the same proportions as the index. It generally invests substantially all, but at least 95%, of its total assets in the securities comprising the index. The fund is non-diversified.",
       "inception": "1998-12-16",
       "expense_ratio": null,
-      "avg_volume": 8932642
+      "avg_volume": 10015490
     },
     "ITB": {
       "name": "iShares U.S. Home Construction ETF",
       "lev": false,
       "category": "sector-thematic",
       "category_label": "Sector/thematic",
-      "cagr": 14.31,
-      "stddev": 30.62,
-      "yield": 1.33,
+      "cagr": 13.63,
+      "stddev": 30.63,
+      "yield": 1.36,
       "ret22": -24.22,
       "prices": [
         [
@@ -11993,22 +12493,22 @@
         ],
         [
           "2026-11-30",
-          94.67
+          92.54
         ]
       ],
       "description": "The index measures the performance of the home construction sector of the U.S. equity market, as defined by the index provider. The fund generally will invest at least 80% of its assets in the component securities of its underlying index and may invest up to 20% of its assets in certain futures, options and swap contracts, cash and cash equivalents. It is non-diversified.",
       "inception": "2006-05-01",
       "expense_ratio": null,
-      "avg_volume": 2499379
+      "avg_volume": 2481723
     },
     "ITA": {
       "name": "iShares U.S. Aerospace & Defense ETF",
       "lev": false,
       "category": "sector-thematic",
       "category_label": "Sector/thematic",
-      "cagr": 12.83,
-      "stddev": 23.46,
-      "yield": 0.27,
+      "cagr": 12.23,
+      "stddev": 23.52,
+      "yield": 0.28,
       "ret22": 8.93,
       "prices": [
         [
@@ -12493,22 +12993,22 @@
         ],
         [
           "2026-11-30",
-          70.78
+          68.58
         ]
       ],
       "description": "The index measures the performance of the aerospace and defense sector of the U.S. equity market, as defined by SPDJI. The fund generally will invest at least 80% of its assets in the component securities of its index and in investments that have economic characteristics that are substantially identical to the component securities of its index and may invest up to 20% of its assets in certain...",
       "inception": "2006-05-01",
       "expense_ratio": null,
-      "avg_volume": 2483628
+      "avg_volume": 2539951
     },
     "XLY": {
       "name": "State Street Consumer Discretionary Select Sector SPDR ETF",
       "lev": false,
       "category": "sector-thematic",
       "category_label": "Sector/thematic",
-      "cagr": 12.56,
-      "stddev": 22.34,
-      "yield": 0.79,
+      "cagr": 12.13,
+      "stddev": 22.43,
+      "yield": 0.8,
       "ret22": -38.05,
       "prices": [
         [
@@ -12993,22 +13493,22 @@
         ],
         [
           "2026-11-30",
-          118.61
+          117.35
         ]
       ],
       "description": "The Advisor employs a replication strategy. The fund generally invests substantially all, but at least 95%, of its total assets in the securities comprising the index. The index includes companies that have been identified as Consumer Discretionary companies by the Global Industry Classification Standard (GICS\u00ae). It is non-diversified.",
       "inception": "1998-12-16",
       "expense_ratio": null,
-      "avg_volume": 7197695
+      "avg_volume": 7477784
     },
     "XLI": {
       "name": "State Street Industrial Select Sector SPDR ETF",
       "lev": false,
       "category": "sector-thematic",
       "category_label": "Sector/thematic",
-      "cagr": 12.48,
-      "stddev": 20.15,
-      "yield": 1.13,
+      "cagr": 11.93,
+      "stddev": 20.22,
+      "yield": 1.16,
       "ret22": -4.79,
       "prices": [
         [
@@ -13493,522 +13993,22 @@
         ],
         [
           "2026-11-30",
-          167.36
+          162.51
         ]
       ],
       "description": "Under normal market conditions, the fund generally invests substantially all, but at least 95%, of its total assets in the securities comprising the index. The index includes companies that have been identified as Industrial companies by the Global Industry Classification Standard, including securities of companies from the following industries: aerospace and defense; industrial conglomerates;...",
       "inception": "1998-12-16",
       "expense_ratio": null,
-      "avg_volume": 7730373
-    },
-    "XLF": {
-      "name": "State Street Financial Select Sector SPDR ETF",
-      "lev": false,
-      "category": "sector-thematic",
-      "category_label": "Sector/thematic",
-      "cagr": 12.39,
-      "stddev": 22.06,
-      "yield": 1.41,
-      "ret22": -11.67,
-      "prices": [
-        [
-          "2016-11-30",
-          18.73
-        ],
-        [
-          "2016-12-31",
-          19.43
-        ],
-        [
-          "2017-01-31",
-          19.48
-        ],
-        [
-          "2017-02-28",
-          20.51
-        ],
-        [
-          "2017-03-31",
-          19.9
-        ],
-        [
-          "2017-04-30",
-          19.74
-        ],
-        [
-          "2017-05-31",
-          19.5
-        ],
-        [
-          "2017-06-30",
-          20.77
-        ],
-        [
-          "2017-07-31",
-          21.13
-        ],
-        [
-          "2017-08-31",
-          20.8
-        ],
-        [
-          "2017-09-30",
-          21.87
-        ],
-        [
-          "2017-10-31",
-          22.49
-        ],
-        [
-          "2017-11-30",
-          23.27
-        ],
-        [
-          "2017-12-31",
-          23.71
-        ],
-        [
-          "2018-01-31",
-          25.26
-        ],
-        [
-          "2018-02-28",
-          24.52
-        ],
-        [
-          "2018-03-31",
-          23.5
-        ],
-        [
-          "2018-04-30",
-          23.4
-        ],
-        [
-          "2018-05-31",
-          23.17
-        ],
-        [
-          "2018-06-30",
-          22.77
-        ],
-        [
-          "2018-07-31",
-          23.93
-        ],
-        [
-          "2018-08-31",
-          24.26
-        ],
-        [
-          "2018-09-30",
-          23.72
-        ],
-        [
-          "2018-10-31",
-          22.6
-        ],
-        [
-          "2018-11-30",
-          23.2
-        ],
-        [
-          "2018-12-31",
-          20.61
-        ],
-        [
-          "2019-01-31",
-          22.45
-        ],
-        [
-          "2019-02-28",
-          22.95
-        ],
-        [
-          "2019-03-31",
-          22.36
-        ],
-        [
-          "2019-04-30",
-          24.37
-        ],
-        [
-          "2019-05-31",
-          22.62
-        ],
-        [
-          "2019-06-30",
-          24.13
-        ],
-        [
-          "2019-07-31",
-          24.7
-        ],
-        [
-          "2019-08-31",
-          23.53
-        ],
-        [
-          "2019-09-30",
-          24.6
-        ],
-        [
-          "2019-10-31",
-          25.22
-        ],
-        [
-          "2019-11-30",
-          26.49
-        ],
-        [
-          "2019-12-31",
-          27.18
-        ],
-        [
-          "2020-01-31",
-          26.46
-        ],
-        [
-          "2020-02-29",
-          23.48
-        ],
-        [
-          "2020-03-31",
-          18.54
-        ],
-        [
-          "2020-04-30",
-          20.3
-        ],
-        [
-          "2020-05-31",
-          20.85
-        ],
-        [
-          "2020-06-30",
-          20.74
-        ],
-        [
-          "2020-07-31",
-          21.54
-        ],
-        [
-          "2020-08-31",
-          22.46
-        ],
-        [
-          "2020-09-30",
-          21.69
-        ],
-        [
-          "2020-10-31",
-          21.5
-        ],
-        [
-          "2020-11-30",
-          25.13
-        ],
-        [
-          "2020-12-31",
-          26.71
-        ],
-        [
-          "2021-01-31",
-          26.23
-        ],
-        [
-          "2021-02-28",
-          29.28
-        ],
-        [
-          "2021-03-31",
-          30.99
-        ],
-        [
-          "2021-04-30",
-          33.0
-        ],
-        [
-          "2021-05-31",
-          34.58
-        ],
-        [
-          "2021-06-30",
-          33.53
-        ],
-        [
-          "2021-07-31",
-          33.37
-        ],
-        [
-          "2021-08-31",
-          35.09
-        ],
-        [
-          "2021-09-30",
-          34.44
-        ],
-        [
-          "2021-10-31",
-          36.95
-        ],
-        [
-          "2021-11-30",
-          34.84
-        ],
-        [
-          "2021-12-31",
-          36.01
-        ],
-        [
-          "2022-01-31",
-          36.02
-        ],
-        [
-          "2022-02-28",
-          35.52
-        ],
-        [
-          "2022-03-31",
-          35.47
-        ],
-        [
-          "2022-04-30",
-          31.95
-        ],
-        [
-          "2022-05-31",
-          32.83
-        ],
-        [
-          "2022-06-30",
-          29.27
-        ],
-        [
-          "2022-07-31",
-          31.37
-        ],
-        [
-          "2022-08-31",
-          30.76
-        ],
-        [
-          "2022-09-30",
-          28.4
-        ],
-        [
-          "2022-10-31",
-          31.79
-        ],
-        [
-          "2022-11-30",
-          33.97
-        ],
-        [
-          "2022-12-31",
-          32.2
-        ],
-        [
-          "2023-01-31",
-          34.42
-        ],
-        [
-          "2023-02-28",
-          33.63
-        ],
-        [
-          "2023-03-31",
-          30.42
-        ],
-        [
-          "2023-04-30",
-          31.38
-        ],
-        [
-          "2023-05-31",
-          30.05
-        ],
-        [
-          "2023-06-30",
-          32.04
-        ],
-        [
-          "2023-07-31",
-          33.57
-        ],
-        [
-          "2023-08-31",
-          32.67
-        ],
-        [
-          "2023-09-30",
-          31.66
-        ],
-        [
-          "2023-10-31",
-          30.89
-        ],
-        [
-          "2023-11-30",
-          34.27
-        ],
-        [
-          "2023-12-31",
-          36.07
-        ],
-        [
-          "2024-01-31",
-          37.18
-        ],
-        [
-          "2024-02-29",
-          38.7
-        ],
-        [
-          "2024-03-31",
-          40.56
-        ],
-        [
-          "2024-04-30",
-          38.86
-        ],
-        [
-          "2024-05-31",
-          40.1
-        ],
-        [
-          "2024-06-30",
-          39.74
-        ],
-        [
-          "2024-07-31",
-          42.28
-        ],
-        [
-          "2024-08-31",
-          44.22
-        ],
-        [
-          "2024-09-30",
-          43.97
-        ],
-        [
-          "2024-10-31",
-          45.1
-        ],
-        [
-          "2024-11-30",
-          49.81
-        ],
-        [
-          "2024-12-31",
-          47.09
-        ],
-        [
-          "2025-01-31",
-          50.15
-        ],
-        [
-          "2025-02-28",
-          50.84
-        ],
-        [
-          "2025-03-31",
-          48.71
-        ],
-        [
-          "2025-04-30",
-          47.68
-        ],
-        [
-          "2025-05-31",
-          49.83
-        ],
-        [
-          "2025-06-30",
-          51.39
-        ],
-        [
-          "2025-07-31",
-          51.39
-        ],
-        [
-          "2025-08-31",
-          52.98
-        ],
-        [
-          "2025-09-30",
-          53.03
-        ],
-        [
-          "2025-10-31",
-          51.56
-        ],
-        [
-          "2025-11-30",
-          52.5
-        ],
-        [
-          "2025-12-31",
-          54.11
-        ],
-        [
-          "2026-01-31",
-          52.79
-        ],
-        [
-          "2026-02-28",
-          50.81
-        ],
-        [
-          "2026-03-31",
-          49.02
-        ],
-        [
-          "2026-04-30",
-          51.76
-        ],
-        [
-          "2026-05-31",
-          51.22
-        ],
-        [
-          "2026-06-30",
-          53.42
-        ],
-        [
-          "2026-07-31",
-          56.74
-        ],
-        [
-          "2026-08-31",
-          57.51
-        ],
-        [
-          "2026-09-30",
-          53.4
-        ],
-        [
-          "2026-10-31",
-          56.51
-        ],
-        [
-          "2026-11-30",
-          58.49
-        ]
-      ],
-      "description": "The fund generally invests substantially all, but at least 95%, of its total assets in the securities comprising the index. The index includes companies that have been identified as Financial companies by the Global Industry Classification Standard, including securities of companies from the following industries: financial services; insurance; banks; capital markets; mortgage real estate...",
-      "inception": "1998-12-16",
-      "expense_ratio": null,
-      "avg_volume": 34359350
+      "avg_volume": 8061607
     },
     "XLV": {
       "name": "State Street Health Care Select Sector SPDR ETF",
       "lev": false,
       "category": "sector-thematic",
       "category_label": "Sector/thematic",
-      "cagr": 12.36,
-      "stddev": 16.76,
-      "yield": 1.34,
+      "cagr": 11.84,
+      "stddev": 16.79,
+      "yield": 1.42,
       "ret22": -1.06,
       "prices": [
         [
@@ -14493,22 +14493,522 @@
         ],
         [
           "2026-11-30",
-          190.33
+          179.2
         ]
       ],
       "description": "In seeking to track the performance of the index, the fund employs a replication strategy. It generally invests substantially all, but at least 95%, of its total assets in the securities comprising the index. The index includes companies from the following industries: pharmaceuticals; health care equipment & supplies; health care providers & services; biotechnology; life sciences tools &...",
       "inception": "1998-12-16",
       "expense_ratio": null,
-      "avg_volume": 9074226
+      "avg_volume": 9499053
+    },
+    "VHT": {
+      "name": "Vanguard Health Care Index Fund ETF Shares",
+      "lev": false,
+      "category": "sector-thematic",
+      "category_label": "Sector/thematic",
+      "cagr": 11.62,
+      "stddev": 17.12,
+      "yield": 1.39,
+      "ret22": -4.99,
+      "prices": [
+        [
+          "2016-11-30",
+          109.27
+        ],
+        [
+          "2016-12-31",
+          109.82
+        ],
+        [
+          "2017-01-31",
+          112.74
+        ],
+        [
+          "2017-02-28",
+          119.97
+        ],
+        [
+          "2017-03-31",
+          119.78
+        ],
+        [
+          "2017-04-30",
+          121.78
+        ],
+        [
+          "2017-05-31",
+          122.38
+        ],
+        [
+          "2017-06-30",
+          128.51
+        ],
+        [
+          "2017-07-31",
+          129.27
+        ],
+        [
+          "2017-08-31",
+          131.72
+        ],
+        [
+          "2017-09-30",
+          133.24
+        ],
+        [
+          "2017-10-31",
+          132.24
+        ],
+        [
+          "2017-11-30",
+          136.05
+        ],
+        [
+          "2017-12-31",
+          135.36
+        ],
+        [
+          "2018-01-31",
+          144.55
+        ],
+        [
+          "2018-02-28",
+          138.49
+        ],
+        [
+          "2018-03-31",
+          135.15
+        ],
+        [
+          "2018-04-30",
+          136.38
+        ],
+        [
+          "2018-05-31",
+          138.48
+        ],
+        [
+          "2018-06-30",
+          140.64
+        ],
+        [
+          "2018-07-31",
+          149.01
+        ],
+        [
+          "2018-08-31",
+          156.48
+        ],
+        [
+          "2018-09-30",
+          159.96
+        ],
+        [
+          "2018-10-31",
+          147.65
+        ],
+        [
+          "2018-11-30",
+          157.29
+        ],
+        [
+          "2018-12-31",
+          142.92
+        ],
+        [
+          "2019-01-31",
+          151.4
+        ],
+        [
+          "2019-02-28",
+          153.88
+        ],
+        [
+          "2019-03-31",
+          154.47
+        ],
+        [
+          "2019-04-30",
+          150.3
+        ],
+        [
+          "2019-05-31",
+          146.28
+        ],
+        [
+          "2019-06-30",
+          156.81
+        ],
+        [
+          "2019-07-31",
+          154.77
+        ],
+        [
+          "2019-08-31",
+          152.95
+        ],
+        [
+          "2019-09-30",
+          151.74
+        ],
+        [
+          "2019-10-31",
+          158.99
+        ],
+        [
+          "2019-11-30",
+          168.74
+        ],
+        [
+          "2019-12-31",
+          174.17
+        ],
+        [
+          "2020-01-31",
+          169.82
+        ],
+        [
+          "2020-02-29",
+          159.23
+        ],
+        [
+          "2020-03-31",
+          151.26
+        ],
+        [
+          "2020-04-30",
+          171.6
+        ],
+        [
+          "2020-05-31",
+          179.07
+        ],
+        [
+          "2020-06-30",
+          176.14
+        ],
+        [
+          "2020-07-31",
+          185.32
+        ],
+        [
+          "2020-08-31",
+          189.69
+        ],
+        [
+          "2020-09-30",
+          187.11
+        ],
+        [
+          "2020-10-31",
+          181.74
+        ],
+        [
+          "2020-11-30",
+          197.8
+        ],
+        [
+          "2020-12-31",
+          206.03
+        ],
+        [
+          "2021-01-31",
+          210.91
+        ],
+        [
+          "2021-02-28",
+          206.85
+        ],
+        [
+          "2021-03-31",
+          211.24
+        ],
+        [
+          "2021-04-30",
+          220.0
+        ],
+        [
+          "2021-05-31",
+          221.62
+        ],
+        [
+          "2021-06-30",
+          228.87
+        ],
+        [
+          "2021-07-31",
+          237.48
+        ],
+        [
+          "2021-08-31",
+          243.1
+        ],
+        [
+          "2021-09-30",
+          229.72
+        ],
+        [
+          "2021-10-31",
+          240.22
+        ],
+        [
+          "2021-11-30",
+          230.67
+        ],
+        [
+          "2021-12-31",
+          248.4
+        ],
+        [
+          "2022-01-31",
+          228.75
+        ],
+        [
+          "2022-02-28",
+          226.51
+        ],
+        [
+          "2022-03-31",
+          237.86
+        ],
+        [
+          "2022-04-30",
+          223.93
+        ],
+        [
+          "2022-05-31",
+          226.08
+        ],
+        [
+          "2022-06-30",
+          220.95
+        ],
+        [
+          "2022-07-31",
+          229.67
+        ],
+        [
+          "2022-08-31",
+          217.26
+        ],
+        [
+          "2022-09-30",
+          210.65
+        ],
+        [
+          "2022-10-31",
+          228.86
+        ],
+        [
+          "2022-11-30",
+          239.52
+        ],
+        [
+          "2022-12-31",
+          234.48
+        ],
+        [
+          "2023-01-31",
+          232.62
+        ],
+        [
+          "2023-02-28",
+          221.92
+        ],
+        [
+          "2023-03-31",
+          226.16
+        ],
+        [
+          "2023-04-30",
+          233.06
+        ],
+        [
+          "2023-05-31",
+          223.69
+        ],
+        [
+          "2023-06-30",
+          233.03
+        ],
+        [
+          "2023-07-31",
+          235.43
+        ],
+        [
+          "2023-08-31",
+          232.67
+        ],
+        [
+          "2023-09-30",
+          224.61
+        ],
+        [
+          "2023-10-31",
+          215.73
+        ],
+        [
+          "2023-11-30",
+          227.96
+        ],
+        [
+          "2023-12-31",
+          240.39
+        ],
+        [
+          "2024-01-31",
+          246.09
+        ],
+        [
+          "2024-02-29",
+          254.5
+        ],
+        [
+          "2024-03-31",
+          260.2
+        ],
+        [
+          "2024-04-30",
+          246.27
+        ],
+        [
+          "2024-05-31",
+          252.43
+        ],
+        [
+          "2024-06-30",
+          256.78
+        ],
+        [
+          "2024-07-31",
+          265.15
+        ],
+        [
+          "2024-08-31",
+          278.11
+        ],
+        [
+          "2024-09-30",
+          273.55
+        ],
+        [
+          "2024-10-31",
+          261.41
+        ],
+        [
+          "2024-11-30",
+          263.89
+        ],
+        [
+          "2024-12-31",
+          246.79
+        ],
+        [
+          "2025-01-31",
+          263.41
+        ],
+        [
+          "2025-02-28",
+          264.46
+        ],
+        [
+          "2025-03-31",
+          258.43
+        ],
+        [
+          "2025-04-30",
+          249.8
+        ],
+        [
+          "2025-05-31",
+          237.95
+        ],
+        [
+          "2025-06-30",
+          243.38
+        ],
+        [
+          "2025-07-31",
+          236.65
+        ],
+        [
+          "2025-08-31",
+          249.98
+        ],
+        [
+          "2025-09-30",
+          255.48
+        ],
+        [
+          "2025-10-31",
+          266.09
+        ],
+        [
+          "2025-11-30",
+          289.86
+        ],
+        [
+          "2025-12-31",
+          284.94
+        ],
+        [
+          "2026-01-31",
+          284.37
+        ],
+        [
+          "2026-02-28",
+          292.52
+        ],
+        [
+          "2026-03-31",
+          270.57
+        ],
+        [
+          "2026-04-30",
+          270.7
+        ],
+        [
+          "2026-05-31",
+          277.8
+        ],
+        [
+          "2026-06-30",
+          298.11
+        ],
+        [
+          "2026-07-31",
+          303.89
+        ],
+        [
+          "2026-08-31",
+          318.99
+        ],
+        [
+          "2026-09-30",
+          316.08
+        ],
+        [
+          "2026-10-31",
+          342.33
+        ],
+        [
+          "2026-11-30",
+          331.29
+        ]
+      ],
+      "description": "The fund employs an indexing investment approach designed to track the performance of the index, an index made up of stocks of large, mid-size, and small U.S. companies within the health care sector, as classified under the GICS. The Advisor attempts to replicate the target index by seeking to invest all, or substantially all, of its assets in the stocks that make up the index, in order to...",
+      "inception": "2004-01-26",
+      "expense_ratio": null,
+      "avg_volume": 245062
     },
     "JNK": {
       "name": "State Street SPDR Bloomberg High Yield Bond ETF",
       "lev": false,
       "category": "bond",
       "category_label": "Bond ETFs",
-      "cagr": 4.45,
+      "cagr": 4.32,
       "stddev": 8.15,
-      "yield": 6.87,
+      "yield": 6.9,
       "ret22": -12.14,
       "prices": [
         [
@@ -14993,22 +15493,22 @@
         ],
         [
           "2026-11-30",
-          92.3
+          91.98
         ]
       ],
-      "description": "The fund generally invests substantially all, but at least 80%, of its total assets in the securities comprising the index and in securities that the Adviser determines have economic characteristics that are substantially identical to the economic characteristics of the securities that comprise the index. The index is designed to measure the performance of publicly issued U.S. dollar...",
+      "description": "Under normal market conditions, the fund will invest at least 80% of its net assets (plus the amount of borrowings for investment purposes) in the securities comprising the index it seeks to track. The index is designed to measure the performance of publicly issued U.S. dollar denominated high yield corporate bonds with above-average liquidity. -null-.",
       "inception": "2007-11-28",
       "expense_ratio": null,
-      "avg_volume": 3699729
+      "avg_volume": 3778996
     },
     "HYG": {
       "name": "iShares iBoxx $ High Yield Corporate Bond ETF",
       "lev": false,
       "category": "bond",
       "category_label": "Bond ETFs",
-      "cagr": 4.43,
+      "cagr": 4.3,
       "stddev": 8.14,
-      "yield": 6.1,
+      "yield": 6.12,
       "ret22": -10.94,
       "prices": [
         [
@@ -15493,22 +15993,22 @@
         ],
         [
           "2026-11-30",
-          76.93
+          76.68
         ]
       ],
       "description": "The underlying index is a rules-based index consisting of U.S. dollar-denominated, high yield corporate bonds for sale in the U.S. The fund will invest at least 80% of its assets in the component securities of the underlying index, and the fund will invest at least 90% of its assets in fixed income securities of the types included in the underlying index that the advisor believes will help the...",
       "inception": "2007-04-04",
       "expense_ratio": null,
-      "avg_volume": 48493531
+      "avg_volume": 49224492
     },
     "EMB": {
       "name": "iShares J.P. Morgan USD Emerging Markets Bond ETF",
       "lev": false,
       "category": "bond",
       "category_label": "Bond ETFs",
-      "cagr": 2.95,
+      "cagr": 2.97,
       "stddev": 9.86,
-      "yield": 5.41,
+      "yield": 5.43,
       "ret22": -17.81,
       "prices": [
         [
@@ -15633,7 +16133,7 @@
         ],
         [
           "2019-05-31",
-          76.93
+          76.94
         ],
         [
           "2019-06-30",
@@ -15993,22 +16493,22 @@
         ],
         [
           "2026-11-30",
-          91.02
+          90.57
         ]
       ],
       "description": "The fund will invest at least 80% of its assets in the component securities of the underlying index and will invest at least 90% of its assets in fixed income securities of the types included in the underlying index. The index is a broad, diverse U.S. dollar-denominated emerging markets debt benchmark that tracks the total return of actively traded external debt instruments in emerging market...",
       "inception": "2007-12-17",
       "expense_ratio": null,
-      "avg_volume": 7789429
+      "avg_volume": 7954045
     },
     "VCIT": {
       "name": "Vanguard Intermediate-Term Corporate Bond Index Fund ETF Shares",
       "lev": false,
       "category": "bond",
       "category_label": "Bond ETFs",
-      "cagr": 2.73,
-      "stddev": 6.31,
-      "yield": 5.08,
+      "cagr": 2.92,
+      "stddev": 6.3,
+      "yield": 5.05,
       "ret22": -13.43,
       "prices": [
         [
@@ -16141,7 +16641,7 @@
         ],
         [
           "2019-07-31",
-          68.36
+          68.35
         ],
         [
           "2019-08-31",
@@ -16493,22 +16993,22 @@
         ],
         [
           "2026-11-30",
-          78.82
+          79.33
         ]
       ],
       "description": "The fund employs an indexing investment approach designed to track the performance of the Bloomberg U.S. 5-10 Year Corporate Bond Index. This index includes U.S. dollar-denominated, investment-grade, fixed-rate, taxable securities issued by U.S. and non-U.S. industrial, utility, and financial companies, with maturities between 5 and 10 years. Under normal circumstances, at least 80% of the...",
       "inception": "2009-11-19",
       "expense_ratio": null,
-      "avg_volume": 11265909
+      "avg_volume": 11330764
     },
     "VCSH": {
       "name": "Vanguard Short-Term Corporate Bond Index Fund ETF Shares",
       "lev": false,
       "category": "bond",
       "category_label": "Bond ETFs",
-      "cagr": 2.7,
-      "stddev": 3.37,
-      "yield": 4.57,
+      "cagr": 2.76,
+      "stddev": 3.36,
+      "yield": 4.55,
       "ret22": -5.48,
       "prices": [
         [
@@ -16993,22 +17493,22 @@
         ],
         [
           "2026-11-30",
-          77.37
+          77.64
         ]
       ],
       "description": "The fund manager employs an indexing investment approach designed to track the performance of the Bloomberg U.S. 1-5 Year Corporate Bond Index, which includes U.S. dollar-denominated, investment-grade, fixed-rate, taxable debt securities issued by U.S. and non-U.S. industrial, utility, and financial companies, all with maturities between 1 and 5 years. Under normal circumstances, it invests at...",
       "inception": "2009-11-19",
       "expense_ratio": null,
-      "avg_volume": 5940381
+      "avg_volume": 5881562
     },
     "SCHP": {
       "name": "Schwab U.S. TIPS ETF",
       "lev": false,
       "category": "bond",
       "category_label": "Bond ETFs",
-      "cagr": 2.4,
-      "stddev": 5.58,
-      "yield": 4.94,
+      "cagr": 2.52,
+      "stddev": 5.59,
+      "yield": 4.9,
       "ret22": -11.55,
       "prices": [
         [
@@ -17077,7 +17577,7 @@
         ],
         [
           "2018-03-31",
-          20.22
+          20.23
         ],
         [
           "2018-04-30",
@@ -17493,522 +17993,22 @@
         ],
         [
           "2026-11-30",
-          25.22
+          25.42
         ]
       ],
       "description": "The fund will invest at least 90% of its net assets in securities included in the index. The index includes all publicly-issued U.S. Treasury Inflation-Protected Securities (TIPS) that have at least one year remaining to maturity, are rated investment grade and have $500 million or more of outstanding face value. The TIPS in the index must be denominated in U.S. dollars and must be fixed-rate...",
       "inception": "2010-08-05",
       "expense_ratio": null,
-      "avg_volume": 6764673
-    },
-    "TIP": {
-      "name": "iShares TIPS Bond ETF",
-      "lev": false,
-      "category": "bond",
-      "category_label": "Bond ETFs",
-      "cagr": 2.28,
-      "stddev": 5.73,
-      "yield": 4.3,
-      "ret22": -11.76,
-      "prices": [
-        [
-          "2016-11-30",
-          83.41
-        ],
-        [
-          "2016-12-31",
-          83.38
-        ],
-        [
-          "2017-01-31",
-          84.13
-        ],
-        [
-          "2017-02-28",
-          84.47
-        ],
-        [
-          "2017-03-31",
-          84.47
-        ],
-        [
-          "2017-04-30",
-          84.85
-        ],
-        [
-          "2017-05-31",
-          84.82
-        ],
-        [
-          "2017-06-30",
-          84.08
-        ],
-        [
-          "2017-07-31",
-          84.47
-        ],
-        [
-          "2017-08-31",
-          85.35
-        ],
-        [
-          "2017-09-30",
-          84.75
-        ],
-        [
-          "2017-10-31",
-          84.95
-        ],
-        [
-          "2017-11-30",
-          85.02
-        ],
-        [
-          "2017-12-31",
-          85.82
-        ],
-        [
-          "2018-01-31",
-          85.09
-        ],
-        [
-          "2018-02-28",
-          84.21
-        ],
-        [
-          "2018-03-31",
-          85.06
-        ],
-        [
-          "2018-04-30",
-          84.95
-        ],
-        [
-          "2018-05-31",
-          85.22
-        ],
-        [
-          "2018-06-30",
-          85.78
-        ],
-        [
-          "2018-07-31",
-          85.32
-        ],
-        [
-          "2018-08-31",
-          85.87
-        ],
-        [
-          "2018-09-30",
-          85.04
-        ],
-        [
-          "2018-10-31",
-          83.74
-        ],
-        [
-          "2018-11-30",
-          84.15
-        ],
-        [
-          "2018-12-31",
-          84.59
-        ],
-        [
-          "2019-01-31",
-          85.8
-        ],
-        [
-          "2019-02-28",
-          85.65
-        ],
-        [
-          "2019-03-31",
-          87.34
-        ],
-        [
-          "2019-04-30",
-          87.54
-        ],
-        [
-          "2019-05-31",
-          89.07
-        ],
-        [
-          "2019-06-30",
-          89.74
-        ],
-        [
-          "2019-07-31",
-          90.02
-        ],
-        [
-          "2019-08-31",
-          92.12
-        ],
-        [
-          "2019-09-30",
-          91.1
-        ],
-        [
-          "2019-10-31",
-          91.07
-        ],
-        [
-          "2019-11-30",
-          91.34
-        ],
-        [
-          "2019-12-31",
-          91.66
-        ],
-        [
-          "2020-01-31",
-          93.61
-        ],
-        [
-          "2020-02-29",
-          94.48
-        ],
-        [
-          "2020-03-31",
-          92.82
-        ],
-        [
-          "2020-04-30",
-          95.63
-        ],
-        [
-          "2020-05-31",
-          96.25
-        ],
-        [
-          "2020-06-30",
-          97.2
-        ],
-        [
-          "2020-07-31",
-          99.46
-        ],
-        [
-          "2020-08-31",
-          100.34
-        ],
-        [
-          "2020-09-30",
-          99.96
-        ],
-        [
-          "2020-10-31",
-          99.29
-        ],
-        [
-          "2020-11-30",
-          100.49
-        ],
-        [
-          "2020-12-31",
-          101.59
-        ],
-        [
-          "2021-01-31",
-          101.86
-        ],
-        [
-          "2021-02-28",
-          100.14
-        ],
-        [
-          "2021-03-31",
-          99.88
-        ],
-        [
-          "2021-04-30",
-          101.31
-        ],
-        [
-          "2021-05-31",
-          102.34
-        ],
-        [
-          "2021-06-30",
-          103.09
-        ],
-        [
-          "2021-07-31",
-          105.84
-        ],
-        [
-          "2021-08-31",
-          105.67
-        ],
-        [
-          "2021-09-30",
-          104.85
-        ],
-        [
-          "2021-10-31",
-          106.01
-        ],
-        [
-          "2021-11-30",
-          106.93
-        ],
-        [
-          "2021-12-31",
-          107.36
-        ],
-        [
-          "2022-01-31",
-          105.15
-        ],
-        [
-          "2022-02-28",
-          106.05
-        ],
-        [
-          "2022-03-31",
-          104.06
-        ],
-        [
-          "2022-04-30",
-          101.79
-        ],
-        [
-          "2022-05-31",
-          100.78
-        ],
-        [
-          "2022-06-30",
-          97.64
-        ],
-        [
-          "2022-07-31",
-          101.84
-        ],
-        [
-          "2022-08-31",
-          99.09
-        ],
-        [
-          "2022-09-30",
-          92.42
-        ],
-        [
-          "2022-10-31",
-          93.73
-        ],
-        [
-          "2022-11-30",
-          95.45
-        ],
-        [
-          "2022-12-31",
-          94.19
-        ],
-        [
-          "2023-01-31",
-          96.15
-        ],
-        [
-          "2023-02-28",
-          94.85
-        ],
-        [
-          "2023-03-31",
-          97.56
-        ],
-        [
-          "2023-04-30",
-          97.61
-        ],
-        [
-          "2023-05-31",
-          96.45
-        ],
-        [
-          "2023-06-30",
-          96.12
-        ],
-        [
-          "2023-07-31",
-          96.16
-        ],
-        [
-          "2023-08-31",
-          95.38
-        ],
-        [
-          "2023-09-30",
-          93.55
-        ],
-        [
-          "2023-10-31",
-          92.87
-        ],
-        [
-          "2023-11-30",
-          95.45
-        ],
-        [
-          "2023-12-31",
-          97.78
-        ],
-        [
-          "2024-01-31",
-          98.1
-        ],
-        [
-          "2024-02-29",
-          97.08
-        ],
-        [
-          "2024-03-31",
-          97.7
-        ],
-        [
-          "2024-04-30",
-          96.05
-        ],
-        [
-          "2024-05-31",
-          97.76
-        ],
-        [
-          "2024-06-30",
-          98.5
-        ],
-        [
-          "2024-07-31",
-          100.2
-        ],
-        [
-          "2024-08-31",
-          101.0
-        ],
-        [
-          "2024-09-30",
-          102.52
-        ],
-        [
-          "2024-10-31",
-          100.62
-        ],
-        [
-          "2024-11-30",
-          101.13
-        ],
-        [
-          "2024-12-31",
-          99.39
-        ],
-        [
-          "2025-01-31",
-          100.75
-        ],
-        [
-          "2025-02-28",
-          102.93
-        ],
-        [
-          "2025-03-31",
-          103.63
-        ],
-        [
-          "2025-04-30",
-          103.76
-        ],
-        [
-          "2025-05-31",
-          103.1
-        ],
-        [
-          "2025-06-30",
-          104.07
-        ],
-        [
-          "2025-07-31",
-          104.08
-        ],
-        [
-          "2025-08-31",
-          105.76
-        ],
-        [
-          "2025-09-30",
-          106.2
-        ],
-        [
-          "2025-10-31",
-          106.54
-        ],
-        [
-          "2025-11-30",
-          106.78
-        ],
-        [
-          "2025-12-31",
-          106.12
-        ],
-        [
-          "2026-01-31",
-          106.67
-        ],
-        [
-          "2026-02-28",
-          108.02
-        ],
-        [
-          "2026-03-31",
-          106.55
-        ],
-        [
-          "2026-04-30",
-          107.71
-        ],
-        [
-          "2026-05-31",
-          107.91
-        ],
-        [
-          "2026-06-30",
-          107.42
-        ],
-        [
-          "2026-07-31",
-          106.68
-        ],
-        [
-          "2026-08-31",
-          106.66
-        ],
-        [
-          "2026-09-30",
-          103.88
-        ],
-        [
-          "2026-10-31",
-          106.53
-        ],
-        [
-          "2026-11-30",
-          104.75
-        ]
-      ],
-      "description": "The index tracks the performance of inflation-protected public obligations of the U.S. Treasury, commonly known as \u201cTIPS,\u201d that have a remaining maturity of more than one year. The fund will invest at least 80% of its assets in the component securities of the index, and it will invest at least 90% of its assets in U.S. Treasury securities that BFA believes will help the fund track the index.",
-      "inception": "2003-12-04",
-      "expense_ratio": null,
-      "avg_volume": 2043698
+      "avg_volume": 7258918
     },
     "LQD": {
       "name": "iShares iBoxx $ Investment Grade Corporate Bond ETF",
       "lev": false,
       "category": "bond",
       "category_label": "Bond ETFs",
-      "cagr": 2.25,
-      "stddev": 8.71,
-      "yield": 4.9,
+      "cagr": 2.45,
+      "stddev": 8.7,
+      "yield": 4.86,
       "ret22": -17.04,
       "prices": [
         [
@@ -18493,21 +18493,521 @@
         ],
         [
           "2026-11-30",
-          103.07
+          103.81
         ]
       ],
       "description": "The fund will invest at least 80% of its assets in the component securities of the underlying index, and it will invest at least 90% of its assets in fixed income securities of the types included in the underlying index that the advisor believes will help the fund track the underlying index. The underlying index is designed to provide a broad representation of the U.S. dollar-denominated...",
       "inception": "2002-07-22",
       "expense_ratio": null,
-      "avg_volume": 31801870
+      "avg_volume": 31593576
+    },
+    "TIP": {
+      "name": "iShares TIPS Bond ETF",
+      "lev": false,
+      "category": "bond",
+      "category_label": "Bond ETFs",
+      "cagr": 2.4,
+      "stddev": 5.73,
+      "yield": 4.27,
+      "ret22": -11.76,
+      "prices": [
+        [
+          "2016-11-30",
+          83.41
+        ],
+        [
+          "2016-12-31",
+          83.38
+        ],
+        [
+          "2017-01-31",
+          84.13
+        ],
+        [
+          "2017-02-28",
+          84.47
+        ],
+        [
+          "2017-03-31",
+          84.47
+        ],
+        [
+          "2017-04-30",
+          84.85
+        ],
+        [
+          "2017-05-31",
+          84.82
+        ],
+        [
+          "2017-06-30",
+          84.08
+        ],
+        [
+          "2017-07-31",
+          84.47
+        ],
+        [
+          "2017-08-31",
+          85.35
+        ],
+        [
+          "2017-09-30",
+          84.75
+        ],
+        [
+          "2017-10-31",
+          84.95
+        ],
+        [
+          "2017-11-30",
+          85.02
+        ],
+        [
+          "2017-12-31",
+          85.82
+        ],
+        [
+          "2018-01-31",
+          85.09
+        ],
+        [
+          "2018-02-28",
+          84.21
+        ],
+        [
+          "2018-03-31",
+          85.06
+        ],
+        [
+          "2018-04-30",
+          84.95
+        ],
+        [
+          "2018-05-31",
+          85.22
+        ],
+        [
+          "2018-06-30",
+          85.78
+        ],
+        [
+          "2018-07-31",
+          85.32
+        ],
+        [
+          "2018-08-31",
+          85.87
+        ],
+        [
+          "2018-09-30",
+          85.04
+        ],
+        [
+          "2018-10-31",
+          83.74
+        ],
+        [
+          "2018-11-30",
+          84.15
+        ],
+        [
+          "2018-12-31",
+          84.59
+        ],
+        [
+          "2019-01-31",
+          85.8
+        ],
+        [
+          "2019-02-28",
+          85.65
+        ],
+        [
+          "2019-03-31",
+          87.34
+        ],
+        [
+          "2019-04-30",
+          87.54
+        ],
+        [
+          "2019-05-31",
+          89.07
+        ],
+        [
+          "2019-06-30",
+          89.74
+        ],
+        [
+          "2019-07-31",
+          90.02
+        ],
+        [
+          "2019-08-31",
+          92.12
+        ],
+        [
+          "2019-09-30",
+          91.1
+        ],
+        [
+          "2019-10-31",
+          91.07
+        ],
+        [
+          "2019-11-30",
+          91.34
+        ],
+        [
+          "2019-12-31",
+          91.66
+        ],
+        [
+          "2020-01-31",
+          93.61
+        ],
+        [
+          "2020-02-29",
+          94.48
+        ],
+        [
+          "2020-03-31",
+          92.82
+        ],
+        [
+          "2020-04-30",
+          95.63
+        ],
+        [
+          "2020-05-31",
+          96.25
+        ],
+        [
+          "2020-06-30",
+          97.2
+        ],
+        [
+          "2020-07-31",
+          99.46
+        ],
+        [
+          "2020-08-31",
+          100.34
+        ],
+        [
+          "2020-09-30",
+          99.96
+        ],
+        [
+          "2020-10-31",
+          99.29
+        ],
+        [
+          "2020-11-30",
+          100.49
+        ],
+        [
+          "2020-12-31",
+          101.59
+        ],
+        [
+          "2021-01-31",
+          101.86
+        ],
+        [
+          "2021-02-28",
+          100.14
+        ],
+        [
+          "2021-03-31",
+          99.88
+        ],
+        [
+          "2021-04-30",
+          101.31
+        ],
+        [
+          "2021-05-31",
+          102.34
+        ],
+        [
+          "2021-06-30",
+          103.09
+        ],
+        [
+          "2021-07-31",
+          105.84
+        ],
+        [
+          "2021-08-31",
+          105.67
+        ],
+        [
+          "2021-09-30",
+          104.85
+        ],
+        [
+          "2021-10-31",
+          106.01
+        ],
+        [
+          "2021-11-30",
+          106.93
+        ],
+        [
+          "2021-12-31",
+          107.36
+        ],
+        [
+          "2022-01-31",
+          105.15
+        ],
+        [
+          "2022-02-28",
+          106.05
+        ],
+        [
+          "2022-03-31",
+          104.06
+        ],
+        [
+          "2022-04-30",
+          101.79
+        ],
+        [
+          "2022-05-31",
+          100.78
+        ],
+        [
+          "2022-06-30",
+          97.64
+        ],
+        [
+          "2022-07-31",
+          101.84
+        ],
+        [
+          "2022-08-31",
+          99.09
+        ],
+        [
+          "2022-09-30",
+          92.42
+        ],
+        [
+          "2022-10-31",
+          93.73
+        ],
+        [
+          "2022-11-30",
+          95.45
+        ],
+        [
+          "2022-12-31",
+          94.19
+        ],
+        [
+          "2023-01-31",
+          96.15
+        ],
+        [
+          "2023-02-28",
+          94.85
+        ],
+        [
+          "2023-03-31",
+          97.56
+        ],
+        [
+          "2023-04-30",
+          97.61
+        ],
+        [
+          "2023-05-31",
+          96.45
+        ],
+        [
+          "2023-06-30",
+          96.12
+        ],
+        [
+          "2023-07-31",
+          96.16
+        ],
+        [
+          "2023-08-31",
+          95.38
+        ],
+        [
+          "2023-09-30",
+          93.55
+        ],
+        [
+          "2023-10-31",
+          92.87
+        ],
+        [
+          "2023-11-30",
+          95.45
+        ],
+        [
+          "2023-12-31",
+          97.78
+        ],
+        [
+          "2024-01-31",
+          98.1
+        ],
+        [
+          "2024-02-29",
+          97.08
+        ],
+        [
+          "2024-03-31",
+          97.7
+        ],
+        [
+          "2024-04-30",
+          96.05
+        ],
+        [
+          "2024-05-31",
+          97.76
+        ],
+        [
+          "2024-06-30",
+          98.5
+        ],
+        [
+          "2024-07-31",
+          100.2
+        ],
+        [
+          "2024-08-31",
+          101.0
+        ],
+        [
+          "2024-09-30",
+          102.52
+        ],
+        [
+          "2024-10-31",
+          100.62
+        ],
+        [
+          "2024-11-30",
+          101.13
+        ],
+        [
+          "2024-12-31",
+          99.39
+        ],
+        [
+          "2025-01-31",
+          100.75
+        ],
+        [
+          "2025-02-28",
+          102.93
+        ],
+        [
+          "2025-03-31",
+          103.63
+        ],
+        [
+          "2025-04-30",
+          103.76
+        ],
+        [
+          "2025-05-31",
+          103.1
+        ],
+        [
+          "2025-06-30",
+          104.07
+        ],
+        [
+          "2025-07-31",
+          104.08
+        ],
+        [
+          "2025-08-31",
+          105.76
+        ],
+        [
+          "2025-09-30",
+          106.2
+        ],
+        [
+          "2025-10-31",
+          106.54
+        ],
+        [
+          "2025-11-30",
+          106.78
+        ],
+        [
+          "2025-12-31",
+          106.12
+        ],
+        [
+          "2026-01-31",
+          106.67
+        ],
+        [
+          "2026-02-28",
+          108.02
+        ],
+        [
+          "2026-03-31",
+          106.55
+        ],
+        [
+          "2026-04-30",
+          107.71
+        ],
+        [
+          "2026-05-31",
+          107.91
+        ],
+        [
+          "2026-06-30",
+          107.42
+        ],
+        [
+          "2026-07-31",
+          106.68
+        ],
+        [
+          "2026-08-31",
+          106.66
+        ],
+        [
+          "2026-09-30",
+          103.88
+        ],
+        [
+          "2026-10-31",
+          106.53
+        ],
+        [
+          "2026-11-30",
+          105.57
+        ]
+      ],
+      "description": "The index tracks the performance of inflation-protected public obligations of the U.S. Treasury, commonly known as \u201cTIPS,\u201d that have a remaining maturity of more than one year. The fund will invest at least 80% of its assets in the component securities of the index, and it will invest at least 90% of its assets in U.S. Treasury securities that BFA believes will help the fund track the index.",
+      "inception": "2003-12-04",
+      "expense_ratio": null,
+      "avg_volume": 2092940
     },
     "BNO": {
       "name": "United States Brent Oil Fund, LP",
       "lev": false,
       "category": "gold-commodity",
       "category_label": "Gold/commodity",
-      "cagr": 16.12,
-      "stddev": 37.38,
+      "cagr": 15.08,
+      "stddev": 37.37,
       "yield": 0.0,
       "ret22": 33.65,
       "prices": [
@@ -18993,21 +19493,21 @@
         ],
         [
           "2026-11-30",
-          59.28
+          57.04
         ]
       ],
       "description": "The Benchmark Futures Contract is the futures contract on Brent crude oil as traded on the Ice Futures Europe Exchange that is the near month contract to expire, except when the near month contract is within two weeks of expiration, in which case it will be measured by the futures contract that is the next month contract to expire.",
       "inception": "2010-06-02",
       "expense_ratio": null,
-      "avg_volume": 1893445
+      "avg_volume": 1842356
     },
     "SGOL": {
       "name": "abrdn Physical Gold Shares ETF",
       "lev": false,
       "category": "gold-commodity",
       "category_label": "Gold/commodity",
-      "cagr": 11.96,
-      "stddev": 16.53,
+      "cagr": 11.66,
+      "stddev": 16.64,
       "yield": 0.0,
       "ret22": 0.98,
       "prices": [
@@ -19493,21 +19993,21 @@
         ],
         [
           "2026-11-30",
-          36.85
+          34.8
         ]
       ],
       "description": "The Shares are intended to constitute a simple and cost-effective means of making an investment similar to an investment in gold. An investment in physical gold requires expensive and sometimes complicated arrangements in connection with the assay, transportation, warehousing and insurance of the metal. Although the Shares are not the exact equivalent of an investment in gold, they provide...",
       "inception": "2009-09-09",
       "expense_ratio": null,
-      "avg_volume": 2624846
+      "avg_volume": 2791128
     },
     "IAU": {
       "name": "iShares Gold Trust",
       "lev": false,
       "category": "gold-commodity",
       "category_label": "Gold/commodity",
-      "cagr": 11.93,
-      "stddev": 16.51,
+      "cagr": 11.64,
+      "stddev": 16.62,
       "yield": 0.0,
       "ret22": 0.96,
       "prices": [
@@ -19993,21 +20493,21 @@
         ],
         [
           "2026-11-30",
-          72.79
+          68.71
         ]
       ],
       "description": "The Trust seeks to reflect such performance before payment of the Trust\u2019s expenses and liabilities. It is not actively managed. The Trust does not engage in any activities designed to obtain a profit from, or to ameliorate losses caused by, changes in the price of gold. The advisor intends to constitute a simple and cost-effective means of making an investment similar to an investment in gold....",
       "inception": "2005-01-21",
       "expense_ratio": null,
-      "avg_volume": 5118992
+      "avg_volume": 5209507
     },
     "GLD": {
       "name": "SPDR Gold Shares",
       "lev": false,
       "category": "gold-commodity",
       "category_label": "Gold/commodity",
-      "cagr": 11.76,
-      "stddev": 16.57,
+      "cagr": 11.46,
+      "stddev": 16.68,
       "yield": 0.0,
       "ret22": 0.78,
       "prices": [
@@ -20493,22 +20993,22 @@
         ],
         [
           "2026-11-30",
-          354.99
+          335.08
         ]
       ],
       "description": "The Trust holds gold bars and from time to time, issues Baskets in exchange for deposits of gold and distributes gold in connection with redemptions of Baskets. The investment objective of the Trust is for the Shares to reflect the performance of the price of gold bullion, less the Trust\u2019s expenses. The Sponsor believes that, for many investors, the Shares represent a cost-effective investment...",
       "inception": "2004-11-18",
       "expense_ratio": null,
-      "avg_volume": 9762368
+      "avg_volume": 9753629
     },
     "DGRO": {
       "name": "iShares Core Dividend Growth ETF",
       "lev": false,
       "category": "dividend",
       "category_label": "Dividend-focused",
-      "cagr": 13.86,
-      "stddev": 16.6,
-      "yield": 1.82,
+      "cagr": 13.24,
+      "stddev": 16.63,
+      "yield": 1.9,
       "ret22": -8.02,
       "prices": [
         [
@@ -20993,22 +21493,22 @@
         ],
         [
           "2026-11-30",
-          81.96
+          78.48
         ]
       ],
       "description": "The fund seeks to track the investment results of the Morningstar\u00ae U.S. Dividend Growth IndexSM (the \u201cunderlying index\u201d), which is a dividend dollar-weighted index that seeks to measure the performance of U.S. companies selected based on a consistent history of growing dividends. The underlying index may include large-, mid- and small-capitalization companies.",
       "inception": "2014-06-10",
       "expense_ratio": null,
-      "avg_volume": 1492687
+      "avg_volume": 1570864
     },
     "VIG": {
       "name": "Vanguard Dividend Appreciation Index Fund ETF Shares",
       "lev": false,
       "category": "dividend",
       "category_label": "Dividend-focused",
-      "cagr": 13.69,
-      "stddev": 16.06,
-      "yield": 1.45,
+      "cagr": 13.1,
+      "stddev": 16.11,
+      "yield": 1.52,
       "ret22": -9.5,
       "prices": [
         [
@@ -21493,22 +21993,22 @@
         ],
         [
           "2026-11-30",
-          251.11
+          240.64
         ]
       ],
       "description": "The adviser employs an indexing investment approach designed to track the performance of the index, which consists of common stocks of companies that have a record of increasing dividends over time. The adviser attempts to replicate the target index by investing all, or substantially all, of its assets in the stocks that make up the index, holding each stock in approximately the same...",
       "inception": "2006-04-21",
       "expense_ratio": null,
-      "avg_volume": 1065040
+      "avg_volume": 1100679
     },
     "SCHD": {
       "name": "Schwab U.S. Dividend Equity ETF",
       "lev": false,
       "category": "dividend",
       "category_label": "Dividend-focused",
-      "cagr": 13.56,
-      "stddev": 16.78,
-      "yield": 2.92,
+      "cagr": 12.85,
+      "stddev": 16.81,
+      "yield": 3.07,
       "ret22": -3.23,
       "prices": [
         [
@@ -21993,22 +22493,22 @@
         ],
         [
           "2026-11-30",
-          36.1
+          34.31
         ]
       ],
       "description": "To pursue its goal, the fund generally invests in stocks that are included in the index. The index is designed to measure the performance of high dividend yielding stocks issued by U.S. companies that have a record of consistently paying dividends, selected for fundamental strength relative to their peers, based on financial ratios. The fund will invest at least 90% of its net assets in these...",
       "inception": "2011-10-20",
       "expense_ratio": null,
-      "avg_volume": 23685557
+      "avg_volume": 24111617
     },
     "DLN": {
       "name": "WisdomTree U.S. LargeCap Dividend Fund",
       "lev": false,
       "category": "dividend",
       "category_label": "Dividend-focused",
-      "cagr": 12.71,
-      "stddev": 16.13,
-      "yield": 1.74,
+      "cagr": 12.13,
+      "stddev": 16.18,
+      "yield": 1.81,
       "ret22": -4.1,
       "prices": [
         [
@@ -22121,7 +22621,7 @@
         ],
         [
           "2019-02-28",
-          38.88
+          38.89
         ],
         [
           "2019-03-31",
@@ -22493,22 +22993,22 @@
         ],
         [
           "2026-11-30",
-          100.22
+          96.37
         ]
       ],
       "description": "The fund invests, at least 80% of its net assets, plus any borrowings for investment purposes, in constituents of the index that have economic characteristics that are substantially similar to the economic characteristics of such constituents. The index is dividend weighted annually to reflect the proportionate share of the aggregate cash dividends each constituent company is projected to pay...",
       "inception": "2006-06-16",
       "expense_ratio": null,
-      "avg_volume": 128443
+      "avg_volume": 133260
     },
     "FDL": {
       "name": "First Trust Morningstar Dividend Leaders Index Fund",
       "lev": false,
       "category": "dividend",
       "category_label": "Dividend-focused",
-      "cagr": 11.95,
-      "stddev": 17.22,
-      "yield": 3.57,
+      "cagr": 11.33,
+      "stddev": 17.23,
+      "yield": 3.72,
       "ret22": 6.12,
       "prices": [
         [
@@ -22993,22 +23493,22 @@
         ],
         [
           "2026-11-30",
-          54.34
+          52.04
         ]
       ],
       "description": "The fund will normally invest at least 90% of its net assets (including investment borrowings) in the securities that comprise the index. The index is designed to measure the performance of the 100 highest-yielding stocks that have a consistent record of dividend payment and have the ability to sustain their dividend payments. It is non-diversified.",
       "inception": "2006-03-09",
       "expense_ratio": null,
-      "avg_volume": 704939
+      "avg_volume": 712768
     },
     "VYM": {
       "name": "Vanguard High Dividend Yield Index Fund ETF Shares",
       "lev": false,
       "category": "dividend",
       "category_label": "Dividend-focused",
-      "cagr": 11.73,
-      "stddev": 16.32,
-      "yield": 2.24,
+      "cagr": 11.09,
+      "stddev": 16.36,
+      "yield": 2.35,
       "ret22": -0.9,
       "prices": [
         [
@@ -23493,22 +23993,22 @@
         ],
         [
           "2026-11-30",
-          164.04
+          156.7
         ]
       ],
       "description": "The fund employs an indexing investment approach designed to track the performance of the the Target Index, which consists of common stocks of companies that pay dividends that generally are higher than average (excluding real estate investment trusts (\u201cREITs\u201d)). Under normal circumstances, it invests at least 80% of its net assets, plus the amount of any borrowings for investment purposes, in...",
       "inception": "2006-11-10",
       "expense_ratio": null,
-      "avg_volume": 1120135
+      "avg_volume": 1155509
     },
     "NOBL": {
       "name": "ProShares S&P 500 Dividend Aristocrats ETF",
       "lev": false,
       "category": "dividend",
       "category_label": "Dividend-focused",
-      "cagr": 10.98,
-      "stddev": 16.69,
-      "yield": 1.92,
+      "cagr": 10.57,
+      "stddev": 16.71,
+      "yield": 1.97,
       "ret22": -6.01,
       "prices": [
         [
@@ -23993,522 +24493,522 @@
         ],
         [
           "2026-11-30",
-          61.15
+          59.43
         ]
       ],
       "description": "The fund invests in financial instruments that ProShare Advisors believes, in combination, should track the performance of the index. The index is designed to measure the performance of companies in the S&P 500 Index that have consistently increased dividends each year for at least 25 years. Under normal circumstances, it will invest at least 80% of its total assets in components of the index...",
       "inception": "2013-10-09",
       "expense_ratio": null,
-      "avg_volume": 1148956
+      "avg_volume": 1235321
     },
     "HDV": {
       "name": "iShares Core High Dividend ETF",
       "lev": false,
       "category": "dividend",
       "category_label": "Dividend-focused",
-      "cagr": 10.87,
-      "stddev": 15.82,
-      "yield": 3.08,
+      "cagr": 10.34,
+      "stddev": 15.84,
+      "yield": 3.43,
       "ret22": 6.84,
       "prices": [
         [
           "2016-11-30",
-          11.19
+          11.16
         ],
         [
           "2016-12-31",
-          11.55
+          11.52
         ],
         [
           "2017-01-31",
-          11.46
+          11.44
         ],
         [
           "2017-02-28",
-          11.89
+          11.87
         ],
         [
           "2017-03-31",
-          11.87
+          11.85
         ],
         [
           "2017-04-30",
-          11.79
+          11.76
         ],
         [
           "2017-05-31",
-          11.95
+          11.93
         ],
         [
           "2017-06-30",
-          11.87
+          11.85
         ],
         [
           "2017-07-31",
-          12.07
+          12.04
         ],
         [
           "2017-08-31",
-          12.02
+          11.99
         ],
         [
           "2017-09-30",
-          12.38
+          12.35
         ],
         [
           "2017-10-31",
-          12.34
+          12.31
         ],
         [
           "2017-11-30",
-          12.8
+          12.77
         ],
         [
           "2017-12-31",
-          13.09
-        ],
-        [
-          "2018-01-31",
-          13.4
-        ],
-        [
-          "2018-02-28",
-          12.51
-        ],
-        [
-          "2018-03-31",
-          12.39
-        ],
-        [
-          "2018-04-30",
-          12.38
-        ],
-        [
-          "2018-05-31",
-          12.42
-        ],
-        [
-          "2018-06-30",
-          12.58
-        ],
-        [
-          "2018-07-31",
           13.07
         ],
         [
-          "2018-08-31",
-          13.23
+          "2018-01-31",
+          13.37
         ],
         [
-          "2018-09-30",
-          13.52
+          "2018-02-28",
+          12.48
         ],
         [
-          "2018-10-31",
-          13.22
+          "2018-03-31",
+          12.36
         ],
         [
-          "2018-11-30",
-          13.78
+          "2018-04-30",
+          12.36
         ],
         [
-          "2018-12-31",
-          12.7
+          "2018-05-31",
+          12.4
         ],
         [
-          "2019-01-31",
-          13.31
-        ],
-        [
-          "2019-02-28",
-          13.89
-        ],
-        [
-          "2019-03-31",
-          14.16
-        ],
-        [
-          "2019-04-30",
-          14.48
-        ],
-        [
-          "2019-05-31",
-          13.59
-        ],
-        [
-          "2019-06-30",
-          14.46
-        ],
-        [
-          "2019-07-31",
-          14.43
-        ],
-        [
-          "2019-08-31",
-          14.18
-        ],
-        [
-          "2019-09-30",
-          14.54
-        ],
-        [
-          "2019-10-31",
-          14.63
-        ],
-        [
-          "2019-11-30",
-          14.84
-        ],
-        [
-          "2019-12-31",
-          15.27
-        ],
-        [
-          "2020-01-31",
-          14.64
-        ],
-        [
-          "2020-02-29",
-          13.19
-        ],
-        [
-          "2020-03-31",
-          11.29
-        ],
-        [
-          "2020-04-30",
-          12.9
-        ],
-        [
-          "2020-05-31",
-          13.24
-        ],
-        [
-          "2020-06-30",
-          12.94
-        ],
-        [
-          "2020-07-31",
-          13.28
-        ],
-        [
-          "2020-08-31",
-          13.51
-        ],
-        [
-          "2020-09-30",
-          12.97
-        ],
-        [
-          "2020-10-31",
+          "2018-06-30",
           12.55
         ],
         [
+          "2018-07-31",
+          13.05
+        ],
+        [
+          "2018-08-31",
+          13.21
+        ],
+        [
+          "2018-09-30",
+          13.49
+        ],
+        [
+          "2018-10-31",
+          13.19
+        ],
+        [
+          "2018-11-30",
+          13.75
+        ],
+        [
+          "2018-12-31",
+          12.67
+        ],
+        [
+          "2019-01-31",
+          13.28
+        ],
+        [
+          "2019-02-28",
+          13.86
+        ],
+        [
+          "2019-03-31",
+          14.13
+        ],
+        [
+          "2019-04-30",
+          14.45
+        ],
+        [
+          "2019-05-31",
+          13.56
+        ],
+        [
+          "2019-06-30",
+          14.43
+        ],
+        [
+          "2019-07-31",
+          14.4
+        ],
+        [
+          "2019-08-31",
+          14.15
+        ],
+        [
+          "2019-09-30",
+          14.51
+        ],
+        [
+          "2019-10-31",
+          14.6
+        ],
+        [
+          "2019-11-30",
+          14.81
+        ],
+        [
+          "2019-12-31",
+          15.23
+        ],
+        [
+          "2020-01-31",
+          14.61
+        ],
+        [
+          "2020-02-29",
+          13.16
+        ],
+        [
+          "2020-03-31",
+          11.27
+        ],
+        [
+          "2020-04-30",
+          12.88
+        ],
+        [
+          "2020-05-31",
+          13.21
+        ],
+        [
+          "2020-06-30",
+          12.92
+        ],
+        [
+          "2020-07-31",
+          13.25
+        ],
+        [
+          "2020-08-31",
+          13.49
+        ],
+        [
+          "2020-09-30",
+          12.95
+        ],
+        [
+          "2020-10-31",
+          12.52
+        ],
+        [
           "2020-11-30",
-          13.98
+          13.95
         ],
         [
           "2020-12-31",
-          14.28
+          14.25
         ],
         [
           "2021-01-31",
-          14.12
+          14.09
         ],
         [
           "2021-02-28",
-          14.59
+          14.55
         ],
         [
           "2021-03-31",
-          15.6
+          15.57
         ],
         [
           "2021-04-30",
-          15.71
+          15.68
         ],
         [
           "2021-05-31",
-          16.13
+          16.09
         ],
         [
           "2021-06-30",
-          16.0
+          15.97
         ],
         [
           "2021-07-31",
-          16.12
+          16.09
         ],
         [
           "2021-08-31",
-          16.13
+          16.1
         ],
         [
           "2021-09-30",
-          15.75
+          15.72
         ],
         [
           "2021-10-31",
-          16.44
+          16.4
         ],
         [
           "2021-11-30",
-          15.82
+          15.79
         ],
         [
           "2021-12-31",
-          17.05
+          17.02
         ],
         [
           "2022-01-31",
-          17.45
+          17.41
         ],
         [
           "2022-02-28",
-          17.42
+          17.38
         ],
         [
           "2022-03-31",
-          18.18
+          18.14
         ],
         [
           "2022-04-30",
-          17.63
+          17.6
         ],
         [
           "2022-05-31",
-          18.51
+          18.47
         ],
         [
           "2022-06-30",
-          17.17
+          17.14
         ],
         [
           "2022-07-31",
-          17.76
+          17.73
         ],
         [
           "2022-08-31",
-          17.25
-        ],
-        [
-          "2022-09-30",
-          15.82
-        ],
-        [
-          "2022-10-31",
-          17.85
-        ],
-        [
-          "2022-11-30",
-          18.74
-        ],
-        [
-          "2022-12-31",
-          18.26
-        ],
-        [
-          "2023-01-31",
-          18.45
-        ],
-        [
-          "2023-02-28",
-          17.61
-        ],
-        [
-          "2023-03-31",
-          18.0
-        ],
-        [
-          "2023-04-30",
-          18.19
-        ],
-        [
-          "2023-05-31",
-          17.33
-        ],
-        [
-          "2023-06-30",
-          17.99
-        ],
-        [
-          "2023-07-31",
-          18.62
-        ],
-        [
-          "2023-08-31",
-          18.4
-        ],
-        [
-          "2023-09-30",
-          17.84
-        ],
-        [
-          "2023-10-31",
           17.22
         ],
         [
+          "2022-09-30",
+          15.78
+        ],
+        [
+          "2022-10-31",
+          17.81
+        ],
+        [
+          "2022-11-30",
+          18.7
+        ],
+        [
+          "2022-12-31",
+          18.22
+        ],
+        [
+          "2023-01-31",
+          18.41
+        ],
+        [
+          "2023-02-28",
+          17.57
+        ],
+        [
+          "2023-03-31",
+          17.96
+        ],
+        [
+          "2023-04-30",
+          18.15
+        ],
+        [
+          "2023-05-31",
+          17.3
+        ],
+        [
+          "2023-06-30",
+          17.95
+        ],
+        [
+          "2023-07-31",
+          18.58
+        ],
+        [
+          "2023-08-31",
+          18.36
+        ],
+        [
+          "2023-09-30",
+          17.8
+        ],
+        [
+          "2023-10-31",
+          17.18
+        ],
+        [
           "2023-11-30",
-          17.97
+          17.94
         ],
         [
           "2023-12-31",
-          18.57
+          18.53
         ],
         [
           "2024-01-31",
-          18.86
+          18.82
         ],
         [
           "2024-02-29",
-          19.21
+          19.16
         ],
         [
           "2024-03-31",
-          20.22
+          20.18
         ],
         [
           "2024-04-30",
-          19.79
+          19.75
         ],
         [
           "2024-05-31",
-          20.19
+          20.15
         ],
         [
           "2024-06-30",
-          20.12
+          20.07
         ],
         [
           "2024-07-31",
-          21.25
-        ],
-        [
-          "2024-08-31",
-          21.91
-        ],
-        [
-          "2024-09-30",
-          21.99
-        ],
-        [
-          "2024-10-31",
-          22.02
-        ],
-        [
-          "2024-11-30",
-          22.68
-        ],
-        [
-          "2024-12-31",
           21.2
         ],
         [
+          "2024-08-31",
+          21.87
+        ],
+        [
+          "2024-09-30",
+          21.95
+        ],
+        [
+          "2024-10-31",
+          21.97
+        ],
+        [
+          "2024-11-30",
+          22.63
+        ],
+        [
+          "2024-12-31",
+          21.15
+        ],
+        [
           "2025-01-31",
-          21.64
+          21.6
         ],
         [
           "2025-02-28",
-          22.8
+          22.75
         ],
         [
           "2025-03-31",
-          23.02
+          22.98
         ],
         [
           "2025-04-30",
-          21.88
+          21.83
         ],
         [
           "2025-05-31",
-          22.11
+          22.06
         ],
         [
           "2025-06-30",
-          22.45
+          22.4
         ],
         [
           "2025-07-31",
-          22.66
+          22.61
         ],
         [
           "2025-08-31",
-          23.64
+          23.59
         ],
         [
           "2025-09-30",
-          23.64
+          23.59
         ],
         [
           "2025-10-31",
-          23.02
+          22.98
         ],
         [
           "2025-11-30",
-          23.95
+          23.89
         ],
         [
           "2025-12-31",
-          23.72
+          23.67
         ],
         [
           "2026-01-31",
-          25.78
+          25.73
         ],
         [
           "2026-02-28",
-          27.33
+          27.28
         ],
         [
           "2026-03-31",
-          26.64
+          26.58
         ],
         [
           "2026-04-30",
-          26.96
+          26.9
         ],
         [
           "2026-05-31",
-          26.69
+          26.64
         ],
         [
           "2026-06-30",
-          27.08
+          27.02
         ],
         [
           "2026-07-31",
-          28.47
+          28.41
         ],
         [
           "2026-08-31",
-          29.34
+          29.28
         ],
         [
           "2026-09-30",
-          27.86
+          27.8
         ],
         [
           "2026-10-31",
-          31.04
+          30.97
         ],
         [
           "2026-11-30",
-          31.08
+          29.85
         ]
       ],
       "description": "The fund generally will invest at least 80% of its assets in the component securities of its underlying index and in investments that have economic characteristics that are substantially identical to the component securities of its underlying index. The underlying index is comprised of qualified income paying securities that are screened for superior company quality and financial health as...",
       "inception": "2011-03-29",
       "expense_ratio": null,
-      "avg_volume": 4563901
+      "avg_volume": 4522220
     },
     "ACWI": {
       "name": "iShares MSCI ACWI ETF",
       "lev": false,
       "category": "international",
       "category_label": "International",
-      "cagr": 12.32,
-      "stddev": 17.14,
-      "yield": 1.46,
+      "cagr": 11.84,
+      "stddev": 17.25,
+      "yield": 1.51,
       "ret22": -18.82,
       "prices": [
         [
@@ -24993,22 +25493,22 @@
         ],
         [
           "2026-11-30",
-          154.08
+          148.94
         ]
       ],
       "description": "The fund generally will invest at least 80% of its assets in the component securities of its underlying index and in investments that have economic characteristics that are substantially identical to the component securities of its underlying index. The index is a free float-adjusted market capitalization weighted index designed to measure the combined equity market performance of developed...",
       "inception": "2008-03-26",
       "expense_ratio": null,
-      "avg_volume": 2347635
+      "avg_volume": 2443159
     },
     "VYMI": {
       "name": "Vanguard International High Dividend Yield Index Fund ETF Shares",
       "lev": false,
       "category": "international",
       "category_label": "International",
-      "cagr": 10.91,
-      "stddev": 16.52,
-      "yield": 3.66,
+      "cagr": 10.3,
+      "stddev": 16.56,
+      "yield": 3.83,
       "ret22": -7.67,
       "prices": [
         [
@@ -25493,22 +25993,22 @@
         ],
         [
           "2026-11-30",
-          101.79
+          97.07
         ]
       ],
       "description": "Under normal circumstances,the fund invests at least 80% of its net assets,plus the amount of any borrowings for investment purposes,in the stocks that make up the target index.",
       "inception": "2016-02-25",
       "expense_ratio": null,
-      "avg_volume": 890198
+      "avg_volume": 932760
     },
     "SCHF": {
       "name": "Schwab International Equity ETF",
       "lev": false,
       "category": "international",
       "category_label": "International",
-      "cagr": 10.05,
-      "stddev": 17.15,
-      "yield": 3.16,
+      "cagr": 9.5,
+      "stddev": 17.23,
+      "yield": 3.3,
       "ret22": -15.34,
       "prices": [
         [
@@ -25993,22 +26493,22 @@
         ],
         [
           "2026-11-30",
-          26.69
+          25.53
         ]
       ],
       "description": "The index is comprised of large and mid capitalization companies in developed countries outside the United States, as defined by the index provider. The index defines the large and mid capitalization universe as approximately the top 90% of the eligible universe. The fund will invest at least 90% of its net assets in stocks, including depositary receipts representing securities of the index;...",
       "inception": "2009-11-03",
       "expense_ratio": null,
-      "avg_volume": 9014717
+      "avg_volume": 9989318
     },
     "VEA": {
       "name": "Vanguard FTSE Developed Markets Index Fund ETF Shares",
       "lev": false,
       "category": "international",
       "category_label": "International",
-      "cagr": 9.96,
-      "stddev": 17.31,
-      "yield": 2.48,
+      "cagr": 9.4,
+      "stddev": 17.38,
+      "yield": 2.6,
       "ret22": -15.85,
       "prices": [
         [
@@ -26493,522 +26993,22 @@
         ],
         [
           "2026-11-30",
-          68.71
+          65.64
         ]
       ],
       "description": "The fund employs an indexing investment approach designed to track the performance of the FTSE Developed All Cap ex U.S. Index, a market-capitalization-weighted index that is made up of approximately 3,957 common stocks of large-, mid-, and small-cap companies located in Canada and the major markets of Europe and the Pacific region. The Advisor attempts to replicate the target index by...",
       "inception": "2007-07-20",
       "expense_ratio": null,
-      "avg_volume": 9997342
-    },
-    "IEFA": {
-      "name": "iShares Core MSCI EAFE ETF",
-      "lev": false,
-      "category": "international",
-      "category_label": "International",
-      "cagr": 9.51,
-      "stddev": 17.1,
-      "yield": 3.42,
-      "ret22": -15.72,
-      "prices": [
-        [
-          "2016-11-30",
-          39.1
-        ],
-        [
-          "2016-12-31",
-          40.11
-        ],
-        [
-          "2017-01-31",
-          41.46
-        ],
-        [
-          "2017-02-28",
-          42.0
-        ],
-        [
-          "2017-03-31",
-          43.34
-        ],
-        [
-          "2017-04-30",
-          44.51
-        ],
-        [
-          "2017-05-31",
-          46.08
-        ],
-        [
-          "2017-06-30",
-          46.26
-        ],
-        [
-          "2017-07-31",
-          47.55
-        ],
-        [
-          "2017-08-31",
-          47.61
-        ],
-        [
-          "2017-09-30",
-          48.75
-        ],
-        [
-          "2017-10-31",
-          49.57
-        ],
-        [
-          "2017-11-30",
-          50.01
-        ],
-        [
-          "2017-12-31",
-          50.76
-        ],
-        [
-          "2018-01-31",
-          53.41
-        ],
-        [
-          "2018-02-28",
-          50.8
-        ],
-        [
-          "2018-03-31",
-          50.6
-        ],
-        [
-          "2018-04-30",
-          51.19
-        ],
-        [
-          "2018-05-31",
-          50.41
-        ],
-        [
-          "2018-06-30",
-          49.54
-        ],
-        [
-          "2018-07-31",
-          50.76
-        ],
-        [
-          "2018-08-31",
-          49.81
-        ],
-        [
-          "2018-09-30",
-          50.1
-        ],
-        [
-          "2018-10-31",
-          45.96
-        ],
-        [
-          "2018-11-30",
-          46.11
-        ],
-        [
-          "2018-12-31",
-          43.58
-        ],
-        [
-          "2019-01-31",
-          46.5
-        ],
-        [
-          "2019-02-28",
-          47.78
-        ],
-        [
-          "2019-03-31",
-          48.16
-        ],
-        [
-          "2019-04-30",
-          49.57
-        ],
-        [
-          "2019-05-31",
-          47.06
-        ],
-        [
-          "2019-06-30",
-          49.63
-        ],
-        [
-          "2019-07-31",
-          48.8
-        ],
-        [
-          "2019-08-31",
-          47.96
-        ],
-        [
-          "2019-09-30",
-          49.36
-        ],
-        [
-          "2019-10-31",
-          51.11
-        ],
-        [
-          "2019-11-30",
-          51.59
-        ],
-        [
-          "2019-12-31",
-          53.45
-        ],
-        [
-          "2020-01-31",
-          51.99
-        ],
-        [
-          "2020-02-29",
-          47.88
-        ],
-        [
-          "2020-03-31",
-          40.88
-        ],
-        [
-          "2020-04-30",
-          43.45
-        ],
-        [
-          "2020-05-31",
-          45.91
-        ],
-        [
-          "2020-06-30",
-          47.41
-        ],
-        [
-          "2020-07-31",
-          48.41
-        ],
-        [
-          "2020-08-31",
-          50.95
-        ],
-        [
-          "2020-09-30",
-          50.0
-        ],
-        [
-          "2020-10-31",
-          48.24
-        ],
-        [
-          "2020-11-30",
-          54.94
-        ],
-        [
-          "2020-12-31",
-          57.83
-        ],
-        [
-          "2021-01-31",
-          57.4
-        ],
-        [
-          "2021-02-28",
-          58.86
-        ],
-        [
-          "2021-03-31",
-          60.3
-        ],
-        [
-          "2021-04-30",
-          62.19
-        ],
-        [
-          "2021-05-31",
-          64.28
-        ],
-        [
-          "2021-06-30",
-          63.55
-        ],
-        [
-          "2021-07-31",
-          64.13
-        ],
-        [
-          "2021-08-31",
-          65.15
-        ],
-        [
-          "2021-09-30",
-          63.03
-        ],
-        [
-          "2021-10-31",
-          64.95
-        ],
-        [
-          "2021-11-30",
-          61.95
-        ],
-        [
-          "2021-12-31",
-          64.55
-        ],
-        [
-          "2022-01-31",
-          61.93
-        ],
-        [
-          "2022-02-28",
-          59.93
-        ],
-        [
-          "2022-03-31",
-          60.12
-        ],
-        [
-          "2022-04-30",
-          56.05
-        ],
-        [
-          "2022-05-31",
-          56.99
-        ],
-        [
-          "2022-06-30",
-          51.96
-        ],
-        [
-          "2022-07-31",
-          54.78
-        ],
-        [
-          "2022-08-31",
-          51.46
-        ],
-        [
-          "2022-09-30",
-          46.5
-        ],
-        [
-          "2022-10-31",
-          49.2
-        ],
-        [
-          "2022-11-30",
-          55.67
-        ],
-        [
-          "2022-12-31",
-          54.71
-        ],
-        [
-          "2023-01-31",
-          59.53
-        ],
-        [
-          "2023-02-28",
-          57.72
-        ],
-        [
-          "2023-03-31",
-          59.34
-        ],
-        [
-          "2023-04-30",
-          61.04
-        ],
-        [
-          "2023-05-31",
-          58.61
-        ],
-        [
-          "2023-06-30",
-          61.07
-        ],
-        [
-          "2023-07-31",
-          62.92
-        ],
-        [
-          "2023-08-31",
-          60.53
-        ],
-        [
-          "2023-09-30",
-          58.22
-        ],
-        [
-          "2023-10-31",
-          56.42
-        ],
-        [
-          "2023-11-30",
-          61.11
-        ],
-        [
-          "2023-12-31",
-          64.54
-        ],
-        [
-          "2024-01-31",
-          64.1
-        ],
-        [
-          "2024-02-29",
-          65.87
-        ],
-        [
-          "2024-03-31",
-          68.09
-        ],
-        [
-          "2024-04-30",
-          65.87
-        ],
-        [
-          "2024-05-31",
-          69.21
-        ],
-        [
-          "2024-06-30",
-          67.82
-        ],
-        [
-          "2024-07-31",
-          69.81
-        ],
-        [
-          "2024-08-31",
-          72.06
-        ],
-        [
-          "2024-09-30",
-          72.87
-        ],
-        [
-          "2024-10-31",
-          68.88
-        ],
-        [
-          "2024-11-30",
-          68.76
-        ],
-        [
-          "2024-12-31",
-          66.64
-        ],
-        [
-          "2025-01-31",
-          69.77
-        ],
-        [
-          "2025-02-28",
-          71.48
-        ],
-        [
-          "2025-03-31",
-          71.73
-        ],
-        [
-          "2025-04-30",
-          74.63
-        ],
-        [
-          "2025-05-31",
-          78.29
-        ],
-        [
-          "2025-06-30",
-          80.58
-        ],
-        [
-          "2025-07-31",
-          79.03
-        ],
-        [
-          "2025-08-31",
-          82.54
-        ],
-        [
-          "2025-09-30",
-          84.28
-        ],
-        [
-          "2025-10-31",
-          85.03
-        ],
-        [
-          "2025-11-30",
-          85.76
-        ],
-        [
-          "2025-12-31",
-          88.02
-        ],
-        [
-          "2026-01-31",
-          92.54
-        ],
-        [
-          "2026-02-28",
-          96.74
-        ],
-        [
-          "2026-03-31",
-          89.07
-        ],
-        [
-          "2026-04-30",
-          94.0
-        ],
-        [
-          "2026-05-31",
-          96.44
-        ],
-        [
-          "2026-06-30",
-          96.58
-        ],
-        [
-          "2026-07-31",
-          98.25
-        ],
-        [
-          "2026-08-31",
-          100.26
-        ],
-        [
-          "2026-09-30",
-          96.88
-        ],
-        [
-          "2026-10-31",
-          96.31
-        ],
-        [
-          "2026-11-30",
-          96.25
-        ]
-      ],
-      "description": "The fund generally will invest at least 80% of its assets in the component securities of its underlying index and in investments that have economic characteristics that are substantially identical to the component securities of its underlying index. The index is designed to measure large-, mid- and small-capitalization equity market performance and includes stocks from Europe, Australasia and...",
-      "inception": "2012-10-18",
-      "expense_ratio": null,
-      "avg_volume": 9368410
+      "avg_volume": 10454720
     },
     "VEU": {
       "name": "Vanguard FTSE All-World ex-US Index Fund ETF Shares",
       "lev": false,
       "category": "international",
       "category_label": "International",
-      "cagr": 9.44,
-      "stddev": 17.15,
-      "yield": 2.46,
+      "cagr": 8.96,
+      "stddev": 17.24,
+      "yield": 2.56,
       "ret22": -16.13,
       "prices": [
         [
@@ -27493,22 +27493,522 @@
         ],
         [
           "2026-11-30",
-          79.78
+          76.75
         ]
       ],
       "description": "The fund employs an indexing investment approach designed to track the performance of the FTSE All-World ex US Index. The advisor attempts to replicate the target index by investing all, or substantially all, of its assets in the stocks that make up the index, holding each stock in approximately the same proportion as its weighting in the index.",
       "inception": "2007-03-02",
       "expense_ratio": null,
-      "avg_volume": 2729100
+      "avg_volume": 2952235
+    },
+    "IEFA": {
+      "name": "iShares Core MSCI EAFE ETF",
+      "lev": false,
+      "category": "international",
+      "category_label": "International",
+      "cagr": 8.95,
+      "stddev": 17.15,
+      "yield": 3.58,
+      "ret22": -15.72,
+      "prices": [
+        [
+          "2016-11-30",
+          39.1
+        ],
+        [
+          "2016-12-31",
+          40.11
+        ],
+        [
+          "2017-01-31",
+          41.46
+        ],
+        [
+          "2017-02-28",
+          42.0
+        ],
+        [
+          "2017-03-31",
+          43.34
+        ],
+        [
+          "2017-04-30",
+          44.51
+        ],
+        [
+          "2017-05-31",
+          46.08
+        ],
+        [
+          "2017-06-30",
+          46.26
+        ],
+        [
+          "2017-07-31",
+          47.55
+        ],
+        [
+          "2017-08-31",
+          47.61
+        ],
+        [
+          "2017-09-30",
+          48.75
+        ],
+        [
+          "2017-10-31",
+          49.57
+        ],
+        [
+          "2017-11-30",
+          50.01
+        ],
+        [
+          "2017-12-31",
+          50.76
+        ],
+        [
+          "2018-01-31",
+          53.41
+        ],
+        [
+          "2018-02-28",
+          50.8
+        ],
+        [
+          "2018-03-31",
+          50.6
+        ],
+        [
+          "2018-04-30",
+          51.19
+        ],
+        [
+          "2018-05-31",
+          50.41
+        ],
+        [
+          "2018-06-30",
+          49.54
+        ],
+        [
+          "2018-07-31",
+          50.76
+        ],
+        [
+          "2018-08-31",
+          49.81
+        ],
+        [
+          "2018-09-30",
+          50.1
+        ],
+        [
+          "2018-10-31",
+          45.96
+        ],
+        [
+          "2018-11-30",
+          46.11
+        ],
+        [
+          "2018-12-31",
+          43.58
+        ],
+        [
+          "2019-01-31",
+          46.5
+        ],
+        [
+          "2019-02-28",
+          47.78
+        ],
+        [
+          "2019-03-31",
+          48.16
+        ],
+        [
+          "2019-04-30",
+          49.57
+        ],
+        [
+          "2019-05-31",
+          47.06
+        ],
+        [
+          "2019-06-30",
+          49.63
+        ],
+        [
+          "2019-07-31",
+          48.8
+        ],
+        [
+          "2019-08-31",
+          47.96
+        ],
+        [
+          "2019-09-30",
+          49.36
+        ],
+        [
+          "2019-10-31",
+          51.11
+        ],
+        [
+          "2019-11-30",
+          51.59
+        ],
+        [
+          "2019-12-31",
+          53.45
+        ],
+        [
+          "2020-01-31",
+          51.99
+        ],
+        [
+          "2020-02-29",
+          47.88
+        ],
+        [
+          "2020-03-31",
+          40.88
+        ],
+        [
+          "2020-04-30",
+          43.45
+        ],
+        [
+          "2020-05-31",
+          45.91
+        ],
+        [
+          "2020-06-30",
+          47.41
+        ],
+        [
+          "2020-07-31",
+          48.41
+        ],
+        [
+          "2020-08-31",
+          50.95
+        ],
+        [
+          "2020-09-30",
+          50.0
+        ],
+        [
+          "2020-10-31",
+          48.24
+        ],
+        [
+          "2020-11-30",
+          54.94
+        ],
+        [
+          "2020-12-31",
+          57.83
+        ],
+        [
+          "2021-01-31",
+          57.4
+        ],
+        [
+          "2021-02-28",
+          58.86
+        ],
+        [
+          "2021-03-31",
+          60.3
+        ],
+        [
+          "2021-04-30",
+          62.19
+        ],
+        [
+          "2021-05-31",
+          64.28
+        ],
+        [
+          "2021-06-30",
+          63.55
+        ],
+        [
+          "2021-07-31",
+          64.13
+        ],
+        [
+          "2021-08-31",
+          65.15
+        ],
+        [
+          "2021-09-30",
+          63.03
+        ],
+        [
+          "2021-10-31",
+          64.95
+        ],
+        [
+          "2021-11-30",
+          61.95
+        ],
+        [
+          "2021-12-31",
+          64.55
+        ],
+        [
+          "2022-01-31",
+          61.93
+        ],
+        [
+          "2022-02-28",
+          59.93
+        ],
+        [
+          "2022-03-31",
+          60.12
+        ],
+        [
+          "2022-04-30",
+          56.05
+        ],
+        [
+          "2022-05-31",
+          56.99
+        ],
+        [
+          "2022-06-30",
+          51.96
+        ],
+        [
+          "2022-07-31",
+          54.78
+        ],
+        [
+          "2022-08-31",
+          51.46
+        ],
+        [
+          "2022-09-30",
+          46.5
+        ],
+        [
+          "2022-10-31",
+          49.2
+        ],
+        [
+          "2022-11-30",
+          55.67
+        ],
+        [
+          "2022-12-31",
+          54.71
+        ],
+        [
+          "2023-01-31",
+          59.53
+        ],
+        [
+          "2023-02-28",
+          57.72
+        ],
+        [
+          "2023-03-31",
+          59.34
+        ],
+        [
+          "2023-04-30",
+          61.04
+        ],
+        [
+          "2023-05-31",
+          58.61
+        ],
+        [
+          "2023-06-30",
+          61.07
+        ],
+        [
+          "2023-07-31",
+          62.92
+        ],
+        [
+          "2023-08-31",
+          60.53
+        ],
+        [
+          "2023-09-30",
+          58.22
+        ],
+        [
+          "2023-10-31",
+          56.42
+        ],
+        [
+          "2023-11-30",
+          61.11
+        ],
+        [
+          "2023-12-31",
+          64.54
+        ],
+        [
+          "2024-01-31",
+          64.1
+        ],
+        [
+          "2024-02-29",
+          65.87
+        ],
+        [
+          "2024-03-31",
+          68.09
+        ],
+        [
+          "2024-04-30",
+          65.87
+        ],
+        [
+          "2024-05-31",
+          69.21
+        ],
+        [
+          "2024-06-30",
+          67.82
+        ],
+        [
+          "2024-07-31",
+          69.81
+        ],
+        [
+          "2024-08-31",
+          72.06
+        ],
+        [
+          "2024-09-30",
+          72.87
+        ],
+        [
+          "2024-10-31",
+          68.88
+        ],
+        [
+          "2024-11-30",
+          68.76
+        ],
+        [
+          "2024-12-31",
+          66.64
+        ],
+        [
+          "2025-01-31",
+          69.77
+        ],
+        [
+          "2025-02-28",
+          71.48
+        ],
+        [
+          "2025-03-31",
+          71.73
+        ],
+        [
+          "2025-04-30",
+          74.63
+        ],
+        [
+          "2025-05-31",
+          78.29
+        ],
+        [
+          "2025-06-30",
+          80.58
+        ],
+        [
+          "2025-07-31",
+          79.03
+        ],
+        [
+          "2025-08-31",
+          82.54
+        ],
+        [
+          "2025-09-30",
+          84.28
+        ],
+        [
+          "2025-10-31",
+          85.03
+        ],
+        [
+          "2025-11-30",
+          85.76
+        ],
+        [
+          "2025-12-31",
+          88.02
+        ],
+        [
+          "2026-01-31",
+          92.54
+        ],
+        [
+          "2026-02-28",
+          96.74
+        ],
+        [
+          "2026-03-31",
+          89.07
+        ],
+        [
+          "2026-04-30",
+          94.0
+        ],
+        [
+          "2026-05-31",
+          96.44
+        ],
+        [
+          "2026-06-30",
+          96.58
+        ],
+        [
+          "2026-07-31",
+          98.25
+        ],
+        [
+          "2026-08-31",
+          100.26
+        ],
+        [
+          "2026-09-30",
+          96.88
+        ],
+        [
+          "2026-10-31",
+          96.31
+        ],
+        [
+          "2026-11-30",
+          91.82
+        ]
+      ],
+      "description": "The fund generally will invest at least 80% of its assets in the component securities of its underlying index and in investments that have economic characteristics that are substantially identical to the component securities of its underlying index. The index is designed to measure large-, mid- and small-capitalization equity market performance and includes stocks from Europe, Australasia and...",
+      "inception": "2012-10-18",
+      "expense_ratio": null,
+      "avg_volume": 9893560
     },
     "EFA": {
       "name": "iShares MSCI EAFE ETF",
       "lev": false,
       "category": "international",
       "category_label": "International",
-      "cagr": 9.43,
-      "stddev": 17.06,
-      "yield": 3.25,
+      "cagr": 8.87,
+      "stddev": 17.12,
+      "yield": 3.41,
       "ret22": -14.94,
       "prices": [
         [
@@ -27993,22 +28493,22 @@
         ],
         [
           "2026-11-30",
-          103.42
+          98.65
         ]
       ],
       "description": "The fund generally will invest at least 80% of its assets in the component securities of its underlying index and in investments that have economic characteristics that are substantially identical to the component securities of its underlying index. The index is a free float-adjusted, market capitalization-weighted index designed to measure large- and mid-capitalization equity market...",
       "inception": "2001-08-14",
       "expense_ratio": null,
-      "avg_volume": 13003629
+      "avg_volume": 13791607
     },
     "IXUS": {
       "name": "iShares Core MSCI Total International Stock ETF",
       "lev": false,
       "category": "international",
       "category_label": "International",
-      "cagr": 9.33,
-      "stddev": 17.05,
-      "yield": 3.07,
+      "cagr": 8.82,
+      "stddev": 17.14,
+      "yield": 3.2,
       "ret22": -16.9,
       "prices": [
         [
@@ -28493,13 +28993,13 @@
         ],
         [
           "2026-11-30",
-          91.21
+          87.68
         ]
       ],
       "description": "The fund generally will invest at least 80% of its assets in the component securities of its underlying index and in investments that have economic characteristics that are substantially identical to the component securities of its underlying index. The index is a free float-adjusted market capitalization weighted index designed to measure the combined equity market performance of developed...",
       "inception": "2012-10-18",
       "expense_ratio": null,
-      "avg_volume": 2092623
+      "avg_volume": 2162509
     },
     "FLOT": {
       "name": "iShares Floating Rate Bond ETF",
@@ -28993,20 +29493,20 @@
         ],
         [
           "2026-11-30",
-          50.92
+          50.98
         ]
       ],
       "description": "The fund will invest at least 80% of its assets in the component securities of the underlying index, and the fund will invest at least 90% of its assets in fixed income securities of the types included in the underlying index that BFA believes will help the fund track the underlying index.",
       "inception": "2011-06-14",
       "expense_ratio": null,
-      "avg_volume": 2139331
+      "avg_volume": 2205725
     },
     "NEAR": {
       "name": "iShares Short Duration Bond Active ETF",
       "lev": false,
       "category": "cash-equivalent",
       "category_label": "Cash equivalents",
-      "cagr": 2.83,
+      "cagr": 2.84,
       "stddev": 2.52,
       "yield": 4.52,
       "ret22": 0.43,
@@ -29493,13 +29993,13 @@
         ],
         [
           "2026-11-30",
-          49.88
+          49.96
         ]
       ],
       "description": "The fund seeks to achieve its investment objective by investing, under normal circumstances, at least 80% of its net assets in a portfolio of U.S. dollar-denominated investment-grade fixed-income securities. Under normal circumstances, the effective duration of its portfolio is expected to be three year or less, as calculated by the management team. It is an actively managed exchange-traded...",
       "inception": "2013-09-25",
       "expense_ratio": null,
-      "avg_volume": 901212
+      "avg_volume": 886123
     },
     "CASH": {
       "name": "Cash / HYSA",
